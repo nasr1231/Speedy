@@ -1,5 +1,5 @@
+using Speedy.Core.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Speedy.Models;
 using System.Diagnostics;
 
 namespace Speedy.Controllers
