@@ -1,17 +1,12 @@
-using Speedy.Core.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Speedy.Core.ViewModels;
 using System.Diagnostics;
 
 namespace Speedy.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+        private readonly ILogger<HomeController> _logger;        
 
         public IActionResult Index()
         {

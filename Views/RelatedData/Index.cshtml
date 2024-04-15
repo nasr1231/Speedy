@@ -1,0 +1,124 @@
+﻿@{
+    ViewData["Title"] = $"البيانات المرجعية";
+}
+
+<div class="card shadow-sm mb-5 mb-lg-10">
+    <div class="card-body">
+        <h1 class="d-flex flex-column justify-content-center fw-bolder py-2">
+            Related Data
+        </h1>
+        <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-5" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link text-active-primary d-flex align-items-center gap-1 pb-4 active" data-bs-toggle="tab" href="#properties_tab" role="tab">
+                    <span class="menu-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path opacity="0.3" d="M5 8.04999L11.8 11.95V19.85L5 15.85V8.04999Z" fill="currentColor" />
+                            <path d="M20.1 6.65L12.3 2.15C12 1.95 11.6 1.95 11.3 2.15L3.5 6.65C3.2 6.85 3 7.15 3 7.45V16.45C3 16.75 3.2 17.15 3.5 17.25L11.3 21.75C11.5 21.85 11.6 21.85 11.8 21.85C12 21.85 12.1 21.85 12.3 21.75L20.1 17.25C20.4 17.05 20.6 16.75 20.6 16.45V7.45C20.6 7.15 20.4 6.75 20.1 6.65ZM5 15.85V7.95L11.8 4.05L18.6 7.95L11.8 11.95V19.85L5 15.85Z" fill="currentColor" />
+                        </svg>
+                    </span>
+                    Geographic Area
+                </a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link text-active-primary d-flex align-items-center gap-1 pb-4" data-bs-toggle="tab" href="#contracts_tab" role="tab">
+                    <span class="menu-icon">
+                        <i class="fa-solid fa-truck-ramp-box"></i>
+                    </span>
+                    Shipping
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade active show" id="properties_tab" role="tabpanel">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                <div class="card shadow-sm w-100 mb-3">
+                                    <div class="card-header flex-nowrap">
+                                        <h3 class="card-title me-5">
+                                            <i class="fa-solid fa-map-location fs-2 pe-3"></i>
+                                            Governates
+                                        </h3>
+                                        <div class="card-toolbar">
+                                            <a class="btn btn-sm btn-light-primary">
+                                                Open
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                <div class="card shadow-sm w-100 mb-3">
+                                    <div class="card-header flex-nowrap">
+                                        <h3 class="card-title me-5">
+                                            <i class="ki-duotone ki-home">
+                                            </i>
+                                            <i class="fa-solid fa-city fs-2 pe-3"></i>
+                                            Cities
+                                        </h3>
+                                        <div class="card-toolbar">
+                                            <a class="btn btn-sm btn-light-primary">
+                                                Open
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="contracts_tab" role="tabpanel">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                <div class="card shadow-sm w-100 mb-3">
+                                    <div class="card-header flex-nowrap">
+                                        <h3 class="card-title me-5">
+                                            <i class="fa-solid fa-motorcycle fs-2 pe-3"></i>
+                                            Vehicle Methods
+                                        </h3>
+                                        <div class="card-toolbar">
+                                            <a class="btn btn-sm btn-light-primary">
+                                                Open
+
+                                                <i class="ms-1 ki-duotone fs-3 ki-entrance-right">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                <div class="card shadow-sm w-100 mb-3">
+                                    <div class="card-header flex-nowrap">
+                                        <h3 class="card-title me-5">
+                                            <i class="ki-duotone ki-home fs-2 pe-3">
+                                            </i>
+                                            Demo
+                                        </h3>
+                                        <div class="card-toolbar">
+                                            <a class="btn btn-sm btn-light-primary">
+                                                Open
+
+                                                <i class="ms-1 ki-duotone fs-3 ki-entrance-right">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
