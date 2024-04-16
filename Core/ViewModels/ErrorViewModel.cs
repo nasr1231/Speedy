@@ -1,4 +1,4 @@
-namespace Speedy.Core.ViewModels
+﻿namespace Speedy.Core.ViewModels
 {
     public class ErrorViewModel
     {

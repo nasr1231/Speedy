@@ -4,7 +4,7 @@ namespace Speedy.Core.Models
 {
     public class Delivery : BaseModel
     {
-        public int Id{ get; set; }
+        public int Id { get; set; }
         public Byte Rate {  get; set; }
         public string ServiceArea { get; set; }
         public string ShippingMethod { get; set; }

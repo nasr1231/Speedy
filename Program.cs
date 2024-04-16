@@ -18,6 +18,9 @@ namespace Speedy
 
             builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(MappingProfile)));
 
+            builder.Services.AddScoped<UserManager<AppUser>>();
+
+
             builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders()

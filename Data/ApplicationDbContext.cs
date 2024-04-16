@@ -1,17 +1,21 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-
+using Speedy.Core.Models;
 
 namespace Speedy.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext: IdentityDbContext<AppUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
+        : base(options)
         {
         }
 
-        public DbSet<AppUser> AppUsers { get; set; }
-        public DbSet<Delivery> Deliveries{ get; set; }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {            
+            base.OnModelCreating(builder);
+        }
+
+        public DbSet<AppUser> AppUsers { get; set; } 
+        public DbSet<Delivery> Deliveries { get; set; } 
     }
 }
