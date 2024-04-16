@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Speedy.Core.Models;
+using Speedy.Core.Models.RelatedData;
 
 namespace Speedy.Data
 {
@@ -17,5 +18,6 @@ namespace Speedy.Data
 
         public DbSet<AppUser> AppUsers { get; set; } 
         public DbSet<Delivery> Deliveries { get; set; } 
+        public DbSet<ShippingMethod> ShippingMethods { get; set; } 
     }
 }

@@ -6,11 +6,14 @@ namespace Speedy.Core.Models
     {        
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
-        public bool Gender { get; set; }
+        public string Gender { get; set; }
         public string Address { get; set; }
+        public string Age { get; set; }
         public string? ProfilePictureIUrl { get; set; }
         public DateTime RegistrationDate { get; set; }
         public DateTime LastUpdateDate { get; set; }
+        public bool IsActive { get; set; }
+        public string NID { get; set; } = null!;
 
     }
 }
