@@ -26,6 +26,8 @@ namespace Speedy
                 .AddDefaultTokenProviders()
                 .AddDefaultUI();
 
+
+
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
