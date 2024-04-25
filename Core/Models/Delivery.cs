@@ -3,18 +3,23 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace Speedy.Core.Models
 {
-    public class Delivery : AppUser
+    public class Delivery : BaseModel
     {
-        public Byte Rate {  get; set; }
+        #region Properties
+        public int Id { get; set; }
+        public Byte Rate { get; set; }
         public string ServiceArea { get; set; }
+        public string Address { get; set; } = null!;
         public string ShippingMethod { get; set; }
         public bool ActiveStatus { get; set; }
-        public bool IsActive { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public DateTime LastUpdateOn { get; set; }
-        public bool IsDeleted { get; set; }
+        public int ShippingMethodId { get; set; }
+        public ShippingMethod ShippingMethods { get; set; } = null!;
+        #endregion
 
-        public int ShippingMethodId{ get; set; }
-        public ShippingMethod ShippingMethods { get; set; }
+        #region Relations
+        public AppUser? AppUser { get; set; }
+        public string AppUserId { get; set; } = null!;
+        public ICollection<Review> Reviews { get; set; } = [];
+        #endregion
     }
 }
