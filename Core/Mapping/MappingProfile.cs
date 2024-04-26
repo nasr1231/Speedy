@@ -9,9 +9,6 @@ namespace Speedy.Core.Mapping
     {
         public MappingProfile() {
 
-
-
-
             // Delivery Agent
             CreateMap<Delivery, DeliveryViewModel>().ReverseMap();
             CreateMap<DeliveryFormViewModel, DeliveryViewModel>().ReverseMap();
@@ -19,6 +16,11 @@ namespace Speedy.Core.Mapping
             //CreateMap<Delivery, SelectListItem>()
             //.ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.CategoryId))
             //.ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.CategoryName));
+
+            //User ViewModel
+            CreateMap<AppUser, UserViewModel>().ReverseMap();
+            CreateMap<UserViewModel, UserFormViewModel>().ReverseMap();
+
         }
     }
 }
