@@ -1,0 +1,26 @@
+﻿@model UserViewModel
+
+<tr>
+    <td>@Model.Id</td>      
+    <td>@Model.UserName</td>      
+    <td>@Model.Email</td>      
+    <td>@Model.CreatedOn</td>      
+    <td>@Model.LastUpdatedOn</td>      
+    <td>
+        <span class="badge badge-light-@(Model.IsActive ? "success" : "danger")">
+            @(Model.IsActive ? "Available" : "Not Active")
+        </span>
+    </td>
+    <td>
+        <div class="btn-group">
+            <a class="js-render-modal btn btn-sm btn-primary" @*data-url="/Units/Edit/@Model.Id" data-title="تعديل وحدة" data-is-edited="true" *@>
+                <i class="bi bi-pencil-square"></i>
+                Edit
+            </a>
+            <a class="js-render-modal btn btn-sm btn-info">
+                <i class="bi bi-pencil-square"></i>
+                Toggle Status
+            </a>            
+        </div>
+    </td>
+</tr>   
