@@ -3,6 +3,7 @@ using Speedy.Core.Mapping;
 using Speedy.Core.Models;
 using Speedy.Data;
 using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 
 namespace Speedy
 {
@@ -15,6 +16,8 @@ namespace Speedy
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
+
+            builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
 
             builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(MappingProfile)));
 
