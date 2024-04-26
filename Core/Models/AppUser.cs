@@ -11,8 +11,9 @@ namespace Speedy.Core.Models
         [MaxLength(40)]
         public string LastName { get; set; } = null!;
         public string Gender { get; set; } = null!;
-        [Range(16,80)]
-        public string Age { get; set; } = null!;
+
+        [Range(16, 80)]
+        public byte Age { get; set; }
         public string? ProfilePictureIUrl { get; set; }
         [MaxLength(20)]
         public string NID { get; set; } = null!;

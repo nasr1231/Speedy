@@ -1,15 +1,14 @@
 using Microsoft.AspNetCore.Identity;
 using Speedy.Core.Mapping;
-using Speedy.Core.Models;
 using Speedy.Data;
 using System.Reflection;
-using Microsoft.EntityFrameworkCore;
+using Speedy.Seeds;
 
 namespace Speedy
 {
     public class Program
     {
-        public static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -17,20 +16,15 @@ namespace Speedy
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
-            builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
+            builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultUI()
+                .AddDefaultTokenProviders();
 
             builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(MappingProfile)));
 
             builder.Services.AddScoped<UserManager<AppUser>>();
-
-
-            builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders()
-                .AddDefaultUI();
-
-
-
+           
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
@@ -48,6 +42,14 @@ namespace Speedy
             app.UseRouting();
 
             app.UseAuthorization();
+
+            var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
+            using var scope = scopeFactory.CreateScope();
+            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+
+            await DefaultRoles.SeedRolesAsync(roleManager);
+            await DefaultUsers.SeedAdminUser(userManager);
 
             app.MapControllerRoute(
                 name: "default",
