@@ -3,6 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Speedy.Core.Models
 {
+    [Index(nameof(Email), IsUnique = true)]
+    [Index(nameof(UserName), IsUnique = true)]
     public class AppUser : IdentityUser
     {
         #region Properties
