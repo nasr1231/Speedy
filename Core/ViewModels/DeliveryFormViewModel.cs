@@ -1,6 +1,7 @@
 ﻿namespace Speedy.Core.ViewModels
 {
-    public class DeliveryFormViewModel
+    public class DeliveryFormViewModel 
     {
+        
     }
 }
