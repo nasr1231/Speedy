@@ -20,22 +20,16 @@
       "destination": "wwwroot/lib/jquery-ajax-unobtrusive/"
     },
     {
-      "library": "select2@4.0.13",
-      "destination": "wwwroot/lib/select2/",
-      "files": [
-        "js/i18n/ar.min.js",
-        "css/select2.min.css",
-        "js/select2.full.min.js",
-        "js/i18n/en.min.js"
-      ]
-    },
-    {
       "library": "font-awesome@6.5.2",
       "destination": "wwwroot/lib/font-awesome/",
       "files": [
         "css/all.min.css",
         "js/all.min.js"
       ]
+    },
+    {
+      "library": "select2@4.0.13",
+      "destination": "wwwroot/lib/select2/"
     }
   ]
 }

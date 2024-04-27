@@ -1,0 +1,56 @@
+﻿@model UserFormViewModel
+@{
+    ViewData["Title"] = $"{(Model?.Id > 0 ? "Edit" : "Add")} User";
+}
+
+<form asp-action="@(Model?.Id > 0 ? "Edit" : "Create")"
+      data-ajax-method="post"
+      data-ajax="true"
+      data-ajax-begin="OnModalBegin"
+      data-ajax-success="OnModalSuccess"
+      data-ajax-failure="ShowErrorMessage"
+      data-ajax-complete="OnModalComplete">
+    @if (Model?.Id > 0)
+    {
+        <input type="hidden" asp-for="Id" />
+    }
+    <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+    </div>
+
+    <div class="row mb-5">
+        <div class="w-100 w-md-50">
+            <label class="d-flex align-items-center fs-6 fw-bold mb-2"><span class="required"></span>Full Name</label>
+            <input type="text" asp-for="FullName" class="form-control form-control-solid" placeholder="Enter FullName">
+            <span asp-validation-for="@Model!.FullName" class="text-danger d-block h-10px"></span>
+        </div>
+        <div class="w-100 w-md-50">
+            <label class="d-flex align-items-center fs-6 fw-bold mb-2"><span class="required">UserName</span></label>
+            <input type="text" asp-for="UserName" class="form-control form-control-solid" placeholder="Enter UserName">
+            <span asp-validation-for="@Model!.UserName" class="text-danger d-block h-10px"></span>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="w-100 w-md-50">
+            <label class="d-flex align-items-center fs-6 fw-bold mb-2"><span class="required">Password</span></label>
+            <input type="password" asp-for="Password" class="form-control form-control-solid" placeholder="Enter Password">
+            <span asp-validation-for="@Model!.Password" class="text-danger d-block h-10px"></span>
+        </div>
+        <div class="w-100 w-md-50">
+            <label class="d-flex align-items-center fs-6 fw-bold mb-2"><span class="required">ConfirmPassword</span></label>
+            <input type="password" asp-for="ConfirmPassword" class="form-control form-control-solid" placeholder="Confirm Password">
+            <span asp-validation-for="@Model!.ConfirmPassword" class="text-danger d-block h-10px"></span>
+        </div>
+    </div>
+
+    <div class="w-100">
+        <div class="d-flex flex-column mb-8" id="container">
+            <label asp-for="Roles"></label>
+            <select class="form-select js-select2" data-control="select2" data-placeholder="Select Role" data-hide-search="true" asp-for="@Model!.SelectedRoles" asp-items="@Model!.Roles">
+                <option></option>
+            </select>
+            <span asp-validation-for="@Model.SelectedRoles" class="text-danger d-block"></span>
+        </div>
+    </div>
+
+    <partial name="_ModalFooter" />
+</form>

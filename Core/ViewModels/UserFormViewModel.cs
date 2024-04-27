@@ -29,7 +29,7 @@ namespace Speedy.Core.ViewModels
 
         #region Roles
         [Display(Name = "Roles")]
-        public IList<int> SelectedRoles { get; set; } = new List<int>();
+        public IList<string> SelectedRoles { get; set; } = new List<string>();
         public IEnumerable<SelectListItem>? Roles { get; set; }
         #endregion
     }
