@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using Bookify.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Speedy.Core.Consts;
+using System.Security.Claims;
 
 namespace Speedy.Controllers
 {   
@@ -24,9 +27,45 @@ namespace Speedy.Controllers
             var ViewModel = _mapper.Map<IEnumerable<UserViewModel>>(users);
             return View(ViewModel);
         }
+        [HttpGet]
+        [AjaxOnly]
         public async Task<IActionResult> Create()
         {
-            return PartialView("_Form");
+            var ViewModel = new UserFormViewModel {
+                Roles = await _roleManager.Roles
+                .Select(r => new SelectListItem
+                {
+                    Text = r.Name,
+                    Value = r.Name
+                })
+                .ToListAsync() 
+            };
+
+            return PartialView("_Form", ViewModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(UserFormViewModel model)
+        {
+            if (ModelState.IsValid)
+                return BadRequest();
+
+            AppUser user = new() { 
+                FirstName = model.FullName,
+                UserName = model.UserName,
+                Email = model.Email,
+                CreatedById = User.FindFirst(ClaimTypes.NameIdentifier)!.Value                
+            };
+
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRolesAsync(user, model.SelectedRoles);
+                var viewModel = _mapper.Map<UserViewModel>(model);
+                return PartialView("_UserRow", viewModel);
+            }
+
+            return BadRequest();
         }
     }
 }
