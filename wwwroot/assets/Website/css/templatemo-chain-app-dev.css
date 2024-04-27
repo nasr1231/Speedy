@@ -2216,3 +2216,10 @@ responsive
     padding: 30px;
   }
 }
+
+
+@media (min-width: 992px) {
+    .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+        padding: 0px !important;
+    }
+}

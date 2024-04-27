@@ -11,8 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <!--End::Global Fonts -->    
     <link href="~/lib/font-awesome/css/all.min.css" rel="stylesheet" crossorigin="anonymous" />
-    <link rel="stylesheet" href="~/assets/css/plugins.bundle.css" crossorigin="anonymous"/>    
-    <link rel="stylesheet" href="~/assets/css/style.bundle.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="~/assets/Panel/css/plugins.bundle.css" crossorigin="anonymous"/>    
+    <link rel="stylesheet" href="~/assets/Panel/css/style.bundle.css" crossorigin="anonymous" />
     <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" crossorigin="anonymous" />
     @await RenderSectionAsync("Styles", required: false)
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -33,9 +33,9 @@
         <div class="page d-flex flex-row flex-column-fluid">
             <!--begin::Wrapper-->
             <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-                <partial name="_Header" />
-                <div class="d-flex flex-column-fluid">
-                    <partial name="_Aside" />
+                <partial name="~/Views/Shared/Panel/_Header.cshtml" />
+                <div class="d-flex flex-column-fluid">_Aside                    
+                    <partial name="~/Views/Shared/Panel/_Aside.cshtml" />
                     <!--begin::Container-->
                     <div class="d-flex flex-column flex-column-fluid container-fluid">
                         <div class="content flex-column-fluid" id="kt_content">
@@ -67,8 +67,8 @@
     <span id="message" class="d-none">@TempData["Message"]</span>
     <partial name="_Modal" />    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/assets/js/plugins.bundle.js"></script>
-    <script src="~/assets/js/scripts.bundle.js"></script>
+    <script src="~/assets/Panel/js/plugins.bundle.js"></script>
+    <script src="~/assets/Panel/js/scripts.bundle.js"></script>
     <script src="~/lib/font-awesome/js/all.min.js"></script>
     <script src="~/lib/select2/js/select2.js"></script>    
     <script src="~/lib/sweetalert2/sweetalert2.min.js"></script>
