@@ -332,7 +332,7 @@ namespace Speedy.Data.Migrations
 
                     b.HasIndex("ShippingMethodId");
 
-                    b.ToTable("Deliveries");
+                    b.ToTable("Deliveries", (string)null);
                 });
 
             modelBuilder.Entity("Speedy.Core.Models.RelatedData.ShippingMethod", b =>
@@ -368,7 +368,7 @@ namespace Speedy.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ShippingMethods");
+                    b.ToTable("ShippingMethods", (string)null);
                 });
 
             modelBuilder.Entity("Speedy.Core.Models.Review", b =>
@@ -409,7 +409,7 @@ namespace Speedy.Data.Migrations
 
                     b.HasIndex("DeliveryId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Reviews", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

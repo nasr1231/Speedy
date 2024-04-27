@@ -13,6 +13,7 @@ namespace Speedy.Seeds
                 await roleManager.CreateAsync(new IdentityRole(AppRoles.StartUp));
                 await roleManager.CreateAsync(new IdentityRole(AppRoles.Individual));
                 await roleManager.CreateAsync(new IdentityRole(AppRoles.Delivery));
+                await roleManager.CreateAsync(new IdentityRole(AppRoles.Clerk));
             }
         }
     }
