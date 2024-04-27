@@ -171,6 +171,16 @@ function OnModalToaster() {
     toastr.success("Updated Successfully!");
 }
 
+//Select2 Function
+function select2func() {
+    $('.js-select2').select2();
+    $('.js-select2').on('select2:select', function (e) {
+
+        $('form').not('.js-logOutForm').validate().element('#' + $(this).attr('id'));
+    });
+}
+
+
 
 // Bootstrap Modal
 $(document).ready(function () {
@@ -187,7 +197,7 @@ $(document).ready(function () {
     });
 
     // Select2
-    $('.js-select2').select2();
+    select2func();
 
     //Date Picker
     $('.js-datepicker').daterangepicker({
