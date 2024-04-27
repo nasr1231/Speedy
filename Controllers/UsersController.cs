@@ -5,8 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Speedy.Core.Consts;
 
 namespace Speedy.Controllers
-{
-    [Authorize(Roles = AppRoles.Admin)]
+{   
     public class UsersController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
@@ -23,7 +22,7 @@ namespace Speedy.Controllers
         {
             var users = await _userManager.Users.ToListAsync();
             var ViewModel = _mapper.Map<IEnumerable<UserViewModel>>(users);
-            return View();
+            return View(ViewModel);
         }
         public async Task<IActionResult> Create()
         {

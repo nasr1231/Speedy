@@ -19,10 +19,10 @@
             </div>
             <h2 class="fw-bolder">Delivery Agents</h2>
         </div>
-        <div class="card-toolbar my-7">
-            <a class="btn btn-sm btn-light btn-primary fs-4 fw-bolder" asp-action="Create">
+        <div class="card-toolbar">
+            <a href="javascript:;" class="btn btn-sm btn-light btn-primary fs-4 fw-bolder js-render-modal" data-title="Add User" data-url="/Users/Create">
                 <i class="bi bi-plus-square-dotted"></i>
-                Add System User
+                Add User
             </a>
         </div>
     </div>
@@ -37,6 +37,7 @@
                     <tr class="fw-bold fs-6 text-gray-800">
                         <th>Id</th>
                         <th>UserName</th>
+                        <th>Role</th>
                         <th>Email</th>                        
                         <th>Registration Date</th>
                         <th>Update Date</th>
