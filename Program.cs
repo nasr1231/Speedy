@@ -3,6 +3,7 @@ using Speedy.Core.Mapping;
 using Speedy.Data;
 using System.Reflection;
 using Speedy.Seeds;
+using Microsoft.EntityFrameworkCore;
 
 namespace Speedy;
 
@@ -15,6 +16,8 @@ public class Program
 
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(connectionString));
+
+        builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
         builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
             .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -49,8 +52,8 @@ public class Program
         app.UseAuthentication();
         app.UseAuthorization();
 
-        var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
-        using var scope = scopeFactory.CreateScope();
+        using var scope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
+
         var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
 
@@ -60,6 +63,7 @@ public class Program
         app.MapControllerRoute(
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");
+        app.MapRazorPages();
 
         app.Run();
     }
