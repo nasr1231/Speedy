@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ActionConstraints;
 
-namespace Bookify.Filters
+namespace Speedy.Filters
 {
     public class AjaxOnly : ActionMethodSelectorAttribute
     {

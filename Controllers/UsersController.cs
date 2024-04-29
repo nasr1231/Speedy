@@ -1,15 +1,10 @@
-﻿using AutoMapper;
-using Bookify.Filters;
-using Microsoft.AspNetCore.Authorization;
+﻿using Speedy.Filters;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Speedy.Core.Consts;
-using Speedy.Data;
 using System.Security.Claims;
 
 namespace Speedy.Controllers
-{   
+{
     public class UsersController(ApplicationDbContext context, IMapper mapper, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager) : Controller
     {
         private readonly ApplicationDbContext _context = context;
