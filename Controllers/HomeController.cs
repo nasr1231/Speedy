@@ -1,9 +1,10 @@
 using Speedy.Core.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Speedy.Controllers
-{
+{   
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
