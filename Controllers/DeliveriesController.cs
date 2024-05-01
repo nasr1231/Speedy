@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Speedy.Core.Consts;
 using Speedy.Data;
+using System.Data;
 
 namespace Speedy.Controllers
 {
@@ -9,7 +11,12 @@ namespace Speedy.Controllers
         private readonly IMapper _mapper = mapper;
         public IActionResult Index()
         {
-            return View();
+
+            if (User.IsInRole(AppRoles.Admin))
+                return View("Index");            
+            
+            return View("Deliveries");
+
         }
 
         public IActionResult Create()
