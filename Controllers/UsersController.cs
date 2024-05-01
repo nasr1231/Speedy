@@ -2,17 +2,22 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
 
 namespace Speedy.Controllers
 {
-    public class UsersController(ApplicationDbContext context, IMapper mapper, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager) : Controller
+	public class UsersController(ApplicationDbContext context, IMapper mapper, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<AppUser> signInManager, ILogger<LoginModel> logger) : Controller
     {
         private readonly ApplicationDbContext _context = context;
         private readonly UserManager<AppUser> _userManager = userManager;
         private readonly RoleManager<IdentityRole> _roleManager = roleManager;
-        private readonly IMapper _mapper = mapper;
+        private readonly SignInManager<AppUser> _signInManager = signInManager;
+		private readonly IMapper _mapper = mapper;
+		private readonly ILogger<LoginModel> _logger = logger;
 
-        public async Task<IActionResult> Index()
+
+		public async Task<IActionResult> Index()
         {
             var users = await _userManager.Users.ToListAsync();
             var ViewModel = _mapper.Map<IEnumerable<UserViewModel>>(users);
@@ -56,10 +61,10 @@ namespace Speedy.Controllers
                 await _userManager.AddToRolesAsync(user, model.SelectedRoles);
                 
                 var viewModel = _mapper.Map<UserViewModel>(model);
-                return PartialView(viewModel);
+                return PartialView("_RowData", viewModel);
             }
 
             return BadRequest();
-        }
+        }		
     }
 }
