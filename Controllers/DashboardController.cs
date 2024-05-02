@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 
 namespace Speedy.Controllers
-{	
+{
+	[Authorize]
 	public class DashboardController : Controller
 	{
 		private readonly ILogger<DashboardController> _logger;

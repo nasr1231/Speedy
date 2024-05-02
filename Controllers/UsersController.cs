@@ -5,6 +5,8 @@ using System.Security.Claims;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
 using Microsoft.VisualBasic.FileIO;
+using System.Data;
+using Speedy.Core.Consts;
 
 namespace Speedy.Controllers
 {
@@ -29,17 +31,17 @@ namespace Speedy.Controllers
         [AjaxOnly]
         public async Task<IActionResult> Create()
         {
-            var ViewModel = new UserFormViewModel {
-                Roles = await _roleManager.Roles
-                .Select(r => new SelectListItem
-                {
-                    Text = r.Name,
-                    Value = r.Name
-                })
-                .ToListAsync() 
-            };
 
-            return PartialView("_Form", ViewModel);
+            IQueryable<IdentityRole> rolesQueryable = _roleManager.Roles;
+
+            rolesQueryable = rolesQueryable.Where(r => r.Name != AppRoles.Delivery && r.Name != AppRoles.StartUp && r.Name != AppRoles.Individual);
+
+            var rolesList = await rolesQueryable
+           .Select(r => new SelectListItem { Text = r.Name, Value = r.Name }).ToListAsync();
+
+            var rolesView = new UserFormViewModel { Roles = rolesList };            
+
+            return PartialView("_Form", rolesView);
         }
 
         [HttpPost]
@@ -57,22 +59,30 @@ namespace Speedy.Controllers
                 NormalizedEmail = model.Email.ToUpper(),
                 Email = model.Email,      
                 EmailConfirmed = true,
+                IsActive = true,                
             };
+            
 
-            if (user == null)
-                throw new ArgumentException("احا الموديل فاضي يابرنس");
+            var result = await _userManager.CreateAsync(user, model.Password);
 
-            var result = await _userManager.CreateAsync(user, model.Password ?? throw new ArgumentException("Password cannot be null"));
+            if (!result.Succeeded)
+                return BadRequest(ToCustomErrorString(result));
 
-            if (result.Succeeded)
-            {
-                await _userManager.AddToRolesAsync(user, model.SelectedRoles);
+            await _userManager.AddToRoleAsync(user, model.SelectedRoles);
 
-                var viewModel = _mapper.Map<UserViewModel>(model);
-                return PartialView("_RowData", viewModel);
-            }            
+            var viewModel = _mapper.Map<UserViewModel>(model);
 
-            return BadRequest();
-        }		
+            return PartialView("_RowData", viewModel);
+        }
+
+        private static string ToCustomErrorString(IdentityResult result)
+        {
+            var error = string.Empty;
+
+            foreach (var identityError in result.Errors)
+                error += $"{identityError.Description},";
+
+            return error;
+        }
     }
 }
