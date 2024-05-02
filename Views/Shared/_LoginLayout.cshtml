@@ -5,58 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
     <!--Global Fonts -->
-    @*Arabic Font to be added here*@
-    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    @*Arabic Font to be added here*@    
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap" crossorigin="anonymous">
-    <!--End::Global Fonts -->
-    <link rel="stylesheet" href="~/assets/website/css/footer.css" crossorigin="anonymous" />
-    <link href="~/lib/font-awesome/css/all.min.css" crossorigin="anonymous" />
+    <!--End::Global Fonts -->    
     <link rel="stylesheet" href="~/assets/Panel/css/plugins.bundle.css" crossorigin="anonymous" />
-    <link rel="stylesheet" href="~/assets/Panel/css/style.bundle.css" crossorigin="anonymous" />
-    <link rel="stylesheet" href="~/lib/select2/css/select2.min.css" crossorigin="anonymous" />
-    <link rel="stylesheet" href="~/assets/website/css/template-chain-app-dev.css" crossorigin="anonymous" />
-    <link rel="stylesheet" href="~/assets/website/css/animated.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="~/assets/Panel/css/style.bundle.css" crossorigin="anonymous" />     
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link href="~/assets/panel/login/style.bundle.css" rel="stylesheet" crossorigin="anonymous" />
+    <link href="~/assets/panel/login/plugins.bundle.css" rel="stylesheet" crossorigin="anonymous" />
     @await RenderSectionAsync("Styles", required: false)
     <link rel="stylesheet" href="~/assets/Website/css/Style.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Speedy.styles.css" asp-append-version="true" crossorigin="anonymous" />
 </head>
 <body>
-    <!--begin::Theme mode setup on page load-->
-    <script>var defaultThemeMode = "light"; var themeMode; if (document.documentElement) { if (document.documentElement.hasAttribute("data-theme-mode")) { themeMode = document.documentElement.getAttribute("data-theme-mode"); } else { if (localStorage.getItem("data-theme") !== null) { themeMode = localStorage.getItem("data-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-theme", themeMode); }</script>
-    <!--end::Theme mode setup on page load-->
-    <!--begin::Loader-->
-    <!-- ***** Preloader Start ***** -->
-    @*
-    <div id="js-preloader" class="js-preloader">
-    <div class="preloader-inner">
-    <span class="dot"></span>
-    <div class="dots">
-    <span></span>
-    <span></span>
-    <span></span>
-    </div>
-    </div>
-    </div>
-    *@
-    <!-- ***** Preloader End ***** -->
+    
     @RenderBody()
 
     <span id="message" class="d-none">@TempData["Message"]</span>
     <partial name="_Modal" />
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/assets/Panel/js/plugins.bundle.js"></script>
-    <script src="~/assets/Panel/js/scripts.bundle.js"></script>
-    <script src="~/lib/font-awesome/js/all.min.js"></script>
-    <script src="~/lib/select2/js/select2.js"></script>
-    <script src="~/lib/sweetalert2/sweetalert2.min.js"></script>
-    <script src="~/assets/website/js/custom.js"></script>
-    <script src="~/assets/website/js/animation.js"></script>
-    <script src="~/assets/website/js/popup.js"></script>
-    <script src="~/assets/website/js/tabs.js"></script>
-
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>    
+    <script src="~/lib/font-awesome/js/all.min.js"></script>        
+    <script src="~/js/site.js"></script>
     @await RenderSectionAsync("Plugins", required: false)
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)

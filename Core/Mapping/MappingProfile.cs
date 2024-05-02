@@ -18,8 +18,12 @@ namespace Speedy.Core.Mapping
             //.ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.CategoryName));
 
             //User ViewModel
-            CreateMap<AppUser, UserViewModel>().ReverseMap();
+            CreateMap<AppUser, UserViewModel>();
             CreateMap<UserViewModel, UserFormViewModel>().ReverseMap();
+            CreateMap<UserFormViewModel, AppUser>()
+                .ForMember(dest => dest.NormalizedEmail, opt => opt.MapFrom(src => src.Email.ToUpper()))
+                .ForMember(dest => dest.NormalizedUserName, opt => opt.MapFrom(src => src.UserName.ToUpper()))
+                .ReverseMap();
 
         }
     }

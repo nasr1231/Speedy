@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
+using Microsoft.VisualBasic.FileIO;
 
 namespace Speedy.Controllers
 {
@@ -21,7 +22,7 @@ namespace Speedy.Controllers
         {
             var users = await _userManager.Users.ToListAsync();
             var ViewModel = _mapper.Map<IEnumerable<UserViewModel>>(users);
-            return View(ViewModel);
+            return View("Index", ViewModel);
         }
 
         [HttpGet]
@@ -46,23 +47,30 @@ namespace Speedy.Controllers
         public async Task<IActionResult> Create(UserFormViewModel model)
         {
             if (ModelState.IsValid)
-                return BadRequest();
+                return BadRequest();            
 
-            AppUser user = new() { 
-                FirstName = model.FullName,
-                UserName = model.UserName,
-                Email = model.Email,
-                CreatedById = User.FindFirst(ClaimTypes.NameIdentifier)!.Value                
+            AppUser user = new()
+            {
+                FirstName = model.FullName,                                                
+                UserName = model.Email,
+                NormalizedUserName = model.Email.ToUpper(),
+                NormalizedEmail = model.Email.ToUpper(),
+                Email = model.Email,      
+                EmailConfirmed = true,
             };
 
-            var result = await _userManager.CreateAsync(user, model.Password);
+            if (user == null)
+                throw new ArgumentException("احا الموديل فاضي يابرنس");
+
+            var result = await _userManager.CreateAsync(user, model.Password ?? throw new ArgumentException("Password cannot be null"));
+
             if (result.Succeeded)
             {
                 await _userManager.AddToRolesAsync(user, model.SelectedRoles);
-                
+
                 var viewModel = _mapper.Map<UserViewModel>(model);
                 return PartialView("_RowData", viewModel);
-            }
+            }            
 
             return BadRequest();
         }		

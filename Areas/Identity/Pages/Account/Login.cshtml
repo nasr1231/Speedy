@@ -1,17 +1,8 @@
 ﻿@page
 @model LoginModel
 @{
-	ViewData["Title"] = "Log in";
-	
-}
-
-@section Styles {
-	<link href="~/assets/panel/login/style.bundle.css" rel="stylesheet" crossorigin="anonymous" />
-	<link href="~/assets/panel/login/plugins.bundle.css" rel="stylesheet" crossorigin="anonymous" />
-    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap" crossorigin="anonymous">
+    ViewData["Title"] = "Log in";
+    Layout = "/Views/Shared/_LoginLayout.cshtml";
 }
 <style>
     *{
@@ -46,7 +37,6 @@
                     <!--begin::Description-->
                     <div class="d-none d-lg-block d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-100px min-h-lg-250px">
                         <img class="img-fluid" style="max-width:50vw;" src="~/assets/website/images/login-amico (2).png" />"
-
                     </div>
                     <!--end::Description-->
                 </div>
@@ -66,7 +56,7 @@
                 <div class="w-lg-500px p-10 p-lg-15 mx-auto">
 
                     <!--begin::Form-->
-                    <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="/saul-html-pro/index.html" action="#">
+                    <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" action="post">
                         <!--begin::Heading-->
                         <div class="text-center mb-10">
                             <!--begin::Title-->
@@ -91,7 +81,8 @@
                             <label class="form-label fs-6 fw-bold text-gray-900">البريد الإلكتروني</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input class="form-control form-control-lg form-control-solid" type="text" name="email" autocomplete="off" />
+                            <input type="text" asp-for="Input.UserName" class="form-control form-control-lg form-control-solid" autocomplete="off" />
+                            <span asp-validation-for="Input.UserName" class="text-danger"></span>
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->
@@ -103,23 +94,25 @@
                                 <label class="form-label fw-bold text-gray-900 fs-6 mb-0">كلمة المرور</label>
                                 <!--end::Label-->
                                 <!--begin::Link-->
-                                <a href="/saul-html-pro/authentication/sign-in/password-reset.html" class="link-primary fs-6 fw-bold">
+                                <a asp-page="./ForgotPassword" class="link-primary fs-6 fw-bold">
                                     هل نسيت كلمة المرور؟
                                 </a>
                                 <!--end::Link-->
                             </div>
                             <!--end::Wrapper-->
                             <!--begin::Input-->
-                            <input class="form-control form-control-lg form-control-solid" type="password" name="password" autocomplete="off" />
+                            <input asp-for="Input.Password" type="password" class="form-control form-control-lg form-control-solid" autocomplete="off" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
                             <!--end::Input-->
                         </div>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <!--end::Input group-->
                         <!--begin::Actions-->
                         <div class="text-center">
                             <!--begin::Submit button-->
-                            <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5">
+                            <button type="submit" class="btn btn-lg btn-primary w-100 mb-5">
                                 <span class="indicator-label">
-                                    تسجيل
+                                    تسجيل الدخول
                                 </span>
 
                                 <span class="indicator-progress">
@@ -158,7 +151,5 @@
 
 <!--end::Wrapper-->
 @section Scripts {
-	<partial name="_ValidationScriptsPartial" />
-	<script src="~/assets/panel/login/plugins.bundle.js"></script>
-	<script src="~/assets/panel/login/style.bundle.js"></script>
+    <partial name="_ValidationScriptsPartial" />    
 }
