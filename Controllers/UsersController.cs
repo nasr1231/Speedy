@@ -1,26 +1,23 @@
-﻿using Speedy.Filters;
+﻿using System.Data;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Security.Claims;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
-using Microsoft.VisualBasic.FileIO;
-using System.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Speedy.Core.Consts;
+using Speedy.Filters;
 
 namespace Speedy.Controllers
 {
-	public class UsersController(ApplicationDbContext context, IMapper mapper, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<AppUser> signInManager, ILogger<LoginModel> logger) : Controller
+    public class UsersController(ApplicationDbContext context, IMapper mapper, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<AppUser> signInManager, ILogger<LoginModel> logger) : Controller
     {
         private readonly ApplicationDbContext _context = context;
         private readonly UserManager<AppUser> _userManager = userManager;
         private readonly RoleManager<IdentityRole> _roleManager = roleManager;
         private readonly SignInManager<AppUser> _signInManager = signInManager;
-		private readonly IMapper _mapper = mapper;
-		private readonly ILogger<LoginModel> _logger = logger;
+        private readonly IMapper _mapper = mapper;
+        private readonly ILogger<LoginModel> _logger = logger;
 
 
-		public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
             var users = await _userManager.Users.ToListAsync();
             var ViewModel = _mapper.Map<IEnumerable<UserViewModel>>(users);
@@ -39,7 +36,7 @@ namespace Speedy.Controllers
             var rolesList = await rolesQueryable
            .Select(r => new SelectListItem { Text = r.Name, Value = r.Name }).ToListAsync();
 
-            var rolesView = new UserFormViewModel { Roles = rolesList };            
+            var rolesView = new UserFormViewModel { Roles = rolesList };
 
             return PartialView("_Form", rolesView);
         }
@@ -49,19 +46,19 @@ namespace Speedy.Controllers
         public async Task<IActionResult> Create(UserFormViewModel model)
         {
             if (ModelState.IsValid)
-                return BadRequest();            
+                return BadRequest();
 
             AppUser user = new()
             {
-                FirstName = model.FullName,                                                
+                FirstName = model.FullName,
                 UserName = model.Email,
                 NormalizedUserName = model.Email.ToUpper(),
                 NormalizedEmail = model.Email.ToUpper(),
-                Email = model.Email,      
+                Email = model.Email,
                 EmailConfirmed = true,
-                IsActive = true,                
+                IsActive = true,
             };
-            
+
 
             var result = await _userManager.CreateAsync(user, model.Password);
 
