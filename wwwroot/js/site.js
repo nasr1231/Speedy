@@ -24,6 +24,15 @@ function ShowSuccessMessage(message = 'Updated Successfully!') {
     });
 }
 
+function showUserForm(form) {
+    var modal = $('#Modal');
+    modal.find('.modal-title').text("إضافة مستخدم");
+    modal.find('.modal-body').html(form);
+    $.validator.unobtrusive.parse(modal);
+    select2func()
+    $("#kt_datepicker_1").flatpickr({});
+    modal.modal('show');
+}
 function ShowErrorMessage(message = 'Something went wrong!') {
     Swal.fire({
         icon: 'error',
@@ -35,10 +44,9 @@ function ShowErrorMessage(message = 'Something went wrong!') {
     });
 }
 
-function OnModalComplete() {
-    $('.body :submit').removeAttr('disabled').removeAttr('data-kt-indicator');
+function onModalComplete() {
+    $('body :submit').removeAttr('data-kt-indicator', 'on').removeAttr('disabled', 'disabled');
 }
-
 function OnModalSuccess(row) {
     ShowSuccessMessage();
     $('#model-window').modal('hide');

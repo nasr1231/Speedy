@@ -1,0 +1,30 @@
+﻿@model UserRoleFormViewModel
+
+@{
+    Layout = "_LoginLayout";
+}
+
+<form asp-action="Create"
+      data-ajax-method="get"
+      data-ajax="true">
+
+    <div class="mb-2">
+        <label asp-for="SelectedRoles" class="required form-label"></label>
+        <select class="form-select js-select2" data-placeholder="أختر دور المستخدم" asp-for="SelectedRoles" asp-items="Model?.Roles">
+            <option></option>
+        </select>
+        <span asp-validation-for="SelectedRoles" class="text-danger d-block"></span>
+    </div>
+
+    <div class="modal-footer px-0">        
+        <button type="submit" class="btn btn-primary">
+            <span class="indicator-label">
+                Save
+            </span>
+            <span class="indicator-progress">
+                Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </span>
+        </button>
+    </div>
+</form>
+
