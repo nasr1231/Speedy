@@ -30,6 +30,17 @@ public class Program
 
         builder.Services.AddControllersWithViews();
 
+        builder.Services.Configure<IdentityOptions>(options =>
+        {
+            options.SignIn.RequireConfirmedEmail = false;
+            options.Password.RequireNonAlphanumeric = false;
+            options.Password.RequireUppercase = true;
+            options.Password.RequiredLength = 8;
+            options.Password.RequiredUniqueChars = 0;
+            options.User.RequireUniqueEmail = true;            
+            options.Lockout.MaxFailedAccessAttempts = 3;
+        });
+
         var app = builder.Build();
        
         // Configure the HTTP request pipeline.
