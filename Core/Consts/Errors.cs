@@ -4,5 +4,6 @@
     {
         public const string MaxLength = "It must be at max {0} characters long.";
         public const string ConfirmPasswordMatch = "The password and confirmation password do not match.";
+        public const string isRequired = "{0} Field is required!";
     }
 }
