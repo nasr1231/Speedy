@@ -16,6 +16,7 @@ namespace Speedy.Core.Models
         [MaxLength(13)]
         public string MobileNumber { get; set; } = null!;
         public int ShippingMethodId { get; set; }
+
         [MaxLength(500)]
         public string? Description { get; set; }
         public bool HasWhatsApp {  get; set; }
