@@ -20,14 +20,23 @@
                         <li class="scroll-to-section"><a href="#newsletter">عنا</a></li>
                     </ul>
                     <div class="gradient-button">
-                        <a id="modal_trigger" href="Identity/Account/login">
-                            <i class="fa fa-sign-in-alt"></i> 
-                            تسجيل الدخول
-                        </a>
-                        <a id="modal_trigger" asp-action="Register">
-                            <i class="fa fa-sign-in-alt"></i>
-                            سجل الآن
-                        </a>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <span>
+                                @User.FindFirst(ClaimTypes.Name)!.Value
+                            </span>
+                        }
+                        else
+                        {
+                            <a id="modal_trigger" href="Identity/Account/login">
+                                <i class="fa fa-sign-in-alt"></i>
+                                تسجيل الدخول
+                            </a>
+                            <a id="modal_trigger" asp-action="Register">
+                                <i class="fa fa-sign-in-alt"></i>
+                                سجل الآن
+                            </a>
+                        }
                     </div>
 
                     <a class='menu-trigger'>

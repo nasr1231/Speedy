@@ -13,8 +13,10 @@
     <link rel="stylesheet" href="~/assets/Panel/css/plugins.bundle.css" crossorigin="anonymous" />
     <link rel="stylesheet" href="~/assets/Panel/css/style.bundle.css" crossorigin="anonymous" />     
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link href="~/lib/select2/css/select2.css" rel="stylesheet" />
     <link href="~/assets/panel/login/style.bundle.css" rel="stylesheet" crossorigin="anonymous" />
     <link href="~/assets/panel/login/plugins.bundle.css" rel="stylesheet" crossorigin="anonymous" />
+
     @await RenderSectionAsync("Styles", required: false)
     <link rel="stylesheet" href="~/assets/Website/css/Style.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -27,7 +29,8 @@
     <span id="message" class="d-none">@TempData["Message"]</span>
     <partial name="_Modal" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>    
-    <script src="~/lib/font-awesome/js/all.min.js"></script>        
+    <script src="~/lib/font-awesome/js/all.min.js"></script>  
+    <script src="~/lib/select2/js/select2.full.min.js"></script>
     <script src="~/js/site.js"></script>
     @await RenderSectionAsync("Plugins", required: false)
     <script src="~/js/site.js" asp-append-version="true"></script>

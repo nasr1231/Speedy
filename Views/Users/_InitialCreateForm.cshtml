@@ -4,10 +4,6 @@
     Layout = "_LoginLayout";
 }
 
-@section Styles{    
-    <link href="~/lib/select2/css/select2.css" rel="stylesheet" />
-}
-
 <form asp-controller="Home" asp-action="Register"
       data-ajax-method="post"
       data-ajax="true">
@@ -34,6 +30,5 @@
 
 @section Scripts
 {
-    <partial name="_ValidationScriptsPartial" />
-    <script src="~/lib/select2/js/select2.full.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />    
 }    

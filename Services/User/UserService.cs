@@ -13,7 +13,7 @@ public class UserService(UserManager<AppUser> userManager) : IUserService
             Email = userForm.Email,
             NormalizedEmail = userForm.Email.ToUpper(),
             UserName = userForm.Email,
-            IsActive = userForm.IsActive == true,
+            IsActive = userForm.IsActive,
             NormalizedUserName = userForm.Email.ToUpper(),
             EmailConfirmed = true,
         };
