@@ -4,3 +4,4 @@ global using Microsoft.EntityFrameworkCore;
 global using Speedy.Core.Models;
 global using Speedy.Core.ViewModels;
 global using Speedy.Data;
+global using System.Security.Claims;

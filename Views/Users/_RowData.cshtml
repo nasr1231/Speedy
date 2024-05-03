@@ -3,7 +3,7 @@
 <tr>
     <td>@Model.Id</td>      
     <td>@Model.UserName</td>      
-    <td>@Model.SelectedRoles</td>      
+    <td>@User.FindFirst(ClaimTypes.Name)!.Value</td>
     <td>@Model.Email</td>      
     <td>@Model.CreatedOn</td>      
     <td>@Model.LastUpdatedOn</td>      
