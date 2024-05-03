@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Speedy.Core.Consts;
+using System.Data;
 
 namespace Speedy.Controllers
 {
-	[Authorize]
-	public class DashboardController : Controller
+    [Authorize(Roles = AppRoles.Admin)]
+    public class DashboardController : Controller
 	{
 		private readonly ILogger<DashboardController> _logger;
 		public DashboardController(ILogger<DashboardController> logger)
