@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
 namespace Speedy.Core.Models
@@ -33,6 +34,8 @@ namespace Speedy.Core.Models
 
         #region Relations
         public Delivery? Delivery { get; set; }        
+        public Individual? Individual { get; set; }        
+        public StartUp? Startup { get; set; }        
         #endregion
     }
 }
