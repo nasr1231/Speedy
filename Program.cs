@@ -4,6 +4,7 @@ using Speedy.Data;
 using System.Reflection;
 using Speedy.Seeds;
 using Microsoft.EntityFrameworkCore;
+using Speedy.Services.User;
 
 namespace Speedy;
 
@@ -27,6 +28,8 @@ public class Program
         builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(MappingProfile)));
 
         //builder.Services.AddScoped<UserManager<AppUser>>();
+
+        builder.Services.AddScoped<IUserService, UserService>();
 
         builder.Services.AddControllersWithViews();
 

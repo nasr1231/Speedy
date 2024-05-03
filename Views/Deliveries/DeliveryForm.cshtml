@@ -1,12 +1,10 @@
 ﻿@model DeliveryFormViewModel
 
-<form asp-action="Create"
-      data-ajax-method="post"
-      data-ajax="true"
-      data-ajax-begin="OnModalBegin"
-      data-ajax-success="OnModalSuccess"
-      data-ajax-failure="ShowErrorMessage"
-      data-ajax-complete="OnModalComplete">    
+@{
+    Layout = "_LoginLayout";
+}
+
+<form asp-action="Create" asp-controller="Deliveries">    
     <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
     </div>
 
@@ -19,7 +17,7 @@
         <div class="col-12 d-flex align-items-center pt-3 pb-5">
             <input class="form-check-input" type="checkbox" asp-for="@Model.HasWhatsApp" id="flexCheck" />
             <label class="form-check-label" for="flexCheckDefault">
-                هل يوجد واتساب على هذا 
+                هل يوجد واتساب على هذا الرقم
             </label>
         </div>       
     </div>
@@ -46,5 +44,14 @@
         </div>
     </div> *@
 
-    <partial name="_ModalFooter" />
+    <div class="modal-footer px-0">
+        <button type="submit" class="btn btn-primary">
+            <span class="indicator-label">
+                Save
+            </span>
+            <span class="indicator-progress">
+                Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </span>
+        </button>
+    </div>
 </form>
