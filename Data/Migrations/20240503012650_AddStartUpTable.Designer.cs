@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Speedy.Data;
 
@@ -11,9 +12,11 @@ using Speedy.Data;
 namespace Speedy.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240503012650_AddStartUpTable")]
+    partial class AddStartUpTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -500,8 +503,7 @@ namespace Speedy.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId")
-                        .IsUnique();
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("StartUps");
                 });
@@ -601,8 +603,8 @@ namespace Speedy.Data.Migrations
             modelBuilder.Entity("Speedy.Core.Models.StartUp", b =>
                 {
                     b.HasOne("Speedy.Core.Models.AppUser", "AppUser")
-                        .WithOne("Startup")
-                        .HasForeignKey("Speedy.Core.Models.StartUp", "AppUserId")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -614,8 +616,6 @@ namespace Speedy.Data.Migrations
                     b.Navigation("Delivery");
 
                     b.Navigation("Individual");
-
-                    b.Navigation("Startup");
                 });
 
             modelBuilder.Entity("Speedy.Core.Models.Delivery", b =>
