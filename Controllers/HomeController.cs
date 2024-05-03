@@ -37,7 +37,7 @@ namespace Speedy.Controllers
         }
 
         [HttpPost]
-        [AjaxOnly]
+        //[AjaxOnly]
         public async Task<IActionResult> Register(UserRoleFormViewModel model)
         {
             if (!ModelState.IsValid)
@@ -45,6 +45,11 @@ namespace Speedy.Controllers
 
             if (model.SelectedRoles == AppRoles.Delivery)
                 return RedirectToAction("Create", "Deliveries");
+
+            if (model.SelectedRoles == AppRoles.Individual)
+                return RedirectToAction("Create", "Individuals");
+            if (model.SelectedRoles == AppRoles.StartUp)
+                return RedirectToAction("Create", "StartUps");
 
             return BadRequest("Invalid Role!");
         }

@@ -1,34 +1,28 @@
-﻿using Speedy.Core.Consts;
+﻿using Microsoft.AspNetCore.Mvc;
+using Speedy.Core.Consts;
 using Speedy.Services.User;
 
 namespace Speedy.Controllers
 {
-    public class DeliveriesController(ApplicationDbContext context, IMapper mapper, IUserService userService) : Controller
+    public class StartUpsController(ApplicationDbContext context, IMapper mapper, IUserService userService) : Controller
     {
         private readonly ApplicationDbContext _context = context;
         private readonly IMapper _mapper = mapper;
         private readonly IUserService _userService = userService;
-
         public IActionResult Index()
         {
-
-            if (User.IsInRole(AppRoles.Admin))
-                return View("Index");
-
-            return View("Deliveries");
-
+            return View();
         }
-
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            var deliveryForm = new DeliveryFormViewModel();
+            var individualForm = new StartUpFormViewModel();
 
-            return View("DeliveryForm");
+            return View("StartUpForm");
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(DeliveryFormViewModel model)
+        public async Task<IActionResult> Create(StartUpFormViewModel model)
         {
             if (!ModelState.IsValid)
                 return View(model);
@@ -38,7 +32,7 @@ namespace Speedy.Controllers
                 //Password= model.Password,
                 //Email= model.Email,
                 //.....
-                SelectedRoles = AppRoles.Delivery
+                SelectedRoles = AppRoles.StartUp
             };
 
             var result = await _userService.SubmitUser(userForm);
@@ -46,19 +40,17 @@ namespace Speedy.Controllers
             if (!result.IsSuccess)
                 return View(model);
 
-            var delivery = new Delivery
+            var startUp = new StartUp
             {
                 AppUserId = result.UserId!,
-                HasWhatsApp = model.HasWhatsApp
+
 
             };
 
-            _context.Add(delivery);
+            _context.Add(startUp);
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Index", "Home");
         }
-
     }
 }
-
