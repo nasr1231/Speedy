@@ -23,7 +23,7 @@
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <span>
-                                @User.FindFirst(ClaimTypes.Name)!.Value
+                                @User.FindFirst(ClaimTypes.Role)!.Value
                             </span>
                         }
                         else

@@ -4,6 +4,7 @@
     Layout = "_LoginLayout";
 }
 
+
 <form asp-controller="Home" asp-action="Register"
       data-ajax-method="post"
       data-ajax="true">
@@ -16,7 +17,7 @@
         <span asp-validation-for="SelectedRoles" class="text-danger d-block"></span>
     </div>
 
-    <div class="modal-footer px-0">        
+    <div class="modal-footer px-0">
         <button type="submit" class="btn btn-primary">
             <span class="indicator-label">
                 Save
@@ -27,8 +28,3 @@
         </button>
     </div>
 </form>
-
-@section Scripts
-{
-    <partial name="_ValidationScriptsPartial" />    
-}    
