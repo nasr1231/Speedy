@@ -8,10 +8,8 @@
         public Byte? Rate { get; set; }
         public string ServiceArea { get; set; } = null!;
         public string Address { get; set; } = null!;
-        public int ShippingMethodId { get; set; }
-        public string MobileNumber { get; set; } = null!;
-        public string? Description { get; set; }
-        public bool HasWhatsApp { get; set; }
+        public string? ProfilePictureUrl { get; set; }
+        public string MobileNumber { get; set; } = null!;                
         #endregion
 
         #region Relations        

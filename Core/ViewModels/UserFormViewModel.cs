@@ -25,6 +25,10 @@ namespace Speedy.Core.ViewModels
         
         [Compare("Password", ErrorMessage = Errors.ConfirmPasswordMatch)]
         public string ConfirmPassword { get; set; } = null!;
+
+        public string? ProfilePictureUrl { get; set; }
+
+        public string? NID { get; set; }
         #endregion
 
         #region Roles
