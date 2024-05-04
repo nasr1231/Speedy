@@ -16,8 +16,7 @@ namespace Speedy.Seeds
                 Email = "admin@Speedy.com",
                 EmailConfirmed = true,
                 Gender = "Male",
-                CreatedOn = DateTime.Now,
-                Age = 22,
+                CreatedOn = DateTime.Now,                
                 NID = "00000000000000"
             };
 
