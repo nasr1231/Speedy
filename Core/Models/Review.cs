@@ -18,6 +18,9 @@ namespace Speedy.Core.Models
         #region Relations
         public Delivery? Delivery { get; set; }
         public int DeliveryId { get; set; }
+
+        public Individual Individual { get; set; } = null!;
+        public int IndividualId { get; set; }
         #endregion
     }
 }

@@ -10,6 +10,7 @@
         #region Relations
         public AppUser? AppUser { get; set; }
         public string AppUserId { get; set; } = null!;
+        public ICollection<Review>? Reviews { get; }
         #endregion
     }
 }

@@ -14,8 +14,7 @@ namespace Speedy.Core.Models
         public string ServiceArea { get; set; } = null!;
         public string Address { get; set; } = null!;
         [MaxLength(13)]
-        public string MobileNumber { get; set; } = null!;
-        public int ShippingMethodId { get; set; }
+        public string MobileNumber { get; set; } = null!;        
 
         [MaxLength(500)]
         public string? Description { get; set; }
@@ -27,6 +26,7 @@ namespace Speedy.Core.Models
         public AppUser? AppUser { get; set; }
         public string AppUserId { get; set; } = null!;
         public ICollection<Review> Reviews { get; set; } = [];
+        public int ShippingMethodId { get; set; }
         public ShippingMethod ShippingMethods { get; set; } = null!;
         #endregion
     }

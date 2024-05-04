@@ -15,11 +15,10 @@ namespace Speedy.Core.Models
         public string LastName { get; set; } = string.Empty;
         public string Gender { get; set; } = string.Empty;
 
-        [Range(16, 80)]
-        public byte? Age { get; set; }
+        public DateTime BirthDate { get; set; }
         public string? ProfilePictureIUrl { get; set; } = string.Empty;
 
-        [MaxLength(20)]
+        [MaxLength(14)]
         public string NID { get; set; } = string.Empty;
         #endregion
 
