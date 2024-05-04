@@ -16,6 +16,8 @@ public class UserService(UserManager<AppUser> userManager) : IUserService
             IsActive = userForm.IsActive,
             NormalizedUserName = userForm.Email.ToUpper(),
             EmailConfirmed = true,
+            NID =  userForm.NID,
+            
         };
 
         var createUserResult = await _userManager.CreateAsync(user, userForm.Password);
