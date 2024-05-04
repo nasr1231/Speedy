@@ -33,7 +33,7 @@ namespace Speedy.Controllers
 
             var rolesView = new UserRoleFormViewModel { Roles = rolesList };
 
-            return PartialView("~/Views/Users/_InitialCreateForm.cshtml", rolesView);
+            return PartialView("~/Views/Users/InitialCreateForm.cshtml", rolesView);
         }
 
         [HttpPost]

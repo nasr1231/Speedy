@@ -5,7 +5,7 @@ using System.Data;
 
 namespace Speedy.Controllers
 {
-    [Authorize(Roles = AppRoles.Admin)]
+	[Authorize(Roles = AppRoles.Admin)]
     public class DashboardController : Controller
 	{
 		private readonly ILogger<DashboardController> _logger;
