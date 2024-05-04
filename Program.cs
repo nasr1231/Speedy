@@ -30,6 +30,7 @@ public class Program
         //builder.Services.AddScoped<UserManager<AppUser>>();
 
         builder.Services.AddScoped<IUserService, UserService>();
+        builder.Services.AddScoped<IAttachmentService, AttachmentService>();
 
         builder.Services.AddControllersWithViews();
 
