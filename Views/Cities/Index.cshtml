@@ -1,0 +1,68 @@
+﻿ @model IEnumerable<CityViewModel>
+
+@{
+    ViewData["Title"] = "Cities";
+}
+
+@section Styles
+{
+    <link href="~/assets/panel/plugins/datatables/datatables.bundle.css" rel="stylesheet" />
+}
+
+<div class="card shadow-sm mb-5 mb-lg-10">
+    <div class="card-header">
+        <div class="card-title">
+            <div class="symbol symbol-70px me-4">
+                <div class="symbol-label fs-2 fw-semibold text-success">
+                    <i class="fa-solid fa-truck-fast text-primary"></i>
+                </div>
+                <span class="symbol-badge badge badge-circle bg-primary start-100 text-white"></span>
+            </div>
+            <h2 class="fw-bolder">Cities</h2>
+        </div>
+        <div class="card-toolbar my-7">
+            <a href="/RelatedData" class="btn btn-md btn-success me-2">
+                Back To Settings
+            </a>
+            <a class="btn btn-sm btn-light btn-primary fs-4 fw-bolder" asp-action="Create">
+                <i class="bi bi-plus-square-dotted"></i>
+                Add
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm mb-5 mb-lg-10 min-h-md-425px">
+    <div class="card-body pt-0">
+        <div class="table-responsive" style="min-height: 270px">
+            <partial name="_TableHeader" />
+            <table class="table table-row-bordered table-row-gray-300 gy-3 align-middle js-datatables" data-export-title="Cities">
+                <thead>
+                    <tr class="fw-bold fs-6 text-gray-800">
+                        <th>Name</th>
+                        <th>Governorate</th>
+                        <th>Status</th>
+                        <th class="js-no-export">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    @foreach (var city in Model)
+                    {
+                        <tr>
+                            <partial name="_RowData" />
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/assets/panel/plugins/datatables/datatables.bundle.js"></script>
+    <script src="~/assets/panel/plugins/datatables/vfs_fonts.js"></script>
+}

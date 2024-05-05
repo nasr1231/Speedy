@@ -1,0 +1,36 @@
+﻿@model CityFormViewModel
+
+
+<form asp-action="@(Model?.Id > 0 ? "Edit" : "Create")"
+      data-ajax-method="post"
+      data-ajax="true"
+      data-ajax-begin="onModalBegin"
+      data-ajax-success="modalSubmitSuccess"
+      data-ajax-failure="showErorrMessage"
+      data-ajax-complete="onModalComplete">
+
+    <div class="mb-2">
+        @if (Model?.Id > 0)
+        {
+            <input type="hidden" asp-for="Id" />
+
+        }
+        <!--begin::Input group-->
+        <div class="form-floating mb-2">
+            <input type="text" asp-for="Name" class="form-control" placeholder="اسم المدينة" />
+            <label asp-for="Name">City</label>
+        </div>
+        <!--end::Input group-->
+        <span asp-validation-for="Name" class="text-danger d-block"></span>
+
+    </div>
+    <div class="mb-2">
+        @* <select class="form-select js-select2" asp-for ="Name" asp-items="@Model.GetGeographicalAreaName"   data-placeholder="Choose one thing"> *@
+        <select class="form-select js-select2" asp-for="GovernorateId" asp-items="Model!.Governorate" data-placeholder="اختر المنطقة الجغرافية">
+            <option></option>
+        </select>
+        <span asp-validation-for="GovernorateId" class="text-danger d-block"></span>
+    </div>
+    <partial name="_ModalFooter" />
+</form>
+
