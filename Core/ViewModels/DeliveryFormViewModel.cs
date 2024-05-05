@@ -70,6 +70,16 @@ namespace Speedy.Core.ViewModels
 		[Required(ErrorMessage = Errors.isRequired)]
 		public string SelectedShippingMethod { get; set; } = null!;
 		public IEnumerable<SelectListItem>? ShippingMethods { get; set; }
-		#endregion
-	}
+
+        [DisplayName("المدينة")]
+        [Required(ErrorMessage = Errors.isRequired)]
+        public string SelectedCity { get; set; } = null!;
+        public IEnumerable<SelectListItem>? Cities { get; set; }
+
+        [DisplayName("المحافظة")]
+        [Required(ErrorMessage = Errors.isRequired)]
+        public string SelectedGovernorate { get; set; } = null!;
+        public IEnumerable<SelectListItem>? Governorates { get; set; }
+        #endregion
+    }
 }

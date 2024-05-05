@@ -1,4 +1,5 @@
-﻿using Speedy.Core.Consts;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Speedy.Core.Consts;
 using Speedy.Services.User;
 
 namespace Speedy.Controllers
@@ -22,10 +23,8 @@ namespace Speedy.Controllers
 
         [HttpGet]
         public async Task<IActionResult> Create()
-        {
-            var deliveryForm = new DeliveryFormViewModel();
-
-            return View("DeliveryForm");
+        {            
+            return View("DeliveryForm", InitialDeliveryFormAsync());
         }
 
         [HttpPost]
@@ -73,7 +72,22 @@ namespace Speedy.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+        private async Task<DeliveryFormViewModel> InitialDeliveryFormAsync(DeliveryFormViewModel? model = null)
+        {
+            DeliveryFormViewModel deliveryFormView = model ?? new DeliveryFormViewModel();
 
+            var methodsTask = _context.ShippingMethods.Where(c => !c.IsActive).OrderBy(c => c.Name).ToListAsync();
+            var citiesTask = _context.Cities.Where(c => !c.IsActive).OrderBy(c => c.Name).ToListAsync();
+            var governoratesTask = _context.Governorates.Where(c => !c.IsActive).OrderBy(c => c.Name).ToListAsync();
+
+            await Task.WhenAll(methodsTask, citiesTask, governoratesTask);
+
+            deliveryFormView.ShippingMethods = _mapper.Map<IEnumerable<SelectListItem>>(methodsTask);
+            deliveryFormView.Cities = _mapper.Map<IEnumerable<SelectListItem>>(citiesTask);
+            deliveryFormView.Governorates = _mapper.Map<IEnumerable<SelectListItem>>(governoratesTask);
+
+            return deliveryFormView;
+        }        
     }
 }
 
