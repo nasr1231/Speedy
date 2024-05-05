@@ -4,8 +4,9 @@
 	Layout = "_LoginLayout";
 	ViewData["Title"] = "Sign Up";
 }
-@section Styles {
-     
+
+@section Styles{
+
 }
 
 <style>
@@ -30,7 +31,7 @@
 <!--begin::Main-->
 <div class="d-flex flex-column flex-root">    
 	<!--begin::Authentication - Sign-up -->
-	<div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(../../wwwroot/assets/Website/LoginAssets/14-dark.png)">
+	<div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(/assets/Website/LoginAssets/14-dark.png)">
 		<!--begin::Content-->
 		<div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
 			<!--begin::Logo-->
@@ -39,11 +40,11 @@
 			</a>
 			<!--end::Logo-->
 			<!--begin::Wrapper-->
-			<div class="w-lg-600px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
+			<div class="w-lg-600px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto" style="padding-top: 30px !important">
 				<!--begin::Form-->
 				<form enctype="multipart/form-data" asp-action="Create" asp-controller="Deliveries" method="post" class="form w-100" novalidate="novalidate" id="kt_sign_up_form">
 					<!--begin::Heading-->
-					<div class="mb-10 text-center">
+					<div class="mb-5 text-center">
 						<!--begin::Title-->
 						<h1 class="text-dark mb-3">إنشاء حساب جديد</h1>
 						<!--end::Title-->
@@ -55,59 +56,9 @@
 						<!--end::Link-->
 					</div>
 					<!--end::Heading-->				
-					<div class="card-body pt-6" bis_skin_checked="1">
-						<!--begin::Nav-->
-						<ul class="nav nav-pills nav-pills-custom mb-3" role="tablist">
-							<!--begin::Item-->
-							<li class="nav-item mb-3 me-3 me-lg-6" role="presentation">
-								<!--begin::Link-->
-								<a class="nav-link btn btn-outline btn-flex btn-color-muted btn-active-color-primary flex-column overflow-hidden w-80px h-85px pt-5 pb-2 active"
-								   id="kt_stats_widget_16_tab_link_1" data-bs-toggle="pill" href="#kt_stats_widget_16_tab_1"
-								   aria-selected="true" role="tab">
-								   التالي
-								</a>
-								<!--end::Link-->
-							</li>
-							<!--end::Item-->
-							<!--begin::Item-->
-							<li class="nav-item mb-3 me-3 me-lg-6" role="presentation">
-								<!--begin::Link-->
-								<a class="nav-link btn btn-outline btn-flex btn-color-muted btn-active-color-primary flex-column overflow-hidden w-80px h-85px pt-5 pb-2"
-								   id="kt_stats_widget_16_tab_link_2" data-bs-toggle="pill" href="#Personal_Details"
-								   aria-selected="false" role="tab" tabindex="-1">
-									التالي
-								</a>
-								<!--end::Link-->
-							</li>
-							<!--end::Item-->
-							<!--begin::Item-->
-							<li class="nav-item mb-3 me-3 me-lg-6" role="presentation">
-								<!--begin::Link-->
-								<a class="nav-link btn btn-outline btn-flex btn-color-muted btn-active-color-primary flex-column overflow-hidden w-80px h-85px pt-5 pb-2
-						" id="kt_stats_widget_16_tab_link_3" data-bs-toggle="pill" href="#vechile_details"
-								   aria-selected="false" tabindex="-1" role="tab">
-									<!--begin::Icon-->
-									<div class="nav-icon mb-3" bis_skin_checked="1">
-										<i class="ki-duotone ki-like fs-1"><span class="path1"></span><span class="path2"></span></i>
-									</div>
-									<!--end::Icon-->
-									<!--begin::Title-->
-									<span class="nav-text text-gray-800 fw-bold fs-6 lh-1">
-										Social
-									</span>
-									<!--end::Title-->									
-								</a>
-								<!--end::Link-->
-							</li>
-							<!--end::Item-->
-
-						</ul>
-						<!--end::Nav-->
-						<!--begin::Tab Content-->
-						<div class="tab-content" bis_skin_checked="1">
-
-							<!--begin::Tap pane-->
-							<div class="tab-pane fade active show" id="kt_stats_widget_16_tab_1" bis_skin_checked="1" role="tabpanel">
+					<div class="card-body" bis_skin_checked="1">
+						<div class="slider-container">
+							<div class="slide" id="slide1">
 								<!--begin::Separator-->
 								<div class="d-flex justify-content-start align-items-center mb-7">
 									<span class="fw-bold  fw-bolder num">1</span><h3 class="align-self-end">بيانات الحساب</h3>
@@ -146,7 +97,7 @@
 										<!--begin::Input wrapper-->
 										<div class="position-relative mb-3">
 											<input asp-for="@Model.Password" class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="password" autocomplete="off" />
-											<span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
+											<span class="btn btn-sm btn-icon position-absolute translate-middle top-50 start-0 me-n2" style="left: 4% !important;top: 40% !important" data-kt-password-meter-control="visibility">
 												<i class="bi bi-eye-slash fs-2"></i>
 												<i class="bi bi-eye fs-2 d-none"></i>
 											</span>
@@ -174,10 +125,9 @@
 									<input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="confirm-password" autocomplete="off" />
 									<span asp-validation-for="@Model!.ConfirmPassword" class="text-danger d-block h-10px"></span>
 								</div>
+								<a onclick="nextSlide()" class="btn btn-success">Next</a>
 							</div>
-							<!--end::Tap pane-->
-							<!--begin::Tap pane-->
-							<div class="tab-pane fade active show" id="Personal_Details" bis_skin_checked="1" role="tabpanel">
+							<div class="slide" id="slide2">
 								<!--begin::Separator-->
 								<div class="d-flex justify-content-start align-items-center mb-7">
 									<span class="fw-bold  fw-bolder num">2</span><h3 class="align-self-end">بيانات شخصية</h3>
@@ -235,19 +185,34 @@
 								<div class="row fv-row mb-7 ">
 									<div class="col-md-6">
 										<label class="form-label fw-bolder text-dark fs-6 mt-5 ">المدينة</label>
-										<input class="form-control form-control-lg form-control-solid w-" type="text" placeholder="" name="city" autocomplete="off" />
+										<select class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="Select an option" data-hide-search="true">
+											<option></option>
+											<option value="1">Option 1</option>
+											<option value="2" selected>Option 2</option>
+											<option value="3">Option 3</option>
+											<option value="4">Option 4</option>
+											<option value="5">Option 5</option>
+										</select>
 									</div>
 									<!--end::Input group-->
 									<!--begin::Input group-->
 									<div class="col-md-6">
 										<label class="form-label fw-bolder text-dark fs-6 mt-5">المحافظة</label>
-										<input class="form-control form-control-lg form-control-solid w-45" type="text" placeholder="" name="Governorate" autocomplete="off" />
+										<select class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="Select an option" data-hide-search="true">
+											<option></option>
+											<option value="1">Option 1</option>
+											<option value="2" selected>Option 2</option>
+											<option value="3">Option 3</option>
+											<option value="4">Option 4</option>
+											<option value="5">Option 5</option>
+										</select>
 									</div>
 								</div>
+								<br />
+								<a onclick="prevSlide()" class="btn btn-secondary">Previous</a>
+								<a onclick="nextSlide()" class="btn btn-primary">Next</a>
 							</div>
-							<!--end::Tap pane-->
-							<!--begin::Tap pane-->
-							<div class="tab-pane fade active show" id="vechile_details" bis_skin_checked="1" role="tabpanel">
+							<div class="slide" id="slide3">
 								<!--begin::Separator-->
 								<div class="d-flex justify-content-start align-items-center mb-7">
 									<span class="fw-bold  fw-bolder num">3</span><h3 class="align-self-end">تفاصيل وسيلة التوصيل</h3>
@@ -269,7 +234,14 @@
 								<!--begin::Input group-->
 								<div class="fv-row mb-7">
 									<label class="form-label fw-bolder text-dark fs-6">نوع وسيلة التوصيل التي تملكها</label>
-									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="نوع وسيلة المواصلات" autocomplete="off" />
+									<select class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="Select an option" data-hide-search="true">
+										<option></option>
+										<option value="1">Option 1</option>
+										<option value="2" selected>Option 2</option>
+										<option value="3">Option 3</option>
+										<option value="4">Option 4</option>
+										<option value="5">Option 5</option>
+									</select>
 								</div>
 								<!--end::Input group-->
 								<!--begin::Input group-->
@@ -311,12 +283,10 @@
 										</span>
 									</button>
 								</div>
-								<!--end::Actions-->
+								<br />
+								<a onclick="prevSlide()" class="btn btn-secondary">Previous</a>
 							</div>
-							<!--end::Tap pane-->
-							<!--end::Table container-->
-						</div>
-						<!--end::Tab Content-->
+						</div>												
 					</div>
 
 
@@ -388,8 +358,39 @@
 </div>
 
 
-@section Scripts
-{
-	<partial name="_ValidationScriptsPartial" />
-    
-}  
+@section Scripts{
+	<script src="~/assets/panel/js/plugins.bundle.js"></script>    
+    <script src="~/assets/panel/login/style.bundle.js"></script>
+    <script src="~/assets/panel/login/general.js"></script>
+	<script>
+		let currentSlide = 0;
+		const slides = document.querySelectorAll('.slide');
+
+		function showSlide(index) {
+			if (index < 0) {
+				index = slides.length - 1;
+			} else if (index >= slides.length) {
+				index = 0;
+			}
+			for (let i = 0; i < slides.length; i++) {
+				if (i === index) {
+					slides[i].style.display = 'block';
+				} else {
+					slides[i].style.display = 'none';
+				}
+			}
+			currentSlide = index;
+		}
+
+		function nextSlide() {
+			showSlide(currentSlide + 1);
+		}
+
+		function prevSlide() {
+			showSlide(currentSlide - 1);
+		}
+
+		// Show the first slide initially
+		showSlide(0);
+	</script>
+}
