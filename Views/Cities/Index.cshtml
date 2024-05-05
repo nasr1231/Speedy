@@ -1,4 +1,4 @@
-﻿ @model IEnumerable<CityViewModel>
+﻿@model IEnumerable<CityViewModel>
 
 @{
     ViewData["Title"] = "Cities";
@@ -24,7 +24,7 @@
             <a href="/RelatedData" class="btn btn-md btn-success me-2">
                 Back To Settings
             </a>
-            <a class="btn btn-sm btn-light btn-primary fs-4 fw-bolder" asp-action="Create">
+            <a class="btn btn-sm btn-light btn-primary fs-4 fw-bolder js-render-modal" data-url="/Governorates/Create">
                 <i class="bi bi-plus-square-dotted"></i>
                 Add
             </a>
@@ -50,7 +50,7 @@
                     @foreach (var city in Model)
                     {
                         <tr>
-                            <partial name="_RowData" />
+                            <partial name="_RowData" model="city"/>
                         </tr>
                     }
                 </tbody>
@@ -59,10 +59,10 @@
     </div>
 </div>
 
-
+@Html.AntiForgeryToken()
 @section Scripts
 {
+    <script src="~/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <script src="~/assets/plugins/custom/datatables/vfs_fonts.js" asp-append-version="true"></script>
     <partial name="_ValidationScriptsPartial" />
-    <script src="~/assets/panel/plugins/datatables/datatables.bundle.js"></script>
-    <script src="~/assets/panel/plugins/datatables/vfs_fonts.js"></script>
 }

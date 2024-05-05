@@ -26,11 +26,12 @@ namespace Speedy.Controllers
             var servicesView = _mapper.Map<IEnumerable<CityViewModel>>(cities);
             return View(servicesView);
         }
+
         [HttpGet]
         [AjaxOnly]
         public IActionResult Create()
         {
-            return PartialView("_Form", InitialGovernoratesForm());
+            return PartialView("_Form", InitialCityForm());
         }
 
         [HttpPost]
@@ -59,7 +60,7 @@ namespace Speedy.Controllers
                 return NotFound();
 
             var propertyFormView = _mapper.Map<CityFormViewModel>(selectedCity);
-            propertyFormView = InitialGovernoratesForm(propertyFormView);
+            propertyFormView = InitialCityForm(propertyFormView);
 
             return PartialView("_Form", propertyFormView);
         }
@@ -69,7 +70,7 @@ namespace Speedy.Controllers
         public IActionResult Edit(CityFormViewModel model)
         {
             if (!ModelState.IsValid)
-                return View(("_Form", InitialGovernoratesForm(model)));
+                return View(("_Form", InitialCityForm(model)));
 
             var city = _context.Cities.Find(model.Id);
 
@@ -118,12 +119,12 @@ namespace Speedy.Controllers
             return PartialView("_NewRow", typeView);
         }
 
-        private CityFormViewModel InitialGovernoratesForm(CityFormViewModel? model = null)
+        private CityFormViewModel InitialCityForm(CityFormViewModel? model = null)
         {
             CityFormViewModel deliveryFormView = model ?? new CityFormViewModel();
-            var Governorates = _context.Governorates.Where(c => !c.IsActive).OrderBy(c => c.Name).ToList();
+            var Cities = _context.Cities.Where(c => !c.IsActive).OrderBy(c => c.Name).ToList();
 
-            deliveryFormView.Governorate = _mapper.Map<IEnumerable<SelectListItem>>(Governorates);
+            deliveryFormView.Governorate = _mapper.Map<IEnumerable<SelectListItem>>(Cities);
 
             return deliveryFormView;
         }
