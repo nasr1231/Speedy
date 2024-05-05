@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Speedy.Data;
 
@@ -11,9 +12,11 @@ using Speedy.Data;
 namespace Speedy.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240505142831_AllowNullableCreatedById")]
+    partial class AllowNullableCreatedById
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -362,9 +365,6 @@ namespace Speedy.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("GovernorateId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -382,8 +382,6 @@ namespace Speedy.Data.Migrations
 
                     b.HasIndex("AppUserId")
                         .IsUnique();
-
-                    b.HasIndex("GovernorateId");
 
                     b.ToTable("Individuals");
                 });
@@ -581,9 +579,6 @@ namespace Speedy.Data.Migrations
                     b.Property<DateTime>("FoundingDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("GovernorateId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -608,8 +603,6 @@ namespace Speedy.Data.Migrations
 
                     b.HasIndex("AppUserId")
                         .IsUnique();
-
-                    b.HasIndex("GovernorateId");
 
                     b.ToTable("StartUps");
                 });
@@ -708,10 +701,6 @@ namespace Speedy.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Speedy.Core.Models.RelatedData.Governorate", null)
-                        .WithMany("Individuals")
-                        .HasForeignKey("GovernorateId");
-
                     b.Navigation("AppUser");
                 });
 
@@ -753,10 +742,6 @@ namespace Speedy.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Speedy.Core.Models.RelatedData.Governorate", null)
-                        .WithMany("StartUps")
-                        .HasForeignKey("GovernorateId");
-
                     b.Navigation("AppUser");
                 });
 
@@ -782,10 +767,6 @@ namespace Speedy.Data.Migrations
             modelBuilder.Entity("Speedy.Core.Models.RelatedData.Governorate", b =>
                 {
                     b.Navigation("Deliveries");
-
-                    b.Navigation("Individuals");
-
-                    b.Navigation("StartUps");
                 });
 #pragma warning restore 612, 618
         }
