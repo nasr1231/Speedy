@@ -71,7 +71,7 @@ namespace Speedy.Controllers
 
             var viewModel = _mapper.Map<UserViewModel>(model);
 
-            return PartialView("_RowData", viewModel);
+            return PartialView("_NewRow", viewModel);
         }
 
         private static string ToCustomErrorString(IdentityResult result)
