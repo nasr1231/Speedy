@@ -2,72 +2,243 @@
 
 @{
     Layout = "_LoginLayout";
+    ViewData["Title"] = "Sign Up";
 }
 
-<form asp-action="Create" asp-controller="Deliveries">
-    <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+@section Styles {
+
+}
+
+<style>
+    .num {
+        background-color: cornflowerblue;
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        margin-left: 6px;
+    }
+
+    .form-control.form-control-solid {
+        border-color: #92b0e6;
+    }
+
+</style>
+
+<!--begin::Main-->
+<div class="d-flex flex-column flex-root">
+    <!--begin::Authentication - Sign-up -->
+    <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(/assets/Website/LoginAssets/14-dark.png)">
+        <!--begin::Content-->
+        <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
+            <!--begin::Logo-->
+            <a href="../../demo5/dist/index.html" class="mb-12">
+                <img alt="Speedy logo" src="" class="h-40px" />
+            </a>
+            <!--end::Logo-->
+            <!--begin::Wrapper-->
+            <div class="w-lg-600px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto" style="padding-top: 30px !important">
+                <!--begin::Form-->
+                <form enctype="multipart/form-data" asp-action="Create" asp-controller="Deliveries" method="post" class="form w-100" novalidate="novalidate" id="kt_sign_up_form">
+                    <!--begin::Heading-->
+                    <div class="mb-5 text-center">
+                        <!--begin::Title-->
+                        <h1 class="text-dark mb-3">إنشاء حساب جديد</h1>
+                        <!--end::Title-->
+                        <!--begin::Link-->
+                        <div class="text-gray-400 fw-bold fs-4">
+                            لديك حساب بالفعل؟
+                            <a href="/Identity/Account/Login" class="link-primary fw-bolder">سجل دخول هنا</a>
+                        </div>
+                        <!--end::Link-->
+                    </div>
+                    <!--end::Heading-->
+                    <div class="card-body" bis_skin_checked="1">
+                        <div class="slider-container">
+                            <div class="slide" id="slide1">
+                                <!--begin::Separator-->
+                                <div class="d-flex justify-content-start align-items-center mb-7">
+                                    <span class="fw-bold  fw-bolder num">1</span><h3 class="align-self-end">بيانات الحساب</h3>
+                                </div>
+                                <!--end::Separator-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-7">
+                                    <!--begin::Col-->
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bolder text-dark fs-6">الاسم الأول</label>
+                                        <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="first-name" autocomplete="off" />
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bolder text-dark fs-6">الاسم الأخير</label>
+                                        <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="last-name" autocomplete="off" />
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-7">
+                                    <label class="form-label fw-bolder text-dark fs-6">البريد الإلكتروني</label>
+                                    <input class="form-control form-control-lg form-control-solid" type="email" placeholder="" name="email" autocomplete="off" />
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="mb-10 fv-row" data-kt-password-meter="true">
+                                    <!--begin::Wrapper-->
+                                    <div class="mb-1">
+                                        <!--begin::Label-->
+                                        <label class="form-label fw-bolder text-dark fs-6">كلمة المرور</label>
+                                        <!--end::Label-->
+                                        <!--begin::Input wrapper-->
+                                        <div class="position-relative mb-3">
+                                            <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="password" autocomplete="off" />
+                                            <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
+                                                <i class="bi bi-eye-slash fs-2"></i>
+                                                <i class="bi bi-eye fs-2 d-none"></i>
+                                            </span>
+                                        </div>
+                                        <!--end::Input wrapper-->
+                                        <!--begin::Meter-->
+                                        <div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight">
+                                            <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+                                            <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+                                            <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+                                            <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px"></div>
+                                        </div>
+                                        <!--end::Meter-->
+                                    </div>
+                                    <!--end::Wrapper-->
+                                    <!--begin::Hint-->
+                                    <div class="text-muted">استخدم 8 أحرف أو أكثر مع مزيج من الحروف والأرقام &amp; الرموز.</div>
+                                    <!--end::Hint-->
+                                </div>
+                                <!--end::Input group=-->
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-5">
+                                    <label class="form-label fw-bolder text-dark fs-6">تأكيد كلمة المرور</label>
+                                    <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="confirm-password" autocomplete="off" />
+                                </div>
+                                <a onclick="nextSlide()" class="btn btn-success">Next</a>
+                            </div>
+                            <div class="slide" id="slide2">
+                                <!--begin::Separator-->
+                                <div class="d-flex justify-content-start align-items-center mb-7">
+                                    <span class="fw-bold  fw-bolder num">2</span><h3 class="align-self-end">بيانات شخصية</h3>
+                                </div>
+                                <!--end::Separator-->
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-7">
+                                    <label class="form-label fw-bolder text-dark fs-6">الرقم القومي</label>
+                                    <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="national-id" autocomplete="off" />
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-7">
+                                    <label class="form-label fw-bolder text-dark fs-6">رقم الهاتف</label>
+                                    <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="phone-number" autocomplete="off" />
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="form-check form-check-custom form-check-solid me-10">
+                                    <input class="form-check-input h-30px w-30px" type="checkbox" value="" id="flexCheckbox30" />
+                                    <label class="form-check-label me-4" for="flexCheckbox30">
+                                        هل هذا الرقم لديه واتساب؟
+                                    </label>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-7">
+                                    <label class="form-label fw-bolder text-dark fs-6 mt-3">تاريخ الميلاد</label>
+                                    <input class="form-control form-control-lg form-control-solid" type="date" placeholder="" name="birth-date" autocomplete="off" />
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <h5 class="fv-row mb-3">النوع</h5>
+                                <div class="d-flex justify-content-around">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="ذكر">
+                                        <label class="form-check-label fw-bolder text-dark fs-6 " for="inlineRadio1">ذكر</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="انثي">
+                                        <label class="form-check-label fw-bolder text-dark fs-6 " for="inlineRadio2">انثي</label>
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-7">
+                                    <label class="form-label fw-bolder text-dark fs-6 mt-5">العنوان</label>
+                                    <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="address" autocomplete="off" />
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-7 ">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bolder text-dark fs-6 mt-5 ">المدينة</label>
+                                        <input class="form-control form-control-lg form-control-solid w-" type="text" placeholder="" name="city" autocomplete="off" />
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bolder text-dark fs-6 mt-5">المحافظة</label>
+                                        <input class="form-control form-control-lg form-control-solid w-45" type="text" placeholder="" name="Governorate" autocomplete="off" />
+                                    </div>
+                                </div>
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10">
+                                    <label class="form-check form-check-custom form-check-solid form-check-inline">
+                                        <input class="form-check-input" type="checkbox" name="toc" value="1" />
+                                        <span class="form-check-label fw-bold text-gray-700 fs-6 me-3">
+                                            أقر بأني موافق على كل
+                                            <a href="#" class="ms-1 link-primary">الشروط و الأحكام</a>.
+                                        </span>
+                                    </label>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Actions-->
+                                <div class="text-center">
+                                    <button type="button" id="kt_sign_up_submit" class="btn btn-lg btn-primary">
+                                        <span class="indicator-label">تسجيل</span>
+                                        <span class="indicator-progress">
+                                            برجاء الانتظار
+                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                        </span>
+                                    </button>
+                                </div>
+                                <a onclick="prevSlide()" class="btn btn-secondary">Previous</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+                <!--end::Form-->
+            </div>
+            <!--end::Wrapper-->
+        </div>
+        <!--end::Content-->
+        <!--begin::Footer-->
+        <div class="d-flex flex-center flex-column-auto p-10">
+            <!--begin::Links-->
+            <div class="d-flex align-items-center fw-bold fs-6">
+                <a href="https://keenthemes.com" class="text-muted text-hover-primary px-2">About</a>
+                <a href="mailto:support@keenthemes.com" class="text-muted text-hover-primary px-2">Contact</a>
+                <a href="https://1.envato.market/EA4JP" class="text-muted text-hover-primary px-2">Contact Us</a>
+            </div>
+            <!--end::Links-->
+        </div>
+        <!--end::Footer-->
     </div>
+    <!--end::Authentication - Sign-up-->
+</div>
 
-    <div class="row mb-5">        
-        <div class="w-100 w-md-50">
-            <label class="d-flex align-items-center fs-6 fw-bold mb-2"><span class="required"></span>الأسم الأول</label>
-            <input type="text" asp-for="@Model.FirstName" class="form-control" placeholder="أدخل رقم الهاتف">
-            <span asp-validation-for="@Model!.FirstName" class="text-danger d-block h-10px"></span>
-        </div>
-        <div class="w-100 w-md-50">
-            <label class="d-flex align-items-center fs-6 fw-bold mb-2"><span class="required"></span>الأسم الأخير</label>
-            <input type="text" asp-for="@Model.LastName" class="form-control" placeholder="أدخل رقم الهاتف">
-            <span asp-validation-for="@Model!.LastName" class="text-danger d-block h-10px"></span>
-        </div>        
-    </div>    
 
-    <div class="row mb-5">
-        <div class="w-100 w-md-50">
-            <label class="d-flex align-items-center fs-6 fw-bold mb-2"><span class="required"></span>الأيميل</label>
-            <input type="text" asp-for="@Model.Email" class="form-control" placeholder="أدخل رقم الهاتف">
-            <span asp-validation-for="@Model!.Email" class="text-danger d-block h-10px"></span>
-        </div>
-        <div class="w-100 w-md-50">
-            <label class="d-flex align-items-center fs-6 fw-bold mb-2"><span class="required"></span>الأسم الأخير</label>
-            <input type="text" asp-for="@Model.Age" class="form-control" placeholder="أدخل رقم الهاتف">
-            <span asp-validation-for="@Model!.Age" class="text-danger d-block h-10px"></span>
-        </div>
-    </div>
-
-    <div class="row mb-5">
-        <div class="w-100 w-md-50">
-            <label class="d-flex align-items-center fs-6 fw-bold mb-2"><span class="required"></span>رقم العدة بتاعتك</label>
-            <input type="text" asp-for="@Model.PhoneNumber" class="form-control" placeholder="أدخل رقم الهاتف">
-            <span asp-validation-for="@Model!.PhoneNumber" class="text-danger d-block h-10px"></span>
-        </div>
-        <div class="w-100 w-md-50">
-            <label class="d-flex align-items-center fs-6 fw-bold mb-2"><span class="required"></span>العنوان</label>
-            <input type="text" asp-for="@Model.Address" class="form-control" placeholder="أدخل رقم الهاتف">
-            <span asp-validation-for="@Model!.Address" class="text-danger d-block h-10px"></span>
-        </div>
-    </div>
-
-    <div class="row mb-5">
-        <div class="w-100 w-md-50">
-            <label class="d-flex align-items-center fs-6 fw-bold mb-2"><span class="required">Password</span></label>
-            <input type="password" asp-for="Password" class="form-control" placeholder="Enter Password">
-            <span asp-validation-for="@Model!.Password" class="text-danger d-block h-10px"></span>
-        </div>
-        <div class="w-100 w-md-50">
-            <label class="d-flex align-items-center fs-6 fw-bold mb-2"><span class="required">ConfirmPassword</span></label>
-            <input type="password" asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password">
-            <span asp-validation-for="@Model!.ConfirmPassword" class="text-danger d-block h-10px"></span>
-        </div>
-    </div>      
-
-    <div class="modal-footer px-0">
-        <button type="submit" class="btn btn-primary">
-            <span class="indicator-label">
-                Save
-            </span>
-            <span class="indicator-progress">
-                Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-            </span>
-        </button>
-    </div>
-</form>
+@section Scripts {
+    <script src="~/assets/panel/js/plugins.bundle.js"></script>
+    <script src="~/assets/panel/login/style.bundle.js"></script>
+    <script src="~/assets/panel/login/general.js"></script>
+    <script src="~/js/slider.js" asp-asp-append-version="true"></script>
+}
