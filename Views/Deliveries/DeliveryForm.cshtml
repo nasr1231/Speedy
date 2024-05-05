@@ -2,11 +2,10 @@
 
 @{
 	Layout = "_LoginLayout";
-	ViewData["Title"] = "Sign Up";
+	ViewData["Title"] = "Sign Up - Delivery";
 }
 
-@section Styles{
-
+@section Styles{    
 }
 
 <style>
@@ -125,6 +124,7 @@
 									<input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="confirm-password" autocomplete="off" />
 									<span asp-validation-for="@Model!.ConfirmPassword" class="text-danger d-block h-10px"></span>
 								</div>
+								<!--end::Input group=-->
 								<a onclick="nextSlide()" class="btn btn-success">Next</a>
 							</div>
 							<div class="slide" id="slide2">
@@ -134,11 +134,57 @@
 								</div>
 								<!--end::Separator-->
 								<!--begin::Input group-->
+								<h5 class="fv-row mb-3">النوع</h5>
+								<div class="d-flex justify-content-around">
+									<div class="form-check form-check-inline">
+										<input asp-for="@Model.Gender" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="ذكر">
+										<label class="form-check-label fw-bolder text-dark fs-6 ">ذكر</label>
+									</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="أنثى">
+										<label class="form-check-label fw-bolder text-dark fs-6">انثي</label>
+									</div>
+									<span asp-validation-for="@Model!.Gender" class="text-danger d-block h-10px"></span>
+								</div>
+								<!--end::Input group-->								
+								<!--begin::Input group-->
 								<div class="fv-row mb-7">
-									<label class="form-label fw-bolder text-dark fs-6">الرقم القومي</label>
-									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="national-id" autocomplete="off" />
+									<label class="form-label fw-bolder text-dark fs-6 mt-5">العنوان</label>
+									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="address" autocomplete="off" />
+								</div>
+								<!--end::Input group-->	
+								<!--begin::Input group-->
+								<div class="row fv-row mb-7 ">
+									<div class="col-md-6">
+										<label class="form-label fw-bolder text-dark fs-6 mt-5 ">المدينة</label>
+										<select asp-for="@Model.SelectedCity" asp-items="@Model.Cities" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المدينة" data-hide-search="true">
+											<option></option>
+										</select>
+									</div>
+									<!--end::Input group-->
+									<!--begin::Input group-->
+									<div class="col-md-6">
+										<label class="form-label fw-bolder text-dark fs-6 mt-5">المحافظة</label>
+										<select asp-for="@Model.SelectedGovernorate" asp-items="@Model.Governorates" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المحافظة" data-hide-search="true">
+											<option></option>
+										</select>
+									</div>
 								</div>
 								<!--end::Input group-->
+								<!--begin::Input group-->
+								<div class="fv-row mb-7">			
+									<label class="form-label fw-bolder text-dark fs-6 mt-3">تاريخ الميلاد</label>
+									<div class="input-group mb-5">										
+										<input asp-for="@Model.BirthDate" type="date" name="birth-date" class="form-control form-select-solid birthdate-flatpickr" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
+										<span class="input-group-text" id="basic-addon1">
+											<i class="fa-solid fa-calendar-days fs-4"></i>
+										</span>
+										<span asp-validation-for="@Model!.BirthDate" class="text-danger d-block h-10px"></span>
+										
+									</div>
+									
+								</div>
+								<!--end::Input group-->		
 								<!--begin::Input group-->
 								<div class="fv-row mb-7">
 									<label class="form-label fw-bolder text-dark fs-6">رقم الهاتف</label>
@@ -156,58 +202,10 @@
 								<!--end::Input group-->
 								<!--begin::Input group-->
 								<div class="fv-row mb-7">
-									<label class="form-label fw-bolder text-dark fs-6 mt-3">تاريخ الميلاد</label>
-									<input asp-for="@Model.BirthDate" class="form-control form-control-lg form-control-solid" type="date" placeholder="" name="birth-date" autocomplete="off" />
-									<span asp-validation-for="@Model!.BirthDate" class="text-danger d-block h-10px"></span>
+									<label class="form-label fw-bolder text-dark fs-6">الرقم القومي</label>
+									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="national-id" autocomplete="off" />
 								</div>
 								<!--end::Input group-->
-								<!--begin::Input group-->
-								<h5 class="fv-row mb-3">النوع</h5>
-								<div class="d-flex justify-content-around">
-									<div class="form-check form-check-inline">
-										<input asp-for="@Model.Gender" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Male">
-										<label class="form-check-label fw-bolder text-dark fs-6 " for="inlineRadio1">ذكر</label>
-									</div>
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Female">
-										<label class="form-check-label fw-bolder text-dark fs-6 " for="inlineRadio2">انثي</label>
-									</div>
-									<span asp-validation-for="@Model!.Gender" class="text-danger d-block h-10px"></span>
-								</div>
-								<!--end::Input group-->
-								<!--begin::Input group-->
-								<div class="fv-row mb-7">
-									<label class="form-label fw-bolder text-dark fs-6 mt-5">العنوان</label>
-									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="address" autocomplete="off" />
-								</div>
-								<!--end::Input group-->
-								<!--begin::Input group-->
-								<div class="row fv-row mb-7 ">
-									<div class="col-md-6">
-										<label class="form-label fw-bolder text-dark fs-6 mt-5 ">المدينة</label>
-										<select asp-for="@Model.SelectedCity" asp-items="@Model.Cities" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="Select an option" data-hide-search="true">
-											<option></option>
-											<option value="1">Option 1</option>
-											<option value="2" selected>Option 2</option>
-											<option value="3">Option 3</option>
-											<option value="4">Option 4</option>
-											<option value="5">Option 5</option>
-										</select>
-									</div>
-									<!--end::Input group-->
-									<!--begin::Input group-->
-									<div class="col-md-6">
-										<label class="form-label fw-bolder text-dark fs-6 mt-5">المحافظة</label>
-										<select asp-for="@Model.SelectedGovernorate" asp-items="@Model.Governorates" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="Select an option" data-hide-search="true">
-											<option></option>
-											<option value="1">Option 1</option>
-											<option value="2" selected>Option 2</option>
-											<option value="3">Option 3</option>
-											<option value="4">Option 4</option>
-											<option value="5">Option 5</option>
-										</select>
-									</div>
-								</div>
 								<br />
 								<a onclick="prevSlide()" class="btn btn-secondary">Previous</a>
 								<a onclick="nextSlide()" class="btn btn-primary">Next</a>
@@ -223,24 +221,19 @@
 								<div class="d-flex justify-content-around">
 									<div class="form-check form-check-inline mb-7">
 										<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="نعم">
-										<label class="form-check-label fw-bolder text-dark fs-6 " for="inlineRadio1">نعم</label>
+										<label class="form-check-label fw-bolder text-dark fs-6">نعم</label>
 									</div>
 									<div class="form-check form-check-inline mb-7">
 										<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="لا">
-										<label class="form-check-label fw-bolder text-dark fs-6 " for="inlineRadio2">لا</label>
+										<label class="form-check-label fw-bolder text-dark fs-6">لا</label>
 									</div>
 								</div>
 								<!--end::Input group-->
 								<!--begin::Input group-->
 								<div class="fv-row mb-7">
 									<label class="form-label fw-bolder text-dark fs-6">نوع وسيلة التوصيل التي تملكها</label>
-									<select class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="Select an option" data-hide-search="true">
-										<option></option>
-										<option value="1">Option 1</option>
-										<option value="2" selected>Option 2</option>
-										<option value="3">Option 3</option>
-										<option value="4">Option 4</option>
-										<option value="5">Option 5</option>
+									<select asp-for="SelectedShippingMethod" asp-items="@Model.ShippingMethods" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر الوسيلة" data-hide-search="true">
+										<option></option>										
 									</select>
 								</div>
 								<!--end::Input group-->
@@ -360,7 +353,26 @@
 
 @section Scripts{
 	<script src="~/assets/panel/js/plugins.bundle.js"></script>    
-    <script src="~/assets/panel/login/style.bundle.js"></script>
-    <script src="~/assets/panel/login/general.js"></script>
+    <script src="~/assets/panel/js/scripts.bundle.js"></script>    
+    <script src="~/assets/panel/login/general.js"></script>    
     <script src="~/js/slider.js" asp-asp-append-version="true"></script>
+	<script>
+		$(document).ready(function() {
+			$(".birthdate-flatpickr").flatpickr(
+				{					
+					"autoApply": true,
+					"showDropdowns": true,
+					"drops": 'up',
+					"disable": [
+						function (date) {
+							let currentDate = new Date(new Date().getFullYear() - 16, 11, 31);
+							// return true to disable
+							return (date >= currentDate)
+						}
+					],
+
+				}
+			)
+		});
+	</script>
 }

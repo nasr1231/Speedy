@@ -24,7 +24,7 @@ namespace Speedy.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {            
-            return View("DeliveryForm", InitialDeliveryFormAsync());
+            return View("DeliveryForm", InitialDeliveryForm());
         }
 
         [HttpPost]
@@ -72,15 +72,13 @@ namespace Speedy.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-        private async Task<DeliveryFormViewModel> InitialDeliveryFormAsync(DeliveryFormViewModel? model = null)
+        private DeliveryFormViewModel InitialDeliveryForm(DeliveryFormViewModel? model = null)
         {
             DeliveryFormViewModel deliveryFormView = model ?? new DeliveryFormViewModel();
 
-            var methodsTask = _context.ShippingMethods.Where(c => !c.IsActive).OrderBy(c => c.Name).ToListAsync();
-            var citiesTask = _context.Cities.Where(c => !c.IsActive).OrderBy(c => c.Name).ToListAsync();
-            var governoratesTask = _context.Governorates.Where(c => !c.IsActive).OrderBy(c => c.Name).ToListAsync();
-
-            await Task.WhenAll(methodsTask, citiesTask, governoratesTask);
+            var methodsTask = _context.ShippingMethods.Where(c => !c.IsActive).OrderBy(c => c.Name).ToList();
+            var citiesTask = _context.Cities.Where(c => !c.IsActive).OrderBy(c => c.Name).ToList();
+            var governoratesTask = _context.Governorates.Where(c => !c.IsActive).OrderBy(c => c.Name).ToList();            
 
             deliveryFormView.ShippingMethods = _mapper.Map<IEnumerable<SelectListItem>>(methodsTask);
             deliveryFormView.Cities = _mapper.Map<IEnumerable<SelectListItem>>(citiesTask);

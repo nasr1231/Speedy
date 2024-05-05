@@ -52,8 +52,8 @@ namespace Speedy.Core.ViewModels
 
 		[Display(Name = "تاريخ الميلاد")]
 		[Required(ErrorMessage = Errors.isRequired)]
-        public DateTime BirthDate { get; set; }
-		
+        public DateTime BirthDate { get; set; } = DateTime.Now;
+
 		[Required(ErrorMessage = Errors.isRequired)]
 		[MaxLength(5, ErrorMessage = "يا اما ذكر يا اما أنثى")]
 		public string Gender { get; set; } = null!;

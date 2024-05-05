@@ -1,42 +1,40 @@
 ﻿@model CityViewModel
 
-<tr>
-    <td>@Model.Name</td>    
-    <td>@Model.GovernorateName</td>          
-    <td>
-        <div class="js-status badge badge-light-@(Model.IsActive ? "danger" : "success") @(Model.LastUpdatedOn is null ? "d-none" : string.Empty) d-grid mb-2 p-2">
-            <p class="mb-0">
-                <span class="text-dark">Updated At:</span> <span class="js-last-updated-on">
-                    <span class="dateJs" data-date="@Model.LastUpdatedOn"></span>
-                </span>
-            </p>
-            <p class="@(Model.LastUpdatedById is null ? "d-none" : "mt-2 mb-0")">
-                <span class="text-dark">Updated By: </span>@await UserManager.FindByIdAsync(Model?.LastUpdatedById)
-            </p>
-        </div>
-
-        <div class="badge badge-light-dark d-grid p-2">
-
-            <p class="mb-0">
-                Created At: <span class="dateJs" data-date="@Model.CreatedOn"></span>
-            </p>
-
-            <p class="@(Model.CreatedById is null ? "0 d-none" : "mt-2 mb-0")">
-                Created By: @await UserManager.FindByIdAsync(Model.CreatedById)
-            </p>
-        </div>
-    </td>
-    <td class="d-grid pe-2">
-        <a href="javascript:;" class="js-render-modal btn btn-sm btn-outline btn-outline-primary btn-active-light-primary mb-2" data-url="/Cities/Edit/@Model.Id" data-title="تعديل المدينة" data-is-edited="true">
-            <i class="bi bi-pencil-square"></i>
-            Edit
-        </a>
-        <a data-url="/Cities/ToggleStatus/@Model.Id" data-message="هل انت متأكد انك تريد تغير حالة المدينة؟" data-title="تغير حالة المدينة" href="javascript:;" class="js-change-btn btn btn-sm btn-outline btn-outline-@(Model.IsActive ? "success" : "danger") btn-active-light-@(Model.IsActive ? "success" : "danger")">
-
-            <i class="bi bi-@(Model.IsActive ? "arrow-clockwise" : "x-circle")"></i>
-            <span class="js-btn-text">
-                @(Model.IsActive ? "Activate" : "Deactive")
+<td>@Model.Name</td>
+<td>@Model.GovernorateName</td>
+<td>
+    <div class="js-status badge badge-light-@(Model.IsActive ? "danger" : "success") @(Model.LastUpdatedOn is null ? "d-none" : string.Empty) d-grid mb-2 p-2">
+        <p class="mb-0">
+            <span class="text-dark">Updated At:</span> <span class="js-last-updated-on">
+                <span class="dateJs" data-date="@Model.LastUpdatedOn"></span>
             </span>
-        </a>
-    </td>
-</tr>   
+        </p>
+        <p class="@(Model.LastUpdatedById is null ? "d-none" : "mt-2 mb-0")">
+            <span class="text-dark">Updated By: </span>@await UserManager.FindByIdAsync(Model?.LastUpdatedById)
+        </p>
+    </div>
+
+    <div class="badge badge-light-dark d-grid p-2">
+
+        <p class="mb-0">
+            Created At: <span class="dateJs" data-date="@Model.CreatedOn"></span>
+        </p>
+
+        <p class="@(Model.CreatedById is null ? "0 d-none" : "mt-2 mb-0")">
+            Created By: @await UserManager.FindByIdAsync(Model.CreatedById)
+        </p>
+    </div>
+</td>
+<td class="d-grid pe-2">
+    <a href="javascript:;" class="js-render-modal btn btn-sm btn-outline btn-outline-primary btn-active-light-primary mb-2" data-url="/Cities/Edit/@Model.Id" data-title="تعديل المدينة" data-is-edited="true">
+        <i class="bi bi-pencil-square"></i>
+        Edit
+    </a>
+    <a data-url="/Cities/ToggleStatus/@Model.Id" data-message="هل انت متأكد انك تريد تغير حالة المدينة؟" data-title="تغير حالة المدينة" href="javascript:;" class="js-change-btn btn btn-sm btn-outline btn-outline-@(Model.IsActive ? "success" : "danger") btn-active-light-@(Model.IsActive ? "success" : "danger")">
+
+        <i class="bi bi-@(Model.IsActive ? "arrow-clockwise" : "x-circle")"></i>
+        <span class="js-btn-text">
+            @(Model.IsActive ? "Activate" : "Deactive")
+        </span>
+    </a>
+</td>

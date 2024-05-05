@@ -21,7 +21,7 @@
             <h2 class="fw-bolder">Delivery Agents</h2>
         </div>
         <div class="card-toolbar my-7">
-            <a class="btn btn-sm btn-light btn-primary fs-4 fw-bolder" asp-action="Create">
+            <a class="btn btn-sm btn-light btn-primary fs-4 fw-bolder js-render-modal" data-url="/Cities/Create">
                 <i class="bi bi-plus-square-dotted"></i>
                 Add Agent
             </a>
@@ -45,7 +45,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <partial name="_RowData" />                                                        
+                    @foreach(var delivery in Model)
+                    {
+                        <tr>
+                            <partial name="_RowData" model="delivery"/>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
