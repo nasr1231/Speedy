@@ -185,7 +185,7 @@
 								<div class="row fv-row mb-7 ">
 									<div class="col-md-6">
 										<label class="form-label fw-bolder text-dark fs-6 mt-5 ">المدينة</label>
-										<select class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="Select an option" data-hide-search="true">
+										<select asp-for="@Model.SelectedCity" asp-items="@Model.Cities" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="Select an option" data-hide-search="true">
 											<option></option>
 											<option value="1">Option 1</option>
 											<option value="2" selected>Option 2</option>
@@ -198,7 +198,7 @@
 									<!--begin::Input group-->
 									<div class="col-md-6">
 										<label class="form-label fw-bolder text-dark fs-6 mt-5">المحافظة</label>
-										<select class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="Select an option" data-hide-search="true">
+										<select asp-for="@Model.SelectedGovernorate" asp-items="@Model.Governorates" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="Select an option" data-hide-search="true">
 											<option></option>
 											<option value="1">Option 1</option>
 											<option value="2" selected>Option 2</option>
@@ -362,35 +362,5 @@
 	<script src="~/assets/panel/js/plugins.bundle.js"></script>    
     <script src="~/assets/panel/login/style.bundle.js"></script>
     <script src="~/assets/panel/login/general.js"></script>
-	<script>
-		let currentSlide = 0;
-		const slides = document.querySelectorAll('.slide');
-
-		function showSlide(index) {
-			if (index < 0) {
-				index = slides.length - 1;
-			} else if (index >= slides.length) {
-				index = 0;
-			}
-			for (let i = 0; i < slides.length; i++) {
-				if (i === index) {
-					slides[i].style.display = 'block';
-				} else {
-					slides[i].style.display = 'none';
-				}
-			}
-			currentSlide = index;
-		}
-
-		function nextSlide() {
-			showSlide(currentSlide + 1);
-		}
-
-		function prevSlide() {
-			showSlide(currentSlide - 1);
-		}
-
-		// Show the first slide initially
-		showSlide(0);
-	</script>
+    <script src="~/js/slider.js" asp-asp-append-version="true"></script>
 }
