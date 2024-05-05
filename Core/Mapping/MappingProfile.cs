@@ -2,6 +2,8 @@
 
 
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Speedy.Core.Models.RelatedData;
+using Speedy.Core.ViewModels.RelatedData;
 
 namespace Speedy.Core.Mapping
 {
@@ -13,6 +15,7 @@ namespace Speedy.Core.Mapping
             CreateMap<Delivery, DeliveryViewModel>().ReverseMap();
             CreateMap<DeliveryFormViewModel, DeliveryViewModel>().ReverseMap();
             CreateMap<DeliveryFormViewModel, Delivery>().ReverseMap();
+
             //CreateMap<Delivery, SelectListItem>()
             //.ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.CategoryId))
             //.ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.CategoryName));
@@ -24,6 +27,33 @@ namespace Speedy.Core.Mapping
                 .ForMember(dest => dest.NormalizedEmail, opt => opt.MapFrom(src => src.Email.ToUpper()))
                 .ForMember(dest => dest.NormalizedUserName, opt => opt.MapFrom(src => src.UserName.ToUpper()))
                 .ReverseMap();
+
+            #region Related Data
+
+            //City
+            
+            CreateMap<City, CityFormViewModel>().ReverseMap();
+            CreateMap<City, CityViewModel>()
+                .ForMember(dest => dest.GovernorateName, opt => opt.MapFrom(src => src.Governorate!.Name));
+            CreateMap<City, SelectListItem>()
+                .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Name));
+
+            //Governorates
+            CreateMap<Governorate, GovernorateViewModel>();
+            CreateMap<Governorate, GovernorateFormViewModel>().ReverseMap();
+            CreateMap<Governorate, SelectListItem>()
+                .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Name));
+
+            //City
+            CreateMap<City, CityViewModel>();
+            CreateMap<City, CityFormViewModel>().ReverseMap();
+            CreateMap<City, SelectListItem>()
+                .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Name));
+
+            #endregion
 
         }
     }
