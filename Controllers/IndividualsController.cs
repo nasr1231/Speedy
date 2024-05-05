@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Speedy.Core.Consts;
 using Speedy.Services.User;
 
@@ -17,10 +18,8 @@ namespace Speedy.Controllers
 
         [HttpGet]
         public async Task<IActionResult> Create()
-        {
-            var individualForm = new IndividualFormViewModel();
-
-            return View("IndividualForm");
+        {            
+            return View("IndividualForm", InitialIndividualForm());
         }
 
         [HttpPost]
@@ -53,6 +52,18 @@ namespace Speedy.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Index", "Home");
+        }
+        private IndividualFormViewModel InitialIndividualForm(IndividualFormViewModel? model = null)
+        {
+            IndividualFormViewModel individualFormView = model ?? new IndividualFormViewModel();
+            
+            var citiesTask = _context.Cities.Where(c => !c.IsActive).OrderBy(c => c.Name).ToList();
+            var governoratesTask = _context.Governorates.Where(c => !c.IsActive).OrderBy(c => c.Name).ToList();
+
+            individualFormView.Cities = _mapper.Map<IEnumerable<SelectListItem>>(citiesTask);
+            individualFormView.Governorates = _mapper.Map<IEnumerable<SelectListItem>>(governoratesTask);
+
+            return individualFormView;
         }
     }
 }

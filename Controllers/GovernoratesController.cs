@@ -85,7 +85,7 @@ namespace Speedy.Controllers
             _context.Governorates.Update(geographical);
             _context.SaveChanges();
 
-            var geographicalView = _mapper.Map<GovernorateViewModel>(geographical);
+            var geographicalView = _mapper.Map<GovernorateFormViewModel>(geographical);
 
 
             return PartialView("_NewRow", geographicalView);
@@ -118,7 +118,7 @@ namespace Speedy.Controllers
             _context.Governorates.Update(type);
             _context.SaveChanges();
 
-            var typeView = _mapper.Map<GovernorateViewModel>(type);
+            var typeView = _mapper.Map<GovernorateFormViewModel>(type);
 
             return PartialView("_NewRow", typeView);
         }
