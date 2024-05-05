@@ -29,8 +29,7 @@ function showUserForm(form) {
     modal.find('.modal-title').text("إضافة مستخدم");
     modal.find('.modal-body').html(form);
     $.validator.unobtrusive.parse(modal);
-    select2func()
-    $("#kt_datepicker_1").flatpickr({});
+    select2func()    
     modal.modal('show');
 }
 function ShowErrorMessage(message = 'Something went wrong!') {
@@ -207,14 +206,14 @@ $(document).ready(function () {
     // Select2
     select2func();
 
-    //Date Picker
-    $('.js-datepicker').daterangepicker({
+    // Date picker
+    $(".js-datepicker").flatpickr({
         singleDatePicker: true,
         autoApply: true,
         showDropdowns: true,
-        drops: 'up',
-        maxDate: new Date()
-    });
+        drops: 'up',               
+        minDate: "1-1-1955",        
+    });    
 
     // Tinymce Editor
     if ($('.js-tinymce').length > 0) {
