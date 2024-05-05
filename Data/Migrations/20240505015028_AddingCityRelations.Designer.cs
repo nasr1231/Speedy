@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Speedy.Data;
 
@@ -11,9 +12,11 @@ using Speedy.Data;
 namespace Speedy.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240505015028_AddingCityRelations")]
+    partial class AddingCityRelations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -342,7 +345,7 @@ namespace Speedy.Data.Migrations
 
                     b.HasIndex("ShippingMethodId");
 
-                    b.ToTable("Deliveries", (string)null);
+                    b.ToTable("Deliveries");
                 });
 
             modelBuilder.Entity("Speedy.Core.Models.Individual", b =>
@@ -382,7 +385,7 @@ namespace Speedy.Data.Migrations
                     b.HasIndex("AppUserId")
                         .IsUnique();
 
-                    b.ToTable("Individuals", (string)null);
+                    b.ToTable("Individuals");
                 });
 
             modelBuilder.Entity("Speedy.Core.Models.RelatedData.City", b =>
@@ -420,7 +423,7 @@ namespace Speedy.Data.Migrations
 
                     b.HasIndex("GovernorateId");
 
-                    b.ToTable("Cities", (string)null);
+                    b.ToTable("Cities");
                 });
 
             modelBuilder.Entity("Speedy.Core.Models.RelatedData.Governorate", b =>
@@ -453,7 +456,7 @@ namespace Speedy.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Governorates", (string)null);
+                    b.ToTable("Governorates");
                 });
 
             modelBuilder.Entity("Speedy.Core.Models.RelatedData.ShippingMethod", b =>
@@ -486,7 +489,7 @@ namespace Speedy.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ShippingMethods", (string)null);
+                    b.ToTable("ShippingMethods");
                 });
 
             modelBuilder.Entity("Speedy.Core.Models.Review", b =>
@@ -532,7 +535,7 @@ namespace Speedy.Data.Migrations
 
                     b.HasIndex("IndividualId");
 
-                    b.ToTable("Reviews", (string)null);
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("Speedy.Core.Models.StartUp", b =>
@@ -585,7 +588,7 @@ namespace Speedy.Data.Migrations
                     b.HasIndex("AppUserId")
                         .IsUnique();
 
-                    b.ToTable("StartUps", (string)null);
+                    b.ToTable("StartUps");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

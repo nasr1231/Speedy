@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Speedy.Data;
 
@@ -11,9 +12,11 @@ using Speedy.Data;
 namespace Speedy.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240505011336_AddingGovernoratesTable")]
+    partial class AddingGovernoratesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -284,9 +287,6 @@ namespace Speedy.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("CityId")
-                        .HasColumnType("int");
-
                     b.Property<string>("CreatedById")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -297,9 +297,6 @@ namespace Speedy.Data.Migrations
                     b.Property<string>("Description")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
-
-                    b.Property<int>("GovernorateId")
-                        .HasColumnType("int");
 
                     b.Property<bool>("HasWhatsApp")
                         .HasColumnType("bit");
@@ -333,16 +330,12 @@ namespace Speedy.Data.Migrations
                     b.HasIndex("AppUserId")
                         .IsUnique();
 
-                    b.HasIndex("CityId");
-
-                    b.HasIndex("GovernorateId");
-
                     b.HasIndex("MobileNumber")
                         .IsUnique();
 
                     b.HasIndex("ShippingMethodId");
 
-                    b.ToTable("Deliveries", (string)null);
+                    b.ToTable("Deliveries");
                 });
 
             modelBuilder.Entity("Speedy.Core.Models.Individual", b =>
@@ -382,45 +375,7 @@ namespace Speedy.Data.Migrations
                     b.HasIndex("AppUserId")
                         .IsUnique();
 
-                    b.ToTable("Individuals", (string)null);
-                });
-
-            modelBuilder.Entity("Speedy.Core.Models.RelatedData.City", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CreatedById")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("GovernorateId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("LastUpdatedById")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("LastUpdatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GovernorateId");
-
-                    b.ToTable("Cities", (string)null);
+                    b.ToTable("Individuals");
                 });
 
             modelBuilder.Entity("Speedy.Core.Models.RelatedData.Governorate", b =>
@@ -453,7 +408,7 @@ namespace Speedy.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Governorates", (string)null);
+                    b.ToTable("Governorates");
                 });
 
             modelBuilder.Entity("Speedy.Core.Models.RelatedData.ShippingMethod", b =>
@@ -474,6 +429,9 @@ namespace Speedy.Data.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("LastUpdatedById")
                         .HasColumnType("nvarchar(max)");
 
@@ -486,7 +444,7 @@ namespace Speedy.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ShippingMethods", (string)null);
+                    b.ToTable("ShippingMethods");
                 });
 
             modelBuilder.Entity("Speedy.Core.Models.Review", b =>
@@ -532,7 +490,7 @@ namespace Speedy.Data.Migrations
 
                     b.HasIndex("IndividualId");
 
-                    b.ToTable("Reviews", (string)null);
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("Speedy.Core.Models.StartUp", b =>
@@ -585,7 +543,7 @@ namespace Speedy.Data.Migrations
                     b.HasIndex("AppUserId")
                         .IsUnique();
 
-                    b.ToTable("StartUps", (string)null);
+                    b.ToTable("StartUps");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -647,18 +605,6 @@ namespace Speedy.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Speedy.Core.Models.RelatedData.City", "City")
-                        .WithMany()
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Speedy.Core.Models.RelatedData.Governorate", "Governorate")
-                        .WithMany("Deliveries")
-                        .HasForeignKey("GovernorateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Speedy.Core.Models.RelatedData.ShippingMethod", "ShippingMethods")
                         .WithMany()
                         .HasForeignKey("ShippingMethodId")
@@ -666,10 +612,6 @@ namespace Speedy.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("AppUser");
-
-                    b.Navigation("City");
-
-                    b.Navigation("Governorate");
 
                     b.Navigation("ShippingMethods");
                 });
@@ -683,17 +625,6 @@ namespace Speedy.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("AppUser");
-                });
-
-            modelBuilder.Entity("Speedy.Core.Models.RelatedData.City", b =>
-                {
-                    b.HasOne("Speedy.Core.Models.RelatedData.Governorate", "Governorate")
-                        .WithMany()
-                        .HasForeignKey("GovernorateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Governorate");
                 });
 
             modelBuilder.Entity("Speedy.Core.Models.Review", b =>
@@ -743,11 +674,6 @@ namespace Speedy.Data.Migrations
             modelBuilder.Entity("Speedy.Core.Models.Individual", b =>
                 {
                     b.Navigation("Reviews");
-                });
-
-            modelBuilder.Entity("Speedy.Core.Models.RelatedData.Governorate", b =>
-                {
-                    b.Navigation("Deliveries");
                 });
 #pragma warning restore 612, 618
         }

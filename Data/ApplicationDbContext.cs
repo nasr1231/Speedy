@@ -1,16 +1,23 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Speedy.Core.Models;
 using Speedy.Core.Models.RelatedData;
+using System.Drawing;
 
 namespace Speedy.Data
 {
     public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<AppUser>(options)
-    { 
+    {
+        #region Related Data
+        public DbSet<ShippingMethod> ShippingMethods { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<Governorate> Governorates { get; set; }
+        #endregion
+
         public DbSet<Delivery> Deliveries { get; set; }
         public DbSet<Individual> Individuals { get; set; }
         public DbSet<StartUp> StartUps { get; set; }
         public DbSet<Review> Reviews { get; set; }        
-        public DbSet<ShippingMethod> ShippingMethods { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
