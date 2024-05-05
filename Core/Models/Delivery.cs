@@ -26,8 +26,14 @@ namespace Speedy.Core.Models
         public AppUser? AppUser { get; set; }
         public string AppUserId { get; set; } = null!;
         public ICollection<Review> Reviews { get; set; } = [];
+
         public int ShippingMethodId { get; set; }
         public ShippingMethod ShippingMethods { get; set; } = null!;
+
+        public int CityId { get; set; }
+        public City City { get; set; } = null!;
+        public int GovernorateId { get; set; }
+        public Governorate Governorate { get; set; } = null!;
         #endregion
     }
 }
