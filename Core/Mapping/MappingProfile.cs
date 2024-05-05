@@ -1,7 +1,4 @@
-﻿
-
-
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Speedy.Core.Models.RelatedData;
 using Speedy.Core.ViewModels.RelatedData;
 
@@ -40,8 +37,8 @@ namespace Speedy.Core.Mapping
                 .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Name));
 
             //Governorates
-            CreateMap<Governorate, GovernorateViewModel>();
             CreateMap<Governorate, GovernorateFormViewModel>().ReverseMap();
+            CreateMap<Governorate, GovernorateViewModel>();
             CreateMap<Governorate, SelectListItem>()
                 .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Name));
@@ -50,6 +47,14 @@ namespace Speedy.Core.Mapping
             CreateMap<City, CityViewModel>();
             CreateMap<City, CityFormViewModel>().ReverseMap();
             CreateMap<City, SelectListItem>()
+                .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Name));
+
+
+            //ShippingMethods
+            CreateMap<ShippingMethod, ShippingMethodViewModel>();
+            CreateMap<ShippingMethod, ShippingMethodFormViewModel>().ReverseMap();
+            CreateMap<ShippingMethod, SelectListItem>()
                 .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Name));
 

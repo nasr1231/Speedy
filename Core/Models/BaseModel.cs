@@ -4,7 +4,7 @@ namespace Speedy.Core.Models
 {
     public class BaseModel
     {
-        public string CreatedById { get; set; } = null!;
+        public string? CreatedById { get; set; }
         public DateTime CreatedOn { get; set; } = DateTime.Now.ToUniversalTime();
         
         public string? LastUpdatedById { get; set; }
