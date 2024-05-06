@@ -28,10 +28,12 @@ namespace Speedy.Controllers
 
             var userForm = new UserFormViewModel
             {
-                //Password= model.Password,
-                //Email= model.Email,
-                //.....
-                SelectedRoles = AppRoles.StartUp
+				Password = model.Password,
+				Email = model.Email,
+				ConfirmPassword = model.ConfirmPassword,
+				CreatedOn = model.CreatedOn,
+				IsActive = false,				
+				SelectedRoles = AppRoles.StartUp
             };
 
             var result = await _userService.SubmitUser(userForm);
@@ -42,8 +44,12 @@ namespace Speedy.Controllers
             var startUp = new StartUp
             {
                 AppUserId = result.UserId!,
-
-
+                Address = model.Address,
+                CreatedOn = model.CreatedOn,
+                FoundingDate = model.EstablishDate,
+                IsOnline = model.IsOnline,
+                StartUpName = model.StartUpName,                
+                Url = model.Urls,                
             };
 
             _context.Add(startUp);
@@ -56,8 +62,8 @@ namespace Speedy.Controllers
 		{
 			StartUpFormViewModel startupFormView = model ?? new StartUpFormViewModel();
 			
-			var citiesTask = _context.Cities.Where(c => !c.IsActive).OrderBy(c => c.Name).ToList();
-			var governoratesTask = _context.Governorates.Where(c => !c.IsActive).OrderBy(c => c.Name).ToList();
+			var citiesTask = _context.Cities.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
+			var governoratesTask = _context.Governorates.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
 			
 			startupFormView.Cities = _mapper.Map<IEnumerable<SelectListItem>>(citiesTask);
 			startupFormView.Governorates = _mapper.Map<IEnumerable<SelectListItem>>(governoratesTask);

@@ -59,39 +59,6 @@ namespace Speedy.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl = null)
-        {
-
-            returnUrl ??= Url.Content("~/");
-
-
-            if (ModelState.IsValid)
-            {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var userName = model.Username.ToUpper();
-                var user = await _userManager.Users
-                    .SingleOrDefaultAsync(u => u.NormalizedUserName == userName || u.NormalizedEmail == userName && u.IsActive);
-
-                if (user == null)
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return View();
-                }
-
-                var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, lockoutOnFailure: false);
-
-                if (result.Succeeded)
-                {
-                    _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
-                }
-            }
-
-            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-            return View(ModelState);
-        }
+        }      
     }
 }

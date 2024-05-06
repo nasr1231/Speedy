@@ -28,15 +28,17 @@ namespace Speedy.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            var userForm = new UserFormViewModel
-            {
-                //Password= model.Password,
-                //Email= model.Email,
-                //.....
-                SelectedRoles = AppRoles.Individual
-            };
+			var userForm = new UserFormViewModel
+			{
+				Password = model.Password,
+				Email = model.Email,
+				ConfirmPassword = model.ConfirmPassword,
+				CreatedOn = model.CreatedOn,
+				IsActive = false,
+				SelectedRoles = AppRoles.Individual
+			};
 
-            var result = await _userService.SubmitUser(userForm);
+			var result = await _userService.SubmitUser(userForm);
 
             if (!result.IsSuccess)
                 return View(model);
@@ -44,8 +46,8 @@ namespace Speedy.Controllers
             var individual = new Individual
             {
                 AppUserId = result.UserId!,
-                
-
+                CreatedOn = model.CreatedOn,                
+                referralCode = model.ReferralCode,                
             };
 
             _context.Add(individual);
@@ -57,8 +59,8 @@ namespace Speedy.Controllers
         {
             IndividualFormViewModel individualFormView = model ?? new IndividualFormViewModel();
             
-            var citiesTask = _context.Cities.Where(c => !c.IsActive).OrderBy(c => c.Name).ToList();
-            var governoratesTask = _context.Governorates.Where(c => !c.IsActive).OrderBy(c => c.Name).ToList();
+            var citiesTask = _context.Cities.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
+            var governoratesTask = _context.Governorates.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
 
             individualFormView.Cities = _mapper.Map<IEnumerable<SelectListItem>>(citiesTask);
             individualFormView.Governorates = _mapper.Map<IEnumerable<SelectListItem>>(governoratesTask);

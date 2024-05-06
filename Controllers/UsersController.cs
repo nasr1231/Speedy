@@ -61,7 +61,6 @@ namespace Speedy.Controllers
                 IsActive = true,
             };
 
-
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)
