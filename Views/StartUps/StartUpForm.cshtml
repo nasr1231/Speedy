@@ -10,8 +10,11 @@
 }
 
 <style>
+	* {
+		font-family: "IBM Plex Sans Arabic", sans-serif;
+	}
 	.num {
-		background-color: cornflowerblue;
+		background-color: #0d9aea;
 		height: 40px;
 		width: 40px;
 		border-radius: 50%;
@@ -26,12 +29,51 @@
 		border-color: #92b0e6;
 	}
 
+	.nextmain {
+		position: fixed;
+		top: 48%;
+		right: 11%;
+		color: #a3a1a1;
+	}
+
+		.nextmain:hover {
+			cursor: pointer;
+			color: #888686;
+		}
+
+	.next {
+		display: block;
+		font-size: 26px;
+		font-weight: 600;
+		margin-right: 16px;
+		color: #00000096;
+	}
+
+	.prevmain {
+		position: fixed;
+		top: 48%;
+		left: 11%;
+		color: #a3a1a1;
+	}
+
+		.prevmain:hover {
+			cursor: pointer;
+			color: #888686;
+		}
+
+	.prev {
+		display: block;
+		font-size: 26px;
+		font-weight: 600;
+		color: #00000096
+	}
+
 </style>
 
 <!--begin::Main-->
 <div class="d-flex flex-column flex-root">
 	<!--begin::Authentication - Sign-up -->
-	<div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(/assets/Website/LoginAssets/14-dark.png)">
+	<div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(/assets/Website/LoginAssets/14.png)">
 		<!--begin::Content-->
 		<div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
 			<!--begin::Logo-->
@@ -61,19 +103,19 @@
 							<div class="slide" id="slide1">
 								<!--begin::Separator-->
 								<div class="d-flex justify-content-start align-items-center mb-7">
-									<span class="fw-bold  fw-bolder num">1</span><h3 class="align-self-end">بيانات الحساب</h3>
+									<span class="fw-bold  fw-bolder text-white num">1</span><h3 class="align-self-end">بيانات الحساب</h3>
 								</div>
 								<!--end::Separator-->
 								<!--begin::Input group-->
-								<div class="row fv-row mb-7">
+								<div class="row fv-row ">
 									<!--begin::Col-->
-									<div class="col-md-6">
+									<div class="col-md-6 mb-7">
 										<label class="form-label fw-bolder text-dark fs-6">الاسم الأول</label>
 										<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="first-name" autocomplete="off" />
 									</div>
 									<!--end::Col-->
 									<!--begin::Col-->
-									<div class="col-md-6">
+									<div class="col-md-6 mb-7">
 										<label class="form-label fw-bolder text-dark fs-6">الاسم الأخير</label>
 										<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="last-name" autocomplete="off" />
 									</div>
@@ -139,12 +181,18 @@
 									<!--end::Wrapper-->								
 								</div>
 								<!--end::Input group=-->																
-								<a onclick="nextSlide()" class="btn btn-success">Next</a>
+								<a onclick="nextSlide()" class="nextmain">
+									<i class=" fa-regular fa-circle-right fa-6x"></i>
+									<span class="next">
+										التالي
+									</span>
+
+								</a>
 							</div>							
 							<div class="slide" id="slide3">
 								<!--begin::Separator-->
 								<div class="d-flex justify-content-start align-items-center mb-7">
-									<span class="fw-bold  fw-bolder num">2</span><h3 class="align-self-end">بيانات الشركة</h3>
+									<span class="fw-bold  fw-bolder text-white num">2</span><h3 class="align-self-end">بيانات الشركة</h3>
 								</div>
 								<!--end::Separator-->
 								<!--begin::Input group-->
@@ -159,10 +207,10 @@
 								<!--end::Input group-->								
 								<!--begin::Input group-->
 								<div class="fv-row mb-7">
-									<label class="form-label fw-bolder text-dark fs-6 mt-3">تاريخ إنشاء الشركة</label>
-									<div class="input-group mb-5">
-										<input asp-for="@Model.EstablishDate" type="date" name="birth-date" class="form-control form-select-solid birthdate-flatpickr" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
-										<span class="input-group-text" id="basic-addon1">
+									<label class="form-label fw-bolder text-dark fs-6 ">تاريخ إنشاء الشركة</label>
+									<div class="input-group">
+										<input asp-for="@Model.EstablishDate" type="date" name="birth-date" style="border-radius:8px;" class="form-control form-control-lg form-control-solid birthdate-flatpickr" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
+										<span style="border-radius:8px;" class="input-group-text" id="basic-addon1">
 											<i class="fa-solid fa-calendar-days fs-4"></i>
 										</span>
 										<span asp-validation-for="@Model!.EstablishDate" class="text-danger d-block h-10px"></span>
@@ -171,33 +219,34 @@
 								</div>
 								<!--end::Input group-->
 								<!--begin::Input group-->
-								<div class="d-flex flex-column mb-8">
-									<label class="fs-6 fw-bold mb-2">روابط وسائل التواصل الاجتماعي الخاصة بالشركة </label>
+								<div class="d-flex flex-column mb-7">
+									<label class="form-label fw-bolder text-dark fs-6">روابط وسائل التواصل الاجتماعي الخاصة بالشركة </label>
 									<textarea class="form-control form-control-solid" rows="3" name="social-media-links"></textarea>
 								</div>
 								<!--end::Input group-->
 								<!--begin::Input group-->
-								<div class="fv-row mb-7">
+								<div class="fv-row ">
 									<label class="form-label fw-bolder text-dark fs-6">رقم الهاتف</label>
-									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="phone-number" autocomplete="off" />
+									<input asp-for="@Model.MobileNumber" class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="phone-number" autocomplete="off" />
+									<span asp-validation-for="@Model!.MobileNumber" class="text-danger d-block h-10px"></span>
 								</div>
 								<!--end::Input group-->
 								<!--begin::Input group-->
-								<div class="form-check form-check-custom form-check-solid me-10 mb-10">
-									<input class="form-check-input h-30px w-30px" type="checkbox" value="" id="flexCheckbox30" />
-									<label class="form-check-label me-4 " for="flexCheckbox30">
+								<div class="form-check form-check-custom form-check-solid me-10 mb-7">
+									<input asp-for="@Model.HasWhatsApp" type="checkbox" value="" class="form-check-input h-30px w-30px" id="flexCheckbox30" />
+									<label class="form-check-label me-4" for="flexCheckbox30">
 										هل هذا الرقم لديه واتساب؟
 									</label>
 								</div>
 								<!--end::Input group-->
 								<!--begin::Input group-->
-								<h5 class="fv-row mb-7 ">هل الشركة افتراضية (online)</h5>
-								<div class="d-flex justify-content-around">
-									<div class="form-check form-check-inline mb-7">
+								<h5 class="fv-row form-label fw-bolder text-dark fs-6  ">هل الشركة افتراضية (online)</h5>
+								<div class="d-flex justify-content-around mb-7">
+									<div class="form-check form-check-inline ">
 										<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="نعم">
 										<label class="form-check-label fw-bolder text-dark fs-6 " for="inlineRadio1">نعم</label>
 									</div>
-									<div class="form-check form-check-inline mb-7">
+									<div class="form-check form-check-inline ">
 										<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="لا">
 										<label class="form-check-label fw-bolder text-dark fs-6 " for="inlineRadio2">لا</label>
 									</div>
@@ -205,21 +254,21 @@
 								<!--end::Input group-->
 								<!--begin::Input group-->
 								<div class="fv-row mb-7">
-									<label class="form-label fw-bolder text-dark fs-6 mt-5">العنوان</label>
+									<label class="form-label fw-bolder text-dark fs-6">العنوان</label>
 									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="address" autocomplete="off" />
 								</div>
 								<!--end::Input group-->
 								<!--begin::Input group-->
-								<div class="row fv-row mb-7 ">
-									<div class="col-md-6">
-										<label class="form-label fw-bolder text-dark fs-6 mt-5 ">المدينة</label>
+								<div class="row fv-row ">
+									<div class="col-md-6 mb-7">
+										<label class="form-label fw-bolder text-dark fs-6">المدينة</label>
 										<select asp-for="@Model.SelectedCity" asp-items="@Model.Cities" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المدينة" data-hide-search="true">
 											<option></option>
 										</select>
 									</div>
 									<!--end::Input group-->
 									<!--begin::Input group-->
-									<div class="col-md-6">
+									<div class="col-md-6 mb-7">
 										<label class="form-label fw-bolder text-dark fs-6 mt-5">المحافظة</label>
 										<select asp-for="@Model.SelectedGovernorate" asp-items="@Model.Governorates" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المحافظة" data-hide-search="true">
 											<option></option>
@@ -237,8 +286,24 @@
 										</span>
 									</label>
 								</div>
+								<!--begin::Actions-->
+								<div class="text-center">
+									<button type="button" id="kt_sign_up_submit" class="btn btn-lg btn-primary">
+										<span class="indicator-label">تسجيل</span>
+										<span class="indicator-progress">
+											برجاء الانتظار
+											<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+										</span>
+									</button>
+								</div>
 								<!--end::Input group-->
-								<a onclick="prevSlide()" class="btn btn-secondary">Previous</a>
+								<a onclick="prevSlide()" class="prevmain">
+									<i class=" fa-regular fa-circle-left fa-6x"></i>
+									<span class="prev">
+										السابق
+									</span>
+
+								</a>
 							</div>
 						</div>
 					</div>
