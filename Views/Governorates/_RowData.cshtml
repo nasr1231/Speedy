@@ -2,43 +2,42 @@
 
 <td class="text-center text-nowrap">
     <p class="h4 mb-2 ">
-        @Model.Name
-        <span class="badge badge-sm badge-square badge-outline badge-@(Model.IsActive ? "danger" : " d-none") p-1">
-            <i class="fs-8 bi bi-x-lg text-danger"></i>
-        </span>
+        @Model.Name        
     </p>
 </td>
 
 <td>
-    <div class="js-status badge badge-light-@(Model.IsActive ? "danger" : "success") @(Model.LastUpdatedOn is null ? "d-none" : string.Empty) d-grid mb-2 p-2">
+    <div class="js-status badge badge-light-@(Model.IsDeleted ? "success" : "danger") @(Model.LastUpdatedOn is null ? "d-none" : string.Empty) d-grid mb-2 p-2">
         <p class="mb-0">
-            <span class="text-dark">تم التحديث في:</span> <span class="js-last-updated-on">  <span class="dateJs" data-date="@Model.LastUpdatedOn"></span></span>
+            <span class="text-dark">Updated On:</span> <span class="js-last-updated-on">
+                <span class="dateJs" data-date="@Model.LastUpdatedOn"></span>
+            </span>
         </p>
         <p class="@(Model.LastUpdatedById is null ? "d-none" : "mt-2 mb-0")">
-            <span class="text-dark">بواسطة: </span>@await UserManager.FindByIdAsync(Model.LastUpdatedById)
+            <span class="text-dark">Updated By: </span>@await UserManager.FindByIdAsync(Model?.LastUpdatedById)
         </p>
     </div>
 
     <div class="badge badge-light-dark d-grid p-2">
-
         <p class="mb-0">
-            تم الإنشاء في: <span class="dateJs" data-date="@Model.CreatedOn"></span>
+            Created At: @Model.CreatedOn.ToShortDateString()
         </p>
 
         <p class="@(Model.CreatedById is null ? "0 d-none" : "mt-2 mb-0")">
-            بواسطة: @await UserManager.FindByIdAsync(Model.CreatedById)
+            By: @await UserManager.FindByIdAsync(Model.CreatedById)
         </p>
     </div>
 </td>
 <td class="d-grid pe-2">
-    <a href="javascript:;" class="js-render-modal btn btn-sm btn-outline btn-outline-primary btn-active-light-primary mb-2" data-url="/Governorates/Edit/@Model.Id" data-title="تعديل المحافظة" data-is-edited="true">
+    <a href="javascript:;" class="js-render-modal btn btn-sm btn-outline btn-outline-primary btn-active-light-primary mb-2" data-url="/Cities/Edit/@Model.Id" data-title="تعديل المدينة" data-is-edited="true">
         <i class="bi bi-pencil-square"></i>
-        تعديل
+        Edit
     </a>
-    <a data-url="/Governorates/ToggleStatus/@Model.Id" data-message="هل انت متأكد أنك تريد تغيير حالة تلك المحافظة؟" data-title="تغير حالة المحافظة" href="javascript:;" class="js-change-btn btn btn-sm btn-outline btn-outline-@(Model.IsActive ? "success" : "danger") btn-active-light-@(Model.IsActive ? "success" : "danger")">
-        <i class="bi bi-@(Model.IsActive ? "arrow-clockwise" : "x-circle")"></i>
+    <a data-url="/Cities/ToggleStatus/@Model.Id" data-message="هل انت متأكد انك تريد تغير حالة المدينة؟" data-title="تغير حالة المدينة" href="javascript:;" class="js-change-btn btn btn-sm btn-outline btn-outline-@(Model.IsDeleted ?  "success" : "danger") btn-active-light-@(Model.IsDeleted ?  "success" : "danger")">
+
+        <i class="bi bi-@(Model.IsDeleted ? "arrow-clockwise" : "x-circle")"></i>
         <span class="js-btn-text">
-            @(Model.IsActive ? "استعادة" : "تعطيل")
+            @(Model.IsDeleted ? "Activate" : "Disable")
         </span>
     </a>
 </td>

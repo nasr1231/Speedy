@@ -6,7 +6,7 @@
       data-ajax="true"
       data-ajax-begin="onModalBegin"
       data-ajax-success="modalSubmitSuccess"
-      data-ajax-failure="showErorrMessage"
+      data-ajax-failure="showErrorMessage"
       data-ajax-complete="onModalComplete">
 
     <div class="mb-2">
@@ -17,8 +17,8 @@
         }
         <!--begin::Input group-->
         <div class="form-floating mb-2">
-            <input type="text" asp-for="Name" class="form-control" placeholder="اسم المحافظة" />
-            <label asp-for="Name">المحافظة</label>
+            <input type="text" asp-for="Name" class="form-control" placeholder="Governorate Name......" />
+            <label asp-for="Name">Governorate</label>
         </div>
         <!--end::Input group-->
         <span asp-validation-for="Name" class="text-danger d-block"></span>

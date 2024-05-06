@@ -6,7 +6,7 @@
       data-ajax="true"
       data-ajax-begin="onModalBegin"
       data-ajax-success="modalSubmitSuccess"
-      data-ajax-failure="showErorrMessage"
+      data-ajax-failure="showErrorMessage"
       data-ajax-complete="onModalComplete">
 
     <div class="mb-2">
@@ -25,12 +25,12 @@
 
     </div>
     <div class="mb-2">
-        @* <select class="form-select js-select2" asp-for ="Name" asp-items="@Model.GetGeographicalAreaName"   data-placeholder="Choose one thing"> *@
-        <select class="form-select js-select2" asp-for="GovernorateId" asp-items="Model!.Governorate" data-placeholder="اختر المنطقة الجغرافية">
+        <label class="form-label fw-bolder text-dark fs-6">المدينة</label>
+        <select asp-for="GovernorateId" asp-items="@Model.Governorate" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المحافظة" data-hide-search="true">
             <option></option>
         </select>
-        <span asp-validation-for="GovernorateId" class="text-danger d-block"></span>
     </div>
+   
     <partial name="_ModalFooter" />
 </form>
 
