@@ -9,6 +9,6 @@ namespace Speedy.Core.Models
         
         public string? LastUpdatedById { get; set; }
         public DateTime? LastUpdatedOn { get; set; }
-        public bool IsActive { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }
