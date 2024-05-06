@@ -28,8 +28,10 @@
     <span id="message" class="d-none">@TempData["Message"]</span>
     <partial name="_Modal" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/font-awesome/js/all.min.js"></script>  
-    <script src="~/lib/select2/js/select2.full.min.js"></script>    
+    <script src="~/lib/font-awesome/js/all.min.js"></script>      
+    <script src="~/assets/panel/js/plugins.bundle.js"></script>
+    <script src="~/assets/panel/js/scripts.bundle.js"></script>
+    <script src="~/js/site.js"></script>
     @await RenderSectionAsync("Plugins", required: false)
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
