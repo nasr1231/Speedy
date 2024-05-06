@@ -3,76 +3,11 @@ var table;
 var UpdatedRow;
 var datatable;
 var exported_Columns = [];
+var model = $('#model-window');
 
-function disableSubmitButton() {
-    $('.body :submit').attr('disabled', 'disabled').attr('data-kt-indicator', 'on');
-}
-
-function OnModalBegin() {
-    disableSubmitButton();
-}
-
-// Messages
-function ShowSuccessMessage(message = 'Updated Successfully!') {
-    Swal.fire({
-        position: 'center-center',
-        icon: 'success',
-        title: 'Success',
-        text: message, // Use the parameter message here
-        showConfirmButton: false,
-        timer: 2500
-    });
-}
-
-function showUserForm(form) {
-    var modal = $('#Modal');
-    modal.find('.modal-title').text("إضافة مستخدم");
-    modal.find('.modal-body').html(form);
-    $.validator.unobtrusive.parse(modal);
-    select2func()    
-    modal.modal('show');
-}
-function ShowErrorMessage(message = 'Something went wrong!') {
-    Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: message, // Use the parameter message here
-        customClass: {
-            confirmButton: "btn btn-primary"
-        }
-    });
-}
-
-function onModalComplete() {
-    $('body :submit').removeAttr('data-kt-indicator', 'on').removeAttr('disabled', 'disabled');
-}
-function OnModalSuccess(row) {
-    ShowSuccessMessage();
-    $('#model-window').modal('hide');
-
-    if (UpdatedRow !== undefined) {
-        datatable.row(UpdatedRow).remove().draw();
-        UpdatedRow = undefined;
-    }
-
-    var newRow = $(row);
-    datatable.row.add(newRow).draw();
-
-    KTMenu.init();
-    KTMenu.initGlobalHandlers();
-}
-
-var headers = $('th');
-$.each(headers, function (i) {
-    if (!$(this).hasClass('js-no-export'))
-        exported_Columns.push(i);
-});
-
-// Datatable Configuration
 var KTDatatables = function () {
     // Private functions
     var initDatatable = function () {
-        // Init datatable --- more info on datatables: https://datatables.net/manual/
         datatable = $(table).DataTable({
             "info": false,
             'pageLength': 10,
@@ -81,7 +16,7 @@ var KTDatatables = function () {
 
     // Hook export buttons
     var exportButtons = () => {
-        const documentTitle = $('.js-datatables').data('doc-title');
+        const documentTitle = $('.js-datatable').data('export-title');
         var buttons = new $.fn.dataTable.Buttons(table, {
             buttons: [
                 {
@@ -142,7 +77,7 @@ var KTDatatables = function () {
     // Public methods
     return {
         init: function () {
-            table = document.querySelector('.js-datatables');
+            table = $('.js-datatable');
 
             if (!table) {
                 return;
@@ -151,10 +86,121 @@ var KTDatatables = function () {
             initDatatable();
             exportButtons();
             handleSearchDatatable();
-        }
+        },
     };
 }();
 
+function showSuccessMessage(message = 'Your Entry is added successfully.') {
+
+    Swal.fire({
+        title: "Done Successfully.....",
+        text: message,
+        icon: 'success',        
+        buttonsStyling: false,
+        showConfirmButton: false,
+        timer: 2500        
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $('.js-status').parents('tr').removeClass('animate__animated animate__flash');
+            $('.js-edition-status').parents('tr').removeClass('animate__animated animate__flash');
+            $('tbody').find('.js-new-row').removeClass('animate__animated animate__flash');
+            $('tbody').find('.js-new-row').removeClass('js-new-row');
+        }
+    });
+}
+function disableSubmitButton() {
+    $('.body :submit').attr('disabled', 'disabled').attr('data-kt-indicator', 'on');
+}
+
+function onModalBegin() {
+    disableSubmitButton();
+}
+
+function showErrorMessage(message) {
+
+    if (message.responseText == '') {
+        message.responseText = 'Something Went Wrong!';
+    }
+
+    Swal.fire({
+        title: "Oooooooops!",
+        text: message.responseText,
+        icon: "error",
+        buttonsStyling: false,
+        confirmButtonText: "Accept",
+        customClass: {
+            confirmButton: "btn btn-primary"
+        }
+    });
+}
+
+function modalSubmitSuccess(row) {
+    $(model).modal('hide');
+
+    addNewRow(row);
+    $('tbody').find('.js-new-row').addClass('animate__animated animate__flash');
+    showSuccessMessage();
+
+    KTMenu.init();
+    KTMenu.initHandlers();    
+}
+
+
+// Messages
+function ShowSuccessMessage(message = 'Updated Successfully!') {
+    Swal.fire({
+        position: 'center-center',
+        icon: 'success',
+        title: 'Success',
+        text: message, // Use the parameter message here
+        showConfirmButton: false,
+        timer: 2500
+    });
+}
+
+function showUserForm(form) {
+    var modal = $('#Modal');
+    modal.find('.modal-title').text("إضافة مستخدم");
+    modal.find('.modal-body').html(form);
+    $.validator.unobtrusive.parse(modal);
+    select2func()    
+    modal.modal('show');
+}
+function ShowErrorMessage(message = 'Something went wrong!') {
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: message, // Use the parameter message here
+        customClass: {
+            confirmButton: "btn btn-primary"
+        }
+    });
+}
+
+function onModalComplete() {
+    $('body :submit').removeAttr('data-kt-indicator', 'on').removeAttr('disabled', 'disabled');
+}
+function OnModalSuccess(row) {
+    $(model).modal('hide');
+    ShowSuccessMessage();
+
+    if (UpdatedRow !== undefined) {
+        datatable.row(UpdatedRow).remove().draw();
+        UpdatedRow = undefined;
+    }
+
+    var newRow = $(row);
+    datatable.row.add(newRow).draw();
+
+    KTMenu.init();
+    KTMenu.initGlobalHandlers();
+}
+
+var headers = $('th');
+$.each(headers, function (i) {
+    if (!$(this).hasClass('js-no-export'))
+        exported_Columns.push(i);
+});
 
 function OnModalToaster() {
     toastr.options = {
@@ -187,7 +233,18 @@ function select2func() {
     });
 }
 
+function addNewRow(row) {
 
+    var newRow = $(row);
+
+    datatable.row.add(newRow).draw();
+
+    //if (rowUpdated !== undefined) {
+    //    datatable.row(rowUpdated).remove().draw()
+
+    //    rowUpdated = undefined;
+    //}
+}
 
 // Bootstrap Modal
 $(document).ready(function () {
@@ -287,7 +344,7 @@ $(document).ready(function () {
         ShowModel.find('#modalLabel').text(btn.data('title'));
 
         if (btn.data('update') !== undefined) {
-            UpdatedRow = btn.parents('tr');
+            rowUpdated = btn.parents('tr');
         }
 
         $.ajax({
@@ -295,18 +352,69 @@ $(document).ready(function () {
             method: 'GET',
             dataType: 'html', // Expect HTML content
             success: function (form) {
+                ShowModel.find('.modal-title').text(btn.data('title'));                
+
                 ShowModel.find('.modal-body').html(form);
                 $.validator.unobtrusive.parse(ShowModel);
+                ShowModel.modal('show');
             },
-            error: function () {
-                ShowErrorMessage();
+            error: function (message) {
+                ShowErrorMessage(message);
             }
         });
 
-        $('#model-window').modal('show');
+       
     });
     //Handle Sign Out
     $('.js-signout').on('click', function () {
         $('#SignOut').submit();
+    });
+
+    $('body').delegate('.js-change-btn', 'click', function () {
+
+        var btn = $(this);
+
+        bootbox.confirm({
+            title: btn.data('title'),
+            message: btn.data('message'),
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times"></i> Cancel',
+                    className: 'btn-primary'
+
+                },
+                confirm: {
+                    label: '<i class="fa fa-check"></i> Confirm',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+
+                    $.post
+                        (
+                            {
+                                url: btn.data('url'),
+                                data: {
+                                    '__RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                                },
+                                success: function (Data) {
+                                    rowUpdated = btn.parents('tr');
+                                    btn.parents('tr').removeClass('animate__animated animate__flash');
+
+                                    modalSubmitSuccess(Data)
+                                    showSuccessMessage();
+
+                                },
+                                error: function (message) {
+                                    showErorrMessage(message);
+                                }
+
+                            }
+                        )
+                }
+            }
+        });
+
     });
 });
