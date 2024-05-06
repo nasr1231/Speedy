@@ -60,11 +60,10 @@ namespace Speedy.Controllers
             var delivery = new Delivery
             {
                 AppUserId = result.UserId!,
-                HasWhatsApp = model.HasWhatsApp,
-                IsActive = false,
+                HasWhatsApp = model.HasWhatsApp,                
                 Address = model.Address,
-                CreatedOn = DateTime.Now,
-                MobileNumber = model.MobileNumber,                                 
+				CreatedOn = model.CreatedOn,
+				MobileNumber = model.MobileNumber,                                 
             };
 
             _context.Add(delivery);
@@ -76,9 +75,9 @@ namespace Speedy.Controllers
         {
             DeliveryFormViewModel deliveryFormView = model ?? new DeliveryFormViewModel();
 
-            var methodsTask = _context.ShippingMethods.Where(c => !c.IsActive).OrderBy(c => c.Name).ToList();
-            var citiesTask = _context.Cities.Where(c => !c.IsActive).OrderBy(c => c.Name).ToList();
-            var governoratesTask = _context.Governorates.Where(c => !c.IsActive).OrderBy(c => c.Name).ToList();            
+            var methodsTask = _context.ShippingMethods.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
+            var citiesTask = _context.Cities.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
+            var governoratesTask = _context.Governorates.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();            
 
             deliveryFormView.ShippingMethods = _mapper.Map<IEnumerable<SelectListItem>>(methodsTask);
             deliveryFormView.Cities = _mapper.Map<IEnumerable<SelectListItem>>(citiesTask);

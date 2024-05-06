@@ -111,7 +111,7 @@ namespace Speedy.Controllers
             if (type is null)
                 return NotFound();
 
-            type.IsActive = !type.IsActive;
+            type.IsDeleted = !type.IsDeleted;
             type.LastUpdatedOn = DateTime.Now.ToUniversalTime();
             type.LastUpdatedById = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
 

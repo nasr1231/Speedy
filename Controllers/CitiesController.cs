@@ -27,8 +27,7 @@ namespace Speedy.Controllers
             return View(servicesView);
         }
 
-        [HttpGet]
-        [AjaxOnly]
+        
         public IActionResult Create()
         {
             return PartialView("_Form", InitialCityForm());
@@ -39,16 +38,26 @@ namespace Speedy.Controllers
         public IActionResult Create(CityFormViewModel model)
         {
             if (!ModelState.IsValid)
-                return BadRequest();            
-            var city = _mapper.Map<City>(model);
+                return View("_Form", InitialCityForm(model));
 
-            city.CreatedById = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+            //City city = new()
+            //{
+            //    CreatedOn = model.CreatedOn,
+            //    GovernorateId = model.GovernorateId,
+            //    IsDeleted = false,
+            //    Name = model.Name,
+            //    CreatedById = User.FindFirst(ClaimTypes.NameIdentifier)!.Value,                
+            //};            
 
-            _context.Cities.Add(city);
+            var cityArea = _mapper.Map<City>(model);
+            cityArea.CreatedById = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+
+            _context.Cities.Add(cityArea);
             _context.SaveChanges();
 
-            var cityView = _mapper.Map<CityViewModel>(city);
-            return PartialView("_RawData", cityView);
+            var cityView = _mapper.Map<CityViewModel>(cityArea);
+
+            return PartialView("_NewRow", cityView);
         }
 
         [HttpGet]
@@ -106,8 +115,7 @@ namespace Speedy.Controllers
 
             if (type is null)
                 return NotFound();
-
-            type.IsActive = !type.IsActive;
+            
             type.LastUpdatedOn = DateTime.Now.ToUniversalTime();
             type.LastUpdatedById = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
 
@@ -119,14 +127,14 @@ namespace Speedy.Controllers
             return PartialView("_NewRow", typeView);
         }
 
-        private CityFormViewModel InitialCityForm(CityFormViewModel? model = null)
+        private CityFormViewModel? InitialCityForm(CityFormViewModel? model = null)
         {
-            CityFormViewModel deliveryFormView = model ?? new CityFormViewModel();
-            var Cities = _context.Cities.Where(c => !c.IsActive).OrderBy(c => c.Name).ToList();
+            CityFormViewModel cityFormView = model is null ? new CityFormViewModel() : model;
+            var Governorates = _context.Governorates.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
 
-            deliveryFormView.Governorate = _mapper.Map<IEnumerable<SelectListItem>>(Cities);
+            cityFormView.Governorate = _mapper.Map<IEnumerable<SelectListItem>>(Governorates);
 
-            return deliveryFormView;
+            return cityFormView;
         }
     }
 }
