@@ -27,15 +27,6 @@ namespace Speedy.Core.Mapping
 
             #region Related Data
 
-            //City
-            
-            CreateMap<City, CityFormViewModel>().ReverseMap();
-            CreateMap<City, CityViewModel>()
-                .ForMember(dest => dest.GovernorateName, opt => opt.MapFrom(src => src.Governorate!.Name));
-            CreateMap<City, SelectListItem>()
-                .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id))
-                .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Name));
-
             //Governorates
             CreateMap<Governorate, GovernorateFormViewModel>().ReverseMap();
             CreateMap<Governorate, GovernorateViewModel>();
@@ -43,13 +34,13 @@ namespace Speedy.Core.Mapping
                 .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Name));
 
-            //City
-            CreateMap<City, CityViewModel>();
-            CreateMap<City, CityFormViewModel>().ReverseMap();
+            //City            
+            CreateMap<CityFormViewModel, City>().ReverseMap();
+            CreateMap<City, CityViewModel>()
+                .ForMember(dest => dest.GovernorateName, opt => opt.MapFrom(src => src.Governorate!.Name));
             CreateMap<City, SelectListItem>()
                 .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id))
-                .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Name));
-
+                .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Name));                     
 
             //ShippingMethods
             CreateMap<ShippingMethod, ShippingMethodViewModel>();
