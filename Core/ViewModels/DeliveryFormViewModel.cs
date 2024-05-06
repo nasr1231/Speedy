@@ -18,7 +18,7 @@ namespace Speedy.Core.ViewModels
         [MaxLength(40, ErrorMessage = Errors.MaxLength)]
         public string LastName { get; set; } = null!;
 
-		[Display(Name = "البريد الالكتروني")]
+		[Display(Name = "البريد الإلكتروني")]
         [EmailAddress]
 		[Required(ErrorMessage = Errors.isRequired)]
 		[MaxLength(40, ErrorMessage = Errors.MaxLength)]
@@ -33,7 +33,7 @@ namespace Speedy.Core.ViewModels
 		[Required(ErrorMessage = Errors.isRequired)]
 		[MaxLength(11, ErrorMessage = Errors.MaxLength)]
 		public string Address { get; set; } = null!;
-
+        public string IsFirstTime { get; set; } = null!;
 		public bool HasWhatsApp { get; set; }
 
         [Display(Name = "الرقم القومي")]

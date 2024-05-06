@@ -6,7 +6,7 @@ namespace Speedy.Core.ViewModels.RelatedData
     {        
         public int Id { get; set; }
 
-        [Display(Name = "المحافظة")]
+        [Display(Name = "Governorate Name")]
         [Required(ErrorMessage = Errors.isRequired)]
         [MaxLength(40, ErrorMessage = Errors.MaxLength)]
         public string Name { get; set; } = null!;

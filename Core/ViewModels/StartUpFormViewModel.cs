@@ -24,6 +24,15 @@ namespace Speedy.Core.ViewModels
 		[MaxLength(40, ErrorMessage = Errors.MaxLength)]
 		public string Email { get; set; } = null!;
 
+		[Required(ErrorMessage = Errors.isRequired)]
+		[StringLength(100, ErrorMessage = Errors.MaxLength, MinimumLength = 6)]
+		[DataType(DataType.Password), Display(Name = "كلمة المرور")]
+		public string Password { get; set; } = null!;
+
+		[DataType(DataType.Password), Display(Name = "تأكيد كلمة المرور")]
+		[Compare("Password", ErrorMessage = Errors.ConfirmPasswordMatch)]
+		public string ConfirmPassword { get; set; } = null!;
+
 		[Display(Name = "رقم الهاتف المحمول")]
 		[Required(ErrorMessage = Errors.isRequired)]
 		[MaxLength(11, ErrorMessage = Errors.MaxLength)]
@@ -34,22 +43,18 @@ namespace Speedy.Core.ViewModels
 		[MaxLength(11, ErrorMessage = Errors.MaxLength)]
 		public string Address { get; set; } = null!;
 
+		[Display(Name = "اسم الشركة")]
+		[Required(ErrorMessage = Errors.isRequired)]
+		[MaxLength(11, ErrorMessage = Errors.MaxLength)]
+		public string StartUpName { get; set; } = null!;
+
 		[Display(Name = "تاريخ إنشاء الشركة")]
 		[Required(ErrorMessage = Errors.isRequired)]
 		public DateTime EstablishDate { get; set; } = DateTime.Now;
 
 		public bool HasWhatsApp { get; set; }
-				
-		public bool IsOnline { get; set; }		
-
-		[Required(ErrorMessage = Errors.isRequired)]
-		[StringLength(100, ErrorMessage = Errors.MaxLength, MinimumLength = 6)]
-		[DataType(DataType.Password), Display(Name = "كلمة المرور")]
-		public string Password { get; set; } = null!;
-
-		[DataType(DataType.Password), Display(Name = "تأكيد كلمة المرور")]
-		[Compare("Password", ErrorMessage = Errors.ConfirmPasswordMatch)]
-		public string ConfirmPassword { get; set; } = null!;
+		public List<string> Urls { get; set; } = [];				
+		public bool IsOnline { get; set; }				
 		#endregion
 
 
