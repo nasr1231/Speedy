@@ -110,22 +110,25 @@
                                 <div class="row fv-row ">
                                     <!--begin::Col-->
                                     <div class="col-md-6 mb-7">
-                                        <label class="form-label fw-bolder text-dark fs-6">الاسم الأول</label>
-                                        <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="first-name" autocomplete="off" />
+                                        <label class="form-label fw-bolder text-dark fs-6" asp-for="FirstName"></label>
+                                        <input asp-for="FirstName" class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="first-name" autocomplete="off" />
+                                        <span asp-validation-for="FirstName" class="text-danger d-block h-10px"></span>
                                     </div>
                                     <!--end::Col-->
                                     <!--begin::Col-->
                                     <div class="col-md-6 mb-7">
-                                        <label class="form-label fw-bolder text-dark fs-6">الاسم الأخير</label>
-                                        <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="last-name" autocomplete="off" />
+                                        <label asp-for="LastName" class="form-label fw-bolder text-dark fs-6"></label>
+                                        <input asp-for="LastName" class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="last-name" autocomplete="off" />
+                                        <span asp-validation-for="LastName" class="text-danger d-block h-10px"></span>
                                     </div>
                                     <!--end::Col-->
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-7">
-                                    <label class="form-label fw-bolder text-dark fs-6">البريد الإلكتروني</label>
-                                    <input class="form-control form-control-lg form-control-solid" type="email" placeholder="" name="email" autocomplete="off" />
+                                    <label asp-for="Email" class="form-label fw-bolder text-dark fs-6">البريد الإلكتروني</label>
+                                    <input asp-for="Email" class="form-control form-control-lg form-control-solid" type="email" placeholder="" name="email" autocomplete="off" />
+                                    <span asp-validation-for="Email" class="text-danger d-block h-10px"></span>
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
