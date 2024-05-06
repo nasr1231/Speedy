@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Speedy.Data;
 
@@ -11,9 +12,11 @@ using Speedy.Data;
 namespace Speedy.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240506135207_AddMissingPropertiesToDelivery")]
+    partial class AddMissingPropertiesToDelivery
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -303,7 +306,7 @@ namespace Speedy.Data.Migrations
                     b.Property<bool>("HasWhatsApp")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsDeleted")
+                    b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsFirstTime")
@@ -344,7 +347,7 @@ namespace Speedy.Data.Migrations
 
                     b.HasIndex("ShippingMethodId");
 
-                    b.ToTable("Deliveries", (string)null);
+                    b.ToTable("Deliveries");
                 });
 
             modelBuilder.Entity("Speedy.Core.Models.Individual", b =>
@@ -368,7 +371,7 @@ namespace Speedy.Data.Migrations
                     b.Property<int?>("GovernorateId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsDeleted")
+                    b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<string>("LastUpdatedById")
@@ -388,7 +391,7 @@ namespace Speedy.Data.Migrations
 
                     b.HasIndex("GovernorateId");
 
-                    b.ToTable("Individuals", (string)null);
+                    b.ToTable("Individuals");
                 });
 
             modelBuilder.Entity("Speedy.Core.Models.RelatedData.City", b =>
@@ -408,7 +411,7 @@ namespace Speedy.Data.Migrations
                     b.Property<int>("GovernorateId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsDeleted")
+                    b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<string>("LastUpdatedById")
@@ -425,7 +428,7 @@ namespace Speedy.Data.Migrations
 
                     b.HasIndex("GovernorateId");
 
-                    b.ToTable("Cities", (string)null);
+                    b.ToTable("Cities");
                 });
 
             modelBuilder.Entity("Speedy.Core.Models.RelatedData.Governorate", b =>
@@ -442,7 +445,7 @@ namespace Speedy.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsDeleted")
+                    b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<string>("LastUpdatedById")
@@ -457,30 +460,7 @@ namespace Speedy.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Governorates", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedOn = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            Name = "القاهرة"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedOn = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            Name = "الجيزة"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedOn = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            Name = "القليوبية"
-                        });
+                    b.ToTable("Governorates");
                 });
 
             modelBuilder.Entity("Speedy.Core.Models.RelatedData.ShippingMethod", b =>
@@ -497,7 +477,7 @@ namespace Speedy.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsDeleted")
+                    b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<string>("LastUpdatedById")
@@ -512,28 +492,28 @@ namespace Speedy.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ShippingMethods", (string)null);
+                    b.ToTable("ShippingMethods");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
                             CreatedOn = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
+                            IsActive = false,
                             Name = "عجلة"
                         },
                         new
                         {
                             Id = 2,
                             CreatedOn = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
+                            IsActive = false,
                             Name = "سيارة"
                         },
                         new
                         {
                             Id = 3,
                             CreatedOn = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
+                            IsActive = false,
                             Name = "موتوسيكل"
                         });
                 });
@@ -562,7 +542,7 @@ namespace Speedy.Data.Migrations
                     b.Property<int>("IndividualId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsDeleted")
+                    b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<string>("LastUpdatedById")
@@ -580,7 +560,7 @@ namespace Speedy.Data.Migrations
 
                     b.HasIndex("IndividualId");
 
-                    b.ToTable("Reviews", (string)null);
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("Speedy.Core.Models.StartUp", b =>
@@ -610,7 +590,7 @@ namespace Speedy.Data.Migrations
                     b.Property<int?>("GovernorateId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsDeleted")
+                    b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsOnline")
@@ -641,7 +621,7 @@ namespace Speedy.Data.Migrations
 
                     b.HasIndex("GovernorateId");
 
-                    b.ToTable("StartUps", (string)null);
+                    b.ToTable("StartUps");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -748,7 +728,7 @@ namespace Speedy.Data.Migrations
             modelBuilder.Entity("Speedy.Core.Models.RelatedData.City", b =>
                 {
                     b.HasOne("Speedy.Core.Models.RelatedData.Governorate", "Governorate")
-                        .WithMany("Cities")
+                        .WithMany()
                         .HasForeignKey("GovernorateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -811,8 +791,6 @@ namespace Speedy.Data.Migrations
 
             modelBuilder.Entity("Speedy.Core.Models.RelatedData.Governorate", b =>
                 {
-                    b.Navigation("Cities");
-
                     b.Navigation("Deliveries");
 
                     b.Navigation("Individuals");
