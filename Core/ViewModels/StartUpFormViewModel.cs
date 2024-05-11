@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using UoN.ExpressiveAnnotations.NetCore.Attributes;
 
 namespace Speedy.Core.ViewModels
 {
@@ -38,6 +39,7 @@ namespace Speedy.Core.ViewModels
 		[MaxLength(11, ErrorMessage = Errors.MaxLength)]
 		public string MobileNumber { get; set; } = null!;
 
+        [RequiredIf("IsOnline == true")]
 		[Display(Name = "العنوان")]
 		[Required(ErrorMessage = Errors.isRequired)]
 		[MaxLength(11, ErrorMessage = Errors.MaxLength)]
@@ -48,6 +50,7 @@ namespace Speedy.Core.ViewModels
 		[MaxLength(11, ErrorMessage = Errors.MaxLength)]
 		public string StartUpName { get; set; } = null!;
 
+		[AssertThat("EstablishDate <= Today()", ErrorMessage = "مش معقولة المهدي المنتظر بنفسه")]
 		[Display(Name = "تاريخ إنشاء الشركة")]
 		[Required(ErrorMessage = Errors.isRequired)]
 		public DateTime EstablishDate { get; set; } = DateTime.Now;

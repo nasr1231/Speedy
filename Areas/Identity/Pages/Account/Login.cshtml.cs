@@ -2,19 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
-using Speedy.Core.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace Speedy.Areas.Identity.Pages.Account
 {
@@ -22,12 +13,14 @@ namespace Speedy.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<AppUser> _signInManager;
         private readonly UserManager<AppUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, ILogger<LoginModel> logger)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _roleManager = roleManager;
             _logger = logger;
         }
 
@@ -122,13 +115,25 @@ namespace Speedy.Areas.Identity.Pages.Account
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                     return Page();
-                }
+                }                
+
+                bool isInRole = await _userManager.IsInRoleAsync(user, AppRoles.Admin);
                 var result = await _signInManager.PasswordSignInAsync(user, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
-                }
+                    if (isInRole)
+                    {
+                        _logger.LogInformation("Admin logged in.");
+                        return RedirectToAction("Index", "Dashboard");
+                    }
+                    else
+                    {
+                        _logger.LogInformation("User logged in.");
+                        return LocalRedirect(returnUrl);
+                    }
+
+                }                
                 //if (result.RequiresTwoFactor)
                 //{
                 //    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });

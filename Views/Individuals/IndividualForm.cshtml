@@ -84,7 +84,7 @@
             <!--begin::Wrapper-->
             <div class="w-lg-600px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto" style="padding-top: 30px !important">
                 <!--begin::Form-->
-                <form enctype="multipart/form-data" asp-action="Create" asp-controller="Deliveries" method="post" class="form w-100" novalidate="novalidate" id="kt_sign_up_form">
+                <form enctype="multipart/form-data" asp-action="Create" asp-controller="Deliveries" method="post" class="form w-100" novalidate="novalidate">
                     <!--begin::Heading-->
                     <div class="mb-5 text-center">
                         <!--begin::Title-->
@@ -271,7 +271,7 @@
                                 <!--end::Input group-->
                                 <!--begin::Actions-->
                                 <div class="text-center">
-                                    <button type="button" id="kt_sign_up_submit" class="btn btn-lg btn-primary">
+                                    <button type="submit" id="kt_sign_up_submit" class="btn btn-lg btn-primary">
                                         <span class="indicator-label">تسجيل</span>
                                         <span class="indicator-progress">
                                             برجاء الانتظار
@@ -314,9 +314,6 @@
 
 
 @section Scripts {
-    <script src="~/assets/panel/js/plugins.bundle.js"></script>
-    <script src="~/assets/panel/js/scripts.bundle.js"></script>
-    <script src="~/assets/panel/login/general.js"></script>
     <script src="~/js/slider.js" asp-asp-append-version="true"></script>
     <script>
         $(document).ready(function () {
@@ -332,7 +329,6 @@
                             return (date >= currentDate)
                         }
                     ],
-
                 }
             )
         });

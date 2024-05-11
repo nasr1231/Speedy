@@ -147,16 +147,16 @@ function modalSubmitSuccess(row) {
 
 
 // Messages
-function ShowSuccessMessage(message = 'Updated Successfully!') {
-    Swal.fire({
-        position: 'center-center',
-        icon: 'success',
-        title: 'Success',
-        text: message, // Use the parameter message here
-        showConfirmButton: false,
-        timer: 2500
-    });
-}
+//function ShowSuccessMessage(message = 'Updated Successfully!') {
+//    Swal.fire({
+//        position: 'center-center',
+//        icon: 'success',
+//        title: 'Success',
+//        text: message, // Use the parameter message here
+//        showConfirmButton: false,
+//        timer: 2500
+//    });
+//}
 
 function showUserForm(form) {
     var modal = $('#Modal');

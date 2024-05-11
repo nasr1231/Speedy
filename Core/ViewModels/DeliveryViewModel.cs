@@ -1,4 +1,4 @@
-﻿using Speedy.Core.Models;
+﻿//using Speedy.Core.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace Speedy.Core.ViewModels

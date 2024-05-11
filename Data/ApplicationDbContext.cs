@@ -47,6 +47,7 @@ namespace Speedy.Data
             builder.Entity<ShippingMethod>().HasData(RelevantData.ShippingMethods);
             builder.Entity<Governorate>().HasData(RelevantData.Governorates);
             #endregion
+
             base.OnModelCreating(builder);
         }
     }

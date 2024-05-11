@@ -5,6 +5,7 @@ using System.Reflection;
 using Speedy.Seeds;
 using Microsoft.EntityFrameworkCore;
 using Speedy.Services.User;
+using UoN.ExpressiveAnnotations.NetCore.DependencyInjection;
 
 namespace Speedy;
 
@@ -26,6 +27,7 @@ public class Program
             .AddDefaultTokenProviders();
 
         builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(MappingProfile)));
+        builder.Services.AddExpressiveAnnotations();
 
         //builder.Services.AddScoped<UserManager<AppUser>>();
 

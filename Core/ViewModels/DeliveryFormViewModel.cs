@@ -2,6 +2,7 @@
 using Speedy.Core.Consts;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using UoN.ExpressiveAnnotations.NetCore.Attributes;
 
 namespace Speedy.Core.ViewModels
 {
@@ -52,6 +53,7 @@ namespace Speedy.Core.ViewModels
 
 		[Display(Name = "تاريخ الميلاد")]
 		[Required(ErrorMessage = Errors.isRequired)]
+        //[AssertThat("BirthDate < Date()")]
         public DateTime BirthDate { get; set; } = DateTime.Now;
 
 		[Required(ErrorMessage = Errors.isRequired)]
@@ -78,7 +80,7 @@ namespace Speedy.Core.ViewModels
 
         [DisplayName("المحافظة")]
         [Required(ErrorMessage = Errors.isRequired)]
-        public string SelectedGovernorate { get; set; } = null!;
+        public int SelectedGovernorate { get; set; }
         public IEnumerable<SelectListItem>? Governorates { get; set; }
         #endregion
     }

@@ -1,7 +1,6 @@
-﻿@model CityViewModel
+﻿@model DeliveryViewModel
 
-<td>@Model.Name</td>
-<td>@Model.GovernorateName</td>
+<td>@Model.FirstName</td>
 <td>
     <div class="js-status badge badge-light-@(Model.IsActive ? "danger" : "success") @(Model.LastUpdatedOn is null ? "d-none" : string.Empty) d-grid mb-2 p-2">
         <p class="mb-0">
@@ -26,15 +25,15 @@
     </div>
 </td>
 <td class="d-grid pe-2">
-    <a href="javascript:;" class="js-render-modal btn btn-sm btn-outline btn-outline-primary btn-active-light-primary mb-2" data-url="/Cities/Edit/@Model.Id" data-title="تعديل المدينة" data-is-edited="true">
+    <a href="javascript:;" class="js-render-modal btn btn-sm btn-outline btn-outline-primary btn-active-light-primary mb-2" data-url="/Deliveries/Edit/@Model.Id" data-title="تعديل العميل" data-is-edited="true">
         <i class="bi bi-pencil-square"></i>
         Edit
     </a>
-    <a data-url="/Cities/ToggleStatus/@Model.Id" data-message="هل انت متأكد انك تريد تغير حالة المدينة؟" data-title="تغير حالة المدينة" href="javascript:;" class="js-change-btn btn btn-sm btn-outline btn-outline-@(Model.IsActive ? "success" : "danger") btn-active-light-@(Model.IsActive ? "success" : "danger")">
+    <a data-url="/Deliveries/ToggleStatus/@Model.Id" data-message="هل انت متأكد انك تريد تغير حالة العميل؟" data-title="تغير حالة العميل" href="javascript:;" class="js-change-btn btn btn-sm btn-outline btn-outline-@(Model.IsActive ? "success" : "danger") btn-active-light-@(Model.IsActive ? "success" : "danger")">
 
         <i class="bi bi-@(Model.IsActive ? "arrow-clockwise" : "x-circle")"></i>
         <span class="js-btn-text">
-            @(Model.IsActive ? "Activate" : "Deactive")
+            @(Model.IsActive ? "Block" : "Unblock")
         </span>
     </a>
 </td>

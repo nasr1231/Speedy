@@ -287,4 +287,12 @@ html {
     }
 }
 
-/*# sourceMappingURL=style.css.map */
+/**Register Form Page*/
+
+@media (max-width:582px) {
+    .roles {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+   
