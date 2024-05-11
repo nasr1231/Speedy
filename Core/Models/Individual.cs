@@ -4,7 +4,7 @@
     {
         #region Properties
         public int Id { get; set; }
-        public string referralCode { get; set; } = string.Empty;
+        public string? referralCode { get; set; }
         #endregion
 
         #region Relations

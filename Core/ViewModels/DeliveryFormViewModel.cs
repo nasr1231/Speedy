@@ -6,7 +6,7 @@ using UoN.ExpressiveAnnotations.NetCore.Attributes;
 
 namespace Speedy.Core.ViewModels
 {
-    public class DeliveryFormViewModel : BaseViewModel
+    public class DeliveryFormViewModel
     {
         #region Properties
         [Display(Name = "الأسم الأول")]
@@ -53,8 +53,8 @@ namespace Speedy.Core.ViewModels
 
 		[Display(Name = "تاريخ الميلاد")]
 		[Required(ErrorMessage = Errors.isRequired)]
-        //[AssertThat("BirthDate < Date()")]
-        public DateTime BirthDate { get; set; } = DateTime.Now;
+        [AssertThat("BirthDate <= Today()")]
+        public DateTime BirthDate { get; set; } = DateTime.Now.AddYears(-16);
 
 		[Required(ErrorMessage = Errors.isRequired)]
 		[MaxLength(5, ErrorMessage = "يا اما ذكر يا اما أنثى")]

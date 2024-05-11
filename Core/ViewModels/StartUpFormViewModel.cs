@@ -5,7 +5,7 @@ using UoN.ExpressiveAnnotations.NetCore.Attributes;
 
 namespace Speedy.Core.ViewModels
 {
-    public class StartUpFormViewModel : BaseViewModel
+    public class StartUpFormViewModel
     {
 
 		#region Properties
@@ -30,6 +30,7 @@ namespace Speedy.Core.ViewModels
 		[DataType(DataType.Password), Display(Name = "كلمة المرور")]
 		public string Password { get; set; } = null!;
 
+		[Required(ErrorMessage = Errors.isRequired)]	
 		[DataType(DataType.Password), Display(Name = "تأكيد كلمة المرور")]
 		[Compare("Password", ErrorMessage = Errors.ConfirmPasswordMatch)]
 		public string ConfirmPassword { get; set; } = null!;
@@ -42,21 +43,21 @@ namespace Speedy.Core.ViewModels
         [RequiredIf("IsOnline == true")]
 		[Display(Name = "العنوان")]
 		[Required(ErrorMessage = Errors.isRequired)]
-		[MaxLength(11, ErrorMessage = Errors.MaxLength)]
+		[MaxLength(100, ErrorMessage = Errors.MaxLength)]
 		public string Address { get; set; } = null!;
 
 		[Display(Name = "اسم الشركة")]
 		[Required(ErrorMessage = Errors.isRequired)]
-		[MaxLength(11, ErrorMessage = Errors.MaxLength)]
+		[MaxLength(50, ErrorMessage = Errors.MaxLength)]
 		public string StartUpName { get; set; } = null!;
 
-		[AssertThat("EstablishDate <= Today()", ErrorMessage = "مش معقولة المهدي المنتظر بنفسه")]
+		[AssertThat("EstablishDate <= Today()", ErrorMessage = "انت عامل الشركة شكك طيب ولا ايه")]
 		[Display(Name = "تاريخ إنشاء الشركة")]
 		[Required(ErrorMessage = Errors.isRequired)]
 		public DateTime EstablishDate { get; set; } = DateTime.Now;
 
 		public bool HasWhatsApp { get; set; }
-		public List<string> Urls { get; set; } = [];				
+		public List<string>? Urls { get; set; }
 		public bool IsOnline { get; set; }				
 		#endregion
 

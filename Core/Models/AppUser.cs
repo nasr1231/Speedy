@@ -14,7 +14,6 @@ namespace Speedy.Core.Models
         [MaxLength(40)]
         public string LastName { get; set; } = string.Empty;
         public string Gender { get; set; } = string.Empty;
-
         public DateTime BirthDate { get; set; }
         public string? ProfilePictureIUrl { get; set; } = string.Empty;
 
@@ -23,10 +22,9 @@ namespace Speedy.Core.Models
         #endregion
 
         #region Conditions
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; }        
         public string? CreatedById { get; set; }
         public DateTime CreatedOn { get; set; } = DateTime.Now.ToUniversalTime();
-
         public string? LastUpdatedById { get; set; }
         public DateTime? LastUpdatedOn { get; set; }                
         #endregion

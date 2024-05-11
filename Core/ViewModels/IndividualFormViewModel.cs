@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Speedy.Core.ViewModels
 {
-    public class IndividualFormViewModel : BaseViewModel
+    public class IndividualFormViewModel
     {
         #region Properties
         [Display(Name = "الأسم الأول")]
@@ -42,11 +42,12 @@ namespace Speedy.Core.ViewModels
 
         [Required(ErrorMessage = Errors.isRequired)]
         [MaxLength(5, ErrorMessage = "يا اما ذكر يا اما أنثى")]
+        [Display(Name = "النوع")]
         public string Gender { get; set; } = null!;
 
         [Display(Name = "تاريخ الميلاد")]
         [Required(ErrorMessage = Errors.isRequired)]
-        public DateTime BirthDate { get; set; } = DateTime.Now;
+        public DateTime BirthDate { get; set; } = DateTime.Now.AddYears(-16);
 
         public bool HasWhatsApp { get; set; }        
 
@@ -55,6 +56,7 @@ namespace Speedy.Core.ViewModels
         [DataType(DataType.Password), Display(Name = "كلمة المرور")]
         public string Password { get; set; } = null!;
 
+        [Required(ErrorMessage = Errors.isRequired)]
         [DataType(DataType.Password), Display(Name = "تأكيد كلمة المرور")]
         [Compare("Password", ErrorMessage = Errors.ConfirmPasswordMatch)]
         public string ConfirmPassword { get; set; } = null!;
@@ -62,8 +64,7 @@ namespace Speedy.Core.ViewModels
         public string? ReferralCode { get; set; }
         #endregion
 
-        #region Relations && Overloads
-        public string AppUserId { get; set; } = null!;
+        #region Relations && Overloads        
 
         [DisplayName("المدينة")]
         [Required(ErrorMessage = Errors.isRequired)]

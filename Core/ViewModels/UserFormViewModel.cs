@@ -5,14 +5,20 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Speedy.Core.ViewModels
 {
-    public class UserFormViewModel : BaseViewModel
+    public class UserFormViewModel
     {
         #region Properties
         public int Id { get; set; }
-        [MaxLength(60, ErrorMessage = Errors.MaxLength), Display(Name = "Full Name")]
-        public string FullName { get; set; } = null!;
-        [MaxLength(60, ErrorMessage = Errors.MaxLength), Display(Name = "User Name")]
+
+        [MaxLength(60, ErrorMessage = Errors.MaxLength), Display(Name = "First Name")]
+        public string FirstName { get; set; } = null!;
+
+		[MaxLength(60, ErrorMessage = Errors.MaxLength), Display(Name = "Last Name")]
+		public string LastName { get; set; } = null!;
+
+		[MaxLength(60, ErrorMessage = Errors.MaxLength), Display(Name = "User Name")]
         public string UserName{ get; set; } = null!;
+
         [MaxLength(60, ErrorMessage = Errors.MaxLength), Display(Name = "Email")]
         public string Email { get; set; } = null!;
 
