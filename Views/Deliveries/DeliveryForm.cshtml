@@ -76,7 +76,7 @@
             <!--begin::Wrapper-->
             <div class="w-lg-600px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto" style="padding-top: 30px !important">
                 <!--begin::Form-->
-                <form enctype="multipart/form-data" asp-action="Create" asp-controller="Deliveries" method="post" class="form w-100" novalidate="novalidate">
+                <form asp-action="Create" asp-controller="Deliveries" method="post" enctype="multipart/form-data" class="form w-100" novalidate="novalidate">                    
                     <!--begin::Heading-->
                     <div class="mb-5 text-center">
                         <!--begin::Title-->
@@ -158,7 +158,7 @@
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-5">
                                     <label class="form-label fw-bolder text-dark fs-6">تأكيد كلمة المرور</label>
-                                    <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" autocomplete="off" />
+                                    <input asp-for="@Model!.ConfirmPassword" class="form-control form-control-lg form-control-solid" type="password" placeholder="" autocomplete="off" />
                                     <span asp-validation-for="@Model!.ConfirmPassword" class="text-danger d-block h-10px"></span>
                                 </div>
                                 <!--end::Input group=-->
@@ -184,7 +184,7 @@
                                         <label class="form-check-label fw-bolder text-dark fs-6 ">ذكر</label>
                                     </div>
                                     <div class="form-check form-check-inline mb-7">
-                                        <input class="form-check-input" type="radio" value="أنثى">
+                                        <input asp-for="@Model.Gender" class="form-check-input" type="radio" value="أنثى">
                                         <label class="form-check-label fw-bolder text-dark fs-6 ">انثي</label>
                                     </div>
                                     <span asp-validation-for="@Model!.Gender" class="text-danger d-block h-10px"></span>
@@ -193,7 +193,8 @@
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-7">
                                     <label class="form-label fw-bolder text-dark fs-6 ">العنوان</label>
-                                    <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" autocomplete="off" />
+                                    <input asp-for="Address" class="form-control form-control-lg form-control-solid" type="text" placeholder="" autocomplete="off" />
+                                    <span asp-validation-for="@Model!.Address" class="text-danger d-block h-10px"></span>
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
@@ -203,6 +204,7 @@
                                         <select asp-for="@Model.SelectedCity" asp-items="@Model.Cities" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المدينة" data-hide-search="true">
                                             <option></option>
                                         </select>
+                                        <span asp-validation-for="@Model!.SelectedCity" class="text-danger d-block h-10px"></span>
                                     </div>
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
@@ -211,6 +213,7 @@
                                         <select asp-for="@Model.SelectedGovernorate" asp-items="@Model.Governorates" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المحافظة" data-hide-search="true">
                                             <option></option>
                                         </select>
+                                        <span asp-validation-for="@Model!.SelectedGovernorate" class="text-danger d-block h-10px"></span>
                                     </div>
                                 </div>
                                 <!--end::Input group-->
@@ -223,7 +226,6 @@
                                             <i class="fa-solid fa-calendar-days fs-4"></i>
                                         </span>
                                         <span asp-validation-for="@Model!.BirthDate" class="text-danger d-block h-10px"></span>
-
                                     </div>
 
                                 </div>
@@ -367,9 +369,12 @@
     <!--end::Authentication - Sign-up-->
 </div>
 
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
 
 @section Plugins {
-    <script src="~/js/slider.js" asp-asp-append-version="true"></script>
+    <script src="~/js/slider.js" asp-append-version="true"></script>
     <script>
         $(document).ready(function () {
             $(".birthdate-flatpickr").flatpickr(
@@ -391,6 +396,4 @@
     </script>
 }
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+
