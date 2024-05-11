@@ -24,28 +24,29 @@ namespace Speedy.Controllers
         public async Task<IActionResult> Create(StartUpFormViewModel model)
         {
             if (!ModelState.IsValid)
-                return View(model);
+                return View("StartUpForm", model);
 
             var userForm = new UserFormViewModel
             {
 				Password = model.Password,
 				Email = model.Email,
-				ConfirmPassword = model.ConfirmPassword,
-				CreatedOn = model.CreatedOn,
-				IsActive = false,				
+				ConfirmPassword = model.ConfirmPassword,	
 				SelectedRoles = AppRoles.StartUp
             };
 
             var result = await _userService.SubmitUser(userForm);
 
             if (!result.IsSuccess)
-                return View(model);
+            {
+				ModelState.AddModelError(string.Empty, result.Error!);
+				return View("StartUpForm", InitialStartUpForm(model));
+			}
 
-            var startUp = new StartUp
+			var startUp = new StartUp
             {
                 AppUserId = result.UserId!,
                 Address = model.Address,
-                CreatedOn = model.CreatedOn,
+                CreatedOn = DateTime.Now,
                 FoundingDate = model.EstablishDate,
                 IsOnline = model.IsOnline,
                 StartUpName = model.StartUpName,                

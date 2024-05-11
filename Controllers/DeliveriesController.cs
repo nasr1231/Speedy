@@ -31,9 +31,9 @@ namespace Speedy.Controllers
         public async Task<IActionResult> Create(DeliveryFormViewModel model)
         {
             if (!ModelState.IsValid)
-                return View(model);            
+				return View("DeliveryForm", model);
 
-            var attachResult = await _attachmentService.UploadAttachmentAsync(
+			var attachResult = await _attachmentService.UploadAttachmentAsync(
                 attachedFile: model.Attachments,                
                 entityName: "Delivery Agents",
                 userName: model.AppUserId);          
@@ -45,24 +45,25 @@ namespace Speedy.Controllers
             {
                 Password = model.Password,
                 Email = model.Email,
-                ConfirmPassword = model.ConfirmPassword,
-                CreatedOn = model.CreatedOn,                
-                IsActive = false,                
+                ConfirmPassword = model.ConfirmPassword,                
                 SelectedRoles = AppRoles.Delivery,
-                NID = model.NID
+                NID = model.NID,
+                
             };
 
             var result = await _userService.SubmitUser(userForm);
 
             if (!result.IsSuccess)
-                return View(model);
+            {
+				ModelState.AddModelError(string.Empty, result.Error!);
+				return View("DeliveryForm", InitialDeliveryForm(model));
+			}
 
-            var delivery = new Delivery
+			var delivery = new Delivery
             {
                 AppUserId = result.UserId!,
                 HasWhatsApp = model.HasWhatsApp,                
-                Address = model.Address,
-				CreatedOn = model.CreatedOn,
+                Address = model.Address,				
 				MobileNumber = model.MobileNumber,                                 
             };
 

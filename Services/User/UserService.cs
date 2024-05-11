@@ -10,15 +10,14 @@ public class UserService(UserManager<AppUser> userManager) : IUserService
     {
         var user = new AppUser
         {
-            Email = userForm.Email,
-            NormalizedEmail = userForm.Email.ToUpper(),
+            Email = userForm.Email,           
             UserName = userForm.Email,
-            IsActive = userForm.IsActive,
-            NormalizedUserName = userForm.Email.ToUpper(),
+            IsActive = true,            
             EmailConfirmed = true,
-            NID =  userForm.NID,
-            
-        };
+            NID =  userForm.NID,   
+            FirstName = userForm.FirstName,
+            LastName = userForm.LastName
+		};
 
         var createUserResult = await _userManager.CreateAsync(user, userForm.Password);
 

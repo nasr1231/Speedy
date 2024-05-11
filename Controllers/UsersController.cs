@@ -52,7 +52,8 @@ namespace Speedy.Controllers
 
             AppUser user = new()
             {
-                FirstName = model.FullName,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
                 UserName = model.Email,
                 NormalizedUserName = model.Email.ToUpper(),
                 NormalizedEmail = model.Email.ToUpper(),
