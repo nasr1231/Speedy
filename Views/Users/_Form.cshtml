@@ -6,10 +6,10 @@
 <form asp-action="@(Model?.Id > 0 ? "Edit" : "Create")"
       data-ajax-method="post"
       data-ajax="true"
-      data-ajax-begin="OnModalBegin"
-      data-ajax-success="OnModalSuccess"
-      data-ajax-failure="ShowErrorMessage"
-      data-ajax-complete="OnModalComplete">
+      data-ajax-begin="onModalBegin"
+      data-ajax-success="modalSubmitSuccess "
+      data-ajax-failure="showErrorMessage"
+      data-ajax-complete="onModalComplete">
 
     @if (Model?.Id > 0)
     {
@@ -20,14 +20,14 @@
 
     <div class="row mb-5">
         <div class="w-100 w-md-50">
-            <label class="d-flex align-items-center fs-6 fw-bold mb-2"><span class="required"></span>Full Name</label>
-            <input type="text" asp-for="FirstName" class="form-control form-control-solid" placeholder="Enter FullName">
+            <label class="d-flex align-items-center fs-6 fw-bold mb-2"><span class="required"></span>First Name</label>
+            <input type="text" asp-for="FirstName" class="form-control form-control-solid" placeholder="Enter First Name">
             <span asp-validation-for="@Model!.FirstName" class="text-danger d-block h-10px"></span>
-        </div>
+        </div>       
         <div class="w-100 w-md-50">
-            <label class="d-flex align-items-center fs-6 fw-bold mb-2"><span class="required">UserName</span></label>
-            <input type="text" asp-for="UserName" class="form-control form-control-solid" placeholder="Enter UserName">
-            <span asp-validation-for="@Model!.UserName" class="text-danger d-block h-10px"></span>
+            <label class="d-flex align-items-center fs-6 fw-bold mb-2"><span class="required">Last Name</span></label>
+            <input type="text" asp-for="LastName" class="form-control form-control-solid" placeholder="Enter Last Name">
+            <span asp-validation-for="@Model!.LastName" class="text-danger d-block h-10px"></span>
         </div>
         <div class="w-100">
             <label class="d-flex align-items-center fs-6 fw-bold mb-2"><span class="required">Email</span></label>

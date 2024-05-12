@@ -2,7 +2,7 @@
 var table;
 var UpdatedRow;
 var datatable;
-var exported_Columns = [];
+var exportedCols = [];
 var model = $('#model-window');
 
 var KTDatatables = function () {
@@ -23,28 +23,56 @@ var KTDatatables = function () {
                     extend: 'copyHtml5',
                     title: documentTitle,
                     exportOptions: {
-                        columns: exported_Columns
+                        columns: exportedCols
                     }
                 },
                 {
                     extend: 'excelHtml5',
                     title: documentTitle,
                     exportOptions: {
-                        columns: exported_Columns
+                        columns: exportedCols
                     }
                 },
                 {
                     extend: 'csvHtml5',
                     title: documentTitle,
                     exportOptions: {
-                        columns: exported_Columns
+                        columns: exportedCols
                     }
                 },
                 {
                     extend: 'pdfHtml5',
                     title: documentTitle,
                     exportOptions: {
-                        columns: exported_Columns
+                        columns: exportedCols,
+                    },
+                    customize: function (doc) {
+                        pdfMake.fonts = {
+                            Amiri: {
+                                normal: 'amiri',
+                                bold: 'amiri',
+                                italics: 'amiri',
+                                bolditalics: 'amiri'
+                            }
+                        }
+
+                        doc.styles.tableBodyEven.alignment = "center";
+                        doc.styles.tableBodyOdd.alignment = "center";
+                        doc.styles.tableFooter.alignment = "center";
+                        doc.styles.tableHeader.alignment = "center";
+
+                        doc.content[0]['text'] = doc.content[0]['text'].split(' ').reverse().join(' ');
+
+                        for (var i = 0; i < doc.content[1].table.body.length; i++) {
+                            for (var j = 0; j < doc.content[1].table.body[i].length; j++) {
+                                doc.content[1].table.body[i][j]['text'] = doc.content[1].table.body[i][j]['text'].split(' ').reverse().join(' ');
+                            }
+                        }
+
+                        doc.defaultStyle.font = 'Amiri';
+                        doc.defaultStyle.fontSize = 8;
+                        doc.defaultStyle.direction = 'RTL';
+
                     }
                 }
             ]
@@ -95,10 +123,10 @@ function showSuccessMessage(message = 'Your Entry is added successfully.') {
     Swal.fire({
         title: "Done Successfully.....",
         text: message,
-        icon: 'success',        
+        icon: 'success',
         buttonsStyling: false,
         showConfirmButton: false,
-        timer: 2500        
+        timer: 2500
     }).then((result) => {
         if (result.isConfirmed) {
             $('.js-status').parents('tr').removeClass('animate__animated animate__flash');
@@ -142,7 +170,7 @@ function modalSubmitSuccess(row) {
     showSuccessMessage();
 
     KTMenu.init();
-    KTMenu.initHandlers();    
+    KTMenu.initHandlers();
 }
 
 
@@ -163,7 +191,7 @@ function showUserForm(form) {
     modal.find('.modal-title').text("إضافة مستخدم");
     modal.find('.modal-body').html(form);
     $.validator.unobtrusive.parse(modal);
-    select2func()    
+    select2func()
     modal.modal('show');
 }
 function ShowErrorMessage(message = 'Something went wrong!') {
@@ -199,7 +227,7 @@ function OnModalSuccess(row) {
 var headers = $('th');
 $.each(headers, function (i) {
     if (!$(this).hasClass('js-no-export'))
-        exported_Columns.push(i);
+        exportedCols.push(i);
 });
 
 function OnModalToaster() {
@@ -268,9 +296,9 @@ $(document).ready(function () {
         singleDatePicker: true,
         autoApply: true,
         showDropdowns: true,
-        drops: 'up',               
-        minDate: "1-1-1955",        
-    });    
+        drops: 'up',
+        minDate: "1-1-1955",
+    });
 
     // Tinymce Editor
     if ($('.js-tinymce').length > 0) {
@@ -352,7 +380,7 @@ $(document).ready(function () {
             method: 'GET',
             dataType: 'html', // Expect HTML content
             success: function (form) {
-                ShowModel.find('.modal-title').text(btn.data('title'));                
+                ShowModel.find('.modal-title').text(btn.data('title'));
 
                 ShowModel.find('.modal-body').html(form);
                 $.validator.unobtrusive.parse(ShowModel);
@@ -363,7 +391,7 @@ $(document).ready(function () {
             }
         });
 
-       
+
     });
     //Handle Sign Out
     $('.js-signout').on('click', function () {

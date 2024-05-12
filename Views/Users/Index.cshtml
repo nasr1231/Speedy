@@ -17,7 +17,7 @@
                 <div class="symbol-label fs-2 fw-semibold text-success">
                     <i class="fa-solid fa-truck-fast text-primary"></i>
                 </div>
-                <span class="symbol-badge badge badge-circle bg-primary start-100 text-white">@Model.Count()</span>
+                <span class="symbol-badge badge badge-circle bg-primary start-100 text-white">@Model.Where(u => u.Role == AppRoles.Clerk || u.Role == AppRoles.Admin).Count()</span>
             </div>
             <h2 class="fw-bolder">Delivery Agents</h2>
         </div>
@@ -34,7 +34,7 @@
     <div class="card-body pt-0">
         <div class="table-responsive" style="min-height: 270px">
             <partial name="_TableHeader" />
-            <table class="table table-row-bordered table-row-gray-300 gy-3 align-middle js-datatables" data-export-title="Delivery Agents">
+            <table class="table table-row-bordered table-row-gray-300 gy-3 align-middle js-datatable" data-export-title="Delivery Agents">
                 <thead>
                     <tr class="fw-bold fs-6 text-gray-800">
                         <th style="width:155px;">Id</th>
@@ -47,8 +47,8 @@
                         <th class="js-no-export">Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach(var user in Model)
+                <tbody>                    
+                    @foreach (var user in Model.Where(u => u.Role == AppRoles.Clerk || u.Role == AppRoles.Admin))
                     {
                         <partial name="_RowData" model="@user"/>
                     }
@@ -58,9 +58,10 @@
     </div>
 </div>
 <input type="hidden" name="__RequestVerificationToken" value="@antiforgery.GetAndStoreTokens(Context).RequestToken" />
+
 @section Plugins {
-    <script src="~/assets/Panel//plugins/datatables/datatables.bundle.js"></script>
-    <script src="~/assets/Panel//plugins/datatables/vfs_fonts.js"></script>
+    <script src="~/assets/Panel/plugins/datatables/datatables.bundle.js"></script>
+    <script src="~/assets/Panel/plugins/datatables/vfs_fonts.js"></script>
 }
 
 @section Scripts {
