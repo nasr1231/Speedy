@@ -65,12 +65,9 @@ namespace Speedy.Controllers
 		}
 		private IndividualFormViewModel InitialIndividualForm(IndividualFormViewModel? model = null)
 		{
-			IndividualFormViewModel individualFormView = model ?? new IndividualFormViewModel();
-
-			var citiesTask = _context.Cities.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
+			IndividualFormViewModel individualFormView = model ?? new IndividualFormViewModel();			
 			var governoratesTask = _context.Governorates.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
 
-			individualFormView.Cities = _mapper.Map<IEnumerable<SelectListItem>>(citiesTask);
 			individualFormView.Governorates = _mapper.Map<IEnumerable<SelectListItem>>(governoratesTask);
 
 			return individualFormView;

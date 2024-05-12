@@ -34,8 +34,6 @@ namespace Speedy.Core.Models
 
         public int CityId { get; set; }
         public City City { get; set; } = null!;
-        public int GovernorateId { get; set; }
-        public Governorate Governorate { get; set; } = null!;
         #endregion
     }
 }

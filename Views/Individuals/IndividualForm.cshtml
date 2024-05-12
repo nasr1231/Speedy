@@ -241,20 +241,20 @@
                                 <!--begin::Input group-->
                                 <div class="row fv-row ">
                                     <div class="col-md-6 mb-7">
-                                        <label class="form-label fw-bolder text-dark fs-6 " asp-for="SelectedCity"></label>
-                                        <select asp-for="@Model.SelectedCity" asp-items="@Model.Cities" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المدينة" data-hide-search="true">
+                                        <label class="form-label fw-bolder text-dark fs-6 " asp-for="SelectedCityId"></label>
+                                        <select id="CityId" asp-for="@Model.SelectedCityId" asp-items="@Model.Cities" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المدينة" data-hide-search="true">
                                             <option></option>
                                         </select>
-                                        <span asp-validation-for="@Model!.SelectedCity" class="text-danger d-block h-10px"></span>
+                                        <span asp-validation-for="@Model!.SelectedCityId" class="text-danger d-block h-10px"></span>
                                     </div>
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
                                     <div class="col-md-6 mb-7">
-                                        <label class="form-label fw-bolder text-dark fs-6 " asp-for="SelectedGovernorate"></label>
-                                        <select asp-for="@Model.SelectedGovernorate" asp-items="@Model.Governorates" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المحافظة" data-hide-search="true">
+                                        <label class="form-label fw-bolder text-dark fs-6 " asp-for="SelectedGovernorateId"></label>
+                                        <select id="GovernorateId" asp-for="@Model.SelectedGovernorateId" asp-items="@Model.Governorates" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المحافظة" data-hide-search="true">
                                             <option></option>
                                         </select>
-                                        <span asp-validation-for="@Model!.SelectedGovernorate" class="text-danger d-block h-10px"></span>
+                                        <span asp-validation-for="@Model!.SelectedGovernorateId" class="text-danger d-block h-10px"></span>
                                     </div>
                                 </div>
                                 <!--begin::Input group-->
@@ -267,8 +267,7 @@
                                         </span>
                                     </label>
                                 </div>
-                                <!--end::Input group-->
-                                <div asp-validation-summary="All" class="text-danger"></div>
+                                <!--end::Input group-->                                
                                 <!--begin::Actions-->
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-lg btn-primary">
@@ -317,6 +316,7 @@
 
 @section Plugins {
     <script src="~/js/slider.js" asp-append-version="true"></script>
+    <script src="~/js/IntitateCities.js" asp-append-version="true"></script>
     <script>
         $(document).ready(function () {
             $(".birthdate-flatpickr").flatpickr(

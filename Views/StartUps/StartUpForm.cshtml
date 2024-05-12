@@ -216,15 +216,16 @@
 								<!--begin::Input group-->
 								<h5 class="fv-row form-label fw-bolder text-dark fs-6  ">هل الشركة افتراضية (online)</h5>
 								<div class="d-flex justify-content-around mb-7">
-									<div class="form-check form-check-inline ">
-										<input asp-for="@Model.IsOnline" class="form-check-input" type="radio">
-										<label class="form-check-label fw-bolder text-dark fs-6 ">نعم</label>
+									<div class="form-check form-check-inline">
+										<input asp-for="@Model.IsOnline" class="form-check-input" type="radio" value="true" checked="@Model.IsOnline">
+										<label class="form-check-label fw-bolder text-dark fs-6">نعم</label>
 									</div>
-									<div class="form-check form-check-inline ">
-										<input asp-for="@Model.IsOnline" class="form-check-input" type="radio">
-										<label class="form-check-label fw-bolder text-dark fs-6 ">لا</label>
+									<div class="form-check form-check-inline">
+										<input asp-for="@Model.IsOnline" class="form-check-input" type="radio" value="false" checked="@(!Model.IsOnline)">
+										<label class="form-check-label fw-bolder text-dark fs-6">لا</label>
 									</div>
 								</div>
+
 								<!--end::Input group-->
 								<!--begin::Input group-->
 								<div class="fv-row mb-7">
@@ -237,7 +238,7 @@
 								<div class="row fv-row ">
 									<div class="col-md-6 mb-7">
 										<label class="form-label fw-bolder text-dark fs-6">المدينة</label>
-										<select asp-for="@Model.SelectedCity" asp-items="@Model.Cities" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المدينة" data-hide-search="true">
+										<select id="CityId" asp-for="@Model.SelectedCity" asp-items="@Model.Cities" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المدينة" data-hide-search="true">
 											<option></option>
 										</select>
 										<span asp-validation-for="@Model!.SelectedCity" class="text-danger d-block h-10px"></span>
@@ -246,7 +247,7 @@
 									<!--begin::Input group-->
 									<div class="col-md-6 mb-7">
 										<label class="form-label fw-bolder text-dark fs-6">المحافظة</label>
-										<select asp-for="@Model.SelectedGovernorate" asp-items="@Model.Governorates" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المحافظة" data-hide-search="true">
+										<select id="GovernorateId" asp-for="@Model.SelectedGovernorate" asp-items="@Model.Governorates" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المحافظة" data-hide-search="true">
 											<option></option>
 										</select>
 										<span asp-validation-for="@Model!.SelectedGovernorate" class="text-danger d-block h-10px"></span>
@@ -356,7 +357,8 @@
 }
 
 @section Plugins {
-	<script src="~/js/slider.js" asp-asp-append-version="true"></script>
+	<script src="~/js/slider.js" asp-append-version="true"></script>
+	<script src="~/js/IntitateCities.js" asp-append-version="true"></script>
 	<script>
 		$(document).ready(function () {
 			$(".birthdate-flatpickr").flatpickr(

@@ -22,8 +22,8 @@ namespace Speedy.Controllers
         public async Task<IActionResult> Index()
         {
             var users = await _userManager.Users.ToListAsync();
-            var ViewModel = _mapper.Map<IEnumerable<UserViewModel>>(users);
-            return View("Index", ViewModel);
+            
+            return View(await MapUserWithRoleAsync(users));
         }
 
         [HttpGet]
@@ -49,14 +49,12 @@ namespace Speedy.Controllers
         {
             if (ModelState.IsValid)
                 return BadRequest();
-
+            using var transaction = _context.Database.BeginTransaction();
             AppUser user = new()
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                UserName = model.Email,
-                NormalizedUserName = model.Email.ToUpper(),
-                NormalizedEmail = model.Email.ToUpper(),
+                UserName = string.Join(string.Empty, model.FirstName, model.LastName),
                 Email = model.Email,
                 EmailConfirmed = true,
                 IsActive = true,
@@ -71,6 +69,8 @@ namespace Speedy.Controllers
 
             var viewModel = _mapper.Map<UserViewModel>(model);
 
+            transaction.Commit();
+
             return PartialView("_NewRow", viewModel);
         }
 
@@ -83,5 +83,19 @@ namespace Speedy.Controllers
 
             return error;
         }
+        private async Task<IEnumerable<UserViewModel>> MapUserWithRoleAsync(IEnumerable<AppUser> users)
+        {
+
+            var UserView = _mapper.Map<IEnumerable<UserViewModel>>(users);
+
+            foreach (var user in UserView)
+            {
+                var roles = await _userManager.GetRolesAsync(await _userManager.FindByIdAsync(user.Id));
+                user.Role = roles.FirstOrDefault() ?? string.Empty;
+            }
+
+            return UserView;
+        }
+
     }
 }

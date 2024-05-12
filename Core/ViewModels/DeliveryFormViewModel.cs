@@ -32,7 +32,7 @@ namespace Speedy.Core.ViewModels
 
 		[Display(Name = "العنوان")]
 		[Required(ErrorMessage = Errors.isRequired)]
-		[MaxLength(11, ErrorMessage = Errors.MaxLength)]
+		[MaxLength(100, ErrorMessage = Errors.MaxLength)]
 		public string Address { get; set; } = null!;
         public string IsFirstTime { get; set; } = null!;
 		public bool HasWhatsApp { get; set; }
@@ -52,12 +52,12 @@ namespace Speedy.Core.ViewModels
 		public string ConfirmPassword { get; set; } = null!;
 
 		[Display(Name = "تاريخ الميلاد")]
-		[Required(ErrorMessage = Errors.isRequired)]
-        [AssertThat("BirthDate <= Today()")]
+		[Required(ErrorMessage = Errors.isRequired)]        
         public DateTime BirthDate { get; set; } = DateTime.Now.AddYears(-16);
 
 		[Required(ErrorMessage = Errors.isRequired)]
-		[MaxLength(5, ErrorMessage = "يا اما ذكر يا اما أنثى")]
+        [Display(Name = "النوع")]
+        [MaxLength(5, ErrorMessage = "يا اما ذكر يا اما أنثى")]
 		public string Gender { get; set; } = null!;
 
 		[Required(ErrorMessage = Errors.isRequired)]
@@ -65,8 +65,7 @@ namespace Speedy.Core.ViewModels
 
         #endregion
 
-        #region Relations && Overloads
-        public string AppUserId { get; set; } = null!;
+        #region Relations && Overloads        
 
 		[DisplayName("نوع وسيلة التوصيل التي تملكها")]
 		[Required(ErrorMessage = Errors.isRequired)]
@@ -75,7 +74,7 @@ namespace Speedy.Core.ViewModels
 
         [DisplayName("المدينة")]
         [Required(ErrorMessage = Errors.isRequired)]
-        public string SelectedCity { get; set; } = null!;
+        public int SelectedCityId { get; set; }
         public IEnumerable<SelectListItem>? Cities { get; set; }
 
         [DisplayName("المحافظة")]

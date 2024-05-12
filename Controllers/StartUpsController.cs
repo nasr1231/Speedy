@@ -63,10 +63,8 @@ namespace Speedy.Controllers
 		{
 			StartUpFormViewModel startupFormView = model ?? new StartUpFormViewModel();
 			
-			var citiesTask = _context.Cities.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
 			var governoratesTask = _context.Governorates.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
 			
-			startupFormView.Cities = _mapper.Map<IEnumerable<SelectListItem>>(citiesTask);
 			startupFormView.Governorates = _mapper.Map<IEnumerable<SelectListItem>>(governoratesTask);
 
 			return startupFormView;

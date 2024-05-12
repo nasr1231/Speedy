@@ -68,12 +68,12 @@ namespace Speedy.Core.ViewModels
 
         [DisplayName("المدينة")]
         [Required(ErrorMessage = Errors.isRequired)]
-        public string SelectedCity { get; set; } = null!;
+        public int SelectedCityId { get; set; }
         public IEnumerable<SelectListItem>? Cities { get; set; }
 
         [DisplayName("المحافظة")]
         [Required(ErrorMessage = Errors.isRequired)]
-        public string SelectedGovernorate { get; set; } = null!;
+        public int SelectedGovernorateId { get; set; } 
         public IEnumerable<SelectListItem>? Governorates { get; set; }
         #endregion
     }

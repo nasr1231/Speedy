@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using Speedy.Core.Consts;
 using Speedy.Services.User;
 
 namespace Speedy.Controllers
@@ -31,27 +30,19 @@ namespace Speedy.Controllers
         public async Task<IActionResult> Create(DeliveryFormViewModel model)
         {
             if (!ModelState.IsValid)
-				return View("DeliveryForm", model);
-
-			var attachResult = await _attachmentService.UploadAttachmentAsync(
-                attachedFile: model.Attachments,                
-                entityName: "Delivery Agents",
-                userName: model.AppUserId);          
-
-            if (!attachResult.isUploaded)
-                return BadRequest(attachResult.errorMessage);
-
+				return View("DeliveryForm", InitialDeliveryForm(model));	
+            
+            using var transaction = _context.Database.BeginTransaction();
             var userForm = new UserFormViewModel
             {
                 Password = model.Password,
                 Email = model.Email,
                 ConfirmPassword = model.ConfirmPassword,                
                 SelectedRoles = AppRoles.Delivery,
-                NID = model.NID,
-                
+                NID = model.NID,                
             };
 
-            var result = await _userService.SubmitUser(userForm);
+            var result = await _userService.SubmitUser(userForm);            
 
             if (!result.IsSuccess)
             {
@@ -64,24 +55,43 @@ namespace Speedy.Controllers
                 AppUserId = result.UserId!,
                 HasWhatsApp = model.HasWhatsApp,                
                 Address = model.Address,				
-				MobileNumber = model.MobileNumber,                                 
+				MobileNumber = model.MobileNumber,                 
             };
+
+            var attachResult = await _attachmentService.UploadAttachmentAsync(
+                attachedFile: model.Attachments,
+                entityName: "Delivery Agents",
+                userName: delivery.AppUserId);
+
+            if (!attachResult.isUploaded)
+                return BadRequest(attachResult.errorMessage);
 
             _context.Add(delivery);
             await _context.SaveChangesAsync();
 
+            transaction.Commit();
+
             return RedirectToAction("Index", "Home");
         }
+
+        public IActionResult GetCities(int GovernorateId)
+        {
+            var cities = _context.Cities.Where(c => !c.IsDeleted && c.GovernorateId == GovernorateId).OrderBy(c => c.Name).ToList();
+
+            var citiesSelectListItem = _mapper.Map<IEnumerable<SelectListItem>>(cities);
+
+            return Ok(citiesSelectListItem);
+        }
+
         private DeliveryFormViewModel InitialDeliveryForm(DeliveryFormViewModel? model = null)
         {
             DeliveryFormViewModel deliveryFormView = model ?? new DeliveryFormViewModel();
 
             var methodsTask = _context.ShippingMethods.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
-            var citiesTask = _context.Cities.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
+            //var citiesTask = _context.Cities.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
             var governoratesTask = _context.Governorates.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();            
 
-            deliveryFormView.ShippingMethods = _mapper.Map<IEnumerable<SelectListItem>>(methodsTask);
-            deliveryFormView.Cities = _mapper.Map<IEnumerable<SelectListItem>>(citiesTask);
+            deliveryFormView.ShippingMethods = _mapper.Map<IEnumerable<SelectListItem>>(methodsTask);            
             deliveryFormView.Governorates = _mapper.Map<IEnumerable<SelectListItem>>(governoratesTask);
 
             return deliveryFormView;
