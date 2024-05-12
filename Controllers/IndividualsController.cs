@@ -38,8 +38,9 @@ namespace Speedy.Controllers
 				SelectedRoles = AppRoles.Individual,
 				FirstName = model.FirstName,
 				LastName = model.LastName,
-				NID = model.NID
-			};
+				NID = model.NID,
+                PhoneNumber = model.MobileNumber
+            };
 
 			var result = await _userService.SubmitUser(userForm);
 
@@ -53,7 +54,6 @@ namespace Speedy.Controllers
 			{
 				AppUserId = result.UserId!,
 				referralCode = model.ReferralCode,
-
 			};
 
 			_context.Add(individual);

@@ -33,13 +33,15 @@ namespace Speedy.Controllers
 				return View("DeliveryForm", InitialDeliveryForm(model));	
             
             using var transaction = _context.Database.BeginTransaction();
+
             var userForm = new UserFormViewModel
             {
                 Password = model.Password,
                 Email = model.Email,
                 ConfirmPassword = model.ConfirmPassword,                
                 SelectedRoles = AppRoles.Delivery,
-                NID = model.NID,                
+                NID = model.NID,
+                PhoneNumber = model.MobileNumber
             };
 
             var result = await _userService.SubmitUser(userForm);            
@@ -54,8 +56,7 @@ namespace Speedy.Controllers
             {
                 AppUserId = result.UserId!,
                 HasWhatsApp = model.HasWhatsApp,                
-                Address = model.Address,				
-				MobileNumber = model.MobileNumber,                 
+                Address = model.Address,								
             };
 
             var attachResult = await _attachmentService.UploadAttachmentAsync(

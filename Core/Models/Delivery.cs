@@ -3,8 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Reflection.Metadata.Ecma335;
 
 namespace Speedy.Core.Models
-{
-    [Index(nameof(MobileNumber), IsUnique = true)]
+{    
     public class Delivery : BaseModel
     {
         #region Properties
@@ -12,10 +11,7 @@ namespace Speedy.Core.Models
         [Range(0,5)]
         public Byte? Rate { get; set; }
         public string ServiceArea { get; set; } = null!;
-        public string Address { get; set; } = null!;
-        [MaxLength(13)]
-        public string MobileNumber { get; set; } = null!;        
-
+        public string Address { get; set; } = null!;        
         [MaxLength(500)]
         public string? Description { get; set; }
         public bool HasWhatsApp {  get; set; }

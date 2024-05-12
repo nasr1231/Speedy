@@ -6,7 +6,6 @@ namespace Speedy.Core.Models
     {
         #region Properties
         public int Id { get; set; }
-        public string LegalStatus { get; set; } = string.Empty;
         public string StartUpName { get; set; } = null!;
         public DateTime FoundingDate { get; set; }
         public List<string> Url { get; set; } = [];

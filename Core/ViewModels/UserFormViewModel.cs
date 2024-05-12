@@ -22,6 +22,9 @@ namespace Speedy.Core.ViewModels
         [MaxLength(60, ErrorMessage = Errors.MaxLength), Display(Name = "Email")]
         public string Email { get; set; } = null!;
 
+        [MaxLength(11, ErrorMessage = Errors.MaxLength), Display(Name = "رقم الهاتف")]
+        public string? PhoneNumber { get; set; }
+
         [Required]
         [StringLength(100, ErrorMessage = Errors.MaxLength, MinimumLength = 6)]
         [DataType(DataType.Password)]

@@ -31,7 +31,8 @@ namespace Speedy.Controllers
 				Password = model.Password,
 				Email = model.Email,
 				ConfirmPassword = model.ConfirmPassword,	
-				SelectedRoles = AppRoles.StartUp
+				SelectedRoles = AppRoles.StartUp,
+                PhoneNumber = model.MobileNumber
             };
 
             var result = await _userService.SubmitUser(userForm);
@@ -45,8 +46,7 @@ namespace Speedy.Controllers
 			var startUp = new StartUp
             {
                 AppUserId = result.UserId!,
-                Address = model.Address,
-                CreatedOn = DateTime.Now,
+                Address = model.Address,                
                 FoundingDate = model.EstablishDate,
                 IsOnline = model.IsOnline,
                 StartUpName = model.StartUpName,                
