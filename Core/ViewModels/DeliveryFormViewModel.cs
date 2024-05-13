@@ -69,7 +69,7 @@ namespace Speedy.Core.ViewModels
 
 		[DisplayName("نوع وسيلة التوصيل التي تملكها")]
 		[Required(ErrorMessage = Errors.isRequired)]
-		public string SelectedShippingMethod { get; set; } = null!;
+		public int SelectedShippingMethod { get; set; }
 		public IEnumerable<SelectListItem>? ShippingMethods { get; set; }
 
         [DisplayName("المدينة")]

@@ -1,20 +1,40 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Speedy.Core.Models;
 using Speedy.Services.User;
 
 namespace Speedy.Controllers
 {
-    public class DeliveriesController(ApplicationDbContext context, IMapper mapper, IUserService userService, IAttachmentService attachmentService) : Controller
+    [Authorize(Roles = AppRoles.Admin)]
+    public class DeliveriesController(ApplicationDbContext context, IMapper mapper, IUserService userService, IAttachmentService attachmentService, IDataService deliveryService) : Controller
     {
         private readonly ApplicationDbContext _context = context;
         private readonly IMapper _mapper = mapper;
         private readonly IUserService _userService = userService;
         private readonly IAttachmentService _attachmentService = attachmentService;
+        private readonly IDataService _deliveryService = deliveryService;
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var deliveries = await _deliveryService.GetAllDeliveriesAsync();
+
+            if (deliveries == null)
+                return NotFound();
+
+            var deliveriesView = deliveries.Select(d =>  new DeliveryViewModel
+            {
+                Id = d.Id,
+                NID = d.AppUser!.NID,
+                CreatedOn = d.CreatedOn,
+                Email = d.AppUser.Email,
+                IsDeleted = d.IsDeleted,
+                FirstName = d.AppUser.FirstName,
+                LastName = d.AppUser.LastName,                
+            });
 
             if (User.IsInRole(AppRoles.Admin))
-                return View("Index");
+                return View("Index", deliveriesView);
 
             return View("Deliveries");
 
@@ -22,7 +42,7 @@ namespace Speedy.Controllers
 
         [HttpGet]
         public async Task<IActionResult> Create()
-        {            
+        {
             return View("DeliveryForm", InitialDeliveryForm());
         }
 
@@ -30,33 +50,38 @@ namespace Speedy.Controllers
         public async Task<IActionResult> Create(DeliveryFormViewModel model)
         {
             if (!ModelState.IsValid)
-				return View("DeliveryForm", InitialDeliveryForm(model));	
-            
+                return View("DeliveryForm", InitialDeliveryForm(model));
+
             using var transaction = _context.Database.BeginTransaction();
 
             var userForm = new UserFormViewModel
             {
                 Password = model.Password,
                 Email = model.Email,
-                ConfirmPassword = model.ConfirmPassword,                
+                ConfirmPassword = model.ConfirmPassword,
                 SelectedRoles = AppRoles.Delivery,
                 NID = model.NID,
-                PhoneNumber = model.MobileNumber
+                PhoneNumber = model.MobileNumber,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
             };
 
-            var result = await _userService.SubmitUser(userForm);            
+            var result = await _userService.SubmitUser(userForm);
 
             if (!result.IsSuccess)
             {
-				ModelState.AddModelError(string.Empty, result.Error!);
-				return View("DeliveryForm", InitialDeliveryForm(model));
-			}
+                ModelState.AddModelError(string.Empty, result.Error!);
+                return View("DeliveryForm", InitialDeliveryForm(model));
+            }
 
-			var delivery = new Delivery
+            var delivery = new Delivery
             {
                 AppUserId = result.UserId!,
-                HasWhatsApp = model.HasWhatsApp,                
-                Address = model.Address,								
+                HasWhatsApp = model.HasWhatsApp,
+                Address = model.Address,
+                CityId = model.SelectedCityId,
+                ShippingMethodId = model.SelectedShippingMethod,
+                IsDeleted = true
             };
 
             var attachResult = await _attachmentService.UploadAttachmentAsync(
@@ -90,13 +115,13 @@ namespace Speedy.Controllers
 
             var methodsTask = _context.ShippingMethods.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
             //var citiesTask = _context.Cities.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
-            var governoratesTask = _context.Governorates.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();            
+            var governoratesTask = _context.Governorates.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
 
-            deliveryFormView.ShippingMethods = _mapper.Map<IEnumerable<SelectListItem>>(methodsTask);            
+            deliveryFormView.ShippingMethods = _mapper.Map<IEnumerable<SelectListItem>>(methodsTask);
             deliveryFormView.Governorates = _mapper.Map<IEnumerable<SelectListItem>>(governoratesTask);
 
             return deliveryFormView;
-        }        
+        }
     }
 }
 

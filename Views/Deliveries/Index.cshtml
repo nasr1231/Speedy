@@ -16,33 +16,33 @@
                 <div class="symbol-label fs-2 fw-semibold text-success">
                     <i class="fa-solid fa-truck-fast text-primary"></i>
                 </div>
-                <span class="symbol-badge badge badge-circle bg-primary start-100 text-white"></span>
+                <span class="symbol-badge badge badge-circle bg-primary start-100 text-white">@Model.Count()</span>
             </div>
             <h2 class="fw-bolder">Delivery Agents</h2>
         </div>
     </div>
 </div>
 
-<div class="card shadow-sm mb-5 mb-lg-10 min-h-md-425px" >    
+<div class="card shadow-sm mb-5 mb-lg-10 min-h-md-425px">
     <div class="card-body pt-0">
         <div class="table-responsive" style="min-height: 270px">
             <partial name="_TableHeader" />
-            <table class="table table-row-bordered table-row-gray-300 gy-3 align-middle js-datatables" data-export-title="Delivery Agents">
+            <table class="table table-row-bordered table-row-gray-300 gy-3 align-middle js-datatable" data-export-title="Delivery Agents">
                 <thead>
                     <tr class="fw-bold fs-6 text-gray-800">
-                        <th>Name</th>                        
-                        <th>Phone Number</th>                        
-                        <th>Number Of Orders</th>                        
-                        <th>Registration Date</th>
-                        <th>Status</th>                        
-                        <th class="js-no-export">Actions</th>
+                        <th>Name</th>
+                        <th>National Id</th>
+                        <th>Email</th>
+                        <th>Register Date</th>                        
+                        <th>Status</th>
+                        <th class="js-no-export text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach(var delivery in Model)
+                    @foreach (var delivery in Model)
                     {
                         <tr>
-                            <partial name="_RowData" model="delivery"/>
+                            <partial name="_RowData" model="delivery" />
                         </tr>
                     }
                 </tbody>
@@ -51,6 +51,11 @@
     </div>
 </div>
 
+@section Plugins {
+    <script src="~/assets/panel/plugins/datatables/datatables.bundle.js"></script>
+    <script src="~/assets/panel/plugins/datatables/vfs_fonts.js"></script>
+}
+
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />            
+    <partial name="_ValidationScriptsPartial" />
 }
