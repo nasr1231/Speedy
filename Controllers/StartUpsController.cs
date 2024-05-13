@@ -1,18 +1,42 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Speedy.Core.Consts;
 using Speedy.Services.User;
 
 namespace Speedy.Controllers
 {
-    public class StartUpsController(ApplicationDbContext context, IMapper mapper, IUserService userService) : Controller
+    [Authorize(Roles = AppRoles.Admin)]
+    public class StartUpsController(ApplicationDbContext context, IMapper mapper, IUserService userService, IDataService dataService) : Controller
     {
         private readonly ApplicationDbContext _context = context;
         private readonly IMapper _mapper = mapper;
         private readonly IUserService _userService = userService;
-        public IActionResult Index()
+        private readonly IDataService _dataService = dataService;
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var startUps = await _dataService.GetAllStartUpsAsync();
+
+            if (startUps == null)
+                return NotFound();
+
+            var startUpsView = startUps.Select(d => new StartUpViewModel
+            {
+                Id = d.Id,
+                NID = d.AppUser!.NID,
+                CreatedOn = d.CreatedOn,
+                Email = d.AppUser.Email,
+                MobileNumber = d.AppUser.PhoneNumber,
+                IsDeleted = d.IsDeleted,
+                FirstName = d.AppUser.FirstName,
+                LastName = d.AppUser.LastName,
+                IsActive = d.AppUser.IsActive,
+                StartUpName = d.StartUpName,
+                IsOnline = d.IsOnline
+            });
+
+            return View(startUpsView);
         }
         [HttpGet]
         public async Task<IActionResult> Create()
