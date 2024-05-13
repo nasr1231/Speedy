@@ -1,21 +1,31 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Speedy.Core.Models.RelatedData;
-using Speedy.Core.ViewModels.RelatedData;
 
 namespace Speedy.Core.Mapping
 {
     public class MappingProfile : Profile
     {
-        public MappingProfile() {
+        public MappingProfile()
+        {
 
             // Delivery Agent
-            CreateMap<Delivery, DeliveryViewModel>().ReverseMap();
-            CreateMap<DeliveryFormViewModel, DeliveryViewModel>().ReverseMap();
-            CreateMap<DeliveryFormViewModel, Delivery>().ReverseMap();
+            CreateMap<Delivery, DeliveryViewModel>()
+            .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City!.Name))
+            .ForMember(dest => dest.GovernorateName, opt => opt.MapFrom(src => src.City!.Governorate!.Name))                       
+            .ForMember(dest => dest.ShippingMethodName, opt => opt.MapFrom(src => src.ShippingMethods!.Name));            
+            CreateMap<Delivery, DeliveryFormViewModel> ().ReverseMap();
 
-            //CreateMap<Delivery, SelectListItem>()
-            //.ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.CategoryId))
-            //.ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.CategoryName));
+            // Start Up            
+            CreateMap<StartUp, StartUpViewModel>()
+            .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City!.Name))
+            .ForMember(dest => dest.GovernorateName, opt => opt.MapFrom(src => src.City!.Governorate!.Name));
+            CreateMap<StartUp, StartUpFormViewModel>().ReverseMap();
+
+            // Individual            
+            CreateMap<Individual, IndividualViewModel>()
+            .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City!.Name))
+            .ForMember(dest => dest.GovernorateName, opt => opt.MapFrom(src => src.City!.Governorate!.Name));
+            CreateMap<Individual, IndividualFormViewModel>().ReverseMap();
 
             //User ViewModel
             CreateMap<AppUser, UserViewModel>();
@@ -40,7 +50,7 @@ namespace Speedy.Core.Mapping
                 .ForMember(dest => dest.GovernorateName, opt => opt.MapFrom(src => src.Governorate!.Name));
             CreateMap<City, SelectListItem>()
                 .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id))
-                .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Name));                     
+                .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Name));
 
             //ShippingMethods
             CreateMap<ShippingMethod, ShippingMethodViewModel>();

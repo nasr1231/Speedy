@@ -1,20 +1,42 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Speedy.Core.Consts;
+using Speedy.Core.ViewModels;
 using Speedy.Services.User;
 
 namespace Speedy.Controllers
 {
-	public class IndividualsController(ApplicationDbContext context, IMapper mapper, IUserService userService) : Controller
+    [Authorize(Roles = AppRoles.Admin)]
+    public class IndividualsController(ApplicationDbContext context, IMapper mapper, IUserService userService, IDataService dataService) : Controller
 	{
 		private readonly ApplicationDbContext _context = context;
 		private readonly IMapper _mapper = mapper;
 		private readonly IUserService _userService = userService;
+        private readonly IDataService _dataService = dataService;
 
-		public IActionResult Index()
+        public async Task<IActionResult> Index()
 		{
-			return View();
-		}
+            var individuals = await _dataService.GetAllIndividualsAsync();
+
+            if (individuals == null)
+                return NotFound();
+
+            var individualsView = individuals.Select(d => new IndividualViewModel
+            {
+                Id = d.Id,
+                NID = d.AppUser!.NID,
+                CreatedOn = d.CreatedOn,
+                Email = d.AppUser.Email,
+                MobileNumber = d.AppUser.PhoneNumber,
+                IsDeleted = d.IsDeleted,
+                FirstName = d.AppUser.FirstName,
+                LastName = d.AppUser.LastName,			
+				IsActive = d.AppUser.IsActive
+            });
+
+            return View(individualsView);
+        }
 
 		[HttpGet]
 		public async Task<IActionResult> Create()
