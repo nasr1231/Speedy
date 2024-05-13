@@ -1,4 +1,5 @@
 ﻿using Humanizer;
+using Speedy.Core.Models.RelatedData;
 
 namespace Speedy.Core.Models
 {
@@ -17,6 +18,8 @@ namespace Speedy.Core.Models
         #region Relations
         public AppUser? AppUser { get; set; }
         public string AppUserId { get; set; } = null!;
+        public int CityId { get; set; }
+        public City City { get; set; } = null!;
         #endregion
     }
 }

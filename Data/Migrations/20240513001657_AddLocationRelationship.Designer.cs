@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Speedy.Data;
 
@@ -11,9 +12,11 @@ using Speedy.Data;
 namespace Speedy.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240513001657_AddLocationRelationship")]
+    partial class AddLocationRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -297,6 +300,9 @@ namespace Speedy.Data.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
+                    b.Property<int?>("GovernorateId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("HasWhatsApp")
                         .HasColumnType("bit");
 
@@ -331,6 +337,8 @@ namespace Speedy.Data.Migrations
 
                     b.HasIndex("CreatedById");
 
+                    b.HasIndex("GovernorateId");
+
                     b.HasIndex("LastUpdatedById");
 
                     b.HasIndex("ShippingMethodId");
@@ -359,6 +367,9 @@ namespace Speedy.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("GovernorateId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -379,6 +390,8 @@ namespace Speedy.Data.Migrations
                     b.HasIndex("CityId");
 
                     b.HasIndex("CreatedById");
+
+                    b.HasIndex("GovernorateId");
 
                     b.HasIndex("LastUpdatedById");
 
@@ -620,6 +633,9 @@ namespace Speedy.Data.Migrations
                     b.Property<DateTime>("FoundingDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("GovernorateId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -648,6 +664,8 @@ namespace Speedy.Data.Migrations
                     b.HasIndex("CityId");
 
                     b.HasIndex("CreatedById");
+
+                    b.HasIndex("GovernorateId");
 
                     b.HasIndex("LastUpdatedById");
 
@@ -724,6 +742,10 @@ namespace Speedy.Data.Migrations
                         .HasForeignKey("CreatedById")
                         .OnDelete(DeleteBehavior.NoAction);
 
+                    b.HasOne("Speedy.Core.Models.RelatedData.Governorate", null)
+                        .WithMany("Deliveries")
+                        .HasForeignKey("GovernorateId");
+
                     b.HasOne("Speedy.Core.Models.AppUser", "LastUpdatedBy")
                         .WithMany()
                         .HasForeignKey("LastUpdatedById")
@@ -764,6 +786,10 @@ namespace Speedy.Data.Migrations
                         .WithMany()
                         .HasForeignKey("CreatedById")
                         .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("Speedy.Core.Models.RelatedData.Governorate", null)
+                        .WithMany("Individuals")
+                        .HasForeignKey("GovernorateId");
 
                     b.HasOne("Speedy.Core.Models.AppUser", "LastUpdatedBy")
                         .WithMany()
@@ -882,6 +908,10 @@ namespace Speedy.Data.Migrations
                         .HasForeignKey("CreatedById")
                         .OnDelete(DeleteBehavior.NoAction);
 
+                    b.HasOne("Speedy.Core.Models.RelatedData.Governorate", null)
+                        .WithMany("StartUps")
+                        .HasForeignKey("GovernorateId");
+
                     b.HasOne("Speedy.Core.Models.AppUser", "LastUpdatedBy")
                         .WithMany()
                         .HasForeignKey("LastUpdatedById")
@@ -916,6 +946,15 @@ namespace Speedy.Data.Migrations
                 });
 
             modelBuilder.Entity("Speedy.Core.Models.RelatedData.City", b =>
+                {
+                    b.Navigation("Deliveries");
+
+                    b.Navigation("Individuals");
+
+                    b.Navigation("StartUps");
+                });
+
+            modelBuilder.Entity("Speedy.Core.Models.RelatedData.Governorate", b =>
                 {
                     b.Navigation("Deliveries");
 
