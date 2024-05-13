@@ -20,8 +20,7 @@ namespace Speedy.Seeds
 
          public static readonly List<City> Cities =
         [
-            new City { Id = 5, Name = "وسط البلد", GovernorateId = 1,CreatedOn = new DateTime(day: 1, month: 1, year: 2024)},
-            
+            new City { Id = 5, Name = "وسط البلد", GovernorateId = 1,CreatedOn = new DateTime(day: 1, month: 1, year: 2024)},            
         ];
     }
 }
