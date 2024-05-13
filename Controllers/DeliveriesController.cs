@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Speedy.Core.Models;
 using Speedy.Services.User;
+using System.Data;
 
 namespace Speedy.Controllers
 {
-    [Authorize(Roles = AppRoles.Admin)]
     public class DeliveriesController(ApplicationDbContext context, IMapper mapper, IUserService userService, IAttachmentService attachmentService, IDataService deliveryService) : Controller
     {
         private readonly ApplicationDbContext _context = context;
@@ -15,6 +15,7 @@ namespace Speedy.Controllers
         private readonly IAttachmentService _attachmentService = attachmentService;
         private readonly IDataService _deliveryService = deliveryService;
 
+
         public async Task<IActionResult> Index()
         {
             var deliveries = await _deliveryService.GetAllDeliveriesAsync();
@@ -22,7 +23,7 @@ namespace Speedy.Controllers
             if (deliveries == null)
                 return NotFound();
 
-            var deliveriesView = deliveries.Select(d =>  new DeliveryViewModel
+            var deliveriesView = deliveries.Select(d => new DeliveryViewModel
             {
                 Id = d.Id,
                 NID = d.AppUser!.NID,
@@ -30,7 +31,7 @@ namespace Speedy.Controllers
                 Email = d.AppUser.Email,
                 IsDeleted = d.IsDeleted,
                 FirstName = d.AppUser.FirstName,
-                LastName = d.AppUser.LastName,                
+                LastName = d.AppUser.LastName,
             });
 
             if (User.IsInRole(AppRoles.Admin))
@@ -40,6 +41,15 @@ namespace Speedy.Controllers
 
         }
 
+
+        public async Task<IActionResult> Dashboard()
+        {
+            return View("Dashboard");
+        }
+        public async Task<IActionResult> Profile()
+        {
+            return View("Profile");
+        }
         [HttpGet]
         public async Task<IActionResult> Create()
         {

@@ -19,6 +19,9 @@ namespace Speedy.Controllers
 
         public IActionResult Index()
         {
+            if (User.IsInRole(AppRoles.Delivery))
+                return View("DeliveryIndex");
+
             return View();
         }
 
