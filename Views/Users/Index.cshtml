@@ -44,13 +44,15 @@
                         <th>Create Date</th>
                         <th>Updated On</th>
                         <th>Status</th>
-                        <th class="js-no-export">Actions</th>
+                        <th class="js-no-export text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>                    
                     @foreach (var user in Model.Where(u => u.Role == AppRoles.Clerk || u.Role == AppRoles.Admin))
                     {
-                        <partial name="_RowData" model="@user"/>
+                        <tr>
+                            <partial name="_RowData" model="@user" />
+                        </tr>
                     }
                 </tbody>
             </table>

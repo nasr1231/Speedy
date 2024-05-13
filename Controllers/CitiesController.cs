@@ -12,7 +12,7 @@ namespace Speedy.Controllers
     public class CitiesController(ApplicationDbContext context, IMapper mapper) : Controller
     {
         private readonly ApplicationDbContext _context = context;
-        private readonly IMapper _mapper = mapper;        
+        private readonly IMapper _mapper = mapper;
         public IActionResult Index()
         {
             var cities = _context.Cities
@@ -27,7 +27,7 @@ namespace Speedy.Controllers
             return View(servicesView);
         }
 
-        
+
         public IActionResult Create()
         {
             return PartialView("_Form", InitialCityForm());
@@ -40,22 +40,20 @@ namespace Speedy.Controllers
             if (!ModelState.IsValid)
                 return View("_Form", InitialCityForm(model));
 
-            //City city = new()
-            //{
-            //    CreatedOn = model.CreatedOn,
-            //    GovernorateId = model.GovernorateId,
-            //    IsDeleted = false,
-            //    Name = model.Name,
-            //    CreatedById = User.FindFirst(ClaimTypes.NameIdentifier)!.Value,                
-            //};            
+            var city = new City
+            {
+                GovernorateId = model.GovernorateId,
+                Name = model.Name,
+                CreatedById = User.FindFirst(ClaimTypes.NameIdentifier)!.Value,
+            };
 
-            var cityArea = _mapper.Map<City>(model);
-            cityArea.CreatedById = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+            //var cityArea = _mapper.Map<City>(model);
+            //cityArea.CreatedById = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
 
-            _context.Cities.Add(cityArea);
+            _context.Cities.Add(city);
             _context.SaveChanges();
 
-            var cityView = _mapper.Map<CityViewModel>(cityArea);
+            var cityView = _mapper.Map<CityViewModel>(city);
 
             return PartialView("_NewRow", cityView);
         }
@@ -115,7 +113,7 @@ namespace Speedy.Controllers
 
             if (type is null)
                 return NotFound();
-            
+
             type.LastUpdatedOn = DateTime.Now.ToUniversalTime();
             type.LastUpdatedById = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
 
