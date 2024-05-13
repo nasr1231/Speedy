@@ -17,5 +17,11 @@ namespace Speedy.Seeds
             new Governorate { Id = 2, Name = "الجيزة", CreatedOn = new DateTime(day: 1, month: 1, year: 2024) },
             new Governorate { Id = 3, Name = "القليوبية", CreatedOn = new DateTime(day: 1, month: 1, year: 2024) },
         ];
+
+         public static readonly List<City> Cities =
+        [
+            new City { Id = 5, Name = "وسط البلد", GovernorateId = 1,CreatedOn = new DateTime(day: 1, month: 1, year: 2024)},
+            
+        ];
     }
 }
