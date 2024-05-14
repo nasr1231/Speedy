@@ -4,3 +4,455 @@
     Layout = "_DeliveryLayout";
     ViewData["Title"] = "الإعدادات";
 }
+<!--begin::Main-->
+<div class="app-main flex-column flex-row-fluid " id="kt_app_main">
+    <!--begin::Content wrapper-->
+    <div class="d-flex flex-column flex-column-fluid">
+
+        <!--begin::Toolbar-->
+        <div id="kt_app_toolbar" class="app-toolbar  pt-5 ">
+
+            <!--begin::Toolbar container-->
+            <div id="kt_app_toolbar_container" class="app-container  container-fluid d-flex align-items-stretch ">
+                <!--begin::Toolbar wrapper-->
+                <div class="app-toolbar-wrapper d-flex flex-stack flex-wrap gap-4 w-100">
+
+                    <!--begin::Page title-->
+                    <div class="page-title d-flex flex-column gap-1 me-3 mb-2">
+
+
+
+                        <!--begin::Title-->
+                        <h1 class="page-heading d-flex flex-column justify-content-center text-gray-900 fw-bolder fs-1 lh-0">
+                             إعدادات الحساب
+                        </h1>
+                        <!--end::Title-->
+                    </div>
+                    <!--end::Page title-->
+                    <!--begin::Actions-->
+                    <a href="#" class="btn btn-sm btn-success ms-3 px-4 py-3" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">
+                        Create Project</span>
+                    </a>
+                    <!--end::Actions-->
+                </div>
+                <!--end::Toolbar wrapper-->
+            </div>
+            <!--end::Toolbar container-->
+        </div>
+        <!--end::Toolbar-->
+        <!--begin::Content-->
+        <div id="kt_app_content" class="app-content  flex-column-fluid ">
+
+
+            <!--begin::Content container-->
+            <div id="kt_app_content_container" class="app-container  container-fluid ">
+
+                <!--begin::Navbar-->
+                <div class="card mb-5 mb-xl-10">
+                    <div class="card-body pt-9 pb-0">
+                        <!--begin::Details-->
+                        <div class="d-flex flex-wrap flex-sm-nowrap mb-3">
+                            <!--begin: Pic-->
+                            <div class="me-7 mb-4">
+                                <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
+                                    <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-body h-20px w-20px"></div>
+                                </div>
+                            </div>
+                            <!--end::Pic-->
+                            <!--begin::Info-->
+                            <div class="flex-grow-1">
+                                <!--begin::Title-->
+                                <div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
+                                    <!--begin::User-->
+                                    <div class="d-flex flex-column">
+                                        <!--begin::Name-->
+                                        <div class="d-flex align-items-center mb-2">
+                                            <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">أحمد</a>
+                                            <a href="#"><i class="ki-duotone ki-verify fs-1 text-primary"><span class="path1"></span><span class="path2"></span></i></a>
+
+                                        </div>
+                                        <!--end::Name-->
+                                        <!--begin::Info-->
+                                        <div class="d-flex flex-wrap fw-semibold fs-6 mb-4 pe-2">
+                                            <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
+                                                <i class="fa-solid fa-user fs-4 me-1">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                    <span class="path3"></span>
+                                                </i>        عامل توصيل
+                                            </a>
+                                            <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
+                                                <i class="fa-solid fa-location-dot fs-4 me-1"><span class="path1"></span><span class="path2"></span></i>
+                                                القاهرة
+                                            </a>
+                                            <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary mb-2">
+                                                <i class="fa-solid fa-caret-down fs-4 me-1"><span class="path1"></span><span class="path2"></span></i>
+                                                Ahmed@gmail.com
+                                            </a>
+                                        </div>
+                                        <!--end::Info-->
+                                    </div>
+                                    <!--end::User-->
+                                    
+                                </div>
+                                <!--end::Title-->
+                                <!--begin::Stats-->
+                                <div class="d-flex flex-wrap flex-stack">
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex flex-column flex-grow-1 pe-8">
+                                        <!--begin::Stats-->
+                                        <div class="d-flex flex-wrap">
+                                            <!--begin::Stat-->
+                                            <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                                <!--begin::Number-->
+                                                <div class="d-flex align-items-center">
+                                                    <i class="fa-solid fa-arrow-trend-up text-success fs-2 me-2"><span class="path1"></span><span class="path2"></span></i>                                    <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="4500" data-kt-countup-prefix="$">0</div>
+                                                </div>
+                                                <!--end::Number-->
+                                                <!--begin::Label-->
+                                                <div class="fw-semibold fs-6 text-gray-500">الأرباح</div>
+                                                <!--end::Label-->
+                                            </div>
+                                            <!--end::Stat-->
+                                            <!--begin::Stat-->
+                                            <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                                <!--begin::Number-->
+                                                <div class="d-flex align-items-center">
+                                                    <i class="fa-solid fa-star fs-2 me-2 text-warning"><span class="path1"></span><span class="path2"></span></i>                                    <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="60" data-kt-countup-prefix="%">0</div>
+                                                </div>
+                                                <!--end::Number-->
+                                                <!--begin::Label-->
+                                                <div class="fw-semibold fs-6 text-gray-500">التقييم </div>
+                                                <!--end::Label-->
+                                            </div>
+                                            <!--end::Stat-->
+                                        </div>
+                                        <!--end::Stats-->
+                                    </div>
+                                    <!--end::Wrapper-->
+                                   
+                                </div>
+                                <!--end::Stats-->
+                            </div>
+                            <!--end::Info-->
+                        </div>
+                        <!--end::Details-->
+                        <!--begin::Navs-->
+                    </div>
+                </div>
+                <!--end::Navbar-->
+                <!--begin::Basic info-->
+                <div class="card mb-5 mb-xl-10">
+                    <!--begin::Card header-->
+                    <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
+                        <!--begin::Card title-->
+                        <div class="card-title m-0">
+                            <h3 class="fw-bold m-0"> تفاصيل الحساب</h3>
+                        </div>
+                        <!--end::Card title-->
+                    </div>
+                    <!--begin::Card header-->
+                    <!--begin::Content-->
+                    <div id="kt_account_settings_profile_details" class="collapse show">
+                        <!--begin::Form-->
+                        <form id="kt_account_profile_details_form" class="form">
+                            <!--begin::Card body-->
+                            <div class="card-body border-top p-9">
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">الصورة</label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8">
+                                        <!--begin::Image input-->
+                                        <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('/saul-html-pro/assets/media/svg/avatars/blank.svg')">
+                                            <!--begin::Preview existing avatar-->
+                                            <div class="image-input-wrapper w-125px h-125px" style="background-image: url(/saul-html-pro/assets/media/avatars/300-1.jpg)"></div>
+                                            <!--end::Preview existing avatar-->
+                                            <!--begin::Label-->
+                                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                                                <i class="ki-duotone ki-pencil fs-7"><span class="path1"></span><span class="path2"></span></i>
+                                                <!--begin::Inputs-->
+                                                <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                                <input type="hidden" name="avatar_remove" />
+                                                <!--end::Inputs-->
+                                            </label>
+                                            <!--end::Label-->
+                                            <!--begin::Cancel-->
+                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+                                                <i class="ki-duotone ki-cross fs-2"><span class="path1"></span><span class="path2"></span></i>
+                                            </span>
+                                            <!--end::Cancel-->
+                                            <!--begin::Remove-->
+                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                                                <i class="ki-duotone ki-cross fs-2"><span class="path1"></span><span class="path2"></span></i>
+                                            </span>
+                                            <!--end::Remove-->
+                                        </div>
+                                        <!--end::Image input-->
+                                        <!--begin::Hint-->
+                                        <div class="form-text">متاح هذه الأنواع من الملفات:  png, jpg, jpeg.</div>
+                                        <!--end::Hint-->
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label required fw-semibold fs-6"> الاسم بالكامل</label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8">
+                                        <!--begin::Row-->
+                                        <div class="row">
+                                            <!--begin::Col-->
+                                            <div class="col-lg-6 fv-row">
+                                                <input type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder=" الاسم الأول" value="أحمد" />
+                                            </div>
+                                            <!--end::Col-->
+                                            <!--begin::Col-->
+                                            <div class="col-lg-6 fv-row">
+                                                <input type="text" name="lname" class="form-control form-control-lg form-control-solid" placeholder=" الاسم الأخير" value="مصطفى" />
+                                            </div>
+                                            <!--end::Col-->
+                                        </div>
+                                        <!--end::Row-->
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label required fw-semibold fs-6">وسيلة التوصيل</label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <input type="text" name="company" class="form-control form-control-lg form-control-solid" placeholder=" وسيلة التوصيل" value="موتوسيكل" />
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                                        <span class="required"> رقم الهاتف</span>
+
+
+                                        <span class="ms-1" data-bs-toggle="tooltip" title="Phone number must be active">
+                                        </span>
+                                    </label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <input type="tel" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Phone number" value="011672359877" />
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label fw-semibold fs-6"> البريد الإلكتروني</label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <input type="text" name="website" class="form-control form-control-lg form-control-solid" placeholder="البريد الإلكتروني" value="Ahmed@gmail.com" />
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                                        <span class="required">االبلد</span>
+
+
+                                        
+                                    </label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <select name="country" aria-label="Select a Country" data-control="select2" data-placeholder="اختر بلدك..." class="form-select form-select-solid form-select-lg fw-semibold">
+                                        </select>
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label required fw-semibold fs-6">اللغة</label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <!--begin::Input-->
+                                        <select name="language" aria-label="Select a Language" data-control="select2" data-placeholder="اختر لغتك..." class="form-select form-select-solid form-select-lg">
+                                            
+                                        </select>
+                                        <!--end::Input-->
+                                        <!--begin::Hint-->
+                                        
+                                        <!--end::Hint-->
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label required fw-semibold fs-6">النطاق الزمني</label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <select name="timezone" aria-label="Select a Timezone" data-control="select2" data-placeholder="اختر نطاقك الزمني..." class="form-select form-select-solid form-select-lg">
+                                            
+                                        </select>
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label  fw-semibold fs-6">العملة</label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <select name="currnecy" aria-label="Select a Currency" data-control="select2" data-placeholder="اختر عملة..." class="form-select form-select-solid form-select-lg">
+                                            </select>
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label required fw-semibold fs-6">تواصل</label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <!--begin::Options-->
+                                        <div class="d-flex align-items-center mt-3">
+                                            <!--begin::Option-->
+                                            <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
+                                                <input class="form-check-input border border-gray-500" name="communication[]" type="checkbox" value="1" />
+                                                <span class="fw-semibold ps-2 fs-6">
+                                                    البريد الإلكتروني
+                                                </span>
+                                            </label>
+                                            <!--end::Option-->
+                                            <!--begin::Option-->
+                                            <label class="form-check form-check-custom form-check-inline form-check-solid">
+                                                <input class="form-check-input border border-gray-500" name="communication[]" type="checkbox" value="2" />
+                                                <span class="fw-semibold ps-2 fs-6">
+                                                    رقم الهاتف
+                                                </span>
+                                            </label>
+                                            <!--end::Option-->
+                                        </div>
+                                        <!--end::Options-->
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-0">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">Allow Marketing</label>
+                                    <!--begin::Label-->
+                                    <!--begin::Label-->
+                                    <div class="col-lg-8 d-flex align-items-center">
+                                        <div class="form-check form-check-solid form-switch form-check-custom fv-row">
+                                            <input class="form-check-input w-45px h-30px" type="checkbox" id="allowmarketing" checked />
+                                            <label class="form-check-label" for="allowmarketing"></label>
+                                        </div>
+                                    </div>
+                                    <!--begin::Label-->
+                                </div>
+                                <!--end::Input group-->
+                            </div>
+                            <!--end::Card body-->
+                            <!--begin::Actions-->
+                            <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                <button type="reset" class="btn btn-light btn-active-light-primary me-2 border border-gray-400">إلغاء</button>
+                                <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">حفظ التغيرات</button>
+                            </div>
+                            <!--end::Actions-->
+                        </form>
+                        <!--end::Form-->
+                    </div>
+                    <!--end::Content-->
+                </div>
+                <!--end::Basic info-->
+               
+                <!--begin::Deactivate Account-->
+                <div class="card  ">
+
+                    <!--begin::Card header-->
+                    <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_deactivate" aria-expanded="true" aria-controls="kt_account_deactivate">
+                        <div class="card-title m-0">
+                            <h3 class="fw-bold m-0">تعطيل الحساب</h3>
+                        </div>
+                    </div>
+                    <!--end::Card header-->
+                    <!--begin::Content-->
+                    <div id="kt_account_settings_deactivate" class="collapse show">
+                        <!--begin::Form-->
+                        <form id="kt_account_deactivate_form" class="form">
+
+                            <!--begin::Card body-->
+                            <div class="card-body border-top p-9">
+
+                                <!--begin::Notice-->
+                                <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed mb-5 p-6">
+                                    <!--begin::Icon-->
+                                    <i class="fa-solid fa-triangle-exclamation fs-2tx text-warning me-4"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>        
+                                    <!--end::Icon-->
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex flex-stack flex-grow-1 ">
+                                        <!--begin::Content-->
+                                        <div class=" fw-semibold">
+                                            <h4 class="text-gray-900 fw-bold mb-5">أنت الآن تقوم بتعطيل حسابك</h4>
+
+                                            <div class="fs-6 text-gray-700">هل أنت متأكد أنك تريد تعطيل الحساب <br /></div>
+                                        </div>
+                                        <!--end::Content-->
+
+                                    </div>
+                                    <!--end::Wrapper-->
+                                </div>
+                                <!--end::Notice-->
+                                <!--begin::Form input row-->
+                                <div class="form-check form-check-solid fv-row">
+                                    <input name="deactivate" class="form-check-input border border-gray-400" type="checkbox" value="" id="deactivate" />
+                                    <label class="form-check-label fw-semibold ps-2 fs-6" for="deactivate">أنا متأكد من تعطيل الحساب</label>
+                                </div>
+                                <!--end::Form input row-->
+                            </div>
+                            <!--end::Card body-->
+                            <!--begin::Card footer-->
+                            <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                <button id="kt_account_deactivate_account_submit" type="submit" class="btn btn-danger fw-semibold">تعطيل الحساب</button>
+                            </div>
+                            <!--end::Card footer-->
+
+                        </form>
+                        <!--end::Form-->
+                    </div>
+                    <!--end::Content-->
+                </div>
+                <!--end::Deactivate Account-->
+            </div>
+            <!--end::Content container-->
+        </div>
+        <!--end::Content-->
+
+    </div>
+    <!--end::Content wrapper-->
+</div>
+<!--end:::Main-->
