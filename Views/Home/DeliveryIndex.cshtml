@@ -3,4 +3,4 @@
     Layout = "_StartLayout";
 }
 
-<a asp-controller="Deliveries" asp-action="Dashboard" class="fs-2 btn btn-danger">الوصول إلى لوحة التحكم</a>
+<a asp-controller="Deliveries" asp-action="Dashboard" asp-route-id="@User.FindFirst(ClaimTypes.NameIdentifier)!.Value" class=" fs-2 btn btn-danger mt-15">الوصول إلى لوحة التحكم</a>

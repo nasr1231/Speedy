@@ -1,8 +1,9 @@
-﻿@model IEnumerable<DeliveryViewModel>
+﻿@model DeliveryViewModel
 @{
     ViewData["Title"] = "حسابي";
     Layout = "_DeliveryLayout";
 }
+
 <!--begin::Main-->
 <div class="app-main flex-column flex-row-fluid " id="kt_app_main">
     <!--begin::Content wrapper-->
@@ -29,7 +30,7 @@
                     <!--end::Page title-->
                     <!--begin::Actions-->
                     <a href="#" class="btn btn-sm btn-success ms-3 px-4 py-3" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">
-                        اختيار لتوصيل طلبك</span>
+                        <span>اختيار لتوصيل طلبك</span>
                     </a>
                     <!--end::Actions-->
                 </div>
@@ -53,7 +54,7 @@
                             <!--begin: Pic-->
                             <div class="me-7 mb-4">
                                 <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                                    <img src="~/assets/website/images/profile.jpg" />
+                                    @* <img src="~/assets/website/images/profile.jpg" /> *@
                                     <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-body h-20px w-20px"></div>
                                 </div>
                             </div>
@@ -67,15 +68,17 @@
                                         <!--begin::Name-->
                                         <div class="d-flex align-items-center mb-2">
                                             <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">أحمد</a>
-                                            <a href="#"><i class="ki-duotone ki-verify fs-1 text-primary"><span class="path1"></span><span class="path2"></span></i></a>
-
-                                            <a href="#" class="btn btn-sm btn-light-success fw-bold ms-2 fs-8 py-1 px-3" data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan" data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">Upgrade to Pro</a>
+                                            <a href="#"><i class="ki-duotone ki-verify fs-1 text-primary"><span class="path1"></span><span class="path2"></span></i></a>                                            
                                         </div>
                                         <!--end::Name-->
                                         <!--begin::Info-->
                                         <div class="d-flex flex-wrap fw-semibold fs-6 mb-4 pe-2">
                                             <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
-                                                <i class="fa-solid fa-user fs-4 me-1"><span class="path1"></span><span class="path2"></span><span class="path3"></i>        عامل توصيل
+                                                <i class="fa-solid fa-user fs-4 me-1">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                    <span class="path3"></span>
+                                                    </i>        عامل توصيل
                                             </a>
                                             <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
                                                 <i class="fa-solid fa-location-dot fs-4 me-1"><span class="path1"></span><span class="path2"></span></i>                                القاهرة
@@ -146,10 +149,8 @@
                         <div class="card-title m-0">
                             <h3 class="fw-bold m-0"> تفاصيل الحساب</h3>
                         </div>
-                        <!--end::Card title-->
-                        <!--begin::Action-->
-                        <a href="/saul-html-pro/account/settings.html" class="btn btn-sm btn-primary align-self-center"> تعديل الحساب</a>
-                        <!--end::Action-->
+                        <!--end::Card title-->                        
+                        <a asp-controller="deliveries" asp-action="EditProfile" class="btn btn-sm btn-primary align-self-center"> تعديل الحساب</a>
                     </div>
                     <!--begin::Card header-->
                     <!--begin::Card body-->

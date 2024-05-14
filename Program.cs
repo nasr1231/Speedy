@@ -33,6 +33,7 @@ public class Program
 
         builder.Services.AddScoped<IUserService, UserService>();
         builder.Services.AddScoped<IAttachmentService, AttachmentService>();
+        builder.Services.AddScoped<IDeliveryService, DeliveryService>();
         builder.Services.AddScoped<IDataService, DataService>();
 
         builder.Services.AddControllersWithViews();

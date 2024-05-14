@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
 using Microsoft.EntityFrameworkCore;
 using Speedy.Core.Models;
 using Speedy.Services.User;
@@ -7,13 +8,13 @@ using System.Data;
 
 namespace Speedy.Controllers
 {
-    public class DeliveriesController(ApplicationDbContext context, IMapper mapper, IUserService userService, IAttachmentService attachmentService, IDataService deliveryService) : Controller
+    public class DeliveriesController(ApplicationDbContext context, IMapper mapper, IUserService userService, IAttachmentService attachmentService, IDeliveryService deliveryService) : Controller
     {
         private readonly ApplicationDbContext _context = context;
         private readonly IMapper _mapper = mapper;
         private readonly IUserService _userService = userService;
         private readonly IAttachmentService _attachmentService = attachmentService;
-        private readonly IDataService _deliveryService = deliveryService;
+        private readonly IDeliveryService _deliveryService = deliveryService;
 
 
         public async Task<IActionResult> Index()
@@ -40,16 +41,31 @@ namespace Speedy.Controllers
             return View("Deliveries");
 
         }
-
-
         public async Task<IActionResult> Dashboard()
         {
             return View("Dashboard");
         }
-        public async Task<IActionResult> Profile()
+        public async Task<IActionResult> Profile(/*string id*/)
         {
-            return View("Profile");
+            //var delivery = await _deliveryService.GetDeliveryAsync(deliveryId: id);
+                
+            //if(delivery is null)
+            //    return NotFound();
+
+            //var deliveriesView = new DeliveryViewModel
+            //{
+            //    Id = delivery.Id,
+            //    NID = delivery.AppUser!.NID,
+            //    CreatedOn = delivery.CreatedOn,
+            //    Email = delivery.AppUser.Email,
+            //    IsDeleted = delivery.IsDeleted,
+            //    FirstName = delivery.AppUser.FirstName,
+            //    LastName = delivery.AppUser.LastName,
+            //};
+
+            return View("Profile"/*, deliveriesView*/);
         }
+
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -108,6 +124,18 @@ namespace Speedy.Controllers
             transaction.Commit();
 
             return RedirectToAction("Index", "Home");
+        }
+
+        
+        //[Authorize(Roles = AppRoles.Delivery)]
+        public IActionResult EditProfile()
+        {            
+            //var property = await _deliveryService.GetDeliveryAsync(id);
+
+            //if (property is null)
+            //    return NotFound();            
+
+            return View("SettingsForm"/*, property*/);
         }
 
         public IActionResult GetCities(int GovernorateId)
