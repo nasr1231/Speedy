@@ -6,22 +6,7 @@ namespace Speedy.Services.User
     public class DataService(ApplicationDbContext context) : IDataService
     {
         private readonly ApplicationDbContext _context = context;
-
-        public async Task<IEnumerable<Delivery>> GetAllDeliveriesAsync()
-        {
-            IQueryable<Delivery> deliveriesQueryable = _context.Deliveries
-                .Include(s => s.ShippingMethods)
-                .Include(s => s.AppUser)
-                .Include(c => c.City)
-                .ThenInclude(g => g.Governorate);
-
-            deliveriesQueryable = deliveriesQueryable.AsNoTracking();
-
-            var deliveries = await deliveriesQueryable.ToListAsync();
-
-            return deliveries;
-        }
-
+       
         // Individuals Retrieve
         public async Task<IEnumerable<Individual>> GetAllIndividualsAsync()
         {
