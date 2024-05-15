@@ -1,7 +1,19 @@
-﻿@model IEnumerable<DeliveryViewModel>
+﻿@model DeliveryViewModel
 @{
-    ViewData["Title"] = "Delivery Agents";
+    ViewData["Title"] = "الصفحة الرئيسية";
     Layout = "_DeliveryLayout";
 }
 
-<p>مرحبا اسماء</p>
+<p>@Model.Id</p>
+<p>@Model.Gender</p>
+<p>@Model.FirstName</p>
+<p>@Model.LastName</p>
+<p>@Model.CreatedOn</p>
+<p>@Model.CityName</p>
+<p>@Model.NID</p>
+<p>@Model.Email</p>
+<p>@Model.Address</p>
+<p>@Model.MobileNumber</p>
+@Model.ProfilePictureIUrl
+@Model.ShippingMethodName
+@Model.Description
