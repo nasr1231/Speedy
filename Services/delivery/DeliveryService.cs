@@ -29,7 +29,7 @@ namespace Speedy.Services.User
                 .Include(c => c.City)
                 .ThenInclude(g => g.Governorate);
 
-            var delivery = await deliveriesQueryable.AsNoTracking().FirstOrDefaultAsync(d => d.AppUserId == deliveryId);                      
+            var delivery = await deliveriesQueryable.AsNoTracking().FirstOrDefaultAsync(d => d.AppUser!.Id == deliveryId);                      
 
             return delivery;
         }

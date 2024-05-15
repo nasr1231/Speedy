@@ -2,6 +2,7 @@
 {
     public interface IAttachmentService
     {
-        public Task<(bool isUploaded, string? errorMessage)> UploadAttachmentAsync(List<IFormFile> attachedFile, string entityName, string userName);
+        public Task<(bool isUploaded, string? errorMessage, List<string>? AttachmentUrls)> UploadAttachmentAsync(List<IFormFile> attachedFile, string entityName, string userName);
     }
 }
+
