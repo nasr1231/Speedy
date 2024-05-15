@@ -3,7 +3,7 @@ var table;
 var UpdatedRow;
 var datatable;
 var exportedCols = [];
-var model = $('#model-window');
+var model;
 
 var KTDatatables = function () {
     // Private functions
@@ -118,7 +118,7 @@ var KTDatatables = function () {
     };
 }();
 
-function showSuccessMessage(message = 'Your Entry is added successfully.') {
+function showSuccessMessage() {
 
     Swal.fire({
         title: "Done Successfully.....",
@@ -163,7 +163,7 @@ function showErrorMessage(message) {
 }
 
 function modalSubmitSuccess(row) {
-    $(model).modal('hide');
+    $('#model-window').modal('hide');
 
     addNewRow(row);
     $('tbody').find('.js-new-row').addClass('animate__animated animate__flash');
@@ -209,7 +209,7 @@ function onModalComplete() {
     $('body :submit').removeAttr('data-kt-indicator', 'on').removeAttr('disabled', 'disabled');
 }
 function OnModalSuccess(row) {
-    $(model).modal('hide');
+    $('#model-window').modal('hide');
     ShowSuccessMessage();
 
     if (UpdatedRow !== undefined) {
@@ -313,9 +313,12 @@ $(document).ready(function () {
 
 
     // Data Table Setting
-    KTUtil.onDOMContentLoaded(function () {
-        KTDatatables.init();
-    });
+    if ($('table').hasClass('js-datatable')) {
+        KTUtil.onDOMContentLoaded(function () {
+            KTDatatables.init();
+        });
+    }
+    
 
     $('.js-save-btn').on('click', function () {
         //var btn = $(this);
