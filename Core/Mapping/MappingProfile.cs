@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Speedy.Core.Models.RelatedData;
+using System.Diagnostics.Contracts;
 
 namespace Speedy.Core.Mapping
 {
@@ -10,10 +11,22 @@ namespace Speedy.Core.Mapping
 
             // Delivery Agent
             CreateMap<Delivery, DeliveryViewModel>()
+            .ForMember(dest => dest.Reviews, opt => opt.Ignore())
             .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City!.Name))
             .ForMember(dest => dest.GovernorateName, opt => opt.MapFrom(src => src.City!.Governorate!.Name))                       
-            .ForMember(dest => dest.ShippingMethodName, opt => opt.MapFrom(src => src.ShippingMethods!.Name));            
-            CreateMap<Delivery, DeliveryFormViewModel> ().ReverseMap();
+            .ForMember(dest => dest.ShippingMethodName, opt => opt.MapFrom(src => src.ShippingMethods!.Name))           
+            .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.AppUser!.FirstName))
+            .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.AppUser!.LastName))
+            .ForMember(dest => dest.NID, opt => opt.MapFrom(src => src.AppUser!.NID))
+            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.AppUser!.Email))
+            .ForMember(dest => dest.MobileNumber, opt => opt.MapFrom(src => src.AppUser!.PhoneNumber))                     
+            .ForMember(dest => dest.Gender, opt => opt.MapFrom(src => src.AppUser!.Gender))                     
+            .ForMember(dest => dest.Gender, opt => opt.MapFrom(src => src.AppUser!.Gender))                     
+            .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.AppUser!.IsActive))                     
+            .ForMember(dest => dest.ProfilePictureIUrl, opt => opt.MapFrom(src => src.AppUser!.ProfilePictureIUrl))                     
+            .ForMember(dest => dest.CreatedOn, opt => opt.MapFrom(src => src.AppUser!.CreatedOn));
+            CreateMap<Delivery, DeliveryFormViewModel>().ReverseMap();
+            CreateMap<Delivery, DeliveryProfileFormViewModel> ().ReverseMap();
 
             // Start Up            
             CreateMap<StartUp, StartUpViewModel>()
