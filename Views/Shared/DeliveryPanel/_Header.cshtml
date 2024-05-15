@@ -28,11 +28,15 @@
             <div class="app-navbar-item me-7 ms-lg-2" id="kt_header_user_menu_toggle">
                 <div class="d-flex flex-column justify-content-center me-3 text-end">                   
                 </div>
-                <div class="cursor-pointer me-5 symbol symbol-30px symbol-lg-40px border border-gray-500 shadow-sm" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-start">
-                    <a href="#" class="btn btn-sm  align-self-center pe-0">  تسجيل الخروج</a>
-                    <i class="fa-solid fa-right-from-bracket px-3"></i>
-                </div>
-                
+                <div class="cursor-pointer me-5 symbol symbol-30px symbol-lg-40px border border-gray-500 shadow-sm" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-start">                    
+                    <form id="SignOut" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/">                        
+                        <button type="submit" class="btn btn-sm align-self-center pe-0">
+                            تسجيل الخروج
+                            <i class="fa-solid fa-right-from-bracket px-3"></i>
+                        </button>
+                    </form>
+                   
+                </div>                
                 <!--end::Menu wrapper-->
             </div>           
         </div>
