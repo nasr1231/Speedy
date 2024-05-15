@@ -12,8 +12,8 @@
     
     <!--End::Global Fonts -->
     <link href="~/lib/font-awesome/css/all.min.css" rel="stylesheet" />
-    <link href="~/assets/website/delivery assets/plugins.bundle.rtl.css" rel="stylesheet" />
-    <link href="~/assets/website/delivery assets/style.bundle.rtl.css" rel="stylesheet" />
+    <link href="~/assets/website/DeliveryAssets/plugins.bundle.rtl.css" rel="stylesheet" />
+    <link href="~/assets/website/DeliveryAssets/style.bundle.rtl.css" rel="stylesheet" />
     @await RenderSectionAsync("Styles", required: false)
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <style>
@@ -78,15 +78,14 @@
     <!--begin::Javascript-->
     <script>var hostUrl = "assets/";</script>
     <!--begin::Global Javascript Bundle(mandatory for all pages)-->   
-    <script src="~/assets/website/delivery assets/plugins.bundle.js"></script>
-    <script src="~/assets/website/delivery assets/scripts.bundle.js"></script>
+    <script src="~/assets/website/DeliveryAssets/plugins.bundle.js"></script>
+    <script src="~/assets/website/DeliveryAssets/scripts.bundle.js"></script>
+    <script src="~/lib/bootbox.js/bootbox.min.js"></script>
     <script src="~/lib/font-awesome/js/all.min.js"></script>
     <!--end::Global Javascript Bundle-->
 
-    @await RenderSectionAsync("Plugins", required: false)
-
+    @await RenderSectionAsync("Plugins", required: false)    
     <script src="~/js/site.js" asp-append-version="true"></script>
-
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
