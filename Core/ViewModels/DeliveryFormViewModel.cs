@@ -8,7 +8,8 @@ namespace Speedy.Core.ViewModels
 {
     public class DeliveryFormViewModel
     {
-        #region Properties
+        #region Properties        
+
         [Display(Name = "الأسم الأول")]
         [Required(ErrorMessage = Errors.isRequired)]
         [MaxLength(40, ErrorMessage = Errors.MaxLength)]
@@ -81,6 +82,10 @@ namespace Speedy.Core.ViewModels
         [Required(ErrorMessage = Errors.isRequired)]
         public int SelectedGovernorate { get; set; }
         public IEnumerable<SelectListItem>? Governorates { get; set; }
+
+        [DisplayName("مناطق العمل")]
+        [Required(ErrorMessage = Errors.isRequired)]
+        public List<string>? ServiceArea { get; set; } = [];
         #endregion
     }
 }

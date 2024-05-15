@@ -18,7 +18,7 @@ namespace Speedy.Core.ViewModels
         #region Delivery Properties
         public int Id { get; set; }
         public Byte? Rate { get; set; }
-        public string ServiceArea { get; set; } = null!;        
+        public List<string>? ServiceArea { get; set; } = [];
         public string Address { get; set; } = null!;       
         public string ShippingMethodName { get; set; } = null!;
         public string GovernorateName { get; set; } = null!;
@@ -30,7 +30,7 @@ namespace Speedy.Core.ViewModels
         #endregion
 
         #region Relations
-        public ReviewViewModel? Reviews { get; }
+        public ICollection<Review>? Reviews { get; }
         #endregion
     }
 }

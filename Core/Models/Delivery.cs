@@ -10,9 +10,10 @@ namespace Speedy.Core.Models
         public int Id { get; set; }
         [Range(0,5)]
         public Byte? Rate { get; set; }
-        public string? ServiceArea { get; set; }
-        public string Address { get; set; } = null!;     
-        
+        public List<string>? ServiceArea { get; set; } = [];
+        public string Address { get; set; } = null!;
+        public List<string>? AttachmentUrl { get; set; }
+
         [MaxLength(500)]
         public string? Description { get; set; }
         public bool HasWhatsApp {  get; set; }

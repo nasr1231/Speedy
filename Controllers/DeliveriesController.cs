@@ -1,17 +1,21 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Speedy.Core.Models;
 using Speedy.Services.User;
 using System.Data;
+using System.Diagnostics;
 
 namespace Speedy.Controllers
 {
-    public class DeliveriesController(ApplicationDbContext context, IMapper mapper, IUserService userService, IAttachmentService attachmentService, IDeliveryService deliveryService) : Controller
+    public class DeliveriesController(ApplicationDbContext context, IMapper mapper,UserManager<AppUser> userManager, IUserService userService, IAttachmentService attachmentService, IDeliveryService deliveryService) : Controller
     {
         private readonly ApplicationDbContext _context = context;
         private readonly IMapper _mapper = mapper;
+        private readonly UserManager<AppUser> _userManager = userManager;
         private readonly IUserService _userService = userService;
         private readonly IAttachmentService _attachmentService = attachmentService;
         private readonly IDeliveryService _deliveryService = deliveryService;
@@ -38,32 +42,38 @@ namespace Speedy.Controllers
             if (User.IsInRole(AppRoles.Admin))
                 return View("Index", deliveriesView);
 
-            return View("Deliveries");
+            if (User.IsInRole(AppRoles.Delivery))
+                return View("Dashboard", deliveriesView);
 
+            if (User.IsInRole(AppRoles.StartUp))
+                return View("StartUps", deliveriesView);
+
+            if (User.IsInRole(AppRoles.Individual))
+                return View("Individuals", deliveriesView);
+
+            return NotFound();
         }
-        public async Task<IActionResult> Dashboard()
+        public async Task<IActionResult> Dashboard(string id)
         {
-            return View("Dashboard");
+            var delivery = await _deliveryService.GetDeliveryAsync(deliveryId: id);
+
+            if (delivery is null)
+                return NotFound();
+
+            var deliveriesView = _mapper.Map<DeliveryViewModel>(delivery);
+
+            return View("Dashboard", deliveriesView);
         }
-        public async Task<IActionResult> Profile(/*string id*/)
+        public async Task<IActionResult> Profile(string id)
         {
-            //var delivery = await _deliveryService.GetDeliveryAsync(deliveryId: id);
-                
-            //if(delivery is null)
-            //    return NotFound();
+            var delivery = await _deliveryService.GetDeliveryAsync(deliveryId: id);
 
-            //var deliveriesView = new DeliveryViewModel
-            //{
-            //    Id = delivery.Id,
-            //    NID = delivery.AppUser!.NID,
-            //    CreatedOn = delivery.CreatedOn,
-            //    Email = delivery.AppUser.Email,
-            //    IsDeleted = delivery.IsDeleted,
-            //    FirstName = delivery.AppUser.FirstName,
-            //    LastName = delivery.AppUser.LastName,
-            //};
+            if (delivery is null)
+                return NotFound();
+         
+            var deliveriesView = _mapper.Map<DeliveryViewModel>(delivery);            
 
-            return View("Profile"/*, deliveriesView*/);
+            return View("Profile", deliveriesView);
         }
 
         [HttpGet]
@@ -111,7 +121,7 @@ namespace Speedy.Controllers
             };
 
             var attachResult = await _attachmentService.UploadAttachmentAsync(
-                attachedFile: model.Attachments,
+                attachedFile: model.Attachments,                
                 entityName: "Delivery Agents",
                 userName: delivery.AppUserId);
 
@@ -128,14 +138,100 @@ namespace Speedy.Controllers
 
         
         //[Authorize(Roles = AppRoles.Delivery)]
-        public IActionResult EditProfile()
-        {            
-            //var property = await _deliveryService.GetDeliveryAsync(id);
+        public async Task<IActionResult> EditProfile(string id)
+        {
+            var delivery = await _deliveryService.GetDeliveryAsync(deliveryId: id);
 
-            //if (property is null)
-            //    return NotFound();            
+            if (delivery is null)
+                return NotFound();
 
-            return View("SettingsForm"/*, property*/);
+            var deliveryData = _mapper.Map<DeliveryProfileFormViewModel>(delivery);
+
+            return View("SettingsForm", deliveryData);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditProfile(DeliveryProfileFormViewModel model)
+        {
+            var agent = _context.Deliveries.SingleOrDefaultAsync(a => a.Id == model.Id);
+
+            return View("Profile");
+        }
+
+        [HttpGet]
+        [AjaxOnly]
+        public async Task<IActionResult> ResetPassword(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+
+            if (user is null)
+                return BadRequest();           
+
+            var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            var resetPassForm = new ResetPasswordFormViewModel {
+                Code = code,
+                Id = id
+            };            
+            return PartialView("_ResetPasswordForm", resetPassForm);
+        }        
+
+        [HttpPost]
+        [AjaxOnly]
+        public async Task<IActionResult> ResetPassword(ResetPasswordFormViewModel resetForm)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var transaction = _context.Database.BeginTransaction();
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == resetForm.Id);
+
+            if (user is null)
+                return BadRequest();
+
+            var checkOld = await _userManager.CheckPasswordAsync(user, resetForm.OldPassword);
+
+            if (!checkOld)
+                return Unauthorized("Password is incorrect");
+
+            var result = await _userManager.ResetPasswordAsync(user, resetForm.Code, resetForm.Password);
+
+            if (!result.Succeeded)
+                return BadRequest(string.Join(',', result.Errors.Select(e => e.Description)));
+
+            user.LastUpdatedById = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+            user.LastUpdatedOn = DateTime.Now;
+
+            var UserResult = await _userManager.UpdateAsync(user);
+
+            if (!UserResult.Succeeded)
+                return BadRequest(string.Join(',', result.Errors.Select(e => e.Description)));
+            transaction.Commit();
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ToggleStatus(int id)
+        {
+            IQueryable<Delivery> userQueryable = _context.Deliveries;
+
+            var delivery = userQueryable.SingleOrDefault(b => b.Id == id);
+
+            if (delivery is null)
+                return NotFound();
+
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+
+            delivery.IsDeleted = !delivery.IsDeleted;
+            delivery.LastUpdatedOn = DateTime.Now;
+            delivery.LastUpdatedById = userId;
+
+            _context.Deliveries.Update(delivery);
+            _context.SaveChanges();
+
+            return Ok();
         }
 
         public IActionResult GetCities(int GovernorateId)
