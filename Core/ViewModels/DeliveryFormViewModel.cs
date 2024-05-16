@@ -20,6 +20,7 @@ namespace Speedy.Core.ViewModels
         [MaxLength(40, ErrorMessage = Errors.MaxLength)]
         public string LastName { get; set; } = null!;
 
+        //[Remote("IsUnique", "Deliveries", ErrorMessage = Errors.isUnique)]
 		[Display(Name = "البريد الإلكتروني")]
         [EmailAddress]
 		[Required(ErrorMessage = Errors.isRequired)]

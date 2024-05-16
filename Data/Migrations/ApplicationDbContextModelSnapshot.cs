@@ -342,7 +342,7 @@ namespace Speedy.Data.Migrations
 
                     b.HasIndex("ShippingMethodId");
 
-                    b.ToTable("Deliveries");
+                    b.ToTable("Deliveries", (string)null);
                 });
 
             modelBuilder.Entity("Speedy.Core.Models.Individual", b =>
@@ -389,7 +389,7 @@ namespace Speedy.Data.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("Individuals");
+                    b.ToTable("Individuals", (string)null);
                 });
 
             modelBuilder.Entity("Speedy.Core.Models.Order", b =>
@@ -467,7 +467,7 @@ namespace Speedy.Data.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("Speedy.Core.Models.RelatedData.City", b =>
@@ -508,7 +508,7 @@ namespace Speedy.Data.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("Cities");
+                    b.ToTable("Cities", (string)null);
 
                     b.HasData(
                         new
@@ -554,7 +554,7 @@ namespace Speedy.Data.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("Governorates");
+                    b.ToTable("Governorates", (string)null);
 
                     b.HasData(
                         new
@@ -613,7 +613,7 @@ namespace Speedy.Data.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("ShippingMethods");
+                    b.ToTable("ShippingMethods", (string)null);
 
                     b.HasData(
                         new
@@ -685,7 +685,7 @@ namespace Speedy.Data.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Reviews", (string)null);
                 });
 
             modelBuilder.Entity("Speedy.Core.Models.StartUp", b =>
@@ -746,7 +746,7 @@ namespace Speedy.Data.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("StartUps");
+                    b.ToTable("StartUps", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

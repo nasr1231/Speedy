@@ -234,7 +234,14 @@ namespace Speedy.Controllers
             return Ok();
         }
 
-        public IActionResult GetCities(int GovernorateId)
+		public IActionResult IsUnique(DeliveryFormViewModel model){
+
+            var isExists = _context.Users.Any(c => c.Email == model.Email);
+
+            return Json(!isExists);
+        }
+
+		public IActionResult GetCities(int GovernorateId)
         {
             var cities = _context.Cities.Where(c => !c.IsDeleted && c.GovernorateId == GovernorateId).OrderBy(c => c.Name).ToList();
 
