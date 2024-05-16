@@ -75,6 +75,7 @@ namespace Speedy.Controllers
 			{
 				AppUserId = result.UserId!,
 				referralCode = model.ReferralCode,
+				CityId = model.SelectedCityId,				
 			};
 
 			_context.Add(individual);

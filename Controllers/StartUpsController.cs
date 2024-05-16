@@ -73,7 +73,8 @@ namespace Speedy.Controllers
                 FoundingDate = model.EstablishDate,
                 IsOnline = model.IsOnline,
                 StartUpName = model.StartUpName,                
-                Url = model.Urls,                
+                Url = model.Urls,
+                CityId = model.SelectedCityId,
             };
 
             _context.Add(startUp);
