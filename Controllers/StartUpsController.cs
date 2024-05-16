@@ -6,8 +6,7 @@ using Speedy.Core.Consts;
 using Speedy.Services.User;
 
 namespace Speedy.Controllers
-{
-    [Authorize(Roles = AppRoles.Admin)]
+{    
     public class StartUpsController(ApplicationDbContext context, IMapper mapper, IUserService userService, IDataService dataService) : Controller
     {
         private readonly ApplicationDbContext _context = context;
