@@ -42,14 +42,7 @@
                 <div class="card mb-5 mb-xl-10">
                     <div class="card-body pt-9 pb-0">
                         <!--begin::Details-->
-                        <div class="d-flex flex-wrap flex-sm-nowrap mb-0">
-                            <!--begin: Pic-->
-                            <div class="me-7 mb-4">
-                                <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                                    <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-body h-20px w-20px"></div>
-                                </div>
-                            </div>
-                            <!--end::Pic-->
+                        <div class="d-flex flex-wrap flex-sm-nowrap mb-0">                           
                             <!--begin::Info-->
                             <div class="flex-grow-1">
                                 <!--begin::Title-->
@@ -368,7 +361,7 @@
                                             <div class="d-flex flex-stack flex-grow-1 ">
                                                 <div class="fw-semibold">
                                                     <h4 class="text-gray-900 fw-bold">الحساب معطل</h4>
-                                                    
+
                                                 </div>
                                             </div>
                                         </div>
@@ -386,7 +379,7 @@
                                             <div class="d-flex flex-stack flex-grow-1 ">
                                                 <div class="fw-semibold">
                                                     <h4 class="text-gray-900 fw-bold mb-5">أنت الآن تقوم بتعطيل حسابك</h4>
-                                                    <div class="fs-6 text-gray-700">هل أنت متأكد أنك تريد تعطيل الحساب <br /></div>                                                    
+                                                    <div class="fs-6 text-gray-700">هل أنت متأكد أنك تريد تعطيل الحساب <br /></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -397,7 +390,8 @@
                                         <span id="checkboxWarning" style="display:none; color: red;">تأكد من موافقتك على تعطيل حسابك</span>
                                     }
                                 </div>
-                                @if(Model.IsDeleted){
+                                @if (Model.IsDeleted)
+                                {
                                     <div class="card-footer d-flex justify-content-end py-6 px-9">
                                         <a href="javascript:;" data-url="/deliveries/ToggleStatus/@Model.Id" data-title="تغير حالة الحساب" data-message="هل انت متأكد من رغبتك في تغير حالة حسابك؟؟" class="btn btn-success fw-semibold delivery-toggle-status">إستعادة الحساب</a>
                                     </div>
@@ -415,7 +409,31 @@
                 </div>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade" id="demo1" role="tabpanel">
-
+                        <div class="card  mb-5 mb-xl-10">
+                            <!--begin::Col-->
+                            <div class="col-xl-6 my-15 mx-10">
+                                <!--begin::Notice-->
+                                <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed h-lg-100 p-6">
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
+                                        <!--begin::Content-->
+                                        <div class="mb-3 mb-md-0 fw-semibold">
+                                            <h4 class="text-gray-900 fw-bold">ملحوظة هامه!</h4>
+                                            <div class="fs-6 text-gray-700 pe-7">فى حاله إضافة أو تعديل أى بطاقه برجاء العلم أنها يجب أن تكون سارية </div>
+                                        </div>
+                                        <!--end::Content-->
+                                        <!--begin::Action-->
+                                        <a href="#" class="btn btn-primary px-6 align-self-center text-nowrap" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card">
+                                            إضافة حساب
+                                        </a>
+                                        <!--end::Action-->
+                                    </div>
+                                    <!--end::Wrapper-->
+                                </div>
+                                <!--end::Notice-->
+                            </div>
+                            <!--end::Col-->
+                        </div>
                     </div>
                 </div>
                 <div class="tab-content" id="myTabContent">
