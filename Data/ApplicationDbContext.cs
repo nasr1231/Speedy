@@ -12,6 +12,7 @@ namespace Speedy.Data
         public DbSet<ShippingMethod> ShippingMethods { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Governorate> Governorates { get; set; }
+        public DbSet<PaymentMethod> PaymentMethods { get; set; }
         #endregion
         public DbSet<Delivery> Deliveries { get; set; }
         public DbSet<Individual> Individuals { get; set; }
@@ -84,6 +85,7 @@ namespace Speedy.Data
 			builder.Entity<ShippingMethod>().HasData(RelevantData.ShippingMethods);
             builder.Entity<Governorate>().HasData(RelevantData.Governorates);
             builder.Entity<City>().HasData(RelevantData.Cities);
+            builder.Entity<PaymentMethod>().HasData(RelevantData.PaymentMethods);
             #endregion
 
             base.OnModelCreating(builder);
