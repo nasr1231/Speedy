@@ -6,7 +6,8 @@
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
                     <a href="index.html" class="logo">
-                        <img src="assets/images/logo.png" alt="Chain App Dev">
+                        
+                        <img src="~/assets/website/images/ourlogo.png"/>
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
@@ -16,15 +17,16 @@
                         </li>
                         <li class="scroll-to-section"><a asp-controller="Deliveries" asp-action="Dashboard">مناديب</a></li>
                         <li class="scroll-to-section"><a href="#services">طلبات</a></li>
-                        <li class="scroll-to-section"><a href="#about">مدفوعات</a></li>
-                        <li class="scroll-to-section"><a href="#newsletter">عنا</a></li>
+                        <li class="scroll-to-section"><a  id="ab" href="#about">عنا</a></li>
+
+
                     </ul>
                     <div class="gradient-button">
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <div class="cursor-pointer me-5 symbol symbol-30px symbol-lg-40px border border-gray-500 shadow-sm" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-start">
+                            <div class="cursor-pointer me-5 symbol symbol-30px symbol-lg-40px border border-gray-500 shadow-sm" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-start" >
                                 <form id="SignOut" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/">
-                                    <button type="submit" class="btn btn-sm align-self-center pe-0">
+                                    <button type="submit" style="color:black; " class="btn bg-white text-black btn-sm align-self-center ps-2">
                                         تسجيل الخروج
                                         <i class="fa-solid fa-right-from-bracket px-3"></i>
                                     </button>
@@ -33,14 +35,11 @@
                         }
                         else
                         {
-                            <a id="modal_trigger" href="Identity/Account/login">
+                            <a id="modal_trigger" href="Identity/Account/login" class="ms-11">
                                 <i class="fa fa-sign-in-alt"></i>
                                 تسجيل الدخول
                             </a>
-                            <a id="modal_trigger" asp-action="Register">
-                                <i class="fa fa-sign-in-alt"></i>
-                                سجل الآن
-                            </a>
+                            
                         }
                     </div>
 

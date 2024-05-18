@@ -15,15 +15,15 @@
                         <div class="left-content show-up header-text wow fadeInLeft" data-wow-duration="1s" data-wow-delay="1s">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <h2>Get The Latest App From App Stores</h2>
-                                    <p>Chain App Dev is an app landing page HTML5 template based on Bootstrap v5.1.3 CSS layout provided by TemplateMo, a great website to download free CSS templates.</p>
+                                    <h2>انضم إلينا الآن فى موقعنا المميز Speedy</h2>
+                                    <p>يوفر سبيدي تجربة حقيقية لتوصيل أي شيء من أي مكان، وهو أمر ممكن فقط من خلال منصتنا المميزة بكثير من عمال التوصيل المسجلين عند الطلب .</p>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="white-button first-button scroll-to-section">
-                                        <a href="#contact">Free Quote <i class="fab fa-apple"></i></a>
-                                    </div>
-                                    <div class="white-button scroll-to-section">
-                                        <a href="#contact">Free Quote <i class="fab fa-google-play"></i></a>
+                                        <a id="modal_trigger" asp-action="Register">
+                                            <i class="fa fa-sign-in-alt"></i>
+                                            سجل الآن
+                                        </a>
                                     </div>
                                 </div>
   
@@ -51,9 +51,8 @@
         <div class="row justify-content-end">
             <div class="col-lg-8 offset-lg-2">
                 <div class="section-heading ">
-                    <h4>Amazing <em>Services &amp; Features</em> for you</h4>
+                    <h4> <em> خدمات &amp; ميزات </em> مذهلة بالنسبة لكل مستخدم</h4>
                     <img class="img-fluid" src="assets/images/heading-line-dec.png" alt="">
-                    <p>If you need the greatest collection of HTML templates for your business, please visit <a rel="nofollow" href="https://www.toocss.com/" target="_blank">TooCSS</a> Blog. If you need to have a contact form PHP script, go to <a href="https://templatemo.com/contact" target="_parent">our contact page</a> for more information.</p>
                 </div>
             </div>
         </div>
@@ -63,18 +62,18 @@
             <div class="col-lg-3">
                 <div class="service-item first-service">
                     <div class="icon"></div>
-                    <h4>App Maintenance</h4>
-                    <p>You are not allowed to redistribute this template ZIP file on any other website.</p>
+                    <h4>عامل توصيل</h4>
+                    <p>.إذا كنت تملك وسيلة توصيل (عجلة - سيارة - موتوسيكل) و تبحث عن المنصة المناسبه للعمل الحر أو تريد أن تحسن دخلك يمكنك أن تعمل معنا بمجرد تسجيل بعض البيانات </p>
                     <div class="text-button">
-                        <a href="#">Read More <i class="fa fa-arrow-right"></i></a>
+                        <a href="#">الشروط و الأحكام<i class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="service-item second-service">
                     <div class="icon"></div>
-                    <h4>Rocket Speed of App</h4>
-                    <p>You are allowed to use the Chain App Dev HTML template. Feel free to modify or edit this layout.</p>
+                    <h4>عميل</h4>
+                    <p>.إذا كنت تبحث عن وسيلة سريعة و آمنه لتوصيل هدية أو أي شيء آخر من مكانك إلى أحد أصدقائك , أقاربك أو غيرهم فى أى وقت من اليوم , عليك التسجيل معنا و الإستمتاع بهذة الخدمة</p>
                     <div class="text-button">
                         <a href="#">Read More <i class="fa fa-arrow-right"></i></a>
                     </div>
@@ -83,8 +82,8 @@
             <div class="col-lg-3">
                 <div class="service-item third-service">
                     <div class="icon"></div>
-                    <h4>Multi Workflow Idea</h4>
-                    <p>If this template is beneficial for your work, please support us <a rel="nofollow" href="https://paypal.me/templatemo" target="_blank">a little via PayPal</a>. Thank you.</p>
+                    <h4>شركة ناشئة</h4>
+                    <p>إذا كانت شركتك ناشئة و تريد أن تتوسع و تنتشر سريعا و توصل منتجاتك إلى عملائك بشكل آمن , سرع , و بتكلفة مناسبة.  <br>سجل معنا الآن و استمتع بهذه الخدمة و أنتظر عروضنا المخصصة لك</p>
                     <div class="text-button">
                         <a href="#">Read More <i class="fa fa-arrow-right"></i></a>
                     </div>
@@ -93,8 +92,8 @@
             <div class="col-lg-3">
                 <div class="service-item fourth-service">
                     <div class="icon"></div>
-                    <h4>24/7 Help &amp; Support</h4>
-                    <p>Lorem ipsum dolor consectetur adipiscing elit sedder williamsburg photo booth quinoa and fashion axe.</p>
+                    <h4>شركة كبرى</h4>
+                    <p>إذا كانت شركتك تعاني من كثرة الطلبات و عدم القدرة على توصيلها جميعها فى الوقت المطلوب. <br /> .يمكننا مساعدتك فى هذا بمجرد مليء بعض البيانات و اختيار عمال التوصيل الذين ترغب بهم لتوصيل طلباتك فى وقت قياسي</p>
                     <div class="text-button">
                         <a href="#">Read More <i class="fa fa-arrow-right"></i></a>
                     </div>
@@ -109,37 +108,43 @@
         <div class="row">
             <div class="col-lg-6 align-self-center">
                 <div class="section-heading">
-                    <h4>About <em>What We Do</em> &amp; Who We Are</h4>
-                    <img src="assets/images/heading-line-dec.png" alt="">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eismod tempor incididunt ut labore et dolore magna.</p>
+                    <h4>أهم ما يتميز به <em> Speedy</em>   </h4>
+                     
+
+                    <p class="text-center mt-4">يحرص Speedy على التعامل مع كل طلبية بعناية فائقة لضمان رضاكم وثقتكم بخدماتنا.</p>
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="box-item">
-                            <h4><a href="#">Maintance Problems</a></h4>
-                            <p>Lorem Ipsum Text</p>
+                            <h4><a href="#">توفير خدمات التوصيل على مدار الساعة</a></h4>
+                            <p class="mt-3">ضمان تلبية احتياجاتكم في أي وقت من اليوم.</p>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="box-item">
-                            <h4><a href="#">24/7 Support &amp; Help</a></h4>
-                            <p>Lorem Ipsum Text</p>
+                            <h4><a href="#">أسعار تنافسية في المتناول </a></h4>
+                            <p class="mt-3">مما يتيح لكم الاستفادة من خدمات عالية الجودة دون أن تؤثر على ميزانيتكم.</p>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="box-item">
-                            <h4><a href="#">Fixing Issues About</a></h4>
-                            <p>Lorem Ipsum Text</p>
+                            <h4><a href="#">دعمًا فنيًا وخدمة عملاء على مدار الساعة</a></h4>
+                            <p class="mt-3">
+                                لحل أي مشكلة تواجه المستخدمين فى أى وقت من اليوم.
+
+                            </p>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="box-item">
-                            <h4><a href="#">Co. Development</a></h4>
-                            <p>Lorem Ipsum Text</p>
+                            <h4><a href="#"> خدمة توصيل سريعة </a></h4>
+                            <p class="mt-3">بحيث تصل طلباتكم في الوقت المحدد دون أي تأخير مما يتيح الحصول على الأشياء الضرورية في وقت قصير .</p>
                         </div>
                     </div>
                     <div class="col-lg-12">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eismod tempor idunte ut labore et dolore adipiscing  magna.</p>
+                        <p class="text-center">
+                            تتيح للمستخدمين توصيل مجموعة واسعة من المنتجات، بما في ذلك الملابس، الإلكترونيات، الأدوية، الهدايا، والمستلزمات المنزلية.
+                        </p>
                         <div class="gradient-button">
                             <a href="#">Start 14-Day Free Trial</a>
                         </div>
@@ -149,7 +154,8 @@
             </div>
             <div class="col-lg-6">
                 <div class="right-image">
-                    <img src="assets/images/about-right-dec.png" alt="">
+                    <img src="~/assets/website/images/delivery-bro (1).png" />
+
                 </div>
             </div>
         </div>
@@ -161,8 +167,7 @@
         <div class="row justify-content-end">
             <div class="col-lg-8 offset-lg-2">
                 <div class="section-heading">
-                    <h4>Check What <em>The Clients Say</em> About Our App Dev</h4>
-                    <img src="assets/images/heading-line-dec.png" alt="">
+                    <h4>إليك بعض من <em> تعليقات المستخدمين </em> على خدماتنا</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eismod tempor incididunt ut labore et dolore magna.</p>
                 </div>
             </div>
@@ -176,18 +181,19 @@
                                         <div class="thumb">
                                             <div class="row">
                                                 <div class="col-lg-4 col-sm-4 col-12">
-                                                    <h4>David Martino Co</h4>
+                                                    <h4>ابراهيم محمد</h4>
                                                     <span class="date">30 November 2021</span>
                                                 </div>
-                                                <div class="col-lg-4 col-sm-4 d-none d-sm-block">
-                                                    <span class="category">Financial Apps</span>
+                                                <div class="col-lg-4 col-sm-4 d-none d-sm-block" style="text-align:center; padding-top:21px;">
+                                                    <span class="category">عميل</span>
                                                 </div>
                                                 <div class="col-lg-4 col-sm-4 col-12">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    
                                                     <span class="rating">4.8</span>
                                                 </div>
                                             </div>
@@ -197,18 +203,19 @@
                                         <div class="thumb">
                                             <div class="row">
                                                 <div class="col-lg-4 col-sm-4 col-12">
-                                                    <h4>Jake Harris Nyo</h4>
+                                                    <h4>محمد صابر</h4>
                                                     <span class="date">29 November 2021</span>
                                                 </div>
-                                                <div class="col-lg-4 col-sm-4 d-none d-sm-block">
-                                                    <span class="category">Digital Business</span>
+                                                <div class="col-lg-4 col-sm-4 d-none d-sm-block" style="text-align:center; padding-top:21px;">
+                                                    <span class="category">عميل</span>
                                                 </div>
                                                 <div class="col-lg-4 col-sm-4 col-12">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa-solid fa-star-half-stroke text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+
                                                     <span class="rating">4.5</span>
                                                 </div>
                                             </div>
@@ -218,18 +225,19 @@
                                         <div class="thumb">
                                             <div class="row">
                                                 <div class="col-lg-4 col-sm-4 col-12">
-                                                    <h4>May Catherina</h4>
+                                                    <h4>هاجر سعيد</h4>
                                                     <span class="date">27 November 2021</span>
                                                 </div>
-                                                <div class="col-lg-4 col-sm-4 d-none d-sm-block">
-                                                    <span class="category">Business &amp; Economics</span>
+                                                <div class="col-lg-4 col-sm-4 d-none d-sm-block" style="text-align:center; padding-top:21px;">
+                                                    <span class="category">شركة ناشئة</span>
                                                 </div>
                                                 <div class="col-lg-4 col-sm-4 col-12">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+
                                                     <span class="rating">4.7</span>
                                                 </div>
                                             </div>
@@ -239,18 +247,19 @@
                                         <div class="thumb">
                                             <div class="row">
                                                 <div class="col-lg-4 col-sm-4 col-12">
-                                                    <h4>Random User</h4>
+                                                    <h4>عمر طاهر</h4>
                                                     <span class="date">24 November 2021</span>
                                                 </div>
-                                                <div class="col-lg-4 col-sm-4 d-none d-sm-block">
-                                                    <span class="category">New App Ecosystem</span>
+                                                <div class="col-lg-4 col-sm-4 d-none d-sm-block" style="text-align:center; padding-top:21px;">
+                                                    <span class="category">شركة ناشئة</span>
                                                 </div>
                                                 <div class="col-lg-4 col-sm-4 col-12">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa-solid fa-star text-secondary"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+
                                                     <span class="rating">3.9</span>
                                                 </div>
                                             </div>
@@ -259,19 +268,20 @@
                                     <div class="last-thumb">
                                         <div class="thumb">
                                             <div class="row">
-                                                <div class="col-lg-4 col-sm-4 col-12">
-                                                    <h4>Mark Amber Do</h4>
+                                                <div class="col-lg-4 col-sm-4 col-12 ">
+                                                    <h4>جاسر علي</h4>
                                                     <span class="date">21 November 2021</span>
                                                 </div>
-                                                <div class="col-lg-4 col-sm-4 d-none d-sm-block">
-                                                    <span class="category">Web Development</span>
+                                                <div class="col-lg-4 col-sm-4 d-none d-sm-block" style="text-align:center; padding-top:21px;">
+                                                    <span class="category">شركة كبرى</span>
                                                 </div>
                                                 <div class="col-lg-4 col-sm-4 col-12">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+
                                                     <span class="rating">4.3</span>
                                                 </div>
                                             </div>
@@ -287,17 +297,18 @@
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <div class="client-content">
-                                                            <img src="assets/images/quote.png" alt="">
+                                                            <img src="/assets/website/images/quote.png" />
+
+
                                                             <p>
                                                                 “Lorem ipsum dolor sit amet, consectetur adpiscing elit, sed do eismod tempor idunte ut labore et dolore magna aliqua darwin kengan
                                                                 lorem ipsum dolor sit amet, consectetur picing elit massive big blasta.”
                                                             </p>
                                                         </div>
                                                         <div class="down-content">
-                                                            <img src="assets/images/client-image.jpg" alt="">
-                                                            <div class="right-content">
-                                                                <h4>David Martino</h4>
-                                                                <span>CEO of David Company</span>
+                                                            <div class="text-center">
+                                                                <h4>Speedy</h4>
+                                                                <span>Our feedback</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -305,102 +316,8 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li>
-                                        <div>
-                                            <div class="thumb">
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="client-content">
-                                                            <img src="assets/images/quote.png" alt="">
-                                                            <p>
-                                                                “CTO, Lorem ipsum dolor sit amet, consectetur adpiscing elit, sed do eismod tempor idunte ut labore et dolore magna aliqua darwin kengan
-                                                                lorem ipsum dolor sit amet, consectetur picing elit massive big blasta.”
-                                                            </p>
-                                                        </div>
-                                                        <div class="down-content">
-                                                            <img src="assets/images/client-image.jpg" alt="">
-                                                            <div class="right-content">
-                                                                <h4>Jake H. Nyo</h4>
-                                                                <span>CTO of Digital Company</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <div class="thumb">
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="client-content">
-                                                            <img src="assets/images/quote.png" alt="">
-                                                            <p>
-                                                                “May, Lorem ipsum dolor sit amet, consectetur adpiscing elit, sed do eismod tempor idunte ut labore et dolore magna aliqua darwin kengan
-                                                                lorem ipsum dolor sit amet, consectetur picing elit massive big blasta.”
-                                                            </p>
-                                                        </div>
-                                                        <div class="down-content">
-                                                            <img src="assets/images/client-image.jpg" alt="">
-                                                            <div class="right-content">
-                                                                <h4>May C.</h4>
-                                                                <span>Founder of Catherina Co.</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <div class="thumb">
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="client-content">
-                                                            <img src="assets/images/quote.png" alt="">
-                                                            <p>
-                                                                “Lorem ipsum dolor sit amet, consectetur adpiscing elit, sed do eismod tempor idunte ut labore et dolore magna aliqua darwin kengan
-                                                                lorem ipsum dolor sit amet, consectetur picing elit massive big blasta.”
-                                                            </p>
-                                                        </div>
-                                                        <div class="down-content">
-                                                            <img src="assets/images/client-image.jpg" alt="">
-                                                            <div class="right-content">
-                                                                <h4>Random Staff</h4>
-                                                                <span>Manager, Digital Company</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <div class="thumb">
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="client-content">
-                                                            <img src="assets/images/quote.png" alt="">
-                                                            <p>
-                                                                “Mark, Lorem ipsum dolor sit amet, consectetur adpiscing elit, sed do eismod tempor idunte ut labore et dolore magna aliqua darwin kengan
-                                                                lorem ipsum dolor sit amet, consectetur picing elit massive big blasta.”
-                                                            </p>
-                                                        </div>
-                                                        <div class="down-content">
-                                                            <img src="assets/images/client-image.jpg" alt="">
-                                                            <div class="right-content">
-                                                                <h4>Mark Am</h4>
-                                                                <span>CTO, Amber Do Company</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
+                                    
+                                    
                                 </ul>
                             </div>
                         </div>
@@ -410,7 +327,7 @@
         </div>
     </div>
 </div>
-
+@*
 <div id="pricing" class="pricing-tables">
     <div class="container">
         <div class="row justify-content-end">
@@ -484,3 +401,5 @@
         </div>
     </div>
 </div>
+*@
+
