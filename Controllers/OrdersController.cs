@@ -10,7 +10,7 @@ namespace Speedy.Controllers
                 return View("OrderStartup");
 
 			if (User.IsInRole(AppRoles.Individual))
-				return View("OrderIndiviudal");
+				return View("OrderIndividual");
 
             return View();
 		}
