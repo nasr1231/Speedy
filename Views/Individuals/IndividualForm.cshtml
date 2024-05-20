@@ -211,7 +211,7 @@
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="form-check form-check-custom form-check-solid me-10 mb-7">
-                                    <input asp-for="@Model.HasWhatsApp" type="checkbox" value="" class="form-check-input h-30px w-30px" />
+                                    <input asp-for="@Model.HasWhatsApp" type="checkbox" class="form-check-input h-30px w-30px" />
                                     <label class="form-check-label me-4" for="flexCheckbox30">
                                         هل هذا الرقم لديه واتساب؟
                                     </label>
@@ -233,17 +233,18 @@
                                 <h5 class="fv-row mb-3 form-label fw-bolder text-dark fs-6 ">النوع</h5>
                                 <div class="d-flex justify-content-around mb-5">
                                     <div class="input-group mb-2">
-                                        <div class="form-check form-check-inline ">
-                                            <input asp-for="@Model.Gender" class="form-check-input" type="radio" value="ذكر">
-                                            <label class="form-check-label fw-bolder text-dark fs-6 ">ذكر</label>
+                                        <div class="form-check form-check-inline">
+                                            <input id="radio-male" class="form-check-input" type="radio" value="ذكر" name="gender">
+                                            <label for="radio-male" class="form-check-label fw-bolder text-dark fs-6">ذكر</label>
                                         </div>
                                         <div class="form-check form-check-inline mb-7">
-                                            <input asp-for="@Model.Gender" class="form-check-input" type="radio" value="أنثى">
-                                            <label class="form-check-label fw-bolder text-dark fs-6 ">انثي</label>
+                                            <input id="radio-female" class="form-check-input" type="radio" value="أنثى" name="gender">
+                                            <label for="radio-female" class="form-check-label fw-bolder text-dark fs-6">أنثى</label>
                                         </div>
                                     </div>
                                     <span asp-validation-for="@Model!.Gender" class="text-danger d-block h-10px"></span>
                                 </div>
+                                <input type="hidden" id="hidden-gender" asp-for="@Model.Gender" name="hiddenGender">
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-7">
@@ -274,18 +275,18 @@
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-10">
                                     <label class="form-check form-check-custom form-check-solid form-check-inline">
-                                        <input class="form-check-input" type="checkbox" value="1" />
+                                        <input class="form-check-input" type="checkbox" id="AcceptTerms"/>
                                         <span class="form-check-label fw-bold text-gray-700 fs-6 me-3">
                                             أقر بأني موافق على كل
                                             <a href="#" class="ms-1 link-primary">الشروط و الأحكام</a>.
                                         </span>
                                     </label>
                                 </div>
-                                <!--end::Input group-->          
+                                <!--end::Input group-->
                                 <div asp-validation-summary="All" class="text-danger"></div>
                                 <!--begin::Actions-->
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-lg btn-primary">
+                                    <button type="submit" class="btn btn-lg btn-primary" id="Submit-Btn">
                                         <span class="indicator-label">تسجيل</span>
                                         <span class="indicator-progress">
                                             برجاء الانتظار
@@ -298,7 +299,6 @@
                                     <span class="prev">
                                         السابق
                                     </span>
-
                                 </a>
                             </div>
                         </div>
@@ -332,7 +332,8 @@
 @section Plugins {
     <script src="~/js/slider.js" asp-append-version="true"></script>
     <script src="~/js/IntitateCities.js" asp-append-version="true"></script>
-    <script>
+    <script src="~/js/register.js" asp-append-version="true"></script>
+    <script>      
         $(document).ready(function () {
             $(".birthdate-flatpickr").flatpickr(
                 {
@@ -348,6 +349,6 @@
                     ],
                 }
             )
-        });
+        });                                 
     </script>
 }
