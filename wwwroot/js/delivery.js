@@ -51,3 +51,20 @@ $(document).ready(function () {
         });
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const anchors = document.querySelectorAll('.my-anchor');
+    const hiddenInput = document.getElementById('hiddenInput');
+
+    anchors.forEach(anchor => {
+        anchor.addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent the default link behavior
+
+            const value = event.target.getAttribute('data-value');
+
+            hiddenInput.value = value; // Update the hidden input with the anchor's data-value
+
+            console.log('Hidden input updated to:', value); // Log for debugging
+        });
+    });
+});
