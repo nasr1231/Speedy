@@ -14,5 +14,13 @@ namespace Speedy.Controllers
 
             return View();
 		}
+
+		public IActionResult Order()
+		{
+			if(User.IsInRole(AppRoles.StartUp))
+			return View("Form");
+
+			return View("Form");
+		}
 	}
 }
