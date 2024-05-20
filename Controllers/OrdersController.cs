@@ -6,7 +6,10 @@ namespace Speedy.Controllers
 	{
 		public IActionResult Index()
 		{
-			return View();
+            if (User.IsInRole(AppRoles.StartUp))
+                return View("OrderStartup");
+
+            return View();
 		}
 	}
 }
