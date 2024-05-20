@@ -18,8 +18,9 @@ namespace Speedy.Core.ViewModels
 		[Required(ErrorMessage = Errors.isRequired)]
 		[MaxLength(40, ErrorMessage = Errors.MaxLength)]
 		public string LastName { get; set; } = null!;
+		public string NID { get; set; } = string.Empty;
 
-		[Display(Name = "البريد الالكتروني")]
+        [Display(Name = "البريد الالكتروني")]
 		[EmailAddress]
 		[Required(ErrorMessage = Errors.isRequired)]
 		[MaxLength(40, ErrorMessage = Errors.MaxLength)]
@@ -40,7 +41,7 @@ namespace Speedy.Core.ViewModels
 		[MaxLength(11, ErrorMessage = Errors.MaxLength)]
 		public string MobileNumber { get; set; } = null!;
 
-        [RequiredIf("IsOnline == true")]
+        //[RequiredIf("IsOnline == true")]
 		[Display(Name = "العنوان")]
 		[Required(ErrorMessage = Errors.isRequired)]
 		[MaxLength(100, ErrorMessage = Errors.MaxLength)]
@@ -51,7 +52,7 @@ namespace Speedy.Core.ViewModels
 		[MaxLength(50, ErrorMessage = Errors.MaxLength)]
 		public string StartUpName { get; set; } = null!;
 
-		[AssertThat("EstablishDate <= Today()", ErrorMessage = "انت عامل الشركة شكك طيب ولا ايه")]
+		[AssertThat("EstablishDate < Today()", ErrorMessage = "انت عامل الشركة شكك طيب ولا ايه")]
 		[Display(Name = "تاريخ إنشاء الشركة")]
 		[Required(ErrorMessage = Errors.isRequired)]
 		public DateTime EstablishDate { get; set; } = DateTime.Now;
@@ -62,8 +63,7 @@ namespace Speedy.Core.ViewModels
 		#endregion
 
 
-		#region Relations && Overloads
-		public string AppUserId { get; set; } = null!;		
+		#region Relations && Overloads		
 
 		[DisplayName("المدينة")]
 		[Required(ErrorMessage = Errors.isRequired)]

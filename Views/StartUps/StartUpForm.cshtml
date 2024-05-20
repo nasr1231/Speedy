@@ -213,18 +213,18 @@
 									<span asp-validation-for="@Model!.EstablishDate" class="text-danger d-block h-10px"></span>
 								</div>
 								<!--end::Input group-->
-								<!--begin::Input group-->
+								@* <!--begin::Input group-->
 								<h5 class="fv-row form-label fw-bolder text-dark fs-6  ">هل الشركة افتراضية (online)</h5>
 								<div class="d-flex justify-content-around mb-7">
 									<div class="form-check form-check-inline">
-										<input asp-for="@Model.IsOnline" class="form-check-input" type="radio" value="true" checked="@Model.IsOnline">
+										<input asp-for="@Model.IsOnline" class="form-check-input" type="radio" value="1" checked="@Model.IsOnline">
 										<label class="form-check-label fw-bolder text-dark fs-6">نعم</label>
 									</div>
 									<div class="form-check form-check-inline">
-										<input asp-for="@Model.IsOnline" class="form-check-input" type="radio" value="false" checked="@(!Model.IsOnline)">
+										<input asp-for="@Model.IsOnline" class="form-check-input" type="radio" checked="@(!Model.IsOnline)">
 										<label class="form-check-label fw-bolder text-dark fs-6">لا</label>
 									</div>
-								</div>
+								</div> *@
 
 								<!--end::Input group-->
 								<!--begin::Input group-->

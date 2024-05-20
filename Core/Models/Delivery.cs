@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Reflection.Metadata.Ecma335;
 
 namespace Speedy.Core.Models
-{    
+{
     public class Delivery : BaseModel
     {
         #region Properties
         public int Id { get; set; }
-        [Range(0,5)]
+        [Range(0, 5)]
         public Byte? Rate { get; set; }
         public List<string>? ServiceArea { get; set; } = [];
         public string Address { get; set; } = null!;
@@ -16,8 +16,8 @@ namespace Speedy.Core.Models
 
         [MaxLength(500)]
         public string? Description { get; set; }
-        public bool HasWhatsApp {  get; set; }
-        public bool IsFirstTime {  get; set; }
+        public bool HasWhatsApp { get; set; }
+        public bool IsFirstTime { get; set; }
 
 
         #endregion
@@ -33,7 +33,8 @@ namespace Speedy.Core.Models
         public int CityId { get; set; }
         public City City { get; set; } = null!;
 
-        public PaymentMethod? PaymentMethod { get; set; } = null!;
+        public int PaymentMethodId { get; set; }
+        public PaymentMethod? PaymentMethod { get; set; }
         #endregion
     }
 }

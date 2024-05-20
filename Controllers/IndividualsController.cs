@@ -47,7 +47,7 @@ namespace Speedy.Controllers
 		public async Task<IActionResult> Create(IndividualFormViewModel model)
 		{
 			if (!ModelState.IsValid)
-				return View("IndividualForm", model);
+				return View("IndividualForm", InitialIndividualForm(model));
 
 			using var transaction = _context.Database.BeginTransaction();
 

@@ -49,13 +49,18 @@ namespace Speedy.Controllers
             if (!ModelState.IsValid)
                 return View("StartUpForm", model);
 
+            var transaction = _context.Database.BeginTransaction();
+
             var userForm = new UserFormViewModel
             {
 				Password = model.Password,
 				Email = model.Email,
 				ConfirmPassword = model.ConfirmPassword,	
 				SelectedRoles = AppRoles.StartUp,
-                PhoneNumber = model.MobileNumber
+                PhoneNumber = model.MobileNumber,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                NID = model.NID,
             };
 
             var result = await _userService.SubmitUser(userForm);
@@ -79,6 +84,8 @@ namespace Speedy.Controllers
 
             _context.Add(startUp);
             await _context.SaveChangesAsync();
+
+            transaction.Commit();
 
             return RedirectToAction("Index", "Home");
         }
