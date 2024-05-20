@@ -20,7 +20,7 @@ namespace Speedy.Controllers
 			if(User.IsInRole(AppRoles.StartUp))
 			return View("Form");
 
-			return View("Form");
+			return View();
 		}
 	}
 }
