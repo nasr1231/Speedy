@@ -33,8 +33,8 @@ namespace Speedy.Core.Models
         public int CityId { get; set; }
         public City City { get; set; } = null!;
 
-        public int PaymentMethodId { get; set; }
-        public PaymentMethod? PaymentMethod { get; set; }
+        //public int PaymentMethodId { get; set; }
+        //public PaymentMethod? PaymentMethod { get; set; }
         #endregion
     }
 }
