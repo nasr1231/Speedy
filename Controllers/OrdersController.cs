@@ -15,9 +15,9 @@ namespace Speedy.Controllers
             return View();
 		}
 
-		public IActionResult Order()
+		public IActionResult Agents()
 		{
-			if(User.IsInRole(AppRoles.StartUp))
+			if(User.IsInRole(AppRoles.Individual))
 			return View("Form");
 
 			return View();
