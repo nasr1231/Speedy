@@ -295,4 +295,12 @@ html {
         align-items: center;
     }
 }
+
+.select2-container--bootstrap5 .select2-selection--multiple .select2-selection__rendered .select2-selection__choice .select2-selection__choice__remove {
+    left: 10% !important;
+}
+
+.select2-container--bootstrap5 .select2-dropdown .select2-results__option.select2-results__option--selected:after{
+    right: 12% !important
+}
    
