@@ -26,7 +26,8 @@ namespace Speedy.Core.Mapping
             .ForMember(dest => dest.ProfilePictureIUrl, opt => opt.MapFrom(src => src.AppUser!.ProfilePictureIUrl))                     
             .ForMember(dest => dest.CreatedOn, opt => opt.MapFrom(src => src.AppUser!.CreatedOn));
             CreateMap<Delivery, DeliveryFormViewModel>().ReverseMap();
-            CreateMap<Delivery, DeliveryProfileFormViewModel> ().ReverseMap();
+            CreateMap<Delivery, DeliveryProfileFormViewModel> ().ReverseMap();            
+            
 
             // Start Up            
             CreateMap<StartUp, StartUpViewModel>()
@@ -84,6 +85,13 @@ namespace Speedy.Core.Mapping
             CreateMap<PaymentMethod, SelectListItem>()
                 .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Title));
+
+            //ShippingMethods
+            CreateMap<ServiceArea, ShippingMethodViewModel>();
+            CreateMap<ShippingMethod, ShippingMethodFormViewModel>().ReverseMap();
+            CreateMap<ServiceArea, SelectListItem>()
+                .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Name));
 
             #endregion
 
