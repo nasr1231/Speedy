@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Speedy.Core.Models;
 using Speedy.Core.Models.RelatedData;
 using Speedy.Seeds;
@@ -13,6 +14,8 @@ namespace Speedy.Data
         public DbSet<City> Cities { get; set; }
         public DbSet<Governorate> Governorates { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
+        public DbSet<ServiceArea> ServiceAreas { get; set; }
+
         #endregion
         public DbSet<Delivery> Deliveries { get; set; }
         public DbSet<Individual> Individuals { get; set; }
@@ -79,10 +82,13 @@ namespace Speedy.Data
 				.WithMany()
 				.HasForeignKey(b => b.LastUpdatedById)
 				.OnDelete(DeleteBehavior.NoAction);
-			#endregion
 
-			#region Seeds
-			builder.Entity<ShippingMethod>().HasData(RelevantData.ShippingMethods);
+            // Configuring Compsite Primary Key for delivery
+            builder.Entity<DeliveryServiceArea>().HasKey(dsa => new { dsa.ServiceAreaId, dsa.DeliveryId});
+            #endregion
+
+            #region Seeds
+            builder.Entity<ShippingMethod>().HasData(RelevantData.ShippingMethods);
             builder.Entity<Governorate>().HasData(RelevantData.Governorates);
             builder.Entity<City>().HasData(RelevantData.Cities);
             builder.Entity<PaymentMethod>().HasData(RelevantData.PaymentMethods);

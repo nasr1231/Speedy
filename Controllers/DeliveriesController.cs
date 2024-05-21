@@ -5,6 +5,7 @@ using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Speedy.Core.Models;
+using Speedy.Core.Models.RelatedData;
 using Speedy.Services.User;
 using System.Data;
 using System.Diagnostics;
@@ -145,17 +146,42 @@ namespace Speedy.Controllers
             if (delivery is null)
                 return NotFound();
 
-            var deliveryData = _mapper.Map<DeliveryProfileFormViewModel>(delivery);
+            var deliveryData = new DeliveryProfileFormViewModel
+            {
+                Id = delivery.AppUser!.Id,
+                MobileNumber = delivery.AppUser.PhoneNumber,                
+            };     
 
-            return View("SettingsForm", deliveryData);
+            return View("SettingsForm", InitiateServiceArea(deliveryData));
         }
 
         [HttpPost]
         public async Task<IActionResult> EditProfile(DeliveryProfileFormViewModel model)
         {
-            var agent = _context.Deliveries.SingleOrDefaultAsync(a => a.Id == model.Id);
+            if (!ModelState.IsValid)
+                return View("SettingsForm", InitiateServiceArea(model));
 
-            return View("Profile");
+            var transaction = _context.Database.BeginTransaction();
+
+            var delivery = await _deliveryService.GetDeliverySettingsById(deliveryId: model.Id);
+
+            if (delivery is null)
+                return NotFound();
+
+            delivery = _mapper.Map(model, delivery);
+            delivery.LastUpdatedOn = DateTime.Now;
+
+            foreach (var area in delivery.ServiceAreas)
+            {
+                delivery.ServiceAreas.Add(new DeliveryServiceArea { ServiceAreaId = area.ServiceAreaId });
+            };
+
+            _context.Update(delivery);
+            _context.SaveChanges();
+
+            transaction.Commit();
+
+            return View("Profile", new { id = delivery.AppUser.Id});
         }
 
         [HttpGet]
@@ -260,6 +286,17 @@ namespace Speedy.Controllers
 
             deliveryFormView.ShippingMethods = _mapper.Map<IEnumerable<SelectListItem>>(methodsTask);
             deliveryFormView.Governorates = _mapper.Map<IEnumerable<SelectListItem>>(governoratesTask);
+
+            return deliveryFormView;
+        }
+
+        private DeliveryProfileFormViewModel InitiateServiceArea(DeliveryProfileFormViewModel? model = null)
+        {
+            DeliveryProfileFormViewModel deliveryFormView = model ?? new DeliveryProfileFormViewModel();
+
+            var areas = _context.ServiceAreas.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
+
+            deliveryFormView.ServiceArea = _mapper.Map<IEnumerable<SelectListItem>>(areas);            
 
             return deliveryFormView;
         }

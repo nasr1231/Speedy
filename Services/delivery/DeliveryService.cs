@@ -33,5 +33,15 @@ namespace Speedy.Services.User
 
             return delivery;
         }
+
+        public async Task<Delivery> GetDeliverySettingsById(string deliveryId)            
+        {
+            IQueryable<Delivery> deliveriesQueryable = _context.Deliveries
+                .Include(s => s.ServiceArea);
+
+            var delivery = await deliveriesQueryable.AsNoTracking().FirstOrDefaultAsync(d => d.AppUser!.Id == deliveryId);
+
+            return delivery;
+        }
     }
 }
