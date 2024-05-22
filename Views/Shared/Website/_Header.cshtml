@@ -1,5 +1,23 @@
-﻿<!-- ***** Header Area Start ***** -->
-<header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+﻿<style>
+    #head{
+        background-color:white;
+    }
+    #m-btn{
+        color: #E25E3E !important;
+        background-color:white;
+        border: 1px solid #E25E3E;
+    }
+   
+
+    ul{
+        font-size:30px;
+    }
+
+</style>
+
+<!-- ***** Header Area Start ***** -->
+
+<header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s" id="head">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -10,17 +28,17 @@
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
-                    <ul class="nav">
+                    <ul class="nav text-white" >
                         <li class="scroll-to-section">
-                            <a asp-controller="Home" asp-action="Index" class="active">الصفحه الرئيسيه</a>
+                            <a asp-controller="Home" asp-action="Index" class=" active  px-4">الصفحه الرئيسيه</a>
                         </li>
-                        <li><a asp-controller="Deliveries" asp-action="Dashboard">مناديب</a></li>
-                        <li><a asp-controller="Orders" asp-action="Index">طلبات</a></li>
-                        <li class="scroll-to-section"><a  id="ab" href="#about">عنا</a></li>
+                        <li><a asp-controller="Deliveries" asp-action="Dashboard" class="  px-6">مناديب</a></li>
+                        <li><a asp-controller="Orders" asp-action="Index" class="  px-6">طلبات</a></li>
+                        <li class="scroll-to-section"><a id="ab" href="#about" class=" px-7">عنا</a></li>
 
 
                     </ul>
-                    <div class="gradient-button">
+                    <div class="btn rounded-pill" id="m-btn" >
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <div class="cursor-pointer me-5 symbol symbol-30px symbol-lg-40px border border-gray-500 shadow-sm" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-start" >
@@ -34,7 +52,7 @@
                         }
                         else
                         {
-                            <a id="modal_trigger" href="Identity/Account/login" class="ms-11">
+                            <a id="modal_trigger" href="Identity/Account/login" style="color: #E25E3E !important;">
                                 <i class="fa fa-sign-in-alt"></i>
                                 تسجيل الدخول
                             </a>
