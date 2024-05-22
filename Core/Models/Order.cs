@@ -9,7 +9,7 @@ namespace Speedy.Core.Models
         public int OrderId { get; set; }
         public DateTime RecieveDate { get; set; }
         public DateTime ShippingDate { get; set; }
-        public double OrderTable { get; set; }
+        public double OrderTotal { get; set; }
         public string? OrderStatus { get; set; }
         public string? PaymentStatus { get; set; }
         public string? Description { get; set; }

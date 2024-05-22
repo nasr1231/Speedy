@@ -1,6 +1,7 @@
 ﻿//Variables Definition
 var table;
 var UpdatedRow;
+var rowUpdated;
 var datatable;
 var exportedCols = [];
 var model;
@@ -210,6 +211,7 @@ function onModalComplete() {
 }
 function OnModalSuccess(row) {
     $('#model-window').modal('hide');
+
     ShowSuccessMessage();
 
     if (UpdatedRow !== undefined) {
@@ -221,7 +223,7 @@ function OnModalSuccess(row) {
     datatable.row.add(newRow).draw();
 
     KTMenu.init();
-    KTMenu.initGlobalHandlers();
+    KTMenu.initHandlers();
 }
 
 var headers = $('th');
@@ -267,11 +269,11 @@ function addNewRow(row) {
 
     datatable.row.add(newRow).draw();
 
-    //if (rowUpdated !== undefined) {
-    //    datatable.row(rowUpdated).remove().draw()
+    if (rowUpdated !== undefined) {
+        datatable.row(rowUpdated).remove().draw()
 
-    //    rowUpdated = undefined;
-    //}
+        rowUpdated = undefined;
+    }
 }
 
 // Bootstrap Modal
@@ -299,18 +301,6 @@ $(document).ready(function () {
         drops: 'up',
         minDate: "1-1-1955",
     });
-
-    // Tinymce Editor
-    if ($('.js-tinymce').length > 0) {
-        var options = { selector: ".js-tinymce", height: "537" };
-
-        if (KTThemeMode.getMode() === "dark") {
-            options["skins"] = "oxide-dark";
-            options["content_css"] = "dark";
-        }
-        tinymce.init(options);
-    }
-
 
     // Data Table Setting
     if ($('table').hasClass('js-datatable')) {
@@ -359,8 +349,8 @@ $(document).ready(function () {
                             //ShowSuccessMessage();
                             OnModalToaster();
                         },
-                        error: function () {
-                            ShowErrorMessage();
+                        error: function (message) {
+                            ShowErrorMessage(message);
                         }
                     });
                 }
@@ -371,8 +361,8 @@ $(document).ready(function () {
     $(document).on('click', '.js-render-modal', function (e) {
         e.preventDefault(); // Prevent the default anchor behavior
         var btn = $(this);
-        var ShowModel = $('#model-window');
-        ShowModel.find('#modalLabel').text(btn.data('title'));
+        var modal = $('#model-window');
+        modal.find('#modalLabel').text(btn.data('title'));
 
         if (btn.data('update') !== undefined) {
             rowUpdated = btn.parents('tr');
@@ -383,11 +373,12 @@ $(document).ready(function () {
             method: 'GET',
             dataType: 'html', // Expect HTML content
             success: function (form) {
-                ShowModel.find('.modal-title').text(btn.data('title'));
+                modal.find('.modal-title').text(btn.data('title'));
 
-                ShowModel.find('.modal-body').html(form);
-                $.validator.unobtrusive.parse(ShowModel);
-                ShowModel.modal('show');
+                modal.find('.modal-body').html(form);
+                $.validator.unobtrusive.parse(modal);
+
+                modal.modal('show');
             },
             error: function (message) {
                 ShowErrorMessage(message);
