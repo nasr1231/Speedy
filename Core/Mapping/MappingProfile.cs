@@ -86,13 +86,14 @@ namespace Speedy.Core.Mapping
                 .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Title));
 
-            //ShippingMethods
-            CreateMap<ServiceArea, ShippingMethodViewModel>();
-            CreateMap<ShippingMethod, ShippingMethodFormViewModel>().ReverseMap();
+            //ShippingMethods           
+           
+
+            CreateMap<ServiceArea, ServiceAreaFormViewModel>().ReverseMap();
+            CreateMap<ServiceArea, ServiceAreaViewModel>();
             CreateMap<ServiceArea, SelectListItem>()
                 .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Name));
-
             #endregion
 
         }

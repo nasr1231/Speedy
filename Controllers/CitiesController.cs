@@ -27,7 +27,8 @@ namespace Speedy.Controllers
             return View(servicesView);
         }
 
-
+        [HttpGet]
+        [AjaxOnly]
         public IActionResult Create()
         {
             return PartialView("_Form", InitialCityForm());
@@ -39,6 +40,8 @@ namespace Speedy.Controllers
         {
             if (!ModelState.IsValid)
                 return View("_Form", InitialCityForm(model));
+
+            var transaction = _context.Database.BeginTransaction();
 
             var city = new City
             {
@@ -52,6 +55,7 @@ namespace Speedy.Controllers
 
             _context.Cities.Add(city);
             _context.SaveChanges();
+            transaction.Commit();
 
             var cityView = _mapper.Map<CityViewModel>(city);
 
@@ -100,10 +104,8 @@ namespace Speedy.Controllers
 
             var IsAllowed = Geographical is null || Geographical.Id == model.Id;
 
-            return Json(IsAllowed);
+            return Json(!IsAllowed);
         }
-
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]

@@ -1,0 +1,43 @@
+﻿   @model ServiceAreaViewModel
+
+<td class="text-center text-nowrap">
+    <p class="h4 mb-2 ">
+        @Model.Name
+    </p>
+</td>
+
+<td>
+    <div class="js-status badge badge-light-@(Model.IsDeleted ? "success" : "danger") @(Model.LastUpdatedOn is null ? "d-none" : string.Empty) d-grid mb-2 p-2">
+        <p class="mb-0">
+            <span class="text-dark">Updated On:</span> <span class="js-last-updated-on">
+                <span class="dateJs" data-date="@Model.LastUpdatedOn"></span>
+            </span>
+        </p>
+        <p class="@(Model.LastUpdatedById is null ? "d-none" : "mt-2 mb-0")">
+            <span class="text-dark">Updated By: </span>@await UserManager.FindByIdAsync(Model?.LastUpdatedById)
+        </p>
+    </div>
+
+    <div class="badge badge-light-dark d-grid p-2">
+        <p class="mb-0">
+            Created At: @Model.CreatedOn.ToShortDateString()
+        </p>
+
+        <p class="@(Model.CreatedById is null ? "0 d-none" : "mt-2 mb-0")">
+            By: @await UserManager.FindByIdAsync(Model.CreatedById)
+        </p>
+    </div>
+</td>
+<td class="d-grid pe-2">
+    <a data-url="/ServiceAreas/Edit/@Model.Id" href="javascript:;" data-is-edited="true" class="js-render-modal btn btn-sm btn-outline btn-outline-primary btn-active-light-primary mb-2" data-title="تعديل المدينة" data-is-edited="true">
+        <i class="bi bi-pencil-square"></i>
+        Edit
+    </a>
+    <a data-url="/ServiceAreas/ToggleStatus/@Model.Id" data-message="هل انت متأكد انك تريد تغير حالة المنطقة؟" data-title="تغير حالة المنطقة" href="javascript:;" class="js-toggle-status btn btn-sm btn-outline btn-outline-@(Model.IsDeleted ?  "success" : "danger") btn-active-light-@(Model.IsDeleted ?  "success" : "danger")">
+
+        <i class="bi bi-@(Model.IsDeleted ? "arrow-clockwise" : "x-circle")"></i>
+        <span class="js-btn-text">
+            @(Model.IsDeleted ? "Activate" : "Disable")
+        </span>
+    </a>
+</td>

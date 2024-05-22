@@ -1,13 +1,13 @@
-﻿@model IEnumerable<CityViewModel>
+﻿@model IEnumerable<ServiceAreaViewModel>
 
 @{
-    ViewData["Title"] = "Cities";
+    Layout = "_Layout";
+    ViewData["Title"] = "مناطق العمل";
 }
 
 @section Styles {
     <link href="~/assets/Panel/plugins/datatables/datatables.bundle.css" rel="stylesheet" crossorigin="anonymous" />
 }
-
 
 <div class="card shadow-sm mb-5 mb-lg-10">
     <div class="card-header">
@@ -25,13 +25,13 @@
                 </div>
                 <span class="symbol-badge badge badge-circle bg-primary start-100 text-white">@Model.Count()</span>
             </div>
-            <h2>Cities</h2>
+            <h2>Service Areas</h2>
         </div>
         <div class="card-toolbar my-7">
             <a href="/RelatedData" class="btn btn-md btn-success me-2">
                 Back To Settings
             </a>
-            <a href="javascript:;" class="btn btn-primary js-render-modal" data-title="Add City" data-url="/Cities/Create">
+            <a href="javascript:;" class="btn btn-primary js-render-modal" data-title="Add Service Area" data-url="/ServiceAreas/Create">
                 <i class="bi bi-plus-circle"></i>
                 Add
             </a>
@@ -50,16 +50,15 @@
                 <thead>
                     <tr class="fw-bold fs-6 text-gray-800 text-center">
                         <th class="text-center">Name</th>
-                        <th class="text-center">Governorate Name</th>
                         <th class="text-center">Logs</th>
                         <th class="js-no-export text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var cities in Model)
+                    @foreach (var areas in Model)
                     {
                         <tr>
-                            <partial name="_RowData" model="cities" />
+                            <partial name="_RowData" model="areas" />
                         </tr>
                     }
                 </tbody>
