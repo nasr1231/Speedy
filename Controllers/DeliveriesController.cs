@@ -1,14 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Speedy.Core.Models;
-using Speedy.Core.Models.RelatedData;
 using Speedy.Services.User;
 using System.Data;
-using System.Diagnostics;
 
 namespace Speedy.Controllers
 {
@@ -19,8 +12,7 @@ namespace Speedy.Controllers
         private readonly UserManager<AppUser> _userManager = userManager;
         private readonly IUserService _userService = userService;
         private readonly IAttachmentService _attachmentService = attachmentService;
-        private readonly IDeliveryService _deliveryService = deliveryService;
-
+        private readonly IDeliveryService _deliveryService = deliveryService;        
 
         public async Task<IActionResult> Index()
         {
@@ -78,7 +70,7 @@ namespace Speedy.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             return View("DeliveryForm", InitialDeliveryForm());
         }

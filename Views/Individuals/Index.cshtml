@@ -41,7 +41,9 @@
                 <tbody>
                     @foreach (var individual in Model)
                     {
-                        <partial name="_RowData" model="individual" />
+                        <tr>
+                            <partial name="_RowData" model="individual" />
+                        </tr>
                     }
                 </tbody>
             </table>
@@ -49,11 +51,10 @@
     </div>
 </div>
 
+
 @section Plugins {
-    <script src="~/assets/Panel/plugins/datatables/datatables.bundle.js"></script>
-    <script src="~/assets/Panel/plugins/datatables/vfs_fonts.js"></script>
+    <script src="~/assets/panel/plugins/datatables/datatables.bundle.js"></script>
+    <script src="~/assets/panel/plugins/datatables/vfs_fonts.js"></script>
 }
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+@section Scripts {<partial name="_ValidationScriptsPartial" />}

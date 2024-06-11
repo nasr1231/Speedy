@@ -1,0 +1,127 @@
+﻿@model RequestViewModel
+@{
+    ViewData["Title"] = "Requests";
+    Layout = "_Layout";
+}
+
+<div class="card shadow-sm mb-5 mb-lg-10">
+    <div class="card-header">
+        <div class="card-title">
+            <div class="symbol symbol-70px me-4">
+                <div class="symbol-label fs-2 fw-semibold">                    
+                    <i class="fa-solid fa-file-contract text-warning"></i>
+                </div>                
+            </div>
+            <h2 class="fw-bolder">Delivery Requests</h2>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm mb-5 mb-lg-10">
+    <div class="d-flex flex-column flex-column-fluid" bis_skin_checked="1">
+        <!--begin::Content-->
+        <div id="kt_app_content" class="app-content  flex-column-fluid " bis_skin_checked="1">
+            <!--begin::Content container-->
+            <div id="kt_app_content_container" class="app-container  container-xxl " bis_skin_checked="1">
+                <!--begin::Row-->
+                <div class="row g-6 g-xl-9 py-7" bis_skin_checked="1">
+                    @foreach(var delivery in Model.Deliveries)
+                    {
+                        <!--begin::Col-->
+                        <div class="col-12 col-md-6 col-lg-3 border border-gray-200 rounded-50 h-50 pb-4" bis_skin_checked="1">
+                            <!--begin::Card-->
+                            <a href="/metronic8/demo1/apps/projects/project.html" class="card border-hover-primary ">
+                                <!--begin::Card header-->
+                                <div class="card-header border-0 pt-9" bis_skin_checked="1">
+                                    <!--begin::Card Title-->
+                                    <div class="card-title m-0" bis_skin_checked="1">
+                                        <!--begin::Avatar-->
+                                        <div class="symbol symbol-50px w-50px bg-light" bis_skin_checked="1">
+                                            <img src="/metronic8/demo1/assets/media/svg/brand-logos/plurk.svg" alt="image" class="p-3">
+                                        </div>
+                                        <!--end::Avatar-->
+                                    </div>
+                                    <!--end::Car Title-->
+                                    <!--begin::Card toolbar-->
+                                    <div class="card-toolbar" bis_skin_checked="1">
+                                        <span class="badge badge-light-primary fw-bold me-auto px-4 py-3">In Progress</span>
+                                    </div>
+                                    <!--end::Card toolbar-->
+                                </div>
+                                <!--end:: Card header-->
+                                <!--begin:: Card body-->
+                                <div class="card-body p-9 pb-0" bis_skin_checked="1">
+                                    <!--begin::Name-->
+                                    <div class="fs-3 fw-bold text-gray-900 mb-5" bis_skin_checked="1">
+                                        Mohamed Nasr
+                                    </div>
+                                    <!--end::Name-->
+                                    <!--begin::Info-->
+                                    <div class="d-flex flex-wrap mb-5" bis_skin_checked="1">
+                                        <!--begin::Due-->
+                                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3" bis_skin_checked="1">
+                                            <div class="fs-6 text-gray-800 fw-bold" bis_skin_checked="1">Apr 15, 2024</div>
+                                            <div class="fw-semibold text-gray-500" bis_skin_checked="1">Due Date</div>
+                                        </div>
+                                    </div>
+                                    <!--end::Info-->
+                                </div>
+                                <!--end:: Card body-->
+                            </a>
+                            <!--end::Card-->
+                        </div>
+                        <!--end::Col-->
+                    }
+                </div>
+                <!--end::Row-->
+                <!--begin::Pagination-->
+                <div class="d-flex flex-stack flex-wrap py-10" bis_skin_checked="1">
+                    <div class="fs-6 fw-semibold text-gray-700" bis_skin_checked="1">
+                        Showing 1 to 10 of 50 entries
+                    </div>
+
+                    <!--begin::Pages-->
+                    <ul class="pagination">
+                        <li class="page-item previous">
+                            <a href="#" class="page-link"><i class="previous"></i></a>
+                        </li>
+
+                        <li class="page-item active">
+                            <a href="#" class="page-link">1</a>
+                        </li>
+
+                        <li class="page-item">
+                            <a href="#" class="page-link">2</a>
+                        </li>
+
+                        <li class="page-item">
+                            <a href="#" class="page-link">3</a>
+                        </li>
+
+                        <li class="page-item">
+                            <a href="#" class="page-link">4</a>
+                        </li>
+
+                        <li class="page-item">
+                            <a href="#" class="page-link">5</a>
+                        </li>
+
+                        <li class="page-item">
+                            <a href="#" class="page-link">6</a>
+                        </li>
+
+                        <li class="page-item next">
+                            <a href="#" class="page-link"><i class="next"></i></a>
+                        </li>
+                    </ul>
+                    <!--end::Pages-->
+                </div>
+                <!--end::Pagination-->
+            </div>
+            <!--end::Content container-->
+        </div>
+        <!--end::Content-->
+
+    </div>
+</div>
+

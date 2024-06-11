@@ -30,9 +30,8 @@
                 <thead>
                     <tr class="fw-bold fs-6 text-gray-800">
                         <th>Account Holder Name</th>
-                        <th>National Id</th>
                         <th>Company Name</th>
-                        <th>Company Type</th>                        
+                        <th>Company Type</th>
                         <th>Email</th>
                         <th>Register Date</th>
                         <th>Status</th>
@@ -42,7 +41,9 @@
                 <tbody>
                     @foreach (var startup in Model)
                     {
-                        <partial name="_RowData" model="startup"/>
+                        <tr>
+                            <partial name="_RowData" model="startup" />
+                        </tr>
                     }
                 </tbody>
             </table>
@@ -50,9 +51,10 @@
     </div>
 </div>
 
+
 @section Plugins {
-    <script src="~/assets/Panel/plugins/datatables/datatables.bundle.js"></script>
-    <script src="~/assets/Panel/plugins/datatables/vfs_fonts.js"></script>
+    <script src="~/assets/panel/plugins/datatables/datatables.bundle.js"></script>
+    <script src="~/assets/panel/plugins/datatables/vfs_fonts.js"></script>
 }
 
 @section Scripts {
