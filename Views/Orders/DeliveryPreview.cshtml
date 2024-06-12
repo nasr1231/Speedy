@@ -1,0 +1,30 @@
+﻿@model OrderFormViewModel
+@{
+    ViewData["Title"] = "اختار الدليفري";
+    Layout = "_StartLayout";
+}
+
+<div class="container d-flex align-items-center" style="min-height:400px;margin-top: 100px;">
+    <div class="row">
+        @foreach(var delivery in Model.Deliveries)
+        {
+            <div class="col-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@delivery.AppUser!.FirstName @delivery.AppUser.LastName</h5>
+                        <p class="card-text">@delivery.AppUser.PhoneNumber</p>
+                        <a href="#" >اختار الجثة ديه</a>
+                        <a class="btn btn-primary js-render-modal" data-url="/Orders/InitiateCreate/@delivery.Id" href="javascript:;">Book</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@Html.AntiForgeryToken()
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+}

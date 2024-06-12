@@ -1,0 +1,24 @@
+﻿@model CitiesHomeViewModel
+
+@{
+    ViewData["Title"] = "الصفحة الرئيسية";
+    Layout = "_StartLayout";
+}
+
+<div class="container-fluid">
+    <div class="row d-flex align-items-center justify-conent-center">
+        <div class="col-8">
+            <form asp-controller="Orders" asp-action="Filter" method="get">
+                <select class="form-select form-select-solid" data-control="select2" data-placeholder="Select an option" data-allow-clear="true">
+                    <option></option>
+                    <option value="1">Option 1</option>
+                    <option value="2" selected>Option 2</option>
+                    <option value="3">Option 3</option>
+                    <option value="4">Option 4</option>
+                    <option value="5">Option 5</option>
+                </select>
+            </form>
+        </div>
+    </div>
+</div>
+
