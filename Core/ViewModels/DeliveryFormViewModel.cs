@@ -35,8 +35,7 @@ namespace Speedy.Core.ViewModels
 		[Display(Name = "العنوان")]
 		[Required(ErrorMessage = Errors.isRequired)]
 		[MaxLength(100, ErrorMessage = Errors.MaxLength)]
-		public string Address { get; set; } = null!;
-        public string IsFirstTime { get; set; } = null!;
+		public string Address { get; set; } = null!;        
 		public bool HasWhatsApp { get; set; }
 
         [Display(Name = "الرقم القومي")]
