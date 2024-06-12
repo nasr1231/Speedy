@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using System.ComponentModel.DataAnnotations;
 
 namespace Speedy.Core.Models
 {
@@ -30,6 +31,9 @@ namespace Speedy.Core.Models
 
         public string AppUserId { get; set; } = null!;
          public ICollection<AppUser>? AppUsers { get; set; } 
+
+        public int? ReviewId { get; set; }
+        public Review? Review { get; set; }
         #endregion
     }
 }

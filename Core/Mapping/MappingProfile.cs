@@ -70,7 +70,7 @@ namespace Speedy.Core.Mapping
                 .ForMember(dest => dest.GovernorateName, opt => opt.MapFrom(src => src.Governorate!.Name));
             CreateMap<City, SelectListItem>()
                 .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id))
-                .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Name));
+                .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Name));            
 
             //ShippingMethods
             CreateMap<ShippingMethod, ShippingMethodViewModel>();
@@ -86,9 +86,7 @@ namespace Speedy.Core.Mapping
                 .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Title));
 
-            //ShippingMethods           
-           
-
+            //ServiceMethods                    
             CreateMap<ServiceArea, ServiceAreaFormViewModel>().ReverseMap();
             CreateMap<ServiceArea, ServiceAreaViewModel>();
             CreateMap<ServiceArea, SelectListItem>()

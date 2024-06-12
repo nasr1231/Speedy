@@ -21,6 +21,8 @@ namespace Speedy.Core.Models
 
         public Individual Individual { get; set; } = null!;
         public int IndividualId { get; set; }
+
+        public Order? OrderId { get; set; }
         #endregion
     }
 }
