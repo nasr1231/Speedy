@@ -5,18 +5,29 @@
     Layout = "_StartLayout";
 }
 
-<div class="container-fluid">
-    <div class="row d-flex align-items-center justify-conent-center">
+
+<style>
+    .select2-container .select2-selection--single {
+        display: flex;
+        height: 45px;
+    }
+</style>
+
+<div class="container d-flex align-items-center justify-content-center" style="height: 600px;">
+    <div class="row d-flex align-items-center justify-content-center">
         <div class="col-8">
             <form asp-controller="Orders" asp-action="Filter" method="get">
-                <select class="form-select form-select-solid" data-control="select2" data-placeholder="Select an option" data-allow-clear="true">
+                <select asp-for="CityId" asp-items="@Model.Cities" style="border-radius:8px; border-top-left-radius:0;border-bottom-left-radius: 0;" class="form-control form-control-lg form-control-solid border-gray-400" data-control="select2" data-placeholder="اختار مكان اقامتك" data-allow-clear="true">
                     <option></option>
-                    <option value="1">Option 1</option>
-                    <option value="2" selected>Option 2</option>
-                    <option value="3">Option 3</option>
-                    <option value="4">Option 4</option>
-                    <option value="5">Option 5</option>
                 </select>
+                <span asp-validation-for="Cities"></span>
+                <button type="submit" class="btn btn-primary">
+                    <span class="indicator-label">
+                        Save
+                    </span>
+                </button>
+
+
             </form>
         </div>
     </div>

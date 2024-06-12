@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Speedy.Core.Models;
 using Speedy.Services.User;
 using System.Data;
 
@@ -48,7 +49,7 @@ namespace Speedy.Controllers
         }
         public async Task<IActionResult> Dashboard(string id)
         {
-            var delivery = await _deliveryService.GetDeliveryAsync(deliveryId: id);
+            var delivery = await _deliveryService.GetDeliveryAsync(deliveryId: id);            
 
             if (delivery is null)
                 return NotFound();

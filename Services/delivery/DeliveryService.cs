@@ -21,15 +21,17 @@ namespace Speedy.Services.User
 
             return deliveries;
         }
-        public async Task<Delivery> GetDeliveryAsync(string deliveryId)
+        public async Task<Delivery?> GetDeliveryAsync(string deliveryId)
         {
-            IQueryable<Delivery> deliveriesQueryable = _context.Deliveries
+            IQueryable<Delivery> deliveriesQueryable = _context.Deliveries!
                 .Include(s => s.ShippingMethods)
                 .Include(s => s.AppUser)
                 .Include(c => c.City)
                 .ThenInclude(g => g.Governorate);
 
-            var delivery = await deliveriesQueryable.AsNoTracking().FirstOrDefaultAsync(d => d.AppUser!.Id == deliveryId);                      
+            deliveriesQueryable = deliveriesQueryable.AsNoTracking();
+
+            var delivery = await deliveriesQueryable.FirstOrDefaultAsync(d => d.AppUser!.Id == deliveryId);                      
 
             return delivery;
         }
