@@ -2,7 +2,6 @@
 
 TemplateMo 570 Chain App Dev
 
-https://templatemo.com/tm-570-chain-app-dev
 
 */
 
@@ -416,7 +415,7 @@ header
 .header-area .main-nav .nav li a {
   display: block;
   font-weight: 500;
-  font-size: 15px;
+  font-size: 20px;
   color: #2a2a2a;
   text-transform: capitalize;
   -webkit-transition: all 0.3s ease 0s;
@@ -1044,7 +1043,7 @@ Services Style
 
 .service-item h4 {
   transition: all .3s;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
   margin-bottom: 15px;
 }
@@ -1053,8 +1052,12 @@ Services Style
         transition: all .3s;
         font-size: 20px;
         margin-bottom: 20px;
-        color: #FF9B50;
+        color:#01153e;
+        font-weight:401;
     }
+.cond {
+    color: rgb(246 84 3);
+}
 
 .service-item:hover h4,
 .service-item:hover p,
@@ -1168,7 +1171,7 @@ About Us
 }
 
 .about-us:after {
-  background-image: url(../images/about-bg.jpg);
+  background-image: url(../images/about-bg-new.jpg);
   width: 777px;
   height: 1132px;
   content: '';
@@ -1585,10 +1588,7 @@ Footer Style
 */
 
 footer {
-  background-image: url(../images/footer-bg.png);
-  background-position: center top;
-  background-repeat: no-repeat;
-  background-size: cover;
+  
   margin-top: 130px;
   padding-top: 300px;
   padding-bottom: 60px;
