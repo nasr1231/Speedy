@@ -141,7 +141,7 @@ namespace Speedy.Controllers
             var deliveryData = new DeliveryProfileFormViewModel
             {
                 Id = delivery.AppUser!.Id,
-                MobileNumber = delivery.AppUser.PhoneNumber,                
+                MobileNumber = delivery.AppUser!.PhoneNumber,                
             };     
 
             return View("SettingsForm", InitiateServiceArea(deliveryData));

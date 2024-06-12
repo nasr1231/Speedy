@@ -22,6 +22,12 @@ namespace Speedy.Controllers
             if (User.IsInRole(AppRoles.Delivery))
                 return View("DeliveryIndex");
 
+            if (User.IsInRole(AppRoles.StartUp))
+                return View("StartUpIndex", InitiateCities());
+
+            if (User.IsInRole(AppRoles.Individual))
+                return View("UserIndex", InitiateCities());
+
             return View();
         }
 
@@ -62,6 +68,16 @@ namespace Speedy.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }      
+        }
+
+        private CitiesHomeViewModel InitiateCities(CitiesHomeViewModel? model = null) 
+        {
+            CitiesHomeViewModel CitiesFormView = model ?? new CitiesHomeViewModel();
+            var CitiesFormViewTask = _context.Cities.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
+
+            CitiesFormView.Cities = _mapper.Map<IEnumerable<SelectListItem>>(CitiesFormViewTask);
+
+            return CitiesFormView;
+        }
     }
 }
