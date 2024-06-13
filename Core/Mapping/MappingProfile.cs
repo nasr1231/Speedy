@@ -55,6 +55,10 @@ namespace Speedy.Core.Mapping
                 .ForMember(dest => dest.NormalizedUserName, opt => opt.MapFrom(src => src.UserName.ToUpper()))
                 .ReverseMap();
 
+            //Users Profiles
+            CreateMap<StartUp, StartUpProfileViewModel>();
+            CreateMap<Individual, IndividualProfileViewModel>();
+
             #region Related Data
 
             //Governorates

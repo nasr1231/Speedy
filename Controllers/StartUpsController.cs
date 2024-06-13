@@ -40,7 +40,7 @@ namespace Speedy.Controllers
             return View(startUpsView);
         }
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {            
             return View("StartUpForm", InitialStartUpForm());
         }
@@ -53,9 +53,9 @@ namespace Speedy.Controllers
             if (user is null)
                 return NotFound();
 
-            var deliveriesView = _mapper.Map<IndividualProfileViewModel>(user);
+            var userView = _mapper.Map<StartUpProfileViewModel>(user);
 
-            return View("Profile", deliveriesView);
+            return View("Profile", userView);
         }
 
         [HttpPost]

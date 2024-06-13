@@ -2,17 +2,18 @@
     .header-area .main-nav .nav li a {
         font-size: 20px;
     }
-        #head{
-        background-color:white;
+
+    #head {
+        background-color: white;
     }
-    #m-btn{
+
+    #m-btn {
         color: #E25E3E !important;
-        background-color:white;
+        background-color: white;
         border: 1px solid #E25E3E;
     }
 
     .service-item p {
-      
         font-size: 20px;
         color: #01153e;
         font-weight: 401;
@@ -21,11 +22,10 @@
     .cond {
         color: rgb(246 84 3);
     }
+
     .about-us:after {
         background-image: url(~/images/about-bg-new.jpg);
     }
-
-
 
 </style>
 
@@ -42,48 +42,59 @@
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
-                    <ul class="nav text-white" >
-                        @{                            
-                            if (SignInManager.IsSignedIn(User))
+                    @{
+                        if (SignInManager.IsSignedIn(User))
+                        {
+                            var role = User.FindFirst(ClaimTypes.Role)!.Value;
+                            var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+                            @if ( role == AppRoles.Individual)
                             {
-                                var role = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
-                                @if (role == AppRoles.Individual)
-                                {
+                                <ul class="nav text-white">
                                     <li class="scroll-to-section">
-                                        <a asp-controller="Home" asp-action="Index" class=" active  px-4">الصفحه الرئيسيه</a>
+                                        <a asp-controller="Home" asp-action="Index" class="active px-4">الصفحه الرئيسيه</a>
                                     </li>
                                     <li><a asp-controller="Deliveries" asp-action="Dashboard" class="px-6">مناديب</a></li>
                                     <li><a asp-controller="Orders" asp-action="Index" class="px-6">طلبات</a></li>
-                                    <li><a asp-controller="Individuals" asp-action="Profile" class="px-6">حسابي</a></li>
-
-                                }
-                                else if (role == AppRoles.StartUp)
-                                {
+                                    <li><a asp-route-id="@userId" asp-controller="Individuals" asp-action="Profile" class="px-6">حسابي</a></li>
+                                </ul>
+                            }
+                            else if (role == AppRoles.StartUp)
+                            {
+                                <ul class="nav text-white">
                                     <li class="scroll-to-section">
-                                        <a asp-controller="Home" asp-action="Index" class=" active  px-4">الصفحه الرئيسيه</a>
+                                        <a asp-controller="Home" asp-action="Index" class="active px-4">الصفحه الرئيسيه</a>
                                     </li>
                                     <li><a asp-controller="Deliveries" asp-action="Dashboard" class="px-6">مناديب</a></li>
                                     <li><a asp-controller="Orders" asp-action="Index" class="px-6">طلبات</a></li>
-                                    <li><a asp-controller="StartUps" asp-action="Profile" class="px-6">حسابي</a></li>
-
-                                }
+                                    <li><a asp-route-id="@userId" asp-controller="StartUps" asp-action="Profile" class="px-6">حسابي</a></li>
+                                </ul>
                             }
                             else
                             {
-                                <li class="scroll-to-section">
-                                    <a asp-controller="Home" asp-action="Index" class=" active  px-4">الصفحه الرئيسيه</a>
-                                </li>
-                                <li><a asp-controller="Deliveries" asp-action="Dashboard" class="  px-6">مناديب</a></li>
-                                <li><a asp-controller="Orders" asp-action="Index" class="  px-6">طلبات</a></li>
-                                <li class="scroll-to-section"><a id="ab" href="#about" class=" px-7">عنا</a></li>
+                                <ul class="nav text-white">
+                                    <li class="scroll-to-section">
+                                        <a asp-controller="Home" asp-action="Index" class="active px-4">الصفحه الرئيسيه</a>
+                                    </li>
+                                    <li><a asp-controller="Deliveries" asp-action="Dashboard" class="px-6">مناديب</a></li>                                    
+                                </ul>
                             }
                         }
-                       
-                    </ul>
-                    <div class="btn rounded-pill" id="m-btn" >
+                        else
+                        {
+                            <ul class="nav text-white">
+                                <li class="scroll-to-section">
+                                    <a asp-controller="Home" asp-action="Index" class="active px-4">الصفحه الرئيسيه</a>
+                                </li>
+                                <li><a asp-controller="Deliveries" asp-action="Dashboard" class="px-6">مناديب</a></li>
+                                <li><a asp-controller="Orders" asp-action="Index" class="px-6">طلبات</a></li>
+                                <li class="scroll-to-section"><a id="ab" href="#about" class="px-7">عنا</a></li>
+                            </ul>
+                        }
+                    }
+                    <div class="btn rounded-pill" id="m-btn">
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <div class="cursor-pointer me-5 symbol symbol-30px symbol-lg-40px border border-gray-500 shadow-sm" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-start" >
+                            <div class="cursor-pointer me-5 symbol symbol-30px symbol-lg-40px border border-gray-500 shadow-sm" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-start">
                                 <form id="SignOut" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/">
                                     <button type="submit" style="color:black; " class="btn bg-white text-black btn-sm align-self-center ps-2">
                                         تسجيل الخروج
@@ -98,14 +109,8 @@
                                 <i class="fa fa-sign-in-alt"></i>
                                 تسجيل الدخول
                             </a>
-                            
                         }
                     </div>
-
-                    <a class='menu-trigger'>
-                        <span>Menu</span>
-                    </a>
-                    <!-- ***** Menu End ***** -->
                 </nav>
             </div>
         </div>
