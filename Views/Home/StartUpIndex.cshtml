@@ -6,14 +6,8 @@
 }
 
 
-<style>
-    .select2-container .select2-selection--single {
-        display: flex;
-        height: 45px;
-    }
-</style>
-
-<div class="container d-flex align-items-center justify-content-center" style="height: 600px;">
+@*
+    <div class="container d-flex align-items-center justify-content-center" style="height: 600px;">
     <div class="row d-flex align-items-center justify-content-center">
         <div class="col-8">
             <form asp-controller="Orders" asp-action="Filter" method="get">
@@ -33,3 +27,51 @@
     </div>
 </div>
 
+*@
+
+<style>
+    .main {
+        margin-top: 200px;
+    }
+    .input-group{
+        flex-wrap:nowrap;
+    }
+    .selection{
+        display:flex;
+    }
+    .select2-container .select2-selection--single {
+        display: flex;
+        height: 45px;
+        border-radius: 8px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        flex: 1 1 auto;
+        width: 1%;
+        min-width: 0;
+       
+    }
+</style>
+
+<div class="main d-flex flex-column align-items-center flex-column-fluid justify-content-center">
+    <h1 class="mb-4">إبدأ تجربة توصيل سريعة معنا الآن</h1>
+    <div class=" d-flex w-100 mb-4 justify-content-center">
+        <div class=" d-flex flex-column flex-md-row justify-content-center align-items-center">
+            <form asp-controller="Orders" asp-action="Filter" method="get" class="d-flex flex-column flex-md-row justify-content-center align-items-center">
+                    <div class="fv-row">
+                        <div class="input-group">
+                        <select asp-for="CityId" asp-items="@Model.Cities"  class="form-control form-control-lg form-control-solid border-gray-400" data-control="select2" data-placeholder="اختار مكان اقامتك" data-allow-clear="true">
+                            <option></option>
+                        </select>
+                            <span style="border-radius:8px; border-top-right-radius:0; border-bottom-right-radius: 0;" class="input-group-text border-gray-400" id="basic-addon1">
+                                <i class="fa-solid fa-location-dot fs-4"></i>
+                            </span>
+                        <span asp-validation-for="Cities"></span>
+
+                        </div>
+
+                    </div>
+                <button type="submit" class="btn m-5" style="border-radius:8px;">أدخل موقعك وتابع</button>
+                </form>
+        </div>
+    </div>
+</div>
