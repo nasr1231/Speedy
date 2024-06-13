@@ -101,10 +101,14 @@
         </div>
         <!-- end row -->
     </div>
-
+    </div>
 
 @Html.AntiForgeryToken()
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />   
+}
 
+@section Plugins{
+    <script src="~/assets/website/deliveryassets/plugins.bundle.js"></script>
+    <script src="~/assets/website/deliveryassets/scripts.bundle.js"></script>
 }
