@@ -43,14 +43,42 @@
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav text-white" >
-                        <li class="scroll-to-section">
-                            <a asp-controller="Home" asp-action="Index" class=" active  px-4">الصفحه الرئيسيه</a>
-                        </li>
-                        <li><a asp-controller="Deliveries" asp-action="Dashboard" class="  px-6">مناديب</a></li>
-                        <li><a asp-controller="Orders" asp-action="Index" class="  px-6">طلبات</a></li>
-                        <li class="scroll-to-section"><a id="ab" href="#about" class=" px-7">عنا</a></li>
+                        @{                            
+                            if (SignInManager.IsSignedIn(User))
+                            {
+                                var role = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+                                @if (role == AppRoles.Individual)
+                                {
+                                    <li class="scroll-to-section">
+                                        <a asp-controller="Home" asp-action="Index" class=" active  px-4">الصفحه الرئيسيه</a>
+                                    </li>
+                                    <li><a asp-controller="Deliveries" asp-action="Dashboard" class="px-6">مناديب</a></li>
+                                    <li><a asp-controller="Orders" asp-action="Index" class="px-6">طلبات</a></li>
+                                    <li><a asp-controller="Individuals" asp-action="Profile" class="px-6">حسابي</a></li>
 
+                                }
+                                else if (role == AppRoles.StartUp)
+                                {
+                                    <li class="scroll-to-section">
+                                        <a asp-controller="Home" asp-action="Index" class=" active  px-4">الصفحه الرئيسيه</a>
+                                    </li>
+                                    <li><a asp-controller="Deliveries" asp-action="Dashboard" class="px-6">مناديب</a></li>
+                                    <li><a asp-controller="Orders" asp-action="Index" class="px-6">طلبات</a></li>
+                                    <li><a asp-controller="StartUps" asp-action="Profile" class="px-6">حسابي</a></li>
 
+                                }
+                            }
+                            else
+                            {
+                                <li class="scroll-to-section">
+                                    <a asp-controller="Home" asp-action="Index" class=" active  px-4">الصفحه الرئيسيه</a>
+                                </li>
+                                <li><a asp-controller="Deliveries" asp-action="Dashboard" class="  px-6">مناديب</a></li>
+                                <li><a asp-controller="Orders" asp-action="Index" class="  px-6">طلبات</a></li>
+                                <li class="scroll-to-section"><a id="ab" href="#about" class=" px-7">عنا</a></li>
+                            }
+                        }
+                       
                     </ul>
                     <div class="btn rounded-pill" id="m-btn" >
                         @if (SignInManager.IsSignedIn(User))

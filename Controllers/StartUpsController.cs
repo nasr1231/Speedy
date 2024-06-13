@@ -3,16 +3,18 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Speedy.Core.Consts;
+using Speedy.Services.StartUps;
 using Speedy.Services.User;
 
 namespace Speedy.Controllers
 {    
-    public class StartUpsController(ApplicationDbContext context, IMapper mapper, IUserService userService, IDataService dataService) : Controller
+    public class StartUpsController(ApplicationDbContext context, IMapper mapper, IStartUpService startService, IUserService userService, IDataService dataService) : Controller
     {
         private readonly ApplicationDbContext _context = context;
         private readonly IMapper _mapper = mapper;
         private readonly IUserService _userService = userService;
         private readonly IDataService _dataService = dataService;
+        private readonly IStartUpService _startService = startService;
         public async Task<IActionResult> Index()
         {
             var startUps = await _dataService.GetAllStartUpsAsync();
@@ -41,6 +43,19 @@ namespace Speedy.Controllers
         public async Task<IActionResult> Create()
         {            
             return View("StartUpForm", InitialStartUpForm());
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Profile(string id)
+        {
+            var user = await _startService.GetStartUpAsync(startUplId: id);
+
+            if (user is null)
+                return NotFound();
+
+            var deliveriesView = _mapper.Map<IndividualProfileViewModel>(user);
+
+            return View("Profile", deliveriesView);
         }
 
         [HttpPost]

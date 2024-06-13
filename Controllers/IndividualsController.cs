@@ -3,15 +3,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Speedy.Core.Consts;
 using Speedy.Core.ViewModels;
+using Speedy.Services.Individuals;
 using Speedy.Services.User;
 
 namespace Speedy.Controllers
 {
-    public class IndividualsController(ApplicationDbContext context, IMapper mapper, IUserService userService, IDataService dataService) : Controller
+    public class IndividualsController(ApplicationDbContext context, IMapper mapper, IUserService userService, IDataService dataService, IIndividualService individualService) : Controller
 	{
 		private readonly ApplicationDbContext _context = context;
 		private readonly IMapper _mapper = mapper;
 		private readonly IUserService _userService = userService;
+		private readonly IIndividualService _individualService = individualService;
         private readonly IDataService _dataService = dataService;
 
         public async Task<IActionResult> Index()
@@ -38,12 +40,26 @@ namespace Speedy.Controllers
         }
 
 		[HttpGet]
-		public async Task<IActionResult> Create()
+		public IActionResult Create()
 		{
 			return View("IndividualForm", InitialIndividualForm());
 		}
 
-		[HttpPost]
+        [HttpGet]
+        public async Task<IActionResult> Profile(string id)
+        {
+            var user = await _individualService.GetIndividualAsync(individualId: id);
+
+            if (user is null)
+                return NotFound();
+
+            var deliveriesView = _mapper.Map<IndividualProfileViewModel>(user);
+
+            return View("Profile", deliveriesView);
+        }
+
+
+        [HttpPost]
 		public async Task<IActionResult> Create(IndividualFormViewModel model)
 		{
 			if (!ModelState.IsValid)

@@ -6,6 +6,8 @@ using Speedy.Seeds;
 using Microsoft.EntityFrameworkCore;
 using Speedy.Services.User;
 using UoN.ExpressiveAnnotations.NetCore.DependencyInjection;
+using Speedy.Services.Individuals;
+using Speedy.Services.StartUps;
 
 namespace Speedy;
 
@@ -34,6 +36,8 @@ public class Program
         builder.Services.AddScoped<IUserService, UserService>();
         builder.Services.AddScoped<IAttachmentService, AttachmentService>();
         builder.Services.AddScoped<IDeliveryService, DeliveryService>();
+        builder.Services.AddScoped<IIndividualService, IndividualService>();
+        builder.Services.AddScoped<IStartUpService, StartUpService>();
         builder.Services.AddScoped<IDataService, DataService>();
 
         builder.Services.AddControllersWithViews();

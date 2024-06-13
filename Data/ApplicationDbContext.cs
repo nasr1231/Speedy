@@ -83,6 +83,11 @@ namespace Speedy.Data
 				.HasForeignKey(b => b.LastUpdatedById)
 				.OnDelete(DeleteBehavior.NoAction);
 
+            builder.Entity<Review>()
+           .HasOne(u => u.StartUp)
+           .WithMany(u => u.Reviews)           
+           .OnDelete(DeleteBehavior.NoAction);
+
             // Configuring Compsite Primary Key for delivery
             builder.Entity<DeliveryServiceArea>().HasKey(dsa => new { dsa.ServiceAreaId, dsa.DeliveryId});
             #endregion
