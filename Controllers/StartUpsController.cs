@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Speedy.Core.Consts;
 using Speedy.Services.StartUps;
 using Speedy.Services.User;
@@ -48,12 +49,28 @@ namespace Speedy.Controllers
         [HttpGet]
         public async Task<IActionResult> Profile(string id)
         {
-            var user = await _startService.GetStartUpAsync(startUplId: id);
+            var user = _context.StartUps
+                .Include(c => c.City)
+                .Include(ap => ap.AppUser)
+                .SingleOrDefault(st => st.AppUserId == id);
 
             if (user is null)
                 return NotFound();
 
-            var userView = _mapper.Map<StartUpProfileViewModel>(user);
+            var userView = new StartUpProfileViewModel
+            {
+                CompanyName = user.StartUpName,
+                IsDeleted = user.IsDeleted,
+                City = user.City.Name,
+                Address = user.Address!,
+                Email = user.AppUser.Email!,
+                EstablishDate = user.FoundingDate,
+                FirstName = user.AppUser.FirstName,
+                LastName = user.AppUser.LastName,
+                Id = user.Id,
+                Urls = user.Url,
+                PhoneNumber = user.AppUser.PhoneNumber!
+            };
 
             return View("Profile", userView);
         }
@@ -105,7 +122,64 @@ namespace Speedy.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-		private StartUpFormViewModel InitialStartUpForm(StartUpFormViewModel? model = null)
+        [HttpGet]
+        public IActionResult Edit(string id)
+        {
+            var user = _context.Users.Find(id);
+            
+            if (user is null)
+                return NotFound();
+
+            var userViewModel = new EditStartUpFormViewModel
+            {
+                Id = user.Id,
+                PhoneNumber = user.PhoneNumber,
+                FirstName = user.FirstName,
+                LastName = user.LastName            
+            };
+
+            return PartialView("_Form", userViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(EditStartUpFormViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var user = _context.StartUps
+                .Include(ap => ap.AppUser)
+                .Include(c=>c.City)
+                .SingleOrDefault(us => us.AppUser!.Id == model.Id);
+
+            if (user is null)
+                return NotFound();
+
+            user.AppUser!.FirstName = model.FirstName;
+            user.AppUser!.LastName = model.LastName;
+            user.AppUser!.PhoneNumber = model.PhoneNumber;
+
+            _context.SaveChanges();
+
+            var userViewModel = new StartUpProfileViewModel
+            {
+                Address = user.Address!,
+                City = user.City!.Name,
+                CompanyName = user.StartUpName,
+                Email = user.AppUser.Email!,
+                EstablishDate = user.FoundingDate,
+                LastName = user.AppUser.LastName,
+                FirstName = user.AppUser.FirstName,
+                PhoneNumber = user.AppUser.PhoneNumber,
+                Id = user.Id, 
+                Urls = user.Url,
+                IsDeleted = user.IsDeleted,                
+            };
+
+            return View("Profile", userViewModel);
+        }
+        private StartUpFormViewModel InitialStartUpForm(StartUpFormViewModel? model = null)
 		{
 			StartUpFormViewModel startupFormView = model ?? new StartUpFormViewModel();
 			

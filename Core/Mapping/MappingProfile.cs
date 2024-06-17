@@ -57,6 +57,7 @@ namespace Speedy.Core.Mapping
 
             //Users Profiles
             CreateMap<StartUp, StartUpProfileViewModel>();
+            CreateMap<AppUser, EditStartUpFormViewModel>();
             CreateMap<Individual, IndividualProfileViewModel>();
 
             #region Related Data

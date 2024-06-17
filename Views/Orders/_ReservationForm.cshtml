@@ -1,205 +1,211 @@
 ﻿@model OrderFormViewModel
 <style>
-	* {
-		direction: rtl !important;
-		font-family: "IBM Plex Sans Arabic", sans-serif;
-	}
+    * {
+        direction: rtl !important;
+        font-family: "IBM Plex Sans Arabic", sans-serif;
+    }
 
-	.num {
-		background-color: #0d9aea;
-		height: 40px;
-		width: 40px;
-		border-radius: 50%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		font-size: 20px;
-		margin-left: 6px;
-	}
+    .num {
+        background-color: #0d9aea;
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        margin-left: 6px;
+    }
 
-	.form-control.form-control-solid {
-		border-color: #92b0e6;
-	}
+    .form-control.form-control-solid {
+        border-color: #92b0e6;
+    }
 </style>
 
+<form asp-action="Create" method="post" enctype="multipart/form-data" asp-action="Create" asp-controller="Orders" method="post" class="form w-100" novalidate="novalidate">
+    <div class="slider-container">
+        <div class="slide" id="slide1">
+            <!--begin::Separator-->
+            <div class="d-flex justify-content-start align-items-center mb-7">
+                <span class="fw-bold  fw-bolder text-white num">1</span><h3 class="align-self-end">بياناتك </h3>
+            </div>
+            <!--end::Separator-->
+            <!--begin::Input group-->
+            <div class="row fv-row ">
+                <!--begin::Col-->
+                <div class="col-md-6 mb-7">
+                    <label class="form-label fw-bolder text-dark fs-6">الاسم </label>
+                    <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" autocomplete="off" />
+                    <span class="text-danger d-block h-10px"></span>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-md-6 mb-7">
+                    <label class="form-label fw-bolder text-dark fs-6">رقم هاتف للتواصل </label>
+                    <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" autocomplete="off" />
+                    <span class="text-danger d-block h-10px"></span>
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="fv-row mb-7">
+                <label class="form-label fw-bolder text-dark fs-6">العنوان </label>
+                <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" autocomplete="off" />
+                <span class="text-danger d-block h-10px"></span>
+            </div>
+            <!--end::Input group-->
 
-<body id="kt_body" class="bg-body">
-	<!--begin::Main-->
-	<div class="d-flex flex-column flex-root">
-		<!--begin::Authentication - Sign-up -->
-		<div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(/assets/Website/LoginAssets/14.png)">
-			<!--begin::Content-->
-			<div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
+            <a onclick="nextSlide()" class="nextmain">
+                <i class=" fa-regular fa-circle-right fa-6x"></i>
+                <span class="next">
+                    التالي
+                </span>
 
-				<!--begin::Wrapper-->
-				<div class="w-lg-600px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto" style="padding-top: 30px !important">
-					<!--begin::Form-->
-					<form asp-action="Create" method="post" enctype="multipart/form-data" asp-action="Create" asp-controller="Individuals" method="post" class="form w-100" novalidate="novalidate">
+            </a>
+        </div>
+        <div class="slide" id="slide2">
 
-						<div class="card-body" bis_skin_checked="1">
-							<!--begin::Separator-->
-							<div class="d-flex justify-content-start align-items-center mb-7">
-								<span class="fw-bold  fw-bolder text-white num">1</span><h3 class="align-self-end">بياناتك </h3>
-							</div>
-							<!--end::Separator-->
-							<!--begin::Input group-->
-							<div class="row fv-row ">
-								<!--begin::Col-->
-								<div class="col-md-6 mb-7">
-									<label class="form-label fw-bolder text-dark fs-6">الاسم </label>
-									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" autocomplete="off" />
-									<span class="text-danger d-block h-10px"></span>
-								</div>
-								<!--end::Col-->
-								<!--begin::Col-->
-								<div class="col-md-6 mb-7">
-									<label class="form-label fw-bolder text-dark fs-6">رقم هاتف للتواصل </label>
-									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" autocomplete="off" />
-									<span class="text-danger d-block h-10px"></span>
-								</div>
-								<!--end::Col-->
-							</div>
-							<!--end::Input group-->
-							<!--begin::Input group-->
-							<div class="fv-row mb-7">
-								<label class="form-label fw-bolder text-dark fs-6">العنوان </label>
-								<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" autocomplete="off" />
-								<span class="text-danger d-block h-10px"></span>
-							</div>
-							<!--end::Input group-->
-							<!--begin::Separator-->
-							<div class="d-flex justify-content-start align-items-center mb-7">
-								<span class="fw-bold  fw-bolder text-white num">2</span><h3 class="align-self-end">بيانات المستلم </h3>
-							</div>
-							<!--end::Separator-->
-							<!--begin::Input group-->
-							<div class="row fv-row ">
-								<!--begin::Col-->
-								<div class="col-md-6 mb-7">
-									<label class="form-label fw-bolder text-dark fs-6">الاسم </label>
-									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" autocomplete="off" />
-									<span class="text-danger d-block h-10px"></span>
-								</div>
-								<!--end::Col-->
-								<!--begin::Col-->
-								<div class="col-md-6 mb-7">
-									<label class="form-label fw-bolder text-dark fs-6">رقم هاتف للتواصل </label>
-									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" autocomplete="off" />
-									<span class="text-danger d-block h-10px"></span>
-								</div>
-								<!--end::Col-->
-							</div>
-							<!--end::Input group-->
-							<!--begin::Input group-->
-							<div class="fv-row mb-7">
-								<label class="form-label fw-bolder text-dark fs-6">العنوان </label>
-								<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" autocomplete="off" />
-								<span class="text-danger d-block h-10px"></span>
-							</div>
-							<!--end::Input group-->
-							<!--begin::Input group-->
-							<div class="fv-row mb-7">
-								<label class="form-label fw-bolder text-dark fs-6 ">تاريخ التسليم</label>
-								<div class="input-group">
-									<input type="date" style="border-radius:8px;" class="form-control form-control-lg form-control-solid birthdate-flatpickr " placeholder="date" aria-label="date" aria-describedby="basic-addon1" />
-									<span style="height:46px; border-radius:8px;" class="input-group-text" id="basic-addon1">
-										<i class="fa-solid fa-calendar-days fs-4"></i>
-									</span>
-								</div>
-								<span  class="text-danger d-block h-10px"></span>
-							</div>
-							<!--end::Input group-->
-							<!--begin::Separator-->
-							<div class="d-flex justify-content-start align-items-center mb-7">
-								<span class="fw-bold  fw-bolder text-white num">3</span><h3 class="align-self-end">بيانات الشحنة </h3>
-							</div>
-							<!--end::Separator-->
-							<!--begin::Input group-->
-							<div class="d-flex flex-column mb-8">
-								<label class="fs-6 fw-bold mb-2">مواصفات الشحنة </label>
-								<textarea class="form-control form-control-solid" rows="3" name="الشحنة"></textarea>
-							</div>
-							<!--end::Input group-->
-							<!--begin::Image input-->
-							<div style="background-image: url(/assets/Website/images/addPhoto.png)" class="image-input image-input-empty" data-kt-image-input="true">
-								<!--begin::Image preview wrapper-->
-								<div class="image-input-wrapper w-250px h-200px"></div>
-								<!--end::Image preview wrapper-->
-								<!--begin::Edit button-->
-								<label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-									   data-kt-image-input-action="change"
-									   data-bs-toggle="tooltip"
-									   data-bs-dismiss="click"
-									   title="تغيير الصورة">
-									<i class="bi bi-pencil-fill fs-7"></i>
+            <!--begin::Separator-->
+            <div class="d-flex justify-content-start align-items-center mb-7">
+                <span class="fw-bold  fw-bolder text-white num">2</span><h3 class="align-self-end">بيانات المستلم </h3>
+            </div>
+            <!--end::Separator-->
+            <!--begin::Input group-->
+            <div class="row fv-row ">
+                <!--begin::Col-->
+                <div class="col-md-6 mb-7">
+                    <label class="form-label fw-bolder text-dark fs-6">الاسم </label>
+                    <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" autocomplete="off" />
+                    <span class="text-danger d-block h-10px"></span>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-md-6 mb-7">
+                    <label class="form-label fw-bolder text-dark fs-6">رقم هاتف للتواصل </label>
+                    <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" autocomplete="off" />
+                    <span class="text-danger d-block h-10px"></span>
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="fv-row mb-7">
+                <label class="form-label fw-bolder text-dark fs-6">العنوان </label>
+                <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" autocomplete="off" />
+                <span class="text-danger d-block h-10px"></span>
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="fv-row mb-7">
+                <label class="form-label fw-bolder text-dark fs-6 ">تاريخ التسليم</label>
+                <div class="input-group">
+                    <input type="date" style="border-radius:8px;" class="form-control form-control-lg form-control-solid birthdate-flatpickr " placeholder="date" aria-label="date" aria-describedby="basic-addon1" />
+                    <span style="height:46px; border-radius:8px;" class="input-group-text" id="basic-addon1">
+                        <i class="fa-solid fa-calendar-days fs-4"></i>
+                    </span>
+                </div>
+                <span class="text-danger d-block h-10px"></span>
+            </div>
+            <!--end::Input group-->
 
-									<!--begin::Inputs-->
-									<input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
-									<input type="hidden" name="avatar_remove" />
-									<!--end::Inputs-->
-								</label>
-								<!--end::Edit button-->
-								<!--begin::Cancel button-->
-								<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-									  data-kt-image-input-action="cancel"
-									  data-bs-toggle="tooltip"
-									  data-bs-dismiss="click"
-									  title="إلغاء الصورة">
-									<i class="bi bi-x fs-2"></i>
-								</span>
-								<!--end::Cancel button-->
-								<!--begin::Remove button-->
-								<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-									  data-kt-image-input-action="remove"
-									  data-bs-toggle="tooltip"
-									  data-bs-dismiss="click"
-									  title="Remove avatar">
-									<i class="bi bi-x fs-2"></i>
-								</span>
-								<!--end::Remove button-->
-							</div>
-							<h5 class="fv-row mb-7 mt-3">برجاء إرفاق صورة الشحنة</h5>
+            <a onclick="prevSlide()" class="prevmain">
+                <i class=" fa-regular fa-circle-left fa-6x"></i>
+                <span class="prev">
+                    السابق
+                </span>
 
-							<!--end::Image input-->
-							<!--begin::Separator-->
-							<div class="d-flex justify-content-start align-items-center mb-7">
-								<span class="fw-bold  fw-bolder text-white num">4</span><h3 class="align-self-end">ملاحظات  </h3>
-							</div>
-							<!--end::Separator-->
-							<!--begin::Input group-->
-							<div class="d-flex flex-column mb-8">
-								<label class="fs-6 fw-bold mb-2">هل لديك أى ملاحظات إضافية بخصوص الشحنة أو الإستلام  </label>
-								<textarea class="form-control form-control-solid" rows="3" name="ملاحظات"></textarea>
-							</div>
-							<!--end::Input group-->
-							<!--end::Input group-->
-							<div class="text-danger"></div>
-							<!--begin::Actions-->
-							<div class="text-center">
-								<button type="submit" class="btn btn-lg btn-primary" id="Submit-Btn">
-									<span class="indicator-label">تسجيل</span>
-									<span class="indicator-progress">
-										برجاء الانتظار
-										<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-									</span>
-								</button>
-							</div>
+            </a>
+        </div>
+        <div class="slide" id="slide3">
 
+            <!--begin::Separator-->
+            <div class="d-flex justify-content-start align-items-center mb-7">
+                <span class="fw-bold  fw-bolder text-white num">3</span><h3 class="align-self-end">بيانات الشحنة </h3>
+            </div>
+            <!--end::Separator-->
+            <!--begin::Input group-->
+            <div class="d-flex flex-column mb-8">
+                <label class="fs-6 fw-bold mb-2">مواصفات الشحنة </label>
+                <textarea class="form-control form-control-solid" rows="3" name="الشحنة"></textarea>
+            </div>
+            <!--end::Input group-->
+            <!--begin::Image input-->
+            <div style="background-image: url(/assets/Website/images/addPhoto.png)" class="image-input image-input-empty" data-kt-image-input="true">
+                <!--begin::Image preview wrapper-->
+                <div class="image-input-wrapper w-250px h-200px"></div>
+                <!--end::Image preview wrapper-->
+                <!--begin::Edit button-->
+                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                       data-kt-image-input-action="change"
+                       data-bs-toggle="tooltip"
+                       data-bs-dismiss="click"
+                       title="تغيير الصورة">
+                    <i class="bi bi-pencil-fill fs-7"></i>
 
+                    <!--begin::Inputs-->
+                    <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                    <input type="hidden" name="avatar_remove" />
+                    <!--end::Inputs-->
+                </label>
+                <!--end::Edit button-->
+                <!--begin::Cancel button-->
+                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                      data-kt-image-input-action="cancel"
+                      data-bs-toggle="tooltip"
+                      data-bs-dismiss="click"
+                      title="إلغاء الصورة">
+                    <i class="bi bi-x fs-2"></i>
+                </span>
+                <!--end::Cancel button-->
+                <!--begin::Remove button-->
+                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                      data-kt-image-input-action="remove"
+                      data-bs-toggle="tooltip"
+                      data-bs-dismiss="click"
+                      title="Remove avatar">
+                    <i class="bi bi-x fs-2"></i>
+                </span>
+                <!--end::Remove button-->
+            </div>
+            <h5 class="fv-row mb-7 mt-3">برجاء إرفاق صورة الشحنة</h5>
 
-						</div>
+            <!--end::Image input-->
 
-					</form>
-					<!--end::Form-->
-				</div>
-				<!--end::Wrapper-->
-			</div>
-			<!--end::Content-->
+            <a onclick="prevSlide()" class="prevmain">
+                <i class=" fa-regular fa-circle-left fa-6x"></i>
+                <span class="prev">
+                    السابق
+                </span>
 
-		</div>
-		<!--end::Authentication - Sign-up-->
-	</div>
+            </a>
+        </div>
+        @* <div class="slide" id="slide4">
 
-	<!--end::Main-->
-	
-</body>
+        <!--begin::Separator-->
+        <div class="d-flex justify-content-start align-items-center mb-7">
+        <span class="fw-bold  fw-bolder text-white num">4</span><h3 class="align-self-end">ملاحظات  </h3>
+        </div>
+        <!--end::Separator-->
+        <!--begin::Input group-->
+        <div class="d-flex flex-column mb-8">
+        <label class="fs-6 fw-bold mb-2">هل لديك أى ملاحظات إضافية بخصوص الشحنة أو الإستلام  </label>
+        <textarea class="form-control form-control-solid" rows="3" name="ملاحظات"></textarea>
+        </div>
+        <!--end::Input group-->
+        <!--end::Input group-->
+        <div class="text-danger"></div>
+        <!--begin::Actions-->
+        <div class="text-center">
+        <button type="submit" class="btn btn-lg btn-primary" id="Submit-Btn">
+        <span class="indicator-label">تسجيل</span>
+        <span class="indicator-progress">
+        برجاء الانتظار
+        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+        </span>
+        </button>
+        </div>
+
+        </div> *@
+    </div>
+</form>

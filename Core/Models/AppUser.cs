@@ -19,6 +19,7 @@ namespace Speedy.Core.Models
 
         [MaxLength(14)]
         public string NID { get; set; } = string.Empty;
+        public string? Address { get; set; }
         #endregion
 
         #region Conditions

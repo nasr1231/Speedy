@@ -46,18 +46,30 @@ namespace Speedy.Controllers
 		}
 
         [HttpGet]
-        public async Task<IActionResult> Profile(string id)
+        public IActionResult Profile(string id)
         {
-            var user = await _individualService.GetIndividualAsync(individualId: id);
+            var user = _context.Individuals
+               .Include(c => c.City)
+               .Include(ap => ap.AppUser)
+               .SingleOrDefault(st => st.AppUserId == id);
 
             if (user is null)
                 return NotFound();
 
-            var deliveriesView = _mapper.Map<IndividualProfileViewModel>(user);
+            var userView = new IndividualProfileViewModel
+            {
+               Address = user.AppUser.Address,
+			   City = user.City.Name,
+			   Email = user.AppUser.Email,
+			   FirstName = user.AppUser!.FirstName,
+			   LastName = user.AppUser!.LastName,
+			   PhoneNumber = user.AppUser.PhoneNumber,
+			   Id = user.AppUserId,
+			    IsDeleted = user.IsDeleted
+            };
 
-            return View("Profile", deliveriesView);
+            return View("Profile", userView);
         }
-
 
         [HttpPost]
 		public async Task<IActionResult> Create(IndividualFormViewModel model)
