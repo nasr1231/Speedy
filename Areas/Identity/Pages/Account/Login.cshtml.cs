@@ -62,7 +62,7 @@ namespace Speedy.Areas.Identity.Pages.Account
             /// </summary>
             [Required]
             //[EmailAddress]
-            [Display(Name = "Username Or Email")]
+            [Display(Name = "أسم المستخدم أو الأيميل")]
             public string UserName { get; set; }
 
             /// <summary>
@@ -71,6 +71,7 @@ namespace Speedy.Areas.Identity.Pages.Account
             /// </summary>
             [Required]
             [DataType(DataType.Password)]
+            [Display(Name = "كلمة السر")]
             public string Password { get; set; }
 
             /// <summary>

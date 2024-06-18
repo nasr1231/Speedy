@@ -1,0 +1,54 @@
+﻿@model FeedbackViewModel
+
+<div class="card-body p-9" bis_skin_checked="1">
+    <!--begin::Row-->
+    <div class="row mb-7" bis_skin_checked="1">
+        <!--begin::Label-->
+        <label class="col-lg-4 fw-semibold text-muted">Full Name</label>
+        <!--end::Label-->
+        <!--begin::Col-->
+        <div class="col-lg-8" bis_skin_checked="1">
+            <span class="fw-bold fs-6 text-gray-800">@Model.UserName</span>
+        </div>
+        <!--end::Col-->
+    </div>
+    <!--end::Row-->
+
+    <!--begin::Row-->
+    <div class="row mb-7" bis_skin_checked="1">
+        <!--begin::Label-->
+        <label class="col-lg-4 fw-semibold text-muted">User Id</label>
+        <!--end::Label-->
+        <!--begin::Col-->
+        <div class="col-lg-8" bis_skin_checked="1">
+            <span class="fw-bold fs-6 text-gray-800">@Model.UserId</span>
+        </div>
+        <!--end::Col-->
+    </div>
+    <!--end::Row-->
+    <!--begin::Input group-->
+    <div class="row mb-7" bis_skin_checked="1">
+        <!--begin::Label-->
+        <label class="col-lg-4 fw-semibold text-muted">Creation Date</label>
+        <!--end::Label-->
+        <!--begin::Col-->
+        <div class="col-lg-8" bis_skin_checked="1">
+            <a href="#" class="fw-semibold fs-6 text-gray-800 text-hover-primary">@Model.CreatedOn</a>
+        </div>
+        <!--end::Col-->
+    </div>
+    <!--end::Input group-->
+
+    <!--begin::Input group-->
+    <div class="row mb-7" bis_skin_checked="1">
+        <!--begin::Label-->
+        <label class="col-lg-4 fw-semibold text-muted">Message</label>
+        <!--end::Label-->
+        <!--begin::Col-->
+        <div class="col-lg-12" bis_skin_checked="1">
+            <span class="fw-bold fs-6 text-gray-800">@Model.Message</span>
+        </div>
+        <!--end::Col-->
+    </div>
+    <!--end::Input group-->
+</div>

@@ -31,6 +31,8 @@ namespace Speedy.Core.Mapping
 
             //FeedBacks
             CreateMap<Feedback, FeedbackViewModel>().ReverseMap();
+            CreateMap<Feedback, FeedbacksDashboardViewModel>()                            
+            .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName));             
 
             // Start Up            
             CreateMap<StartUp, StartUpViewModel>()

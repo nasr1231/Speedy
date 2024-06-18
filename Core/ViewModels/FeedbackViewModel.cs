@@ -9,6 +9,7 @@ namespace Speedy.Core.ViewModels
         [Display(Name ="الرسالة")]
         [Required(ErrorMessage = Errors.isRequired)]
         public string Message { get; set; } = null!;
-        public DateTime CreatedOn { get; set; } = DateTime.Now;
+        public string? UserName { get; set; }
+        public DateTime CreatedOn { get; set; }
     }
 }

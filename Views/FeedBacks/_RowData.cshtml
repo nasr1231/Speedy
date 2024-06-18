@@ -1,0 +1,11 @@
+﻿@model FeedbacksDashboardViewModel
+
+<td>@Model.Id</td>
+<td>@Model.UserName</td>
+<td>@Model.CreationDate</td>
+<td class="text-center">
+    <a href="javascript:;" data-url="/FeedBacks/Message/@Model.Id" class="js-render-modal btn btn-sm btn-light btn-flex btn-center btn-active-light-primary">
+        View Message
+        <i class="fa-solid fa-arrow-down fs-7 ms-1"></i>
+    </a>
+</td>  
