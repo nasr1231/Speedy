@@ -1,0 +1,62 @@
+﻿@model List<FeedbacksDashboardViewModel>
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery antiforgery
+@{
+    ViewData["Title"] = "System Users";
+    Layout = "_Layout";
+}
+
+@section Styles {
+
+    <link href="~/assets/Panel/plugins/datatables/datatables.bundle.css" rel="stylesheet" crossorigin="anonymous" />
+}
+
+<div class="card shadow-sm mb-5 mb-lg-10">
+    <div class="card-header">
+        <div class="card-title">
+            <div class="symbol symbol-70px me-4">
+                <div class="symbol-label fs-2 fw-semibold text-success">
+                    <i class="fa-solid fa-truck-fast text-primary"></i>
+                </div>
+                <span class="symbol-badge badge badge-circle bg-primary start-100 text-white">@Model.Count()</span>
+            </div>
+            <h2 class="fw-bolder">Feedbacks</h2>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm mb-5 mb-lg-10 min-h-md-425px">
+    <div class="card-body pt-0">
+        <div class="table-responsive" style="min-height: 270px">
+            <partial name="_TableHeader" />
+            <table class="table table-row-bordered table-row-gray-300 gy-3 align-middle js-datatable" data-export-title="Delivery Agents">
+                <thead>
+                    <tr class="fw-bold fs-6 text-gray-800">
+                        <th style="width:155px;">Id</th>
+                        <th>UserName</th>                                            
+                        <th>Feedback Date</th>                        
+                        <th class="js-no-export text-center">Message</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var feed in Model)
+                    {
+                        <tr>
+                            <partial name="_RowData" model="@feed" />
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<input type="hidden" name="__RequestVerificationToken" value="@antiforgery.GetAndStoreTokens(Context).RequestToken" />
+
+@section Plugins {
+    <script src="~/assets/Panel/plugins/datatables/datatables.bundle.js"></script>
+    <script src="~/assets/Panel/plugins/datatables/vfs_fonts.js"></script>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+}
