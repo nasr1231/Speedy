@@ -181,14 +181,15 @@
                                 <div class="d-flex justify-content-around mb-5">
                                     <div class="input-group mb-2">
                                         <div class="form-check form-check-inline">
-                                            <input id="radio-male" class="form-check-input" type="radio" value="ذكر" name="gender">
+                                            <input id="radio-male" class="form-check-input" type="radio" name="gender" value="Male">
                                             <label for="radio-male" class="form-check-label fw-bolder text-dark fs-6">ذكر</label>
                                         </div>
                                         <div class="form-check form-check-inline mb-7">
-                                            <input id="radio-female" class="form-check-input" type="radio" value="أنثى" name="gender">
+                                            <input id="radio-female" class="form-check-input" type="radio" name="gender" value="Female">
                                             <label for="radio-female" class="form-check-label fw-bolder text-dark fs-6">أنثى</label>
                                         </div>
                                     </div>
+                                    <input asp-for="@Model.Gender" type="hidden" id="GenderName">
                                     <span asp-validation-for="@Model!.Gender" class="text-danger d-block h-10px"></span>
                                 </div>
                                 <input type="hidden" id="hidden-gender" asp-for="@Model.Gender" name="hiddenGender">
@@ -395,7 +396,18 @@
                     ],
 
                 }
-            )
+            );
+            const radioMale = document.getElementById('radio-male');
+            const radioFemale = document.getElementById('radio-female');
+            const genderName = document.getElementById('GenderName');
+
+            radioMale.addEventListener('change', () => {
+                genderName.value = radioMale.value;
+            });
+
+            radioFemale.addEventListener('change', () => {
+                genderName.value = radioFemale.value;
+            });
         });
     </script>
 }

@@ -174,6 +174,11 @@ function modalSubmitSuccess(row) {
     KTMenu.initHandlers();
 }
 
+function modalSubmitClose(row) {
+    $('#model-window').modal('hide');
+
+}
+
 
 // Messages
 //function ShowSuccessMessage(message = 'Updated Successfully!') {

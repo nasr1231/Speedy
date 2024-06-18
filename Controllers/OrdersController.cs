@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Speedy.Core.Enums;
+using static Speedy.Core.Enums.Variables;
 
 namespace Speedy.Controllers
 {
@@ -20,14 +22,6 @@ namespace Speedy.Controllers
             return View();
 		}
 
-		public IActionResult Agents()
-		{
-			if(User.IsInRole(AppRoles.Individual))
-			return View("Form");
-
-			return View();
-		}
-
         [HttpGet]
         public IActionResult Filter(CitiesHomeViewModel model)
         {
@@ -40,7 +34,7 @@ namespace Speedy.Controllers
             if (deliveryCitiesFliter is null)
                 return NotFound();
 
-            var orderViewModel = new OrderFormViewModel { Deliveries = deliveryCitiesFliter};
+            var orderViewModel = new OrderDeliveryViewModel { Deliveries = deliveryCitiesFliter};
             
             return View("DeliveryPreview", orderViewModel);
         }
@@ -54,24 +48,60 @@ namespace Speedy.Controllers
             return PartialView("_ReservationForm", appointmentsViewModel);
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Create(ReservationFormViewModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return BadRequest();
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(OrderFormViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(model);
 
-        //    var reserve = model.MapToModel(User.GetUserId());
+            using var transaction = _context.Database.BeginTransaction();
 
-        //    _dbContext.Add(reserve);
-        //    _dbContext.SaveChanges();
+            var order = new Order
+            {
+                Notes = model.Notes,
+                AppUserId = model.UserId,
+                CreatedById = model.UserId,
+                Description = model.Description,
+                IsSensitive = model.IsSensitive,                
+                RecieveDate = model.RecieveDate,
+                RecieverName = model.RecieverName,
+                RecieverAddress = model.RecieverAddress,
+                RecieverPhoneNumber = model.RecieverPhoneNumber,
+                ShippingDate = model.ShippingDate,
+                PaymentMethod = new PaymentMethod
+                {
+                    Title = "Cash",
+                    HolderName = model.RecieverName,                    
+                },
+                
+            };
 
-        //    var newAppoinment = _dbContext.Reservations.FirstOrDefault(a => a.Id == reserve.Id);
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+            transaction.Commit();
 
-        //    if (newAppoinment is null)
-        //        return NotFound();
+            var user = _context.Individuals
+              .Include(c => c.City)
+              .Include(ap => ap.AppUser)
+              .SingleOrDefault(st => st.AppUserId == model.UserId);
 
-        //    return View("PatientReservations");
-        //}
+            if (user is null)
+                return NotFound();
+
+            var userView = new IndividualProfileViewModel
+            {
+                Address = user.AppUser!.Address,
+                City = user.City.Name,
+                Email = user.AppUser.Email,
+                FirstName = user.AppUser!.FirstName,
+                LastName = user.AppUser!.LastName,
+                PhoneNumber = user.AppUser.PhoneNumber,
+                Id = user.AppUserId,
+                IsDeleted = user.IsDeleted
+            };
+
+            return View("~/Views/Individuals/Profile.cshtml", userView);
+        }
     }
 }

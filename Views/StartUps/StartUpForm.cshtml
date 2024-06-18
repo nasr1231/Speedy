@@ -237,20 +237,18 @@
                                 <!--begin::Input group-->
                                 <div class="row fv-row ">
                                     <div class="col-md-6 mb-7">
-                                        <label class="form-label fw-bolder text-dark fs-6">المدينة</label>
-                                        <select id="CityId" asp-for="@Model.SelectedCityId" asp-items="@Model.Cities" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المدينة" data-hide-search="true">
-                                            <option></option>
-                                        </select>
-                                        <span asp-validation-for="@Model!.SelectedCityId" class="text-danger d-block h-10px"></span>
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Input group-->
-                                    <div class="col-md-6 mb-7">
                                         <label class="form-label fw-bolder text-dark fs-6">المحافظة</label>
                                         <select id="GovernorateId" asp-for="@Model.SelectedGovernorateId" asp-items="@Model.Governorates" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المحافظة" data-hide-search="true">
                                             <option></option>
                                         </select>
                                         <span asp-validation-for="@Model!.SelectedGovernorateId" class="text-danger d-block h-10px"></span>
+                                    </div>
+                                    <div class="col-md-6 mb-7">
+                                        <label class="form-label fw-bolder text-dark fs-6">المدينة</label>
+                                        <select id="CityId" asp-for="@Model.SelectedCityId" asp-items="@Model.Cities" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المدينة" data-hide-search="true">
+                                            <option></option>
+                                        </select>
+                                        <span asp-validation-for="@Model!.SelectedCityId" class="text-danger d-block h-10px"></span>
                                     </div>
                                     <!--begin::Input group-->
                                     <div class="fv-row mb-7">

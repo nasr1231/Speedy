@@ -58,7 +58,7 @@ namespace Speedy.Controllers
 
             var userView = new IndividualProfileViewModel
             {
-               Address = user.AppUser.Address,
+               Address = user.AppUser!.Address,
 			   City = user.City.Name,
 			   Email = user.AppUser.Email,
 			   FirstName = user.AppUser!.FirstName,

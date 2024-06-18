@@ -230,14 +230,15 @@
                                 <div class="d-flex justify-content-around mb-5">
                                     <div class="input-group mb-2">
                                         <div class="form-check form-check-inline">
-                                            <input id="radio-male" class="form-check-input" type="radio" value="ذكر" name="gender">
+                                            <input id="radio-male" class="form-check-input" type="radio" name="gender" value="Male">
                                             <label for="radio-male" class="form-check-label fw-bolder text-dark fs-6">ذكر</label>
                                         </div>
                                         <div class="form-check form-check-inline mb-7">
-                                            <input id="radio-female" class="form-check-input" type="radio" value="أنثى" name="gender">
+                                            <input id="radio-female" class="form-check-input" type="radio" name="gender" value="Female">
                                             <label for="radio-female" class="form-check-label fw-bolder text-dark fs-6">أنثى</label>
                                         </div>
                                     </div>
+                                    <input asp-for="@Model.Gender" type="hidden" id="GenderName">
                                     <span asp-validation-for="@Model!.Gender" class="text-danger d-block h-10px"></span>
                                 </div>
                                 <input type="hidden" id="hidden-gender" asp-for="@Model.Gender" name="hiddenGender">
@@ -252,26 +253,24 @@
                                 <!--begin::Input group-->
                                 <div class="row fv-row ">
                                     <div class="col-md-6 mb-7">
-                                        <label class="form-label fw-bolder text-dark fs-6 " asp-for="SelectedCityId"></label>
-                                        <select id="CityId" asp-for="@Model.SelectedCityId" asp-items="@Model.Cities" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المدينة" data-hide-search="true">
-                                            <option></option>
-                                        </select>
-                                        <span asp-validation-for="@Model!.SelectedCityId" class="text-danger d-block h-10px"></span>
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Input group-->
-                                    <div class="col-md-6 mb-7">
                                         <label class="form-label fw-bolder text-dark fs-6 " asp-for="SelectedGovernorateId"></label>
                                         <select id="GovernorateId" asp-for="@Model.SelectedGovernorateId" asp-items="@Model.Governorates" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المحافظة" data-hide-search="true">
                                             <option></option>
                                         </select>
                                         <span asp-validation-for="@Model!.SelectedGovernorateId" class="text-danger d-block h-10px"></span>
                                     </div>
+                                    <div class="col-md-6 mb-7">
+                                        <label class="form-label fw-bolder text-dark fs-6 " asp-for="SelectedCityId"></label>
+                                        <select id="CityId" asp-for="@Model.SelectedCityId" asp-items="@Model.Cities" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المدينة" data-hide-search="true">
+                                            <option></option>
+                                        </select>
+                                        <span asp-validation-for="@Model!.SelectedCityId" class="text-danger d-block h-10px"></span>
+                                    </div>
                                 </div>
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-10">
                                     <label class="form-check form-check-custom form-check-solid form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="AcceptTerms"/>
+                                        <input class="form-check-input" type="checkbox" id="AcceptTerms" />
                                         <span class="form-check-label fw-bold text-gray-700 fs-6 me-3">
                                             أقر بأني موافق على كل
                                             <a href="#" class="ms-1 link-primary">الشروط و الأحكام</a>.
@@ -329,7 +328,7 @@
     <script src="~/js/slider.js" asp-append-version="true"></script>
     <script src="~/js/IntitateCities.js" asp-append-version="true"></script>
     <script src="~/js/register.js" asp-append-version="true"></script>
-    <script>      
+    <script>
         $(document).ready(function () {
             $(".birthdate-flatpickr").flatpickr(
                 {
@@ -344,7 +343,18 @@
                         }
                     ],
                 }
-            )
-        });                                 
+            );
+            const radioMale = document.getElementById('radio-male');
+            const radioFemale = document.getElementById('radio-female');
+            const genderName = document.getElementById('GenderName');
+
+            radioMale.addEventListener('change', () => {
+                genderName.value = radioMale.value;
+            });
+
+            radioFemale.addEventListener('change', () => {
+                genderName.value = radioFemale.value;
+            });
+        });
     </script>
 }

@@ -46,7 +46,7 @@
                                 <div class="d-flex flex-column">
                                     <!--begin::Name-->
                                     <div class="d-flex align-items-center mb-7">
-                                        <a class="text-gray-900 text-primary fs-2 fw-bold me-1">@Model.</a>
+                                        <a class="text-gray-900 text-primary fs-2 fw-bold me-1">@Model.FirstName @Model.LastName</a>
 
                                     </div>
                                     <!--end::Name-->
@@ -57,7 +57,7 @@
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
-                                            </i>        شركة
+                                            </i>        فرد
                                         </a>
                                         <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
                                             <i class="fa-solid fa-location-dot fs-4 me-1 ms-2"><span class="path1"></span><span class="path2"></span></i>
@@ -102,7 +102,7 @@
                                             </div>
                                             <!--end::Number-->
                                             <!--begin::Label-->
-                                            <div class="fw-semibold fs-6 text-gray-500">التقييم </div>
+                                            <div class="fw-semibold fs-6 text-gray-500">التقييم</div>
                                             <!--end::Label-->
                                         </div>
                                         <!--end::Stat-->
@@ -157,7 +157,7 @@
                                 <h3 class="fw-bold m-0"> تفاصيل الحساب</h3>
                             </div>
                             <!--end::Card title-->
-                            <a data-url="/StartUps/Edit/@User.FindFirst(ClaimTypes.NameIdentifier)!.Value" href="javascript:;" data-title="تعديل بيانات الحساب" class="btn btn-sm btn-primary align-self-center js-render-modal"> تعديل الحساب</a>
+                            <a data-url="/Individuals/Edit/@User.FindFirst(ClaimTypes.NameIdentifier)!.Value" href="javascript:;" data-title="تعديل بيانات الحساب" class="btn btn-sm btn-primary align-self-center js-render-modal"> تعديل الحساب</a>
                         </div>
                         <!--begin::Card header-->
                         <!--begin::Card body-->
@@ -208,26 +208,12 @@
                             <!--begin::Input group-->
                             <div class="row mb-7">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 fw-semibold text-muted">   البريد الالكتروني الخاص بالشركة</label>
+                                <label class="col-lg-4 fw-semibold text-muted">البريد الالكتروني</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8">
                                     <a href="#" class="fw-semibold fs-6 text-gray-800 text-hover-primary">
-                                        startup@gmail.com
-                                    </a>
-                                </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row mb-7">
-                                <!--begin::Label-->
-                                <label class="col-lg-4 fw-semibold text-muted">   رقم الهاتف الخاص بالشركة</label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8">
-                                    <a href="#" class="fw-semibold fs-6 text-gray-800 text-hover-primary">
-                                        01537458926
+                                        @Model.Email
                                     </a>
                                 </div>
                                 <!--end::Col-->

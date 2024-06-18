@@ -54,42 +54,46 @@ namespace Speedy.Data
                .HasForeignKey(b => b.CreatedById)
                .OnDelete(DeleteBehavior.NoAction);
             builder.Entity<Delivery>()
-				.HasOne(b => b.LastUpdatedBy)
-				.WithMany()
-				.HasForeignKey(b => b.LastUpdatedById)
-				.OnDelete(DeleteBehavior.NoAction);
+                .HasOne(b => b.LastUpdatedBy)
+                .WithMany()
+                .HasForeignKey(b => b.LastUpdatedById)
+                .OnDelete(DeleteBehavior.NoAction);
 
-			builder.Entity<Individual>()
-			   .HasOne(b => b.CreatedBy)
-			   .WithMany()
-			   .HasForeignKey(b => b.CreatedById)
-			   .OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<Individual>()
+               .HasOne(b => b.CreatedBy)
+               .WithMany()
+               .HasForeignKey(b => b.CreatedById)
+               .OnDelete(DeleteBehavior.NoAction);
 
-			builder.Entity<Individual>()
-				.HasOne(b => b.LastUpdatedBy)
-				.WithMany()
-				.HasForeignKey(b => b.LastUpdatedById)
-				.OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<Individual>()
+                .HasOne(b => b.LastUpdatedBy)
+                .WithMany()
+                .HasForeignKey(b => b.LastUpdatedById)
+                .OnDelete(DeleteBehavior.NoAction);
 
-			builder.Entity<StartUp>()
-			   .HasOne(b => b.CreatedBy)
-			   .WithMany()
-			   .HasForeignKey(b => b.CreatedById)
-			   .OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<StartUp>()
+               .HasOne(b => b.CreatedBy)
+               .WithMany()
+               .HasForeignKey(b => b.CreatedById)
+               .OnDelete(DeleteBehavior.NoAction);
 
-			builder.Entity<StartUp>()
-				.HasOne(b => b.LastUpdatedBy)
-				.WithMany()
-				.HasForeignKey(b => b.LastUpdatedById)
-				.OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<StartUp>()
+                .HasOne(b => b.LastUpdatedBy)
+                .WithMany()
+                .HasForeignKey(b => b.LastUpdatedById)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<Review>()
            .HasOne(u => u.StartUp)
-           .WithMany(u => u.Reviews)           
+           .WithMany(u => u.Reviews)
            .OnDelete(DeleteBehavior.NoAction);
 
+            builder.Entity<Order>()
+            .Property(r => r.PaymentStatus)
+            .HasConversion<string>();
+
             // Configuring Compsite Primary Key for delivery
-            builder.Entity<DeliveryServiceArea>().HasKey(dsa => new { dsa.ServiceAreaId, dsa.DeliveryId});
+            builder.Entity<DeliveryServiceArea>().HasKey(dsa => new { dsa.ServiceAreaId, dsa.DeliveryId });
             #endregion
 
             #region Seeds
