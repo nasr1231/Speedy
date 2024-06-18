@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Speedy.Core.Enums;
+using Speedy.Core.Models;
 using static Speedy.Core.Enums.Variables;
 
 namespace Speedy.Controllers
@@ -11,15 +12,34 @@ namespace Speedy.Controllers
         private readonly ApplicationDbContext _context = context;
         private readonly IMapper _mapper = mapper;
         private readonly UserManager<AppUser> _userManager = userManager;
-        public IActionResult Index()
+        public IActionResult Index(string id)
 		{
+            var delivery = _context.Deliveries.SingleOrDefault(x => x.AppUserId == id);
+            var orders = _context.Orders.Where(i => i.DeliveryId == delivery!.Id).ToList();
+            var viewModels = new List<OrderDetailsViewModel>();
+
+            foreach (var order in orders)
+            {
+                var viewModel = new OrderDetailsViewModel
+                {
+                    TrackingNumber = order.TrackingNumber,
+                    SenderName = order.SenderName,
+                    SenderAddress = order.SenderAddress,
+                    OrderDate = order.ShippingDate,
+                    RecieverAddress = order.RecieverAddress,
+                    RecieverName = order.RecieverName
+                };
+
+                viewModels.Add(viewModel);
+            }            
+
             if (User.IsInRole(AppRoles.StartUp))
                 return View("OrderStartup");
 
 			if (User.IsInRole(AppRoles.Individual))
 				return View("OrderIndividual");
 
-            return View();
+            return View(viewModels);
 		}
 
         [HttpGet]
@@ -59,6 +79,7 @@ namespace Speedy.Controllers
 
             var order = new Order
             {
+                DeliveryId = model.DeliveryId,
                 Notes = model.Notes,
                 AppUserId = model.UserId,
                 CreatedById = model.UserId,
@@ -74,7 +95,9 @@ namespace Speedy.Controllers
                     Title = "Cash",
                     HolderName = model.RecieverName,                    
                 },
-                
+                SenderName = model.SenderName,
+                SenderAddress = model.SenderAddress,
+                SenderPhoneNumber = model.SenderPhoneNumber
             };
 
             _context.Orders.Add(order);

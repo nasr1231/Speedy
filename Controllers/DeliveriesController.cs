@@ -130,14 +130,15 @@ namespace Speedy.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        
-        //[Authorize(Roles = AppRoles.Delivery)]
+
+        [HttpGet]
+        [AjaxOnly]
         public async Task<IActionResult> EditProfile(string id)
         {
             var delivery = await _deliveryService.GetDeliveryAsync(deliveryId: id);
 
             if (delivery is null)
-                return NotFound();
+                return NotFound(delivery);
 
             var deliveryData = new DeliveryProfileFormViewModel
             {
@@ -145,7 +146,7 @@ namespace Speedy.Controllers
                 MobileNumber = delivery.AppUser!.PhoneNumber,                
             };     
 
-            return View("SettingsForm", InitiateServiceArea(deliveryData));
+            return View("_SettingsForm", InitiateServiceArea(deliveryData));
         }
 
         [HttpPost]
@@ -184,14 +185,9 @@ namespace Speedy.Controllers
             var user = await _userManager.FindByIdAsync(id);
 
             if (user is null)
-                return BadRequest();           
+                return BadRequest();                       
 
-            var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-
-            var resetPassForm = new ResetPasswordFormViewModel {
-                Code = code,
-                Id = id
-            };            
+            var resetPassForm = new ResetPasswordFormViewModel {Id = id};            
             return PartialView("_ResetPasswordForm", resetPassForm);
         }        
 
@@ -200,32 +196,43 @@ namespace Speedy.Controllers
         public async Task<IActionResult> ResetPassword(ResetPasswordFormViewModel resetForm)
         {
             if (!ModelState.IsValid)
-                return BadRequest();
+                return BadRequest(resetForm);
 
-            var transaction = _context.Database.BeginTransaction();
             var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == resetForm.Id);
-
             if (user is null)
                 return BadRequest();
 
             var checkOld = await _userManager.CheckPasswordAsync(user, resetForm.OldPassword);
-
             if (!checkOld)
                 return Unauthorized("Password is incorrect");
 
-            var result = await _userManager.ResetPasswordAsync(user, resetForm.Code, resetForm.Password);
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                try
+                {
+                    var removeResult = await _userManager.RemovePasswordAsync(user);
+                    if (!removeResult.Succeeded)
+                        return BadRequest(string.Join(',', removeResult.Errors.Select(e => e.Description)));
 
-            if (!result.Succeeded)
-                return BadRequest(string.Join(',', result.Errors.Select(e => e.Description)));
+                    var addResult = await _userManager.AddPasswordAsync(user, resetForm.Password);
+                    if (!addResult.Succeeded)
+                        return BadRequest(string.Join(',', addResult.Errors.Select(e => e.Description)));
 
-            user.LastUpdatedById = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
-            user.LastUpdatedOn = DateTime.Now;
+                    user.LastUpdatedById = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+                    user.LastUpdatedOn = DateTime.Now;
 
-            var UserResult = await _userManager.UpdateAsync(user);
+                    var updateResult = await _userManager.UpdateAsync(user);
+                    if (!updateResult.Succeeded)
+                        return BadRequest(string.Join(',', updateResult.Errors.Select(e => e.Description)));
 
-            if (!UserResult.Succeeded)
-                return BadRequest(string.Join(',', result.Errors.Select(e => e.Description)));
-            transaction.Commit();
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
 
             return Ok();
         }

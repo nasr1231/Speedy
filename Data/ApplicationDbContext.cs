@@ -4,6 +4,7 @@ using Speedy.Core.Models;
 using Speedy.Core.Models.RelatedData;
 using Speedy.Seeds;
 using System.Drawing;
+using System.Reflection.Emit;
 
 namespace Speedy.Data
 {
@@ -92,6 +93,15 @@ namespace Speedy.Data
             builder.Entity<Order>()
             .Property(r => r.PaymentStatus)
             .HasConversion<string>();
+
+            builder.HasSequence<int>("TrackingNumber").
+                StartsAt(100001)
+                .IncrementsBy(5);
+
+            builder.Entity<Order>()
+                .Property(tr => tr.TrackingNumber).
+                HasDefaultValueSql("NEXT VALUE FOR TrackingNumber");
+
 
             // Configuring Compsite Primary Key for delivery
             builder.Entity<DeliveryServiceArea>().HasKey(dsa => new { dsa.ServiceAreaId, dsa.DeliveryId });

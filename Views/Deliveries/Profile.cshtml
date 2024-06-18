@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "حسابي";
     Layout = "_DeliveryLayout";
+    var UserId = @User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
 }
 
 <!--begin::Main-->
@@ -23,11 +24,6 @@
                         <!--end::Title-->
                     </div>
                     <!--end::Page title-->
-                    <!--begin::Actions-->
-                    <a href="#" class="btn btn-sm btn-success ms-3 px-4 py-3" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">
-                        <span>اختيار لتوصيل طلبك</span>
-                    </a>
-                    <!--end::Actions-->
                 </div>
                 <!--end::Toolbar wrapper-->
             </div>
@@ -145,15 +141,6 @@
                                             </a>
                                         </li>
                                         <!--end::Nav item-->
-                                        <!--begin::Nav item-->
-                                        <li class="nav-item mt-2" role="presentation">
-                                            <a class="nav-link text-active-primary ms-0 me-10 py-5 "
-                                               data-bs-toggle="tab" role="tab"
-                                               href="#demo2">
-                                                نصر
-                                            </a>
-                                        </li>
-                                        <!--end::Nav item-->
                                     </ul>
                                 </div>
                                 <!--end::Stats-->
@@ -172,8 +159,8 @@
                                 <div class="card-title m-0">
                                     <h3 class="fw-bold m-0"> تفاصيل الحساب</h3>
                                 </div>
-                                <!--end::Card title-->
-                                <a asp-controller="deliveries" asp-action="EditProfile" asp-route-id="@User.FindFirst(ClaimTypes.NameIdentifier)!.Value" class="btn btn-sm btn-primary align-self-center"> تعديل الحساب</a>
+                                <!--end::Card title-->                                
+                                <a href="javascript:;" class="btn btn-sm btn-primary align-self-center js-render-modal" data-url="/Deliveries/EditProfile/@UserId" data-title="تعديل الحساب">تعديل الحساب</a>
                             </div>
                             <!--begin::Card header-->
                             <!--begin::Card body-->
@@ -209,7 +196,6 @@
                                     <!--begin::Label-->
                                     <label class="col-lg-4 fw-semibold text-muted">
                                         رقم الهاتف
-
                                         <span class="ms-1" data-bs-toggle="tooltip" title="يجب أن يكون رقم الهاتف ساري">
                                             <i class="ki-duotone ki-information fs-7"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
                                         </span>
@@ -253,32 +239,7 @@
                                     </div>
                                     <!--end::Col-->
                                 </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="row mb-7">
-                                    <!--begin::Label-->
-                                    <label class="col-lg-4 fw-semibold text-muted">Communication</label>
-                                    <!--end::Label-->
-                                    <!--begin::Col-->
-                                    <div class="col-lg-8">
-                                        <span class="fw-bold fs-6 text-gray-800">Email, Phone</span>
-                                    </div>
-                                    <!--end::Col-->
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="row mb-10">
-                                    <!--begin::Label-->
-                                    <label class="col-lg-4 fw-semibold text-muted">Allow Changes</label>
-                                    <!--begin::Label-->
-                                    <!--begin::Label-->
-                                    <div class="col-lg-8">
-                                        <span class="fw-semibold fs-6 text-gray-800">Yes</span>
-                                    </div>
-                                    <!--begin::Label-->
-                                </div>
-                                <!--end::Input group-->
-
+                                <!--end::Input group-->                                                               
                             </div>
                             <!--end::Card body-->
                         </div>
@@ -329,7 +290,7 @@
                                         <!--end::Label-->
                                         <!--begin::Action-->
                                         <div class="ms-auto">
-                                            <a href="javascript:;" class="btn btn-light btn-active-light-primary js-render-modal" data-url="/Deliveries/ResetPassword/@User.FindFirst(ClaimTypes.NameIdentifier)!.Value" data-title="تغير كلمة السر">تغيير كلمة السر</a>
+                                            <a href="javascript:;" class="btn btn-light btn-active-light-primary js-render-modal" data-url="/Deliveries/ResetPassword/@UserId" data-title="تغير كلمة السر">تغيير كلمة السر</a>
                                         </div>
                                         <!--end::Action-->
                                     </div>
@@ -434,10 +395,6 @@
                             </div>
                             <!--end::Col-->
                         </div>
-                    </div>
-                </div>
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade" id="demo2" role="tabpanel">
                     </div>
                 </div>
             </div>

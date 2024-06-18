@@ -12,7 +12,7 @@
             </div>            
             
             <div class="menu-item here show menu-accordion border-bottom">
-                <a asp-controller="Orders" asp-action="Index" active-when="Orders" class="menu-link">
+                <a asp-controller="Orders" asp-action="Index" asp-route-id="@User.FindFirst(ClaimTypes.NameIdentifier)!.Value" active-when="Orders" class="menu-link">
                     <span class="menu-icon">
                         <i class="fa-solid fa-truck-fast fs-3 text-50-black"></i>                            
                     </span>

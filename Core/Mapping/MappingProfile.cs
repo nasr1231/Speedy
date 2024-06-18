@@ -51,6 +51,13 @@ namespace Speedy.Core.Mapping
            .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City!.Name))
            .ForMember(dest => dest.GovernorateName, opt => opt.MapFrom(src => src.City!.Governorate!.Name));
             CreateMap<Individual, IndividualFormViewModel>().ReverseMap();
+            CreateMap<Order, OrderDetailsViewModel>()
+                .ForMember(dest => dest.SenderName, opt => opt.MapFrom(src => src.SenderName))            
+                .ForMember(dest => dest.RecieverName, opt => opt.MapFrom(src => src.RecieverName))            
+                .ForMember(dest => dest.SenderAddress, opt => opt.MapFrom(src => src.SenderAddress))            
+                .ForMember(dest => dest.RecieverAddress, opt => opt.MapFrom(src => src.RecieverAddress))            
+                .ForMember(dest => dest.OrderDate, opt => opt.MapFrom(src => src.RecieveDate))       
+                .ForMember(dest => dest.TrackingNumber, opt => opt.MapFrom(src => src.TrackingNumber));            
 
             //User ViewModel
             CreateMap<AppUser, UserViewModel>();
