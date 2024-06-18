@@ -47,7 +47,7 @@ namespace Speedy.Controllers
 
         [HttpPost]
         //[AjaxOnly]
-        public async Task<IActionResult> Register(UserRoleFormViewModel model)
+        public IActionResult Register(UserRoleFormViewModel model)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Invalid Role!");
@@ -61,8 +61,7 @@ namespace Speedy.Controllers
                 return RedirectToAction("Create", "StartUps");
 
             return BadRequest("Invalid Role!");
-        }
-
+        }        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -1,0 +1,27 @@
+﻿@model FeedbackViewModel
+@{
+    ViewData["Title"] = "رأيك عنا";
+    Layout = "_StartLayout";
+}
+
+<div class="container h-400px d-flex flex-column">
+    <form asp-action="Complain">
+        <input type="hidden" asp-for="UserId" value="@User.FindFirst(ClaimTypes.NameIdentifier)!.Value" />
+
+        <h2>رأيك عنا يا زميلي</h2>
+
+        <div class="input-group input-group-solid">            
+            <textarea asp-for="Message" class="form-control" aria-label="With textarea"></textarea>
+            <span asp-validation-for="Message" class="text-danger fs-5"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">سجل رأيك!</button>
+
+        @if (ViewBag.SuccessMessage != null)
+        {
+            <div class="alert alert-success">
+                @ViewBag.SuccessMessage
+            </div>
+        }
+    </form>
+</div>
