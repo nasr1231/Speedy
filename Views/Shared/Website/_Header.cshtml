@@ -1,4 +1,6 @@
 ﻿<style>
+    
+    }
     :root {
         --main-orange: #E25E3E;
         --sec-orange: #da6b16;
@@ -66,9 +68,9 @@
                                     <li class="scroll-to-section">
                                         <a asp-controller="Home" asp-action="Index" class="active px-4">الصفحه الرئيسيه</a>
                                     </li>
-                                    <li><a asp-controller="Deliveries" asp-action="Dashboard" class="px-6">مناديب</a></li>
-                                    <li><a asp-controller="Orders" asp-action="Index" class="px-6">طلبات</a></li>
-                                    <li><a asp-route-id="@userId" asp-controller="Individuals" asp-action="Profile" class="px-6">حسابي</a></li>
+                                    <li class="scroll-to-section"><a asp-controller="Deliveries" asp-action="Dashboard" class="px-6">مناديب</a></li>
+                                    <li class="scroll-to-section"><a asp-controller="Orders" asp-action="Index" class="px-6">طلبات</a></li>
+                                    <li class="scroll-to-section"><a asp-route-id="@userId" asp-controller="Individuals" asp-action="Profile" class="px-6">حسابي</a></li>
                                 </ul>
                             }
                             else if (role == AppRoles.StartUp)
@@ -77,9 +79,9 @@
                                     <li class="scroll-to-section">
                                         <a asp-controller="Home" asp-action="Index" class="active px-4">الصفحه الرئيسيه</a>
                                     </li>
-                                    <li><a asp-controller="Deliveries" asp-action="Dashboard" class="px-6">مناديب</a></li>
-                                    <li><a asp-controller="Orders" asp-action="Index" class="px-6">طلبات</a></li>
-                                    <li><a asp-route-id="@userId" asp-controller="StartUps" asp-action="Profile" class="px-6">حسابي</a></li>
+                                    <li class="scroll-to-section"><a asp-controller="Deliveries" asp-action="Dashboard" class="px-6">مناديب</a></li>
+                                    <li class="scroll-to-section"><a asp-controller="Orders" asp-action="Index" class="px-6">طلبات</a></li>
+                                    <li class="scroll-to-section"><a asp-route-id="@userId" asp-controller="StartUps" asp-action="Profile" class="px-6">حسابي</a></li>
                                 </ul>
                             }
                             else
@@ -88,7 +90,7 @@
                                     <li class="scroll-to-section">
                                         <a asp-controller="Home" asp-action="Index" class="active px-4">الصفحه الرئيسيه</a>
                                     </li>
-                                    <li><a asp-controller="Deliveries" asp-action="Dashboard" class="px-6">مناديب</a></li>                                    
+                                    <li class="scroll-to-section"><a asp-controller="Deliveries" asp-action="Dashboard" class="px-6">مناديب</a></li>
                                 </ul>
                             }
                         }
@@ -98,12 +100,15 @@
                                 <li class="scroll-to-section">
                                     <a asp-controller="Home" asp-action="Index" class="active px-4">الصفحه الرئيسيه</a>
                                 </li>
-                                <li><a asp-controller="Deliveries" asp-action="Dashboard" class="px-6">مناديب</a></li>
-                                <li><a asp-controller="Orders" asp-action="Index" class="px-6">طلبات</a></li>
+                                <li class="scroll-to-section"><a asp-controller="Deliveries" asp-action="Dashboard" class="px-6">مناديب</a></li>
+                                <li class="scroll-to-section"><a asp-controller="Orders" asp-action="Index" class="px-6">طلبات</a></li>
                                 <li class="scroll-to-section"><a id="ab" href="#about" class="px-7">عنا</a></li>
                             </ul>
                         }
                     }
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
                     <div class="btn rounded-pill" id="m-btn">
                         @if (SignInManager.IsSignedIn(User))
                         {
