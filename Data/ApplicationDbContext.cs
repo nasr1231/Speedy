@@ -22,6 +22,7 @@ namespace Speedy.Data
         public DbSet<StartUp> StartUps { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)

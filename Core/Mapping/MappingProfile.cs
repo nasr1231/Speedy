@@ -26,8 +26,11 @@ namespace Speedy.Core.Mapping
             .ForMember(dest => dest.ProfilePictureIUrl, opt => opt.MapFrom(src => src.AppUser!.ProfilePictureIUrl))                     
             .ForMember(dest => dest.CreatedOn, opt => opt.MapFrom(src => src.AppUser!.CreatedOn));
             CreateMap<Delivery, DeliveryFormViewModel>().ReverseMap();
-            CreateMap<Delivery, DeliveryProfileFormViewModel> ().ReverseMap();            
-            
+            CreateMap<Delivery, DeliveryProfileFormViewModel> ().ReverseMap();
+
+
+            //FeedBacks
+            CreateMap<Feedback, FeedbackViewModel>().ReverseMap();
 
             // Start Up            
             CreateMap<StartUp, StartUpViewModel>()
