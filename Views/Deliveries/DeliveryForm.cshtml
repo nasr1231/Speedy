@@ -191,11 +191,11 @@
                                     <div class="input-group mb-2 justify-content-evenly">
                                         <div class="form-check form-check-inline">
                                             <input id="radio-male" class="form-check-input" type="radio" name="gender" value="Male">
-                                            <label for="radio-male" class="form-check-label fw-bolder text-dark fs-6">ذكر</label>
+                                            <label class="form-check-label fw-bolder text-dark fs-6">ذكر</label>
                                         </div>
                                         <div class="form-check form-check-inline mb-7">
                                             <input id="radio-female" class="form-check-input" type="radio" name="gender" value="Female">
-                                            <label for="radio-female" class="form-check-label fw-bolder text-dark fs-6">أنثى</label>
+                                            <label class="form-check-label fw-bolder text-dark fs-6">أنثى</label>
                                         </div>
                                     </div>
                                     <input asp-for="@Model.Gender" type="hidden" id="GenderName">
@@ -400,15 +400,20 @@
             );
             const radioMale = document.getElementById('radio-male');
             const radioFemale = document.getElementById('radio-female');
-            const genderName = document.getElementById('GenderName');
+            const genderInput = document.getElementById('GenderName');
+            
+            radioMale.addEventListener('change', updateGenderValue);
+            radioFemale.addEventListener('change', updateGenderValue);
 
-            radioMale.addEventListener('change', () => {
-                genderName.value = radioMale.value;
-            });
-
-            radioFemale.addEventListener('change', () => {
-                genderName.value = radioFemale.value;
-            });
+            function updateGenderValue() {
+                if (radioMale.checked) {
+                    genderInput.value = radioMale.value;
+                } else if (radioFemale.checked) {
+                    genderInput.value = radioFemale.value;
+                } else {
+                    genderInput.value = '';
+                }
+            }
         });
     </script>
 }

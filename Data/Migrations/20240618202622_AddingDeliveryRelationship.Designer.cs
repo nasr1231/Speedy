@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Speedy.Data;
 
@@ -11,9 +12,11 @@ using Speedy.Data;
 namespace Speedy.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240618202622_AddingDeliveryRelationship")]
+    partial class AddingDeliveryRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,10 +24,6 @@ namespace Speedy.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.HasSequence<int>("TrackingNumber")
-                .StartsAt(100001L)
-                .IncrementsBy(5);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -527,10 +526,8 @@ namespace Speedy.Data.Migrations
                     b.Property<DateTime>("ShippingDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("TrackingNumber")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValueSql("NEXT VALUE FOR TrackingNumber");
+                    b.Property<string>("TrackingNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("OrderId");
 

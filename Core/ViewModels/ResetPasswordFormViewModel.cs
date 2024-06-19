@@ -6,10 +6,7 @@ namespace Speedy.Core.ViewModels
 {
     public class ResetPasswordFormViewModel
     {
-        public string Id { get; set; } = null!;
-
-        public string Code { get; set; } = null!;
-
+        public string Id { get; set; } = null!;        
 
         [DisplayName("كلمة المرور الحالية")]
         [Required(ErrorMessage = Errors.isRequired)]

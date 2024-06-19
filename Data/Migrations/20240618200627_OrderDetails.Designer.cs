@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Speedy.Data;
 
@@ -11,9 +12,11 @@ using Speedy.Data;
 namespace Speedy.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240618200627_OrderDetails")]
+    partial class OrderDetails
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,10 +24,6 @@ namespace Speedy.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.HasSequence<int>("TrackingNumber")
-                .StartsAt(100001L)
-                .IncrementsBy(5);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -458,9 +457,6 @@ namespace Speedy.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DeliveryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -491,7 +487,7 @@ namespace Speedy.Data.Migrations
                     b.Property<DateOnly>("PaymentDueDate")
                         .HasColumnType("date");
 
-                    b.Property<int?>("PaymentMethodId")
+                    b.Property<int>("PaymentMethodId")
                         .HasColumnType("int");
 
                     b.Property<string>("PaymentStatus")
@@ -527,16 +523,12 @@ namespace Speedy.Data.Migrations
                     b.Property<DateTime>("ShippingDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("TrackingNumber")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValueSql("NEXT VALUE FOR TrackingNumber");
+                    b.Property<string>("TrackingNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("OrderId");
 
                     b.HasIndex("CreatedById");
-
-                    b.HasIndex("DeliveryId");
 
                     b.HasIndex("LastUpdatedById");
 
@@ -1115,27 +1107,21 @@ namespace Speedy.Data.Migrations
                         .WithMany()
                         .HasForeignKey("CreatedById");
 
-                    b.HasOne("Speedy.Core.Models.Delivery", "Delivery")
-                        .WithMany()
-                        .HasForeignKey("DeliveryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Speedy.Core.Models.AppUser", "LastUpdatedBy")
                         .WithMany()
                         .HasForeignKey("LastUpdatedById");
 
                     b.HasOne("Speedy.Core.Models.PaymentMethod", "PaymentMethod")
                         .WithMany("Order")
-                        .HasForeignKey("PaymentMethodId");
+                        .HasForeignKey("PaymentMethodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Speedy.Core.Models.Review", "Review")
                         .WithOne("OrderId")
                         .HasForeignKey("Speedy.Core.Models.Order", "ReviewId");
 
                     b.Navigation("CreatedBy");
-
-                    b.Navigation("Delivery");
 
                     b.Navigation("LastUpdatedBy");
 

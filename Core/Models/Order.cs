@@ -10,6 +10,9 @@ namespace Speedy.Core.Models
         #region Properties
         [Key]
         public int OrderId { get; set; }
+        public string? SenderName { get; set; }
+        public string? SenderAddress { get; set; }
+        public string? SenderPhoneNumber { get; set; }
         public DateTime RecieveDate { get; set; }
         public DateTime ShippingDate { get; set; }
         public double OrderTotal { get; set; }
@@ -18,7 +21,7 @@ namespace Speedy.Core.Models
         public Status? PaymentStatus { get; set; } = Status.Pending;
         public string? Description { get; set; }
         public bool IsSensitive { get; set; }
-        public string? TrackingNumber { get; set; }
+        public int TrackingNumber { get; set; }
         public DateTime PaymentDate { get; set; }
         public DateOnly PaymentDueDate { get; set; }
         #endregion
@@ -32,7 +35,12 @@ namespace Speedy.Core.Models
 
         #region Relations
         public string AppUserId { get; set; } = null!;
-        public ICollection<AppUser>? AppUsers { get; set; } 
+        public ICollection<AppUser>? AppUsers { get; set; }
+
+        public int DeliveryId { get; set; }
+        public Delivery Delivery { get; set; } = null!;
+
+        public int? PaymentMethodId { get; set; }
 
         public PaymentMethod PaymentMethod { get; set; } = null!;
 

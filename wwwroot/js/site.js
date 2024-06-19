@@ -137,6 +137,8 @@ function showSuccessMessage() {
         }
     });
 }
+
+
 function disableSubmitButton() {
     $('.body :submit').attr('disabled', 'disabled').attr('data-kt-indicator', 'on');
 }
@@ -174,9 +176,21 @@ function modalSubmitSuccess(row) {
     KTMenu.initHandlers();
 }
 
+function showSuccessMessageAlert() {
+
+    Swal.fire({
+        title: "Done Successfully.....",
+        text: message,
+        icon: 'success',
+        buttonsStyling: false,
+        showConfirmButton: false,
+        timer: 2500
+    });
+}
+
 function modalSubmitClose(row) {
     $('#model-window').modal('hide');
-
+    showSuccessMessageAlert();
 }
 
 
@@ -367,10 +381,12 @@ $(document).ready(function () {
         e.preventDefault(); // Prevent the default anchor behavior
         var btn = $(this);
         var modal = $('#model-window');
-        modal.find('#modalLabel').text(btn.data('title'));
+        var modalTitle = btn.data('title');
+        modal.find('.modal-title').text(modalTitle);
 
-        if (btn.data('update') !== undefined) {
-            rowUpdated = btn.parents('tr');
+        var row = btn.closest('tr');
+        if (row.length > 0 && btn.data('update') !== undefined) {
+            rowUpdated = row;
         }
 
         $.ajax({
@@ -378,19 +394,17 @@ $(document).ready(function () {
             method: 'GET',
             dataType: 'html', // Expect HTML content
             success: function (form) {
-                modal.find('.modal-title').text(btn.data('title'));
-
                 modal.find('.modal-body').html(form);
-                $.validator.unobtrusive.parse(modal);
-
+                var modalForm = modal.find('form');
+                if (modalForm.length > 0) {
+                    $.validator.unobtrusive.parse(modalForm);
+                }
                 modal.modal('show');
             },
             error: function (message) {
                 ShowErrorMessage(message);
             }
         });
-
-
     });
     //Handle Sign Out
     $('.js-signout').on('click', function () {

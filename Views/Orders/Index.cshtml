@@ -1,4 +1,4 @@
-﻿@model DeliveryViewModel
+﻿@model List<OrderDetailsViewModel>
 @{
     Layout = "_DeliveryLayout";
 }
@@ -7,7 +7,7 @@
     <!--begin::Content wrapper-->
     <div class="d-flex flex-column flex-column-fluid">
 
-        
+
         <!--begin::Content-->
         <div id="kt_app_content" class="app-content  flex-column-fluid ">
             <!--begin::Content container-->
@@ -27,21 +27,9 @@
                             <ul class="nav nav-stretch fs-5 fw-semibold nav-line-tabs border-transparent" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <a id="kt_referrals_tab_1" class="nav-link text-active-gray-800 me-4 active" data-bs-toggle="tab" role="tab" href="#kt_referrals_1">
-                                        الاسبوع الحالي
+                                        طلباتي
                                     </a>
-                                </li>
-
-                                <li class="nav-item" role="presentation">
-                                    <a id="kt_referrals_tab_2" class="nav-link text-active-gray-800 me-4" data-bs-toggle="tab" role="tab" href="#kt_referrals_2">
-                                    الاسبوع الماضي
-                                    </a>
-                                </li>
-
-                                <li class="nav-item" role="presentation">
-                                    <a id="kt_referrals_tab_3" class="nav-link text-active-gray-800" data-bs-toggle="tab" role="tab" href="#kt_referrals_3">
-                                        الاسبوع الأقدم
-                                    </a>
-                                </li>
+                                </li>                                
                             </ul>
                             <!--end::Tab nav-->
                         </div>
@@ -50,7 +38,6 @@
                     <!--end::Header-->
                     <!--begin::Tab content-->
                     <div id="kt_referred_users_tab_content" class="tab-content">
-
                         <!--begin::Tab panel-->
                         <div id="kt_referrals_1" class="card-body p-0 tab-pane fade show active" role="tabpanel">
                             <div class="table-responsive">
@@ -59,7 +46,7 @@
                                     <!--begin::Thead-->
                                     <thead class="border-bottom border-gray-200 fs-6 fw-bold bg-lighten">
                                         <tr>
-                                        
+
                                             <th class="min-w-125px text-center">رقم الطلب</th>
                                             <th class="min-w-115px text-center ps-0">التاريخ</th>
                                             <th class="min-w-125px text-center ps-0">اسم العميل</th>
@@ -72,77 +59,20 @@
                                     <!--end::Thead-->
                                     <!--begin::Tbody-->
                                     <tbody class="fs-6 fw-semibold text-gray-600">
-                                        <tr>
-                                            <td class="ps-9">3301</td>
-                                            <td class="text-center ps-0">1/5/2024</td>
-                                            <td class="ps-0"><a href="" class="text-gray-600 text-hover-primary text-center d-block">سارة أحمد</a></td>
-                                            <td>13 شارع قصر النيل، ميدان التحرير، وسط البلد</td>
-                                            <td class="text-center">ليلى محمد</td>
-                                            <td>47 ش  عباس العقاد – مدينة نصر</td>
-                                            <td class="text-success text-center ps-0">$2,400</td>
-                                            
-                                        </tr>
-                                        <tr>
-                                            <td class="ps-9">3302</td>
-                                            <td class="text-center ps-0">1/5/2024</td>
-                                            <td class="ps-0"><a href="" class="text-gray-600 text-hover-primary text-center d-block">حازم أيمن</a></td>
-                                            <td>306 كورنيش النيل، المعادي</td>
-                                            <td class="text-center">ابراهيم على</td>
-                                            <td>6 شارع أبو الفدا، الزمالك</td>
-                                            <td class="text-success text-center ps-0">$2,400</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="ps-9">3303</td>
-                                            <td class="text-center ps-0">3/5/2024</td>
-                                            <td class="ps-0"><a href="" class="text-gray-600 text-hover-primary text-center d-block">عمر وائل </a></td>
-                                            <td>11 شارع السودان – الدقي</td>
-                                            <td class="text-center">هشام جمال</td>
-                                            <td>13ش مصطفى حافظ – عين شمس</td>
-                                            <td class="text-success text-center ps-0">$2,400</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="ps-9">3304</td>
-                                            <td class="text-center ps-0">3/5/2024</td>
-                                            <td class="ps-0"><a href="" class="text-gray-600 text-hover-primary text-center d-block">آلاء جاد</a></td>
-                                            <td>6 ميدان روكسي، مصر الجديدة</td>
-                                            <td class="text-center">روان تامر</td>
-                                            <td>105 ش القصر العيني</td>
-                                            <td class="text-success text-center ps-0">$2,400</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="ps-9">3305</td>
-                                            <td class="text-center ps-0">3/5/2024</td>
-                                            <td class="ps-0"><a href="" class="text-gray-600 text-hover-primary text-center d-block">مريم حامد</a></td>
-                                            <td>7 ميدان النافورة، المقطم</td>
-                                            <td class="text-center">تقى أشرف</td>
-                                            <td>15 شارع عبد الحميد بدوي، مصر الجديدة</td>
-                                            <td class="text-success text-center ps-0">$2,400</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="ps-9">3306</td>
-                                            <td class="text-center ps-0">5/5/2024</td>
-                                            <td class="ps-0"><a href="" class="text-gray-600 text-hover-primary text-center d-block">سارة أحمد</a></td>
-                                            <td>13 شارع قصر النيل، ميدان التحرير، وسط البلد</td>
-                                            <td class="text-center">ليلى محمد</td>
-                                            <td>47 ش  عباس العقاد – مدينة نصر</td>
-                                            <td class="text-success text-center ps-0">$2,400</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="ps-9">3301</td>
-                                            <td class="text-center ps-0">1/5/2024</td>
-                                            <td class="ps-0"><a href="" class="text-gray-600 text-hover-primary text-center d-block">سارة أحمد</a></td>
-                                            <td>13 شارع قصر النيل، ميدان التحرير، وسط البلد</td>
-                                            <td class="text-center">ليلى محمد</td>
-                                            <td>47 ش  عباس العقاد – مدينة نصر</td>
-                                            <td class="text-success text-center ps-0">$2,400</td>
-
-                                        </tr>
-
+                                        @foreach (var order in Model)
+                                        {
+                                            <tr>
+                                                <td class="ps-9 text-center">@order.TrackingNumber</td>
+                                                <td class="text-center ps-0">@order.OrderDate</td>
+                                                <td class="ps-0 text-center">
+                                                    @order.SenderName
+                                                </td>
+                                                <td class="text-center">@order.SenderAddress</td>
+                                                <td class="text-center">@order.RecieverName</td>
+                                                <td class="text-center">@order.RecieverAddress</td>
+                                                <td class="text-success text-center ps-0">$2,400</td>
+                                            </tr>
+                                        }
                                     </tbody>
                                     <!--end::Tbody-->
                                 </table>
@@ -150,205 +80,6 @@
                             </div>
                         </div>
                         <!--end::Tab panel-->
-                        <!--begin::Tab panel-->
-                        <div id="kt_referrals_2" class="card-body p-0 tab-pane fade " role="tabpanel">
-                            <div class="table-responsive">
-                                <!--begin::Table-->
-                                <table class="table table-row-bordered align-middle gy-6">
-                                    <!--begin::Thead-->
-                                    <thead class="border-bottom border-gray-200 fs-6 fw-bold bg-lighten">
-                                        <tr>
-                                            <th class="min-w-125px text-center">رقم الطلب</th>
-                                            <th class="min-w-115px text-center ps-0">التاريخ</th>
-                                            <th class="min-w-125px text-center ps-0">اسم العميل</th>
-                                            <th class="min-w-125px text-center">عنوان العميل</th>
-                                            <th class="min-w-125px text-center">اسم المستلم</th>
-                                            <th class="min-w-125px text-center">عنوان المستلم</th>
-                                            <th class="min-w-125px text-center ps-0">السعر</th>
-                                        </tr>
-                                    </thead>
-                                    <!--end::Thead-->
-                                    <!--begin::Tbody-->
-                                    <tbody class="fs-6 fw-semibold text-gray-600">
-                                        <tr>
-                                            <td class="ps-9">3301</td>
-                                            <td class="text-center ps-0">1/5/2024</td>
-                                            <td class="ps-0"><a href="" class="text-gray-600 text-hover-primary text-center d-block">سارة أحمد</a></td>
-                                            <td>13 شارع قصر النيل، ميدان التحرير، وسط البلد</td>
-                                            <td class="text-center">ليلى محمد</td>
-                                            <td>47 ش  عباس العقاد – مدينة نصر</td>
-                                            <td class="text-success text-center ps-0">$2,400</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="ps-9">3302</td>
-                                            <td class="text-center ps-0">1/5/2024</td>
-                                            <td class="ps-0"><a href="" class="text-gray-600 text-hover-primary text-center d-block">حازم أيمن</a></td>
-                                            <td>306 كورنيش النيل، المعادي</td>
-                                            <td class="text-center">ابراهيم على</td>
-                                            <td>6 شارع أبو الفدا، الزمالك</td>
-                                            <td class="text-success text-center ps-0">$2,400</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="ps-9">3303</td>
-                                            <td class="text-center ps-0">3/5/2024</td>
-                                            <td class="ps-0"><a href="" class="text-gray-600 text-hover-primary text-center d-block">عمر وائل </a></td>
-                                            <td>11 شارع السودان – الدقي</td>
-                                            <td class="text-center">هشام جمال</td>
-                                            <td>13ش مصطفى حافظ – عين شمس</td>
-                                            <td class="text-success text-center ps-0">$2,400</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="ps-9">3304</td>
-                                            <td class="text-center ps-0">3/5/2024</td>
-                                            <td class="ps-0"><a href="" class="text-gray-600 text-hover-primary text-center d-block">آلاء جاد</a></td>
-                                            <td>6 ميدان روكسي، مصر الجديدة</td>
-                                            <td class="text-center">روان تامر</td>
-                                            <td>105 ش القصر العيني</td>
-                                            <td class="text-success text-center ps-0">$2,400</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="ps-9">3305</td>
-                                            <td class="text-center ps-0">3/5/2024</td>
-                                            <td class="ps-0"><a href="" class="text-gray-600 text-hover-primary text-center d-block">مريم حامد</a></td>
-                                            <td>7 ميدان النافورة، المقطم</td>
-                                            <td class="text-center">تقى أشرف</td>
-                                            <td>15 شارع عبد الحميد بدوي، مصر الجديدة</td>
-                                            <td class="text-success text-center ps-0">$2,400</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="ps-9">3306</td>
-                                            <td class="text-center ps-0">5/5/2024</td>
-                                            <td class="ps-0"><a href="" class="text-gray-600 text-hover-primary text-center d-block">سارة أحمد</a></td>
-                                            <td>13 شارع قصر النيل، ميدان التحرير، وسط البلد</td>
-                                            <td class="text-center">ليلى محمد</td>
-                                            <td>47 ش  عباس العقاد – مدينة نصر</td>
-                                            <td class="text-success text-center ps-0">$2,400</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="ps-9">3301</td>
-                                            <td class="text-center ps-0">1/5/2024</td>
-                                            <td class="ps-0"><a href="" class="text-gray-600 text-hover-primary text-center d-block">سارة أحمد</a></td>
-                                            <td>13 شارع قصر النيل، ميدان التحرير، وسط البلد</td>
-                                            <td class="text-center">ليلى محمد</td>
-                                            <td>47 ش  عباس العقاد – مدينة نصر</td>
-                                            <td class="text-success text-center ps-0">$2,400</td>
-
-                                        </tr>
-
-                                       
-
-                                    </tbody>
-                                    <!--end::Tbody-->
-                                </table>
-                                <!--end::Table-->
-                            </div>
-                        </div>
-                        <!--end::Tab panel-->
-                        <!--begin::Tab panel-->
-                        <div id="kt_referrals_3" class="card-body p-0 tab-pane fade " role="tabpanel">
-                            <div class="table-responsive">
-                                <!--begin::Table-->
-                                <table class="table table-row-bordered align-middle gy-6">
-                                    <!--begin::Thead-->
-                                    <thead class="border-bottom border-gray-200 fs-6 fw-bold bg-lighten">
-                                        <tr>
-                                            <th class="min-w-125px text-center">رقم الطلب</th>
-                                            <th class="min-w-115px text-center ps-0">التاريخ</th>
-                                            <th class="min-w-125px text-center ps-0">اسم العميل</th>
-                                            <th class="min-w-125px text-center">عنوان العميل</th>
-                                            <th class="min-w-125px text-center">اسم المستلم</th>
-                                            <th class="min-w-125px text-center">عنوان المستلم</th>
-                                            <th class="min-w-125px text-center ps-0">السعر</th>
-                                        </tr>
-                                    </thead>
-                                    <!--end::Thead-->
-                                    <!--begin::Tbody-->
-                                    <tbody class="fs-6 fw-semibold text-gray-600">
-                                        <tr>
-                                            <td class="ps-9">3301</td>
-                                            <td class="text-center ps-0">1/5/2024</td>
-                                            <td class="ps-0"><a href="" class="text-gray-600 text-hover-primary text-center d-block">سارة أحمد</a></td>
-                                            <td>13 شارع قصر النيل، ميدان التحرير، وسط البلد</td>
-                                            <td class="text-center">ليلى محمد</td>
-                                            <td>47 ش  عباس العقاد – مدينة نصر</td>
-                                            <td class="text-success text-center ps-0">$2,400</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="ps-9">3302</td>
-                                            <td class="text-center ps-0">1/5/2024</td>
-                                            <td class="ps-0"><a href="" class="text-gray-600 text-hover-primary text-center d-block">حازم أيمن</a></td>
-                                            <td>306 كورنيش النيل، المعادي</td>
-                                            <td class="text-center">ابراهيم على</td>
-                                            <td>6 شارع أبو الفدا، الزمالك</td>
-                                            <td class="text-success text-center ps-0">$2,400</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="ps-9">3303</td>
-                                            <td class="text-center ps-0">3/5/2024</td>
-                                            <td class="ps-0"><a href="" class="text-gray-600 text-hover-primary text-center d-block">عمر وائل </a></td>
-                                            <td>11 شارع السودان – الدقي</td>
-                                            <td class="text-center">هشام جمال</td>
-                                            <td>13ش مصطفى حافظ – عين شمس</td>
-                                            <td class="text-success text-center ps-0">$2,400</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="ps-9">3304</td>
-                                            <td class="text-center ps-0">3/5/2024</td>
-                                            <td class="ps-0"><a href="" class="text-gray-600 text-hover-primary text-center d-block">آلاء جاد</a></td>
-                                            <td>6 ميدان روكسي، مصر الجديدة</td>
-                                            <td class="text-center">روان تامر</td>
-                                            <td>105 ش القصر العيني</td>
-                                            <td class="text-success text-center ps-0">$2,400</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="ps-9">3305</td>
-                                            <td class="text-center ps-0">3/5/2024</td>
-                                            <td class="ps-0"><a href="" class="text-gray-600 text-hover-primary text-center d-block">مريم حامد</a></td>
-                                            <td>7 ميدان النافورة، المقطم</td>
-                                            <td class="text-center">تقى أشرف</td>
-                                            <td>15 شارع عبد الحميد بدوي، مصر الجديدة</td>
-                                            <td class="text-success text-center ps-0">$2,400</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="ps-9">3306</td>
-                                            <td class="text-center ps-0">5/5/2024</td>
-                                            <td class="ps-0"><a href="" class="text-gray-600 text-hover-primary text-center d-block">سارة أحمد</a></td>
-                                            <td>13 شارع قصر النيل، ميدان التحرير، وسط البلد</td>
-                                            <td class="text-center">ليلى محمد</td>
-                                            <td>47 ش  عباس العقاد – مدينة نصر</td>
-                                            <td class="text-success text-center ps-0">$2,400</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="ps-9">3301</td>
-                                            <td class="text-center ps-0">1/5/2024</td>
-                                            <td class="ps-0"><a href="" class="text-gray-600 text-hover-primary text-center d-block">سارة أحمد</a></td>
-                                            <td>13 شارع قصر النيل، ميدان التحرير، وسط البلد</td>
-                                            <td class="text-center">ليلى محمد</td>
-                                            <td>47 ش  عباس العقاد – مدينة نصر</td>
-                                            <td class="text-success text-center ps-0">$2,400</td>
-
-                                        </tr>
-
-                                    </tbody>
-                                    <!--end::Tbody-->
-                                </table>
-                                <!--end::Table-->
-                            </div>
-                        </div>
-                        <!--end::Tab panel-->
-
                     </div>
                     <!--end::Tab content-->
                 </div>
