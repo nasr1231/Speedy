@@ -11,37 +11,45 @@ namespace Speedy.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Create(int userId)
+        [HttpGet]
+        [AjaxOnly]
+        public async Task<IActionResult> Create(string userId)
         {
-            var user = await _context.Deliveries.FindAsync(userId);
+            var user = await _context.Users.FindAsync(userId);
             if (user is null)
                 return NotFound();
             var paymentList = new PaymentFormViewModel
             {
-               Id = userId
+                Id = userId
             };
 
-            return PartialView("_Form", InitiatePaymentMethods(paymentList));
+            return PartialView("_Form", paymentList);
         }
+
         [HttpPost]
-        [AjaxOnly]
-        public async Task<IActionResult> Create(PaymentFormViewModel model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Add(PaymentFormViewModel model)
         {
             if (!ModelState.IsValid)
-                return BadRequest();
+                return BadRequest(ModelState);
+
+            var transaction = _context.Database.BeginTransaction();
+
+            var method = new PaymentMethod
+            {
+                AppUserId = model.Id,
+                handle = model.handle,
+                HolderName = model.HolderName,
+                PhoneNumber = model.PhoneNumber,
+                Title = model.Name,
+            };
+
+            _context.PaymentMethods.Add(method);
+            _context.SaveChanges();
+
+            transaction.Commit();
 
             return Ok();
-        }
-
-        private PaymentFormViewModel InitiatePaymentMethods(PaymentFormViewModel ? model = null)
-        {
-            PaymentFormViewModel paymentsViewModel = model ?? new PaymentFormViewModel();
-
-            var payments = _context.PaymentMethods.Where(c => !c.IsDeleted).OrderBy(c => c.Title).ToList();
-
-            paymentsViewModel.PaymentMethods = _mapper.Map<IEnumerable<SelectListItem>>(payments);
-
-            return paymentsViewModel;
         }
     }
 }

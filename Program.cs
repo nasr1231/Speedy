@@ -8,6 +8,7 @@ using Speedy.Services.User;
 using UoN.ExpressiveAnnotations.NetCore.DependencyInjection;
 using Speedy.Services.Individuals;
 using Speedy.Services.StartUps;
+using Speedy.Services.delivery;
 
 namespace Speedy;
 

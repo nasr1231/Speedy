@@ -1,4 +1,4 @@
-﻿namespace Speedy.Services.User
+﻿namespace Speedy.Services.delivery
 {
     public interface IDeliveryService
     {

@@ -22,13 +22,6 @@ namespace Speedy.Seeds
          public static readonly List<City> Cities =
         [
             new City { Id = 5, Name = "وسط البلد", GovernorateId = 1,CreatedOn = new DateTime(day: 1, month: 1, year: 2024)},            
-        ];
-        public static readonly List<PaymentMethod> PaymentMethods =
-        [
-            new PaymentMethod { Id = 1, Title = "كاش",CreatedOn = new DateTime(day: 1, month: 1, year: 2024)},            
-            new PaymentMethod { Id = 2, Title = "محفظة الكترونية",CreatedOn = new DateTime(day: 1, month: 1, year: 2024)},            
-            new PaymentMethod { Id = 3, Title = "انستا باي",CreatedOn = new DateTime(day: 1, month: 1, year: 2024)},            
-            new PaymentMethod { Id = 4, Title = "حساب بنكي",CreatedOn = new DateTime(day: 1, month: 1, year: 2024)},            
-        ];
+        ];       
     }
 }

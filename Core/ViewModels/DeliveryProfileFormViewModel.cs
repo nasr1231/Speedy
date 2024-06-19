@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 public class DeliveryProfileFormViewModel
 {
     #region Properties
-    public string Id { get; set; }
+    public string Id { get; set; } = null!;
 
     [Display(Name = "رقم الهاتف المحمول")]
     [Required(ErrorMessage = Errors.isRequired)]

@@ -110,8 +110,7 @@ namespace Speedy.Data
             #region Seeds
             builder.Entity<ShippingMethod>().HasData(RelevantData.ShippingMethods);
             builder.Entity<Governorate>().HasData(RelevantData.Governorates);
-            builder.Entity<City>().HasData(RelevantData.Cities);
-            builder.Entity<PaymentMethod>().HasData(RelevantData.PaymentMethods);
+            builder.Entity<City>().HasData(RelevantData.Cities);            
             #endregion
 
             base.OnModelCreating(builder);

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-namespace Speedy.Services.User
+namespace Speedy.Services.delivery
 {
     public class DeliveryService(ApplicationDbContext context) : IDeliveryService
     {
@@ -31,12 +31,12 @@ namespace Speedy.Services.User
 
             deliveriesQueryable = deliveriesQueryable.AsNoTracking();
 
-            var delivery = await deliveriesQueryable.FirstOrDefaultAsync(d => d.AppUser!.Id == deliveryId);                      
+            var delivery = await deliveriesQueryable.FirstOrDefaultAsync(d => d.AppUser!.Id == deliveryId);
 
             return delivery;
         }
 
-        public async Task<Delivery> GetDeliverySettingsById(string deliveryId)            
+        public async Task<Delivery> GetDeliverySettingsById(string deliveryId)
         {
             IQueryable<Delivery> deliveriesQueryable = _context.Deliveries
                 .Include(s => s.ServiceArea);

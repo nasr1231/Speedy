@@ -1,5 +1,4 @@
-﻿using JazanWatan.Web.Core.Consts;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
 namespace Speedy.Core.ViewModels

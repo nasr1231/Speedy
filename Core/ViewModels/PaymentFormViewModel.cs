@@ -1,18 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace Speedy.Core.ViewModels
 {
     public class PaymentFormViewModel
     {
-        public int Id { get; set; }
-        public string Name { get; set; } = null!;
-        public string? handle { get; set; } = null!;
-        public string? PhoneNumber { get; set; } = null!;
-        public string? HolderName { get; set; } = null!;
+        public string Id { get; set; } = null!;
 
-        #region Relationships
-        public int PaymentMethodId { get; set; }
-        public IEnumerable<SelectListItem>? PaymentMethods { get; set; }
-        #endregion
+        [Required(ErrorMessage ="من فضلك اختار وسيلة دفع")]
+        public string Name { get; set; } = null!;
+        public string? handle { get; set; }
+        public string? PhoneNumber { get; set; }
+        public string? HolderName { get; set; } 
     }
 }

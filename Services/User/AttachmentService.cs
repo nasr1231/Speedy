@@ -1,5 +1,4 @@
 ﻿
-using ClinicGraduationProject.web.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using NuGet.Packaging.Signing;
 using Speedy.Core.Consts;

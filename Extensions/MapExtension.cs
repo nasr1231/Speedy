@@ -1,7 +1,7 @@
-﻿namespace ClinicGraduationProject.web.Extensions;
+﻿namespace Speedy.Extensions;
 
 public static class MapExtension
-{    
+{
     public static Delivery MapToDelivery(this DeliveryFormViewModel model)
     {
         var delivery = new Delivery
@@ -11,7 +11,7 @@ public static class MapExtension
             //MedicalSpecialtyId = model.MedicalSpecialtyId,
             //AppUserId = model.UserId,
             //CreatedById = model.UserId
-        };        
+        };
 
         return delivery;
     }

@@ -6,7 +6,7 @@ namespace Speedy.Core.Models
     {
         public AppUser? CreatedBy { get; set; }        
 		public string? CreatedById { get; set; }
-        public DateTime CreatedOn { get; set; } = DateTime.Now.ToUniversalTime();
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
 
 		public AppUser? LastUpdatedBy { get; set; }
 		public string? LastUpdatedById { get; set; }

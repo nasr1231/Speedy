@@ -1,40 +1,321 @@
 ﻿@model PaymentFormViewModel
+    
+<style>
+    .input-container {
+        display: none;
+    }
+</style>
 
-<!--begin::Option-->
-<input type="radio" class="btn-check" name="radio_buttons_2" value="apps" checked="checked" id="kt_radio_buttons_2_option_1" />
-<label class="btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center mb-5">
-    <i class="fa-solid fa-wallet fs-3 text-dark p-3"></i>
-    <span class="d-block fw-semibold text-start">
-        <span class="text-gray-900 fw-bold d-block fs-3">محفظة الكترونية</span>        
-    </span>
-</label>
-<!--end::Option-->
-<!--begin::Option-->
-<input type="radio" class="btn-check" name="radio_buttons_2" value="apps" checked="checked" id="kt_radio_buttons_2_option_1" />
-<label class="btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center mb-5">
-    <i class="fa-solid fa-money-bill fs-3 text-success p-3"></i>
-    <span class="d-block fw-semibold text-start">
-        <span class="text-gray-900 fw-bold d-block fs-3">كاش</span>
-    </span>
-</label>
-<!--end::Option-->
-<!--begin::Option-->
-<input type="radio" class="btn-check" name="radio_buttons_2" value="apps" checked="checked" id="kt_radio_buttons_2_option_1" />
-<label class="btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center mb-5" for="kt_radio_buttons_2_option_1">
-    <i class="fa-solid fa-building-columns fs-3 text-primary p-3"></i>
-    <span class="d-block fw-semibold text-start">
-        <span class="text-gray-900 fw-bold d-block fs-3">حساب بنكي</span>
-    </span>
-</label>
-<!--end::Option-->
+<form asp-action="Add" novalidate="novalidate"
+      data-ajax-method="post"
+      data-ajax="true"
+      data-ajax-begin="onModalBegin"
+      data-ajax-success="modalSubmitClose"
+      data-ajax-failure="showErrorMessage"
+      data-ajax-complete="onModalComplete">
 
-<!--begin::Option-->
-<input type="radio" class="btn-check" name="radio_buttons_2" value="sms" id="kt_radio_buttons_2_option_2" />
-<label class="btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center" for="kt_radio_buttons_2_option_2">
-    <img src="~/assets/website/images/insta logo.png" class="w-50px h-50px"/>
+    <input type="hidden" asp-for="Id"/>
 
-    <span class="d-block fw-semibold text-start">
-        <span class="text-gray-900 fw-bold d-block fs-3">انستا باي</span>
-    </span>
-</label>
-<!--end::Option-->
+    <label class="d-flex flex-stack cursor-pointer mb-5">
+        <!--begin::Label-->
+        <span class="d-flex align-items-center me-2">
+            <!--begin::Icon-->
+            <span class="symbol symbol-50px me-6">
+                <span class="symbol-label bg-light-warning">
+                    <img src="~/assets/website/images/insta logo.png" style="width:80%;height:80%;" />
+                </span>
+            </span>
+            <!--end::Icon-->
+            <!--begin::Info-->
+            <span class="d-flex flex-column me-3">
+                <span class="fw-bold fs-6">إنستا باي</span>                
+            </span>
+            <!--end::Info-->
+        </span>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <span class="form-check form-check-custom form-check-solid">
+            <input class="form-check-input" type="radio" id="Instapay" name="paymentMethod" value="instapay">
+        </span>
+        <!--end::Input-->
+    </label>
+    <label class="d-flex flex-stack cursor-pointer mb-5">
+        <!--begin::Label-->
+        <span class="d-flex align-items-center me-2">
+            <!--begin::Icon-->
+            <span class="symbol symbol-50px me-6">
+                <span class="symbol-label bg-light-light">
+                    <i class="fa-solid fa-wallet text-gray fs-2"></i>
+                </span>
+            </span>
+            <!--end::Icon-->
+            <!--begin::Info-->
+            <span class="d-flex flex-column me-3">
+                <span class="fw-bold fs-6">محفظة الكترونية</span>                
+            </span>
+            <!--end::Info-->
+        </span>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <span class="form-check form-check-custom form-check-solid">
+            <input class="form-check-input" type="radio" id="Wallet" name="paymentMethod" value="wallet">
+        </span>
+        <!--end::Input-->
+    </label>
+    <!--begin:Option-->
+    <label class="d-flex flex-stack cursor-pointer mb-5">
+        <!--begin::Label-->
+        <span class="d-flex align-items-center me-2">
+            <!--begin::Icon-->
+            <span class="symbol symbol-50px me-6">
+                <span class="symbol-label bg-light-danger">
+                    <i class="fa-solid fa-building-columns fs-2 text-warning"></i>
+                </span>
+            </span>
+            <!--end::Icon-->
+            <!--begin::Info-->
+            <span class="d-flex flex-column me-3">
+                <span class="fw-bold fs-6">حساب بنكي</span>
+                <span class="fs-7 text-muted">نقبل الدفع بكروت Visa/Master Card/Meeza</span>
+            </span>
+            <!--end::Info-->
+        </span>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <span class="form-check form-check-custom form-check-solid">
+            <input class="form-check-input" type="radio" id="Bank" name="paymentMethod" value="bank">
+        </span>
+        <!--end::Input-->
+    </label>
+    <!--end::Option-->
+    <!--begin:Option-->
+    <label class="d-flex flex-stack cursor-pointer mb-5">
+        <!--begin::Label-->
+        <span class="d-flex align-items-center me-2">
+            <!--begin::Icon-->
+            <span class="symbol symbol-50px me-6">
+                <span class="symbol-label bg-light-success">
+                    <i class="fa-solid fa-money-bill-wave text-success fs-2"></i>
+                </span>
+            </span>
+            <!--end::Icon-->
+            <!--begin::Info-->
+            <span class="d-flex flex-column me-3">
+                <span class="fw-bold fs-6">كاش</span>
+                <span class="fs-7 text-muted">الدفع عند الإستلام</span>
+            </span>
+            <!--end::Info-->
+        </span>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <span class="form-check form-check-custom form-check-solid">
+            <input class="form-check-input" type="radio" id="Cash" name="paymentMethod" value="cash">
+        </span>
+        <!--end::Input-->
+    </label>
+    <!--end::Option-->
+    
+    <div id="cash-container" class="input-container">
+        <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container" bis_skin_checked="1">
+            <!--begin::Label-->
+            <label class="required fs-6 fw-semibold form-label mb-2">اسم المستلم</label>
+            <!--end::Label-->
+            <!--begin::Input wrapper-->
+            <div class="position-relative" bis_skin_checked="1">
+                <!--begin::Input-->
+                <input asp-for="HolderName" type="text" class="form-control form-control-solid" placeholder="أدخل أسم المستلم">
+                <!--end::Input-->
+            </div>
+            <!--end::Input wrapper-->
+        </div>        
+    </div>
+
+    <div id="wallet-container" class="input-container">
+        <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container" bis_skin_checked="1">
+            <!--begin::Label-->
+            <label class="required fs-6 fw-semibold form-label mb-2">اسم مالك المحفظة</label>
+            <!--end::Label-->
+            <!--begin::Input wrapper-->
+            <div class="position-relative" bis_skin_checked="1">
+                <!--begin::Input-->
+                <input asp-for="HolderName" type="text" class="form-control form-control-solid" placeholder="أدخل أسم المالك">
+                <!--end::Input-->
+            </div>
+            <!--end::Input wrapper-->
+        </div>
+        <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container" bis_skin_checked="1">
+            <!--begin::Label-->
+            <label class="required fs-6 fw-semibold form-label mb-2">رقم المحفظة</label>
+            <!--end::Label-->
+            <!--begin::Input wrapper-->
+            <div class="position-relative" bis_skin_checked="1">
+                <!--begin::Input-->
+                <input asp-for="@Model.PhoneNumber" type="text" class="form-control form-control-solid" placeholder="أدخل رقم المحفظة">
+                <!--end::Input-->
+            </div>
+            <!--end::Input wrapper-->
+        </div>        
+    </div>
+
+    <div id="bank-container" class="input-container">
+        <div class="flex-row-fluid py-lg-5 px-lg-15" bis_skin_checked="1">
+            <div data-kt-stepper-element="content" bis_skin_checked="1" class="current">
+                <div class="w-100" bis_skin_checked="1">
+                    <!--begin::Input group-->
+                    <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container" bis_skin_checked="1">
+                        <!--begin::Label-->
+                        <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+                            <span class="required">أسم حامل البطاقة</span>
+                        </label>
+                        <!--end::Label-->
+                        <input type="text" class="form-control form-control-solid" placeholder="أدخل الأسم">                        
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container" bis_skin_checked="1">
+                        <!--begin::Label-->
+                        <label class="required fs-6 fw-semibold form-label mb-2">رقم البطاقة</label>
+                        <!--end::Label-->
+                        <!--begin::Input wrapper-->
+                        <div class="position-relative" bis_skin_checked="1">
+                            <!--begin::Input-->
+                            <input type="text" class="form-control form-control-solid" placeholder="أدخل رقم البطاقة">
+                            <!--end::Input-->
+                        </div>
+                        <!--end::Input wrapper-->                        
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="row mb-10" bis_skin_checked="1">
+                        <!--begin::Col-->
+                        <div class="col-md-8 fv-row" bis_skin_checked="1">
+                            <!--begin::Label-->
+                            <label class="required fs-6 fw-semibold form-label mb-2">
+                                تاريخ الإنتهاء
+                            </label>
+                            <!--end::Label-->
+                            <!--begin::Row-->
+                            <div class="row fv-row fv-plugins-icon-container" bis_skin_checked="1">
+                                <!--begin::Col-->
+                                <div class="col-6" bis_skin_checked="1">
+                                    <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Month" data-select2-id="select2-data-16-p3xu" tabindex="-1" aria-hidden="true" data-kt-initialized="1">
+                                        <option data-select2-id="select2-data-18-tgld"></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="col-6" bis_skin_checked="1">
+                                    <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Year" data-select2-id="select2-data-19-tnfs" tabindex="-1" aria-hidden="true" data-kt-initialized="1">
+                                        <option data-select2-id="select2-data-21-sj3u"></option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2026">2026</option>
+                                        <option value="2027">2027</option>
+                                        <option value="2028">2028</option>
+                                        <option value="2029">2029</option>
+                                        <option value="2030">2030</option>
+                                        <option value="2031">2031</option>
+                                        <option value="2032">2032</option>
+                                        <option value="2033">2033</option>
+                                        <option value="2034">2034</option>
+                                    </select>                                                                       
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Row-->
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-md-4 fv-row fv-plugins-icon-container" bis_skin_checked="1">
+                            <!--begin::Label-->
+                            <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+                                <span class="required">CVV</span>                                
+                            </label>
+                            <!--end::Label-->
+                            <!--begin::Input wrapper-->
+                            <div class="position-relative" bis_skin_checked="1">
+                                <!--begin::Input-->
+                                <input type="text" class="form-control form-control-solid" minlength="3" maxlength="4" placeholder="CVV" name="card_cvv">
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Input wrapper-->                            
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Input group-->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="instapay-container" class="input-container">
+        <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container" bis_skin_checked="1">
+            <!--begin::Label-->
+            <label class="required fs-6 fw-semibold form-label mb-2">اسم عنوان المحفظة</label>
+            <!--end::Label-->
+            <!--begin::Input wrapper-->
+            <div class="position-relative" bis_skin_checked="1">
+                <!--begin::Input-->
+                <input asp-for="handle" type="text" class="form-control form-control-solid" placeholder="أدخل عنوان المحفظة">
+                <!--end::Input-->
+            </div>
+            <!--end::Input wrapper-->
+        </div>
+    </div>
+    <!--end::Option-->
+    
+    <input asp-for="Name" type="hidden" id="PaymentName" class="text-danger fs-5" />
+    <span asp-validation-for="Name" class="text-danger fs-5"></span>
+    <div class="row py-5 w-100 text-center d-flex align-items-center justify-content-center">
+        <button type="submit" class="btn btn-success w-50">إضافة</button>
+        <div asp-validation-summary="ModelOnly"></div>
+    </div>
+</form>
+
+<script>
+    const radios = document.querySelectorAll('input[name="paymentMethod"]');
+    radios.forEach(radio => {
+        radio.addEventListener('change', handleRadioChange);
+    });
+
+    function handleRadioChange() {
+        const selectedRadio = document.querySelector('input[name="paymentMethod"]:checked');
+        const selectedMethod = selectedRadio ? selectedRadio.value : null;
+        const containers = document.querySelectorAll('.input-container');
+        const paymentNameInput = document.getElementById('PaymentName');
+
+        containers.forEach(container => {
+            container.style.display = 'none';
+            const inputs = container.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.required = false;
+                input.value = '';
+            });
+        });
+
+        if (selectedMethod) {
+            paymentNameInput.value = selectedMethod;
+            const selectedContainer = document.getElementById(`${selectedMethod}-container`);
+            selectedContainer.style.display = 'block';
+            const inputs = selectedContainer.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.required = true;
+            });
+        }else {
+            paymentNameInput.value = '';
+        }
+    }
+</script>

@@ -14,9 +14,8 @@ namespace Speedy.Core.Models
         #endregion
 
         #region 
-
-        //public ICollection<Delivery>? Delivery { get; set; }
-        //public ICollection<Individual>? Individuals { get; set; }
+        public string? AppUserId { get; set; }
+        public AppUser? AppUser {  get; set; }
         public ICollection<Order>? Order { get; set; }
         #endregion
     }

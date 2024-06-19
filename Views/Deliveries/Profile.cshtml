@@ -384,7 +384,7 @@
                                         </div>
                                         <!--end::Content-->
                                         <!--begin::Action-->
-                                        <a href="javascript:;" data-url="/Payments/Create?userId=@Model.Id" data-title="إضافة وسيلة سحب" class="btn btn-primary px-6 align-self-center text-nowrap js-render-modal">
+                                        <a href="javascript:;" data-url="/Payments/Create?userId=@UserId" data-title="إضافة وسيلة سحب" class="btn btn-primary px-6 align-self-center text-nowrap js-render-modal">
                                             إضافة حساب
                                         </a>
                                         <!--end::Action-->
@@ -402,11 +402,14 @@
         </div>
     </div>
 </div>
+@Html.AntiForgeryToken()
 <!--end::details View-->
-@section Plugins
+@section Scripts
 {
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <partial name="_ValidationScriptsPartial" />
+
 }
-@section Scripts {
+@section Plugins{
     <script src="~/js/delivery.js" asp-append-version="true"></script>
 }

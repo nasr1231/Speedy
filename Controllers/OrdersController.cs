@@ -73,7 +73,7 @@ namespace Speedy.Controllers
         public IActionResult Create(OrderFormViewModel model)
         {
             if (!ModelState.IsValid)
-                return BadRequest(model);
+                return BadRequest(ModelState);
 
             using var transaction = _context.Database.BeginTransaction();
 

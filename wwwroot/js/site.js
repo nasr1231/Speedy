@@ -180,7 +180,7 @@ function showSuccessMessageAlert() {
 
     Swal.fire({
         title: "Done Successfully.....",
-        text: message,
+        text: "تمت العملية بنجاح!",
         icon: 'success',
         buttonsStyling: false,
         showConfirmButton: false,
