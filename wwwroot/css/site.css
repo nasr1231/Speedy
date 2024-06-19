@@ -7,7 +7,7 @@ html {
 /**********************footer part css*******************/
 /* line 2, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */
 .footer_part {
-    padding: 130px 0px 25px;
+    padding: 115px 0px 25px;
 }
 
 @media (max-width: 576px) {
@@ -99,14 +99,14 @@ html {
 
 /* line 65, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */
 .footer_part .single_footer_part .list-unstyled li a {
-    color: #7f7f7f;
+    color: white;
     margin-bottom: 10px;
     display: inline-block;
 }
 
     /* line 69, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */
     .footer_part .single_footer_part .list-unstyled li a:hover {
-        color: #ff3368 !important;
+        color: white !important;
     }
 
 /* line 76, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */
@@ -178,7 +178,7 @@ html {
         /* line 137, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */
         .footer_part .footer_icon li a {
             font-size: 14px;
-            color: #7f7f7f;
+            color: white;
             padding: 5px 11px;
             -webkit-transition: 0.5s;
             transition: 0.5s;
@@ -216,6 +216,9 @@ html {
 .footer_part .footer_icon li a :hover {
     color: #ff3368;
 }
+h4{
+    color:white;
+}
 
 @media (max-width: 576px) {
     /* line 131, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */
@@ -229,12 +232,12 @@ html {
 .footer_part .copyright_text p {
     color: #888;
 }
-
-/* line 191, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */
-.footer_part .copyright_text span {
-    color: #ff3368;
-    font-size: 12px;
-}
+   
+    /* line 191, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */
+    .footer_part .copyright_text span {
+        color: #ff3368;
+        font-size: 12px;
+    }
 
 @media (max-width: 991px) {
     /* line 186, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */
@@ -245,14 +248,14 @@ html {
 
 /* line 203, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */
 .footer_part .copyright_text p a {
-    color: #ff3368;
+    color: #E25E3E;
     -webkit-transition: 0.5s;
     transition: 0.5s;
 }
 
     /* line 207, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */
     .footer_part .copyright_text p a:hover {
-        color: #ff3368;
+        color: #da6b16;
     }
 
 /* line 212, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */
