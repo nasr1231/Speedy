@@ -8,7 +8,7 @@
 
 <style>
     .num {
-        background-color: #0d9aea;
+        background-color: #E25E3E;
         height: 40px;
         width: 40px;
         border-radius: 50%;
@@ -17,6 +17,15 @@
         align-items: center;
         font-size: 20px;
         margin-left: 6px;
+    }
+
+    div a, span a {
+        color: #E25E3E;
+    }
+
+    .end .btn {
+        background-color: #E25E3E;
+        color: white;
     }
 
     .form-control.form-control-solid {
@@ -67,13 +76,11 @@
 <!--begin::Main-->
 <div class="d-flex flex-column flex-root">
     <!--begin::Authentication - Sign-up -->
-    <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(/assets/Website/LoginAssets/14.png)">
+    <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(/assets/Website/LoginAssets/bg14.png)">
         <!--begin::Content-->
         <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
             <!--begin::Logo-->
-            <a href="../../demo5/dist/index.html" class="mb-12">
-                <img alt="Speedy logo" src="" class="h-40px" />
-            </a>
+            
             <!--end::Logo-->
             <!--begin::Wrapper-->
             <div class="w-lg-600px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto" style="padding-top: 30px !important">
@@ -87,7 +94,7 @@
                         <!--begin::Link-->
                         <div class="text-gray-400 fw-bold fs-4">
                             لديك حساب بالفعل؟
-                            <a href="/Identity/Account/Login" class="link-primary fw-bolder">سجل دخول هنا</a>
+                            <a href="/Identity/Account/Login" class=" fw-bolder">سجل دخول هنا</a>
                         </div>
                         <!--end::Link-->
                     </div>
@@ -303,14 +310,14 @@
                                         <input class="form-check-input" type="checkbox" id="AcceptTerms" />
                                         <span class="form-check-label fw-bold text-gray-700 fs-6 me-3">
                                             أقر بأني موافق على كل
-                                            <a href="#" class="ms-1 link-primary">الشروط و الأحكام</a>.
+                                            <a href="#" class="ms-1 ">الشروط و الأحكام</a>.
                                         </span>
                                     </label>
                                 </div>
                                 <div asp-validation-summary="All" class="text-danger"></div>
                                 <!--end::Input group-->
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-lg btn-primary" id="Submit-Btn">
+                                <div class="end text-center">
+                                    <button type="submit" class="btn btn-lg " id="Submit-Btn">
                                         <span class="indicator-label">تسجيل</span>
                                         <span class="indicator-progress">
                                             برجاء الانتظار
@@ -336,15 +343,7 @@
         </div>
         <!--end::Content-->
         <!--begin::Footer-->
-        <div class="d-flex flex-center flex-column-auto p-10">
-            <!--begin::Links-->
-            <div class="d-flex align-items-center fw-bold fs-6">
-                <a href="https://keenthemes.com" class="text-muted text-hover-primary px-2">About</a>
-                <a href="mailto:support@keenthemes.com" class="text-muted text-hover-primary px-2">Contact</a>
-                <a href="https://1.envato.market/EA4JP" class="text-muted text-hover-primary px-2">Contact Us</a>
-            </div>
-            <!--end::Links-->
-        </div>
+        
         <!--end::Footer-->
     </div>
     <!--end::Authentication - Sign-up-->

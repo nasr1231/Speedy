@@ -5,20 +5,25 @@
 
 @section Styles{
     <style>
+        :root {
+            --main-orange: #E25E3E;
+            --sec-orange: #da6b16;
+            --dark: #01153e;
+        }
         em{
-            color:#E25E3E ;
+           color: var(--main-orange);
         }
 
         .about-us .box-item:hover h4 a {
-            color: #01153e;
+            color: var(--dark);
         }
 
         .hed-l{
-            color: #da6b16;
+            color:var(--sec-orange);
         }
         
         .cont{
-            color: #01153e;
+            color:var(--dark);
             font-weight: 400;
         }
     </style>
@@ -182,7 +187,6 @@
             <div class="col-lg-8 offset-lg-2">
                 <div class="section-heading">
                     <h4>إليك بعض من <em> تعليقات المستخدمين </em> على خدماتنا</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eismod tempor incididunt ut labore et dolore magna.</p>
                 </div>
             </div>
             <div class="col-lg-12">
@@ -196,7 +200,7 @@
                                             <div class="row">
                                                 <div class="col-lg-4 col-sm-4 col-12">
                                                     <h4>ابراهيم محمد</h4>
-                                                    <span class="date">30 November 2021</span>
+                                                    <span class="date">30/ November 2021</span>
                                                 </div>
                                                 <div class="col-lg-4 col-sm-4 d-none d-sm-block" style="text-align:center; padding-top:21px;">
                                                     <span class="category">عميل</span>
@@ -218,7 +222,7 @@
                                             <div class="row">
                                                 <div class="col-lg-4 col-sm-4 col-12">
                                                     <h4>محمد صابر</h4>
-                                                    <span class="date">29 November 2021</span>
+                                                    <span class="date">29/ November 2021</span>
                                                 </div>
                                                 <div class="col-lg-4 col-sm-4 d-none d-sm-block" style="text-align:center; padding-top:21px;">
                                                     <span class="category">عميل</span>
@@ -240,7 +244,7 @@
                                             <div class="row">
                                                 <div class="col-lg-4 col-sm-4 col-12">
                                                     <h4>هاجر سعيد</h4>
-                                                    <span class="date">27 November 2021</span>
+                                                    <span class="date">27/ November 2021</span>
                                                 </div>
                                                 <div class="col-lg-4 col-sm-4 d-none d-sm-block" style="text-align:center; padding-top:21px;">
                                                     <span class="category">شركة ناشئة</span>
@@ -262,7 +266,7 @@
                                             <div class="row">
                                                 <div class="col-lg-4 col-sm-4 col-12">
                                                     <h4>عمر طاهر</h4>
-                                                    <span class="date">24 November 2021</span>
+                                                    <span class="date">24/ November 2021</span>
                                                 </div>
                                                 <div class="col-lg-4 col-sm-4 d-none d-sm-block" style="text-align:center; padding-top:21px;">
                                                     <span class="category">شركة ناشئة</span>
@@ -284,7 +288,7 @@
                                             <div class="row">
                                                 <div class="col-lg-4 col-sm-4 col-12 ">
                                                     <h4>جاسر علي</h4>
-                                                    <span class="date">21 November 2021</span>
+                                                    <span class="date">21/ November 2021</span>
                                                 </div>
                                                 <div class="col-lg-4 col-sm-4 d-none d-sm-block" style="text-align:center; padding-top:21px;">
                                                     <span class="category">شركة كبرى</span>
@@ -319,12 +323,15 @@
                                                                 lorem ipsum dolor sit amet, consectetur picing elit massive big blasta.”
                                                             </p>
                                                         </div>
+                                                        @*
                                                         <div class="down-content">
-                                                            <div class="text-center">
-                                                                <h4>Speedy</h4>
-                                                                <span>Our feedback</span>
-                                                            </div>
+                                                        <div class="text-center">
+                                                        <h4>Speedy</h4>
+                                                        <span>Our feedback</span>
                                                         </div>
+                                                        </div>
+                                                        *@
+                                                        
                                                     </div>
                                                 </div>
                                             </div>

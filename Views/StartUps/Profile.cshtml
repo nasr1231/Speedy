@@ -5,7 +5,7 @@
     ViewData["Title"] = "حسابي";
 }
 
-<div class="container d-flex flex-column flex-column-fluid border border-gray-300 rounded-4" style="height:700px;margin-top:100px;">
+<div class="container d-flex flex-column flex-column-fluid border border-gray-300 rounded-4" style="margin-top:100px;margin-bottom:100px;">
     <!--begin::Toolbar-->
     <div id="kt_app_toolbar" class="app-toolbar pt-5">
         <!--begin::Toolbar container-->
@@ -31,7 +31,7 @@
     <!--begin::Content-->
     <div id="kt_app_content" class="app-content flex-column-fluid ">
         <!--begin::Content container-->
-        <div id="kt_app_content_container" class="app-container container-fluid ">
+        <div id="kt_app_content_container" class="app-container container-fluid " >
             <!--begin::Navbar-->
             <div class="card mb-5 mb-xl-10 mt-5">
                 <div class="card-body pt-3 pb-0">
@@ -164,7 +164,7 @@
                             <!--begin::Row-->
                             <div class="row mb-7">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 fw-semibold text-muted">الاسم بالكامل </label>
+                                <label class="col-lg-4 fw-bolder text-muted">الاسم بالكامل </label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8">
@@ -178,7 +178,7 @@
                             <!--begin::Input group-->
                             <div class="row mb-7">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 fw-semibold text-muted">رقم الهاتف </label>
+                                <label class="col-lg-4 fw-bolder text-muted">رقم الهاتف </label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
@@ -190,7 +190,7 @@
                             <!--begin::Input group-->
                             <div class="row mb-7">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 fw-semibold text-muted">
+                                <label class="col-lg-4 fw-bolder text-muted">
                                     حالة الحساب
                                 </label>
                                 <!--end::Label-->
@@ -207,7 +207,7 @@
                             <!--begin::Input group-->
                             <div class="row mb-7">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 fw-semibold text-muted">   البريد الالكتروني الخاص بالشركة</label>
+                                <label class="col-lg-4 fw-bolder text-muted">   البريد الالكتروني الخاص بالشركة</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8">
@@ -221,7 +221,7 @@
                             <!--begin::Input group-->
                             <div class="row mb-7">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 fw-semibold text-muted">   رقم الهاتف الخاص بالشركة</label>
+                                <label class="col-lg-4 fw-bolder text-muted">   رقم الهاتف الخاص بالشركة</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8">
@@ -235,7 +235,7 @@
                             <!--begin::Input group-->
                             <div class="row mb-7">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 fw-semibold text-muted">
+                                <label class="col-lg-4 fw-bolder text-muted">
                                     العنوان بالكامل
                                     <span class="ms-1" data-bs-toggle="tooltip" title="Country of origination">
                                         <i class="ki-duotone ki-information fs-7"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
@@ -271,7 +271,7 @@
                             <!--begin::Card body-->
                             <div class="card-body border-top p-9">
                                 <!--begin::Email Address-->
-                                <div class="d-flex flex-wrap align-items-center">
+                                <div class="d-flex flex-wrap  align-items-center">
                                     <!--begin::Label-->
                                     <div id="kt_signin_email">
                                         <div class="fs-6 fw-bold mb-1">الإيميل</div>
@@ -282,7 +282,7 @@
                                     <!--end::Label-->
                                     <!--begin::Action-->
                                     <div id="kt_signin_email_button" class="ms-auto">
-                                        <button class="btn btn-light btn-active-light-primary">تغيير الإيميل</button>
+                                        <button class="btn btn-light btn-active-light-primary me-12">تغيير الإيميل</button>
                                     </div>
                                     <!--end::Action-->
                                 </div>
@@ -300,7 +300,7 @@
                                     <!--end::Label-->
                                     <!--begin::Action-->
 
-                                    <div class="ms-auto">
+                                    <div class="ms-auto me-12">
                                         <a href="javascript:;" class="btn btn-light btn-active-light-primary js-render-modal" data-url="/Deliveries/ResetPassword/@User.FindFirst(ClaimTypes.NameIdentifier)!.Value" data-title="تغير كلمة السر">تغيير كلمة السر</a>
                                     </div>
 
