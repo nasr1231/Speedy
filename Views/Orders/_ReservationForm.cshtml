@@ -6,7 +6,7 @@
     }
 
     .num {
-        background-color: #0d9aea;
+        background-color: #E25E3E;
         height: 40px;
         width: 40px;
         border-radius: 50%;
@@ -20,6 +20,15 @@
     .form-control.form-control-solid {
         border-color: #92b0e6;
     }
+
+    .btn {
+        background-color: #E25E3E;
+    }
+
+        .btn:hover {
+            background-color: #FF9B50;
+            color: white;
+        }
 </style>
 
 <form asp-controller="Orders" asp-action="Create" enctype="multipart/form-data" class="form w-100" novalidate="novalidate"
@@ -66,7 +75,7 @@
             <!--end::Input group-->
 
             <div class="modal-footer px-0 py-2 d-flex justify-content-center">
-                <a onclick="nextSlide()" href="#" class="btn btn-primary" id="nextBtn">التالي</a>
+                <a onclick="nextSlide()" href="#" class="btn " id="nextBtn">التالي</a>
             </div>
         </div>
         <div class="slide" id="slide2">
@@ -119,7 +128,7 @@
             </div>
             <!--end::Input group-->
             <div class="modal-footer px-0 py-2 d-flex justify-content-center">
-                <a onclick="nextSlide()" href="#" class="btn btn-primary" id="nextBtn">التالي</a>
+                <a onclick="nextSlide()" href="#" class="btn " id="nextBtn">التالي</a>
                 <a onclick="prevSlide()" href="#" class="btn btn-secondary">السابق</a>
             </div>
         </div>
@@ -195,7 +204,7 @@
             </div>
             <!--end::Input group-->
             <div class="modal-footer px-0 py-2 d-flex justify-content-center">
-                <a onclick="nextSlide()" href="#" class="btn btn-primary" id="nextBtn">التالي</a>
+                <a onclick="nextSlide()" href="#" class="btn " id="nextBtn">التالي</a>
                 <a onclick="prevSlide()" href="#" class="btn btn-secondary">السابق</a>
             </div>
         </div>
@@ -500,7 +509,7 @@
                     </div>
                 </div>
                 <div class="modal-footer px-0 py-2 d-flex justify-content-center">
-                    <a onclick="nextSlide()" href="#" class="btn btn-primary" id="nextBtn">التالي</a>
+                    <a onclick="nextSlide()" href="#" class="btn " id="nextBtn">التالي</a>
                     <a onclick="prevSlide()" href="#" class="btn btn-secondary">السابق</a>
                 </div>
                 <!--end::Option-->
@@ -542,8 +551,8 @@
         </div>     
         <div class="text-center">
             <div asp-validation-summary="All" class="text-danger fs-4"></div>
-            <button type="submit" class="btn btn-lg btn-primary" id="Submit-Btn">
-                <span class="indicator-label">تسجيل الطلب</span>
+            <button type="submit" class="btn btn-lg " id="Submit-Btn">
+                <span class="indicator-label ">تسجيل الطلب</span>
                 <span class="indicator-progress">
                     برجاء الانتظار
                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span>

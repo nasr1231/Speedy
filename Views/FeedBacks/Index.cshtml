@@ -4,18 +4,24 @@
     Layout = "_StartLayout";
 }
 
-<div class="container h-400px d-flex flex-column">
-    <form asp-action="Complain">
+<div class="container h-400px d-flex flex-column mb-20 ">
+    <form asp-action="Complain" class="mx-auto  d-flex flex-column align-items-center" style="margin-top:135px;">
         <input type="hidden" asp-for="UserId" value="@User.FindFirst(ClaimTypes.NameIdentifier)!.Value" />
 
-        <h2>رأيك عنا يا زميلي</h2>
+        <h2 class="d-flex w-55 justify-content-center align-items-center">
+            شكرًا لك على استخدام خدمة SPEEDY ! نحن نقدر جميع عملائنا ونسعى جاهدين لتلبية احتياجات الجميع.<br />
 
-        <div class="input-group input-group-solid">            
-            <textarea asp-for="Message" class="form-control" aria-label="With textarea"></textarea>
+            من فضلك أخبرنا تقييمك لموقعنا :
+        </h2>
+
+        <div class="input-group input-group-solid d-flex justify-content-center">
+            <textarea asp-for="Message" class="form-control form-control-solid border-gray-600 my-7" aria-label="With textarea" style="border-radius: 8px;max-width: 380px;height: 135px;"></textarea>
             <span asp-validation-for="Message" class="text-danger fs-5"></span>
         </div>
 
-        <button type="submit" class="btn btn-primary">سجل رأيك!</button>
+        <button type="submit" class="btn w-15 " style="background-color:#E25E3E;">
+            سجل رأيك!
+        </button>
 
         @if (ViewBag.SuccessMessage != null)
         {
