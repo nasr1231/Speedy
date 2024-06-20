@@ -15,7 +15,9 @@ namespace Speedy.Core.ViewModels
         [Required(ErrorMessage = Errors.isRequired)]
         public string Description { get; set; } = null!;
         public bool IsSensitive { get; set; }
-        
+
+        [Required()]
+        public IFormFile OrderImage { get; set; } = null!;        
 
         [Required(ErrorMessage = Errors.isRequired)]
         [Display(Name ="الأسم")]

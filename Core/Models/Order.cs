@@ -24,6 +24,7 @@ namespace Speedy.Core.Models
         public int TrackingNumber { get; set; }
         public DateTime PaymentDate { get; set; }
         public DateOnly PaymentDueDate { get; set; }
+        public string OrderAttachment { get; set; } = null!;
         #endregion
 
         #region Reciever Properties 

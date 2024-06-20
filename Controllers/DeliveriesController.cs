@@ -84,7 +84,7 @@ namespace Speedy.Controllers
                 return View("DeliveryForm", InitialDeliveryForm(model));
 
             using var transaction = _context.Database.BeginTransaction();
-
+          
             var userForm = new UserFormViewModel
             {
                 Password = model.Password,
@@ -114,6 +114,14 @@ namespace Speedy.Controllers
                 ShippingMethodId = model.SelectedShippingMethod,
                 IsDeleted = true
             };
+
+            var imageAttachment = await _attachmentService.UploadImageAsync(
+              attachedFile: model.DeliveryImage,
+              entityName: "Delivery Agents",
+             userName: delivery.AppUserId);
+
+            if (!imageAttachment.isUploaded)
+                return BadRequest(imageAttachment.errorMessage);
 
             var attachResult = await _attachmentService.UploadAttachmentAsync(
                 attachedFile: model.Attachments,                

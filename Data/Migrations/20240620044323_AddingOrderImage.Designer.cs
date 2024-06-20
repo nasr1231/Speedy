@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Speedy.Data;
 
@@ -11,9 +12,11 @@ using Speedy.Data;
 namespace Speedy.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240620044323_AddingOrderImage")]
+    partial class AddingOrderImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -993,9 +996,9 @@ namespace Speedy.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("Speedy.Core.Models.RelatedData.City", "City")
-                        .WithMany()
+                        .WithMany("Deliveries")
                         .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Speedy.Core.Models.AppUser", "CreatedBy")
@@ -1317,6 +1320,8 @@ namespace Speedy.Data.Migrations
 
             modelBuilder.Entity("Speedy.Core.Models.RelatedData.City", b =>
                 {
+                    b.Navigation("Deliveries");
+
                     b.Navigation("Individuals");
 
                     b.Navigation("StartUps");

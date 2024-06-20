@@ -28,6 +28,7 @@ namespace Speedy.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            
 
             #region Setting Relationships
             builder.Entity<AppUser>()
@@ -47,6 +48,13 @@ namespace Speedy.Data
            .WithOne(u => u.AppUser)
            .HasForeignKey<StartUp>(u => u.AppUserId)
            .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Delivery>()
+           .HasOne(u => u.City)
+           .WithMany()
+           .HasForeignKey(u => u.CityId)
+           .OnDelete(DeleteBehavior.NoAction);
+
             #endregion
 
             #region Created and Update
@@ -55,6 +63,7 @@ namespace Speedy.Data
                .WithMany()
                .HasForeignKey(b => b.CreatedById)
                .OnDelete(DeleteBehavior.NoAction);
+
             builder.Entity<Delivery>()
                 .HasOne(b => b.LastUpdatedBy)
                 .WithMany()
@@ -84,6 +93,8 @@ namespace Speedy.Data
                 .WithMany()
                 .HasForeignKey(b => b.LastUpdatedById)
                 .OnDelete(DeleteBehavior.NoAction);
+
+
 
             builder.Entity<Review>()
            .HasOne(u => u.StartUp)

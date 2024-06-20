@@ -3,17 +3,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Speedy.Core.Enums;
 using Speedy.Core.Models;
+using Speedy.Services.User;
 using static Speedy.Core.Enums.Variables;
 
 namespace Speedy.Controllers
 {
-	public class OrdersController(ApplicationDbContext context, IMapper mapper, UserManager<AppUser> userManager) : Controller
+    public class OrdersController(ApplicationDbContext context, IMapper mapper, UserManager<AppUser> userManager, IAttachmentService attachImage) : Controller
     {
         private readonly ApplicationDbContext _context = context;
         private readonly IMapper _mapper = mapper;
         private readonly UserManager<AppUser> _userManager = userManager;
+        private readonly IAttachmentService _attachImage = attachImage;
         public IActionResult Index(string id)
-		{
+        {
             var delivery = _context.Deliveries.SingleOrDefault(x => x.AppUserId == id);
             var orders = _context.Orders.Where(i => i.DeliveryId == delivery!.Id).ToList();
             var viewModels = new List<OrderDetailsViewModel>();
@@ -31,16 +33,16 @@ namespace Speedy.Controllers
                 };
 
                 viewModels.Add(viewModel);
-            }            
+            }
 
             if (User.IsInRole(AppRoles.StartUp))
                 return View("OrderStartup");
 
-			if (User.IsInRole(AppRoles.Individual))
-				return View("OrderIndividual");
+            if (User.IsInRole(AppRoles.Individual))
+                return View("OrderIndividual");
 
             return View(viewModels);
-		}
+        }
 
         [HttpGet]
         public IActionResult Filter(CitiesHomeViewModel model)
@@ -54,8 +56,8 @@ namespace Speedy.Controllers
             if (deliveryCitiesFliter is null)
                 return NotFound();
 
-            var orderViewModel = new OrderDeliveryViewModel { Deliveries = deliveryCitiesFliter};
-            
+            var orderViewModel = new OrderDeliveryViewModel { Deliveries = deliveryCitiesFliter };
+
             return View("DeliveryPreview", orderViewModel);
         }
 
@@ -63,19 +65,27 @@ namespace Speedy.Controllers
         public IActionResult InitiateCreate(int id)
         {
             //ModelState.AddModelError(string.Empty, "Sorry, There are no appointments available right now");
-            var appointmentsViewModel = new OrderFormViewModel{DeliveryId = id};
+            var appointmentsViewModel = new OrderFormViewModel { DeliveryId = id };
 
             return PartialView("_ReservationForm", appointmentsViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(OrderFormViewModel model)
+        public async Task<IActionResult> Create(OrderFormViewModel model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             using var transaction = _context.Database.BeginTransaction();
+
+            var imageAttachment = await _attachImage.UploadImageAsync(
+                attachedFile: model.OrderImage,
+                entityName: "Delivery Agents",
+               userName: model.UserId);
+
+            if (!imageAttachment.isUploaded)
+                return BadRequest(imageAttachment.errorMessage);            
 
             var order = new Order
             {
@@ -84,7 +94,7 @@ namespace Speedy.Controllers
                 AppUserId = model.UserId,
                 CreatedById = model.UserId,
                 Description = model.Description,
-                IsSensitive = model.IsSensitive,                
+                IsSensitive = model.IsSensitive,
                 RecieveDate = model.RecieveDate,
                 RecieverName = model.RecieverName,
                 RecieverAddress = model.RecieverAddress,
@@ -93,11 +103,12 @@ namespace Speedy.Controllers
                 PaymentMethod = new PaymentMethod
                 {
                     Title = "Cash",
-                    HolderName = model.RecieverName,                    
+                    HolderName = model.RecieverName,
                 },
                 SenderName = model.SenderName,
                 SenderAddress = model.SenderAddress,
-                SenderPhoneNumber = model.SenderPhoneNumber
+                SenderPhoneNumber = model.SenderPhoneNumber,
+                OrderAttachment = imageAttachment.AttachmentUrl!,
             };
 
             _context.Orders.Add(order);

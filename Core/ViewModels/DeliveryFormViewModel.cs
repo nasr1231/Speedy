@@ -64,11 +64,15 @@ namespace Speedy.Core.ViewModels
 		[Required(ErrorMessage = Errors.isRequired)]
         public List<IFormFile> Attachments { get; set; } = [];
 
+        [Display(Name = "الصورة الشخصية")]
+        [Required(ErrorMessage = Errors.isRequired)]
+        public IFormFile DeliveryImage { get; set; } = null!;
+
         #endregion
 
         #region Relations && Overloads        
 
-		[DisplayName("نوع وسيلة التوصيل التي تملكها")]
+        [DisplayName("نوع وسيلة التوصيل التي تملكها")]
 		[Required(ErrorMessage = Errors.isRequired)]
 		public int SelectedShippingMethod { get; set; }
 		public IEnumerable<SelectListItem>? ShippingMethods { get; set; }

@@ -35,7 +35,7 @@
       data-ajax-method="post"
       data-ajax="true"
       data-ajax-begin="onModalBegin"
-      data-ajax-success="modalSubmitClose "
+      data-ajax-success="modalSubmitClose"
       data-ajax-failure="showErrorMessage"
       data-ajax-complete="onModalComplete">
 
@@ -153,8 +153,7 @@
                     <i class="bi bi-pencil-fill fs-7"></i>
 
                     <!--begin::Inputs-->
-                    <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
-                    <input type="hidden" name="avatar_remove" />
+                    <input type="file" asp-for="OrderImage" accept=".png, .jpg, .jpeg" />
                     <!--end::Inputs-->
                 </label>
                 <!--end::Edit button-->
@@ -177,7 +176,7 @@
                 </span>
                 <!--end::Remove button-->
             </div>
-
+            <span asp-validation-for="@Model!.OrderImage" class="text-danger d-block h-10px"></span>
             <div class="row my-10">
                 <h5 class="fv-row mb-6 form-label fw-bolder text-dark fs-6 ">هل الشحنة قابلة للكسر؟</h5>
                 <div class="d-flex justify-content-around">

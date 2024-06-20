@@ -12,7 +12,7 @@ namespace Speedy.Core.Models.RelatedData
 
         #region Relations
         public ICollection<Individual> Individuals { get; set; } = [];
-        public ICollection<Delivery> Deliveries { get; set; } = [];
+        //public ICollection<Delivery> Deliveries { get; set; } = [];
         public ICollection<StartUp> StartUps { get; set; } = [];
         #endregion
     }

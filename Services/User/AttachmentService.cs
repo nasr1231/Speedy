@@ -30,7 +30,7 @@ namespace Speedy.Services.User
                 if (file.Length > _maxAllowedSize)
                     return (isUploaded: false, errorMessage: Errors.MaxSize, null);
 
-                var directoryPath = $"{_webHostEnvironment.WebRootPath}/attachments/{userName}";
+                var directoryPath = $"{_webHostEnvironment.WebRootPath}/attachments/Orders/{userName}";
 
                 if (!Directory.Exists(directoryPath))
                 {
@@ -49,7 +49,27 @@ namespace Speedy.Services.User
 
 
             return (isUploaded: true, errorMessage: null, AttachmentUrls: attachmentUrls);
-        }        
+        }
+
+        public async Task<(bool isUploaded, string? errorMessage, string? AttachmentUrl)> UploadImageAsync(IFormFile attachedFile, string entityName, string userName)
+        {
+            var extension = Path.GetExtension(attachedFile.FileName);
+
+            if (!_allowedExtensions.Contains(extension))
+                return (isUploaded: false, errorMessage: Errors.NotAllowedExtension, null);
+
+            if (attachedFile.Length > _maxAllowedSize)
+                return (isUploaded: false, errorMessage: Errors.MaxSize, null);
+
+            var imageName = $"{Guid.NewGuid()}{extension}";
+
+            var path = Path.Combine($"{_webHostEnvironment.WebRootPath}/attachments/Orders/", imageName);
+
+            using var stream = System.IO.File.Create(path);
+            attachedFile.CopyTo(stream);
+
+            return (isUploaded: true, errorMessage: null, AttachmentUrl: path);
+        }
     }
    
 }
