@@ -3,8 +3,7 @@
 namespace Speedy.Core.ViewModels
 {
     public class DeliveryDashViewModel
-    {        
-        public int DeliveryId { get; set; }
+    {                
         public int OrderId { get; set; }
         public string? SenderName { get; set; }
         public string? OrderAttachment { get; set; }

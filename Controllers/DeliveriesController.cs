@@ -61,8 +61,7 @@ namespace Speedy.Controllers
             foreach (var order in orders)
             {
                 var orderView = new DeliveryDashViewModel
-                {
-                    DeliveryId = delivery!.Id,
+                {                    
                     Description = order.Description,
                     IsSensitive = order.IsSensitive,
                     Notes = order.Notes,

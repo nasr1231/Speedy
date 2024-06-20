@@ -8,6 +8,6 @@
         public string SenderAddress { get; set; }
         public string RecieverName { get; set; }
         public string RecieverAddress { get; set; }
-        public string PriceTotal { get; set; }
+        public string? PriceTotal { get; set; }
     }
 }

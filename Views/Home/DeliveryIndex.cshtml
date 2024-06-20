@@ -2,8 +2,14 @@
     ViewData["Title"] = "الصفحة الرئيسية";
     Layout = "_StartLayout";
 }
-<div class="mt-20 d-flex justify-content-center">
-    <a asp-controller="Deliveries" asp-action="Dashboard" asp-route-id="@User.FindFirst(ClaimTypes.NameIdentifier)!.Value" class=" fs-2 btn btn-danger mt-15">
-    الوصول إلى لوحة التحكم
-</a>
+
+<div class="main d-flex flex-column align-items-center justify-content-center flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain" style="background-image: url(/assets/Website/LoginAssets/bg14.png); padding-bottom:130px;">
+    <h1 class="mb-7">إبدأ تجربة توصيل سريعة معنا الآن</h1>
+    <div class=" d-flex w-100 mb-4 justify-content-center">
+        <div class=" d-flex flex-column flex-md-row justify-content-center align-items-center">
+            <a asp-controller="Deliveries" asp-action="Dashboard" asp-route-id="@User.FindFirst(ClaimTypes.NameIdentifier)!.Value" class=" fs-2 btn btn-danger mt-15">
+                الوصول إلى لوحة التحكم
+            </a>
+        </div>
+    </div>
 </div>

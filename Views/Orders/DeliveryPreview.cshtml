@@ -121,11 +121,9 @@
 
 <div class="row text-center d-flex align-items-center justify-content-center w-100" style="height:800px;">
     <div class="col-6">
-        <form asp-controller="Orders" asp-action="Create" enctype="multipart/form-data" class="form w-100" style="margin-top: 59px;" novalidate="novalidate"
->
+        <form asp-controller="Orders" asp-action="Create" method="post" enctype="multipart/form-data" class="form w-100" style="margin-top: 59px;" novalidate="novalidate">
 
-            <input type="hidden" asp-for="UserId" value="@User.FindFirst(ClaimTypes.NameIdentifier)!.Value" />
-            <input type="hidden" asp-for="DeliveryId" />
+            <input type="hidden" asp-for="UserId" value="@User.FindFirst(ClaimTypes.NameIdentifier)!.Value" />            
 
             <div class="slider-container">
                 <div class="slide" id="slide1">
@@ -147,27 +145,14 @@
                             <label class="form-label fw-bolder text-dark fs-6">رقم هاتف للتواصل </label>
                             <input asp-for="SenderPhoneNumber" class="form-control form-control-lg form-control-solid" type="text" placeholder="" autocomplete="off" />
                             <span asp-validation-for="SenderPhoneNumber" class="text-danger d-block h-10px"></span>
+                        </div>                        
+                        <div class="mb-7 text-end">
+                            <label class="form-label fw-bolder text-dark fs-6">العنوان </label>
+                            <input asp-for="SenderAddress" class="form-control form-control-lg form-control-solid" type="text" placeholder="" autocomplete="off" />
+                            <span asp-validation-for="SenderAddress" class="text-danger d-block h-10px"></span>
                         </div>
                     </div>
-                    <!--begin::Input group-->
-                    <div class="row fv-row text-end">
-                        <div class="col-md-6 mb-7">
-                            <label class="form-label fw-bolder text-dark fs-6">المحافظة</label>
-                            <select id="GovernorateId" asp-for="@Model.SenderGovernorateId" asp-items="@Model.Governorates" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المحافظة" data-hide-search="true">
-                                <option></option>
-                            </select>
-                            <span asp-validation-for="@Model!.SenderGovernorateId" class="text-danger d-block h-10px"></span>
-                        </div>
-                        <div class="col-md-6 mb-7">
-                            <label class="form-label fw-bolder text-dark fs-6">المدينة</label>
-                            <select id="CityId" asp-for="@Model.SenderCityId" asp-items="@Model.Cities" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المدينة" data-hide-search="true">
-                                <option></option>
-                            </select>
-                            <span asp-validation-for="@Model!.SenderCityId" class="text-danger d-block h-10px"></span>
-                        </div>
-                        
-                    </div>
-
+                    <!--begin::Input group-->                   
                     <div class="modal-footer px-0 py-2 d-flex justify-content-center">
                         <a onclick="nextSlide()" href="#" class="btn " id="nextBtn">التالي</a>
                     </div>
@@ -196,7 +181,6 @@
                         <!--end::Col-->
                     </div>
                     
-                    <!--begin::Input group-->
                     <div class="row fv-row text-end">
                         <div class="col-md-6 mb-7">
                             <label class="form-label fw-bolder text-dark fs-6">المحافظة</label>
@@ -207,25 +191,27 @@
                         </div>
                         <div class="col-md-6 mb-7">
                             <label class="form-label fw-bolder text-dark fs-6">المدينة</label>
-                            <select id="CityId" asp-for="@Model.SenderCityId" asp-items="@Model.Cities" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المدينة" data-hide-search="true">
+                            <select id="CityId" asp-for="@Model.RecieverCityId" asp-items="@Model.Cities" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المدينة" data-hide-search="true">
                                 <option></option>
                             </select>
-                            <span asp-validation-for="@Model!.SenderCityId" class="text-danger d-block h-10px"></span>
+                            <span asp-validation-for="@Model!.RecieverCityId" class="text-danger d-block h-10px"></span>
                         </div>
+
                     </div>
-                    <!--end::Input group-->
+
                     <!--begin::Input group-->
                     <div class="fv-row mb-7 text-end">
                         <label class="form-label fw-bolder text-dark fs-6">العنوان </label>
                         <input asp-for="RecieverAddress" class="form-control form-control-lg form-control-solid" type="text" placeholder="" autocomplete="off" />
                         <span asp-validation-for="RecieverAddress" class="text-danger d-block h-10px"></span>
                     </div>
+
                     <!--end::Input group-->
                     <!--begin::Input group-->
                     <div class="fv-row mb-7 text-end">
                         <label class="form-label fw-bolder text-dark fs-6 ">تاريخ الاستلام</label>
                         <div class="input-group">
-                            <input asp-for="ShippingDate" class="form-control form-control-solid" placeholder="Pick a date" id="js-Order-flatpicker" />
+                            <input asp-for="RecieverAddress" class="form-control form-control-solid" placeholder="Pick a date" id="js-Order-flatpicker" />                            
                         </div>
                         <span asp-validation-for="ShippingDate" class="text-danger d-block h-10px"></span>
                     </div>
@@ -233,8 +219,8 @@
                     <!--begin::Input group-->
                     <div class="fv-row mb-7 text-end">
                         <label class="form-label fw-bolder text-dark fs-6 ">تاريخ التسليم</label>
-                        <div class="input-group">
-                            <input asp-for="RecieveDate" class="form-control form-control-solid" placeholder="Pick a date" id="js-Order-flatpicker" />
+                        <div class="input-group">                            
+                            <input asp-for="RecieveDate" class="form-control form-control-solid" placeholder="Pick date rage" id="js-Order-flatpicker" />
                         </div>
                         <span asp-validation-for="RecieveDate" class="text-danger d-block h-10px"></span>
                     </div>
@@ -716,15 +702,17 @@
 
     <script>
         $(document).ready(function () {
-            $("#js-Order-flatpicker").flatpickr({
-                singleDatePicker: true,
-                autoApply: true,
-                showDropdowns: true,
-                drops: 'up',
-                minDate: new Date(),
-                enableTime: true,
-                dateFormat: "Y-m-d H:i",
-            });
+            $("[id='js-Order-flatpicker']").each(function () {
+                $(this).flatpickr({
+                    singleDatePicker: true,
+                    autoApply: true,
+                    showDropdowns: true,
+                    drops: 'up',
+                    minDate: new Date(),
+                    enableTime: true,
+                    dateFormat: "Y-m-d H:i",
+                });
+            });            
         });
 
         // document.addEventListener('DOMContentLoaded', function () {

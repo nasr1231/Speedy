@@ -4,9 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Speedy.Core.ViewModels
 {
     public class OrderFormViewModel
-    {
-        public int? OrderTotal { get; set; }
-        public int? OrderFees { get; set; }
+    {       
 
         [Required(ErrorMessage = Errors.isRequired)]
         [Display(Name = "محافظة العميل")]
@@ -14,27 +12,21 @@ namespace Speedy.Core.ViewModels
         
         [Required(ErrorMessage = Errors.isRequired)]
         [Display(Name = "مدينة العميل")]
-        public int RecieverCityId { get; set; }
-
-        [Required(ErrorMessage = Errors.isRequired)]
-        [Display(Name = "محافظة المستلم")]
-        public int SenderGovernorateId { get; set; }
-
-        [Required(ErrorMessage = Errors.isRequired)]
-        [Display(Name = "مدينة العميل")]
-        public int SenderCityId { get; set; }        
+        public int RecieverCityId { get; set; }     
 
         [Required(ErrorMessage = Errors.isRequired)]
         [Display(Name = "وسيلة الشحن")]
         public int ShippingMethodId { get; set; }
+
+        public int? shippingFees { get; set; }
+
 
         public IEnumerable<SelectListItem> Cities { get; set; } = [];
         public IEnumerable<SelectListItem> Governorates { get; set; } = [];
         public IEnumerable<SelectListItem> ShippingMethods { get; set; } = [];
 
         public int CityId { get; set; }
-        public string UserId { get; set; } = null!;
-        public int DeliveryId { get; set; }
+        public string UserId { get; set; } = null!;        
         public DateTime RecieveDate { get; set; } = DateTime.Now;
         public DateTime ShippingDate { get; set; } = DateTime.Now;        
         [Display(Name = "ملاحظات")]

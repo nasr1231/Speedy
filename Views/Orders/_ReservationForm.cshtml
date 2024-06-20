@@ -39,8 +39,7 @@
       data-ajax-failure="showErrorMessage"
       data-ajax-complete="onModalComplete">
 
-    <input type="hidden" asp-for="UserId" value="@User.FindFirst(ClaimTypes.NameIdentifier)!.Value" />
-    <input type="hidden" asp-for="DeliveryId" />
+    <input type="hidden" asp-for="UserId" value="@User.FindFirst(ClaimTypes.NameIdentifier)!.Value" />    
 
     <div class="slider-container">
         <div class="slide" id="slide1">

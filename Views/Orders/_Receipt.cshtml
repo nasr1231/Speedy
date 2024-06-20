@@ -1,24 +1,17 @@
-﻿@model OrderFormViewModel
+﻿@model ReceiptFormViewModel
 
-<style>
-    Here's the converted vanilla CSS code:
-    cssCopy@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400|Work+Sans:300,500');
+@{
+    ViewData["Title"] = "حسابك";
+    Layout = "_StartLayout";
+}
 
+<style>   
     body {
-        display: flex;
-        align-items: center;
-        justify-content: center;
         min-height: 100vh;
         color: #525252;
         font-family: 'Work Sans', sans-serif;
         font-weight: 300;
         line-height: 1.25;
-        background: linear-gradient(to bottom, #00b09b, #96c93d);
-    }
-
-    a {
-        color: #5c7b25;
-        text-decoration-skip: ink;
     }
 
     .receipt {
@@ -39,8 +32,7 @@
     }
 
     .receipt__subtitle {
-        padding: 0 30px;
-        font-family: 'Work Sans', sans-serif;
+        padding: 0 30px;        
         font-weight: 300;
         font-size: 18px;
     }
@@ -86,30 +78,32 @@
         text-align: center;
     }
 </style>
-<div class="container">
+<div class="container h-auto" style="margin-top: 100px;">
     <div class="receipt">
-        <h2 class="receipt__title">Thank you.</h2>
-        <p class="receipt__subtitle">Your order is on its way. Here is your receipt:</p>
+        <h2 class="receipt__title">شكرا لك</h2>
+        <p class="receipt__subtitle">انتظر لحين قبول أحد عمال التوصيل طلبك</p>
         <ul class="receipt__lines">
             <li class="receipt__line">
-                <span class="receipt__line__item">Octocat Mug</span>
-                <span class="receipt__line__price">11,99 €</span>
+                <span class="receipt__line__item">سعر  التوصيل</span>
+                <span class="receipt__line__price">@Model.OrderTotal</span>
             </li>
             <li class="receipt__line">
-                <span class="receipt__line__item">ES6 stickers (x5)</span>
-                <span class="receipt__line__price">1,99 €</span>
-            </li>
-            <li class="receipt__line">
-                <span class="receipt__line__item">Node modules (+Infinity)</span>
-                <span class="receipt__line__price">8 403,67 €</span>
+                <span class="receipt__line__item">العمولة</span>
+                <span class="receipt__line__price">@Model.Fees</span>
             </li>
         </ul>
         <p class="receipt__total">
-            <span class="receipt__total__item">Total</span>
-            <span class="receipt__total__price">8 417,65 €</span>
+            <span class="receipt__total__item">الإجمالي</span>
+            <span class="receipt__total__price">@(Model.Fees + Model.OrderTotal) جنيه</span>
         </p>
-        <p class="receipt__back">
-            <a href="#">Return to shop</a>
-        </p>
+        <div class="text-center d-flex flex-row align-items-center justify-content-center">
+            <form asp-action="SubmitOrder" method="post">                
+                <button type="submit" class="btn btn-light-success m-5">قبول الطلب</button>
+            </form>
+            <form asp-action="RejectOrder" method="post">
+                <button type="submit" class="btn btn-light-danger">قبول الطلب</button>
+            </form>                       
+        </div>
     </div>
-</div>
+    
+</div> 

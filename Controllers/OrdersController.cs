@@ -5,7 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Speedy.Core.Enums;
 using Speedy.Core.Models;
+using Speedy.Core.ViewModels;
 using Speedy.Services.User;
+using static Azure.Core.HttpHeader;
 using static Speedy.Core.Enums.Variables;
 
 namespace Speedy.Controllers
@@ -43,7 +45,7 @@ namespace Speedy.Controllers
             if (User.IsInRole(AppRoles.Individual))
                 return View("OrderIndividual");
 
-            return View(viewModels);
+            return View();
         }
 
         [HttpPost]
@@ -77,7 +79,6 @@ namespace Speedy.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-
             using var transaction = _context.Database.BeginTransaction();
 
             var imageAttachment = await _attachImage.UploadImageAsync(
@@ -88,11 +89,10 @@ namespace Speedy.Controllers
             if (!imageAttachment.isUploaded)
                 return BadRequest(imageAttachment.errorMessage);
 
-            var priceList = TotalPriceCalculator(model.RecieverCityId, model.SenderCityId,model.ShippingMethodId);
+            var priceList = TotalPriceCalculator(model.RecieverCityId, model.CityId, model.ShippingMethodId);
 
             var order = new Order
             {
-                DeliveryId = model.DeliveryId,
                 Notes = model.Notes,
                 AppUserId = model.UserId,
                 CreatedById = model.UserId,
@@ -112,35 +112,67 @@ namespace Speedy.Controllers
                 SenderAddress = model.SenderAddress,
                 SenderPhoneNumber = model.SenderPhoneNumber,
                 OrderAttachment = imageAttachment.AttachmentUrl!,
-                OrderTotal = priceList.NetPrice,
-                Fees = priceList.Fees,
             };
 
             _context.Orders.Add(order);
             _context.SaveChanges();
             transaction.Commit();
 
-            //var user = _context.Individuals
-            //  .Include(c => c.City)
-            //  .Include(ap => ap.AppUser)
-            //  .SingleOrDefault(st => st.AppUserId == model.UserId);
+            var receiptViewModel = new ReceiptFormViewModel
+            {
+                OrderId = order.OrderId,
+                Fees = priceList.Fees,
+                OrderTotal = priceList.NetPrice
+            };
 
-            //if (user is null)
-            //    return NotFound();
+            return View("_Receipt", receiptViewModel);
+        }
 
-            //var userView = new IndividualProfileViewModel
-            //{
-            //    Address = user.AppUser!.Address,
-            //    City = user.City.Name,
-            //    Email = user.AppUser.Email,
-            //    FirstName = user.AppUser!.FirstName,
-            //    LastName = user.AppUser!.LastName,
-            //    PhoneNumber = user.AppUser.PhoneNumber,
-            //    Id = user.AppUserId,
-            //    IsDeleted = user.IsDeleted
-            //};
+        public IActionResult AcceptOrder(ReceiptFormViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            return PartialView("_Receipt", model);
+            var order = _context.Orders.Find(model.OrderId);
+
+            if (order == null)
+                return NotFound(ModelState);
+
+            order.OrderTotal = model.OrderTotal;
+            order.Fees = model.Fees;
+
+            _context.Update(order);
+            _context.SaveChanges();
+
+            if (User.IsInRole(AppRoles.StartUp))
+                return View("OrderStartup");
+
+            if (User.IsInRole(AppRoles.Individual))
+                return View("OrderIndividual");
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult RejectOrder(ReceiptFormViewModel model) 
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var order = _context.Orders.Find(model.OrderId);
+
+            if (order == null)
+                return NotFound(ModelState);
+
+            _context.Remove(order);
+            _context.SaveChanges();
+
+            if (User.IsInRole(AppRoles.StartUp))
+                return View("~/Home/StartUpIndex.cshtml");
+
+            if (User.IsInRole(AppRoles.Individual))
+                return View("~/Home/UserIndex.cshtml");
+
+            return View();
         }
 
         private OrderFormViewModel InitialOrderForm(OrderFormViewModel? model = null)
@@ -162,13 +194,15 @@ namespace Speedy.Controllers
             switch (shippingMethodId)
             {
                 case 1011:
-                    netPrice = (int)(120 * 0.20 * 0.5);
+                    netPrice = (int)(120 * 0.5);
                     fees = (int)(netPrice * 0.20);
+
                     if ((receiverCityId == 11 && senderCityId == 12) || (receiverCityId == 12 && senderCityId == 11))
                     {
                         netPrice = (int)(120 * 0.666666667);
                         fees = (int)(netPrice * 0.20);
                     }
+
                     else if ((receiverCityId == 7 && senderCityId == 10) || (receiverCityId == 10 && senderCityId == 7))
                     {
                         netPrice = (int)(120 * 0.333333333);
@@ -181,7 +215,7 @@ namespace Speedy.Controllers
                     }
                     break;
                 case 1012:
-                    netPrice = (int)(50 * 0.20 * 0.5);
+                    netPrice = (int)(50 * 0.5);
                     fees = (int)(netPrice * 0.20);
                     if ((receiverCityId == 7 && senderCityId == 10) || (receiverCityId == 10 && senderCityId == 7))
                     {
@@ -191,7 +225,7 @@ namespace Speedy.Controllers
                     else if ((receiverCityId == 11 && senderCityId == 7) || (receiverCityId == 7 && senderCityId == 11))
                     {
                         netPrice = (int)(50 * 0.4);
-                        fees = (int)(netPrice * 0.20);
+                        fees = (int)(netPrice * 0.20);                        
                     }
                     break;
                 default:

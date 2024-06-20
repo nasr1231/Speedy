@@ -25,8 +25,7 @@ namespace Speedy.Controllers
 
             var individualsView = individuals.Select(d => new IndividualViewModel
             {
-                Id = d.Id,
-                NID = d.AppUser!.NID,
+                Id = d.Id,                
                 CreatedOn = d.CreatedOn,
                 Email = d.AppUser.Email,
                 MobileNumber = d.AppUser.PhoneNumber,
@@ -86,8 +85,7 @@ namespace Speedy.Controllers
 				ConfirmPassword = model.ConfirmPassword,
 				SelectedRoles = AppRoles.Individual,
 				FirstName = model.FirstName,
-				LastName = model.LastName,
-				NID = model.NID,
+				LastName = model.LastName,				
                 PhoneNumber = model.MobileNumber
             };
 
