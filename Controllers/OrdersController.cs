@@ -115,27 +115,27 @@ namespace Speedy.Controllers
             _context.SaveChanges();
             transaction.Commit();
 
-            var user = _context.Individuals
-              .Include(c => c.City)
-              .Include(ap => ap.AppUser)
-              .SingleOrDefault(st => st.AppUserId == model.UserId);
+            //var user = _context.Individuals
+            //  .Include(c => c.City)
+            //  .Include(ap => ap.AppUser)
+            //  .SingleOrDefault(st => st.AppUserId == model.UserId);
 
-            if (user is null)
-                return NotFound();
+            //if (user is null)
+            //    return NotFound();
 
-            var userView = new IndividualProfileViewModel
-            {
-                Address = user.AppUser!.Address,
-                City = user.City.Name,
-                Email = user.AppUser.Email,
-                FirstName = user.AppUser!.FirstName,
-                LastName = user.AppUser!.LastName,
-                PhoneNumber = user.AppUser.PhoneNumber,
-                Id = user.AppUserId,
-                IsDeleted = user.IsDeleted
-            };
+            //var userView = new IndividualProfileViewModel
+            //{
+            //    Address = user.AppUser!.Address,
+            //    City = user.City.Name,
+            //    Email = user.AppUser.Email,
+            //    FirstName = user.AppUser!.FirstName,
+            //    LastName = user.AppUser!.LastName,
+            //    PhoneNumber = user.AppUser.PhoneNumber,
+            //    Id = user.AppUserId,
+            //    IsDeleted = user.IsDeleted
+            //};
 
-            return View("~/Views/Individuals/Profile.cshtml", userView);
+            return Ok();
         }
     }
 }

@@ -18,5 +18,6 @@ namespace Speedy.Controllers
 		{
 			return View();
 		}
+
 	}
 }

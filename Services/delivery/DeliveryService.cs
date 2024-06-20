@@ -25,7 +25,7 @@ namespace Speedy.Services.delivery
         {
             IQueryable<Delivery> deliveriesQueryable = _context.Deliveries!
                 .Include(s => s.ShippingMethods)
-                .Include(s => s.AppUser)
+                .Include(s => s.AppUser)                    
                 .Include(c => c.City)
                 .ThenInclude(g => g.Governorate);
 

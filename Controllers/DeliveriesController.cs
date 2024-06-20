@@ -48,20 +48,45 @@ namespace Speedy.Controllers
 
             return NotFound();
         }
-        public async Task<IActionResult> Dashboard(string id)
+        public IActionResult Dashboard(string id)
         {
-            var delivery = await _deliveryService.GetDeliveryAsync(deliveryId: id);            
+            var delivery = _context.Deliveries.SingleOrDefault(d => d.AppUserId == id);
 
-            if (delivery is null)
-                return NotFound();
+            var orders = _context.Orders
+                 .Include(ap => ap.AppUsers)                 
+                 .Where(x => x.DeliveryId == delivery!.Id);
+           
+            var orderViews = new List<DeliveryDashViewModel>();
 
-            var deliveriesView = _mapper.Map<DeliveryViewModel>(delivery);
+            foreach (var order in orders)
+            {
+                var orderView = new DeliveryDashViewModel
+                {
+                    DeliveryId = delivery!.Id,
+                    Description = order.Description,
+                    IsSensitive = order.IsSensitive,
+                    Notes = order.Notes,
+                    ShippingDate = order.ShippingDate,
+                    RecieverName = order.RecieverName,
+                    SenderName = order.SenderName,
+                    RecieverPhoneNumber = order.RecieverPhoneNumber,
+                    TrackingNumber = order.TrackingNumber,
+                    SenderPhoneNumber = order.SenderPhoneNumber,
+                    SenderAddress = order.SenderAddress,
+                    OrderAttachment = order.OrderAttachment,
+                    RecieveDate = order.RecieveDate,
+                    RecieverAddress = order.RecieverAddress,
+                    OrderId = order.OrderId,
+                };
+                orderViews.Add(orderView);
+            };
 
-            return View("Dashboard", deliveriesView);
+            return View("Dashboard", orderViews);
         }
         public async Task<IActionResult> Profile(string id)
         {
             var delivery = await _deliveryService.GetDeliveryAsync(deliveryId: id);
+
 
             if (delivery is null)
                 return NotFound();

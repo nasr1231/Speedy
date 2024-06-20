@@ -1,6 +1,7 @@
 ﻿@model List<OrderDetailsViewModel>
 @{
     Layout = "_DeliveryLayout";
+    ViewData["Title"] = "طلباتي";
 }
 <!--begin::Main-->
 <div class="app-main flex-column flex-row-fluid " id="kt_app_main">
@@ -40,42 +41,51 @@
                     <div id="kt_referred_users_tab_content" class="tab-content">
                         <!--begin::Tab panel-->
                         <div id="kt_referrals_1" class="card-body p-0 tab-pane fade show active" role="tabpanel">
-                            <div class="table-responsive">
+                            <div class="table-responsive">                                
                                 <!--begin::Table-->
-                                <table class="table table-row-bordered align-middle gy-6">
-                                    <!--begin::Thead-->
-                                    <thead class="border-bottom border-gray-200 fs-6 fw-bold bg-lighten">
-                                        <tr>
-
-                                            <th class="min-w-125px text-center">رقم الطلب</th>
-                                            <th class="min-w-115px text-center ps-0">التاريخ</th>
-                                            <th class="min-w-125px text-center ps-0">اسم العميل</th>
-                                            <th class="min-w-125px text-center">عنوان العميل</th>
-                                            <th class="min-w-125px text-center">اسم المستلم</th>
-                                            <th class="min-w-125px text-center">عنوان المستلم</th>
-                                            <th class="min-w-125px text-center ps-0">السعر</th>
-                                        </tr>
-                                    </thead>
-                                    <!--end::Thead-->
-                                    <!--begin::Tbody-->
-                                    <tbody class="fs-6 fw-semibold text-gray-600">
-                                        @foreach (var order in Model)
-                                        {
+                                @if(Model.Any()){
+                                    <table class="table table-row-bordered align-middle gy-6">
+                                        <!--begin::Thead-->
+                                        <thead class="border-bottom border-gray-200 fs-6 fw-bold bg-lighten">
                                             <tr>
-                                                <td class="ps-9 text-center">@order.TrackingNumber</td>
-                                                <td class="text-center ps-0">@order.OrderDate</td>
-                                                <td class="ps-0 text-center">
-                                                    @order.SenderName
-                                                </td>
-                                                <td class="text-center">@order.SenderAddress</td>
-                                                <td class="text-center">@order.RecieverName</td>
-                                                <td class="text-center">@order.RecieverAddress</td>
-                                                <td class="text-success text-center ps-0">$2,400</td>
+
+                                                <th class="min-w-125px text-center">رقم الطلب</th>
+                                                <th class="min-w-115px text-center ps-0">التاريخ</th>
+                                                <th class="min-w-125px text-center ps-0">اسم العميل</th>
+                                                <th class="min-w-125px text-center">عنوان العميل</th>
+                                                <th class="min-w-125px text-center">اسم المستلم</th>
+                                                <th class="min-w-125px text-center">عنوان المستلم</th>
+                                                <th class="min-w-125px text-center ps-0">السعر</th>
                                             </tr>
-                                        }
-                                    </tbody>
-                                    <!--end::Tbody-->
-                                </table>
+                                        </thead>
+                                        <!--end::Thead-->
+                                        <!--begin::Tbody-->
+                                        <tbody class="fs-6 fw-semibold text-gray-600">
+                                            @foreach (var order in Model)
+                                            {
+                                                <tr>
+                                                    <td class="ps-9 text-center">@order.TrackingNumber</td>
+                                                    <td class="text-center ps-0">@order.OrderDate</td>
+                                                    <td class="ps-0 text-center">
+                                                        @order.SenderName
+                                                    </td>
+                                                    <td class="text-center">@order.SenderAddress</td>
+                                                    <td class="text-center">@order.RecieverName</td>
+                                                    <td class="text-center">@order.RecieverAddress</td>
+                                                    <td class="text-success text-center ps-0">$2,400</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                        <!--end::Tbody-->
+                                    </table>
+                                }
+                                else
+                                {
+                                    <div class="w-100 d-flex flex-column align-items-center h-100 justify-content-center">
+                                        <img src="~/assets/WhatsApp Image 2024-06-20 at 14.35.53_6a7cab49.jpg" class="" />
+                                        <span class="text-danger fs-4 mb-10">لا يوجد طلبات حتى الأن</span>
+                                    </div>
+                                }
                                 <!--end::Table-->
                             </div>
                         </div>
