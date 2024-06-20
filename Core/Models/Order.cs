@@ -15,7 +15,8 @@ namespace Speedy.Core.Models
         public string? SenderPhoneNumber { get; set; }
         public DateTime RecieveDate { get; set; }
         public DateTime ShippingDate { get; set; }
-        public double OrderTotal { get; set; }
+        public int OrderTotal { get; set; }
+        public int Fees { get; set; }
         public Status? OrderStatus { get; set; } = Status.Pending;
         public string? Notes { get; set; }
         public Status? PaymentStatus { get; set; } = Status.Pending;

@@ -52,7 +52,7 @@ namespace Speedy.Core.ViewModels
 		[MaxLength(50, ErrorMessage = Errors.MaxLength)]
 		public string StartUpName { get; set; } = null!;
 
-		[AssertThat("EstablishDate < Today()", ErrorMessage = "انت عامل الشركة شكك طيب ولا ايه")]
+		[AssertThat("EstablishDate < Today()", ErrorMessage = "هذا التاريخ غير صالح")]
 		[Display(Name = "تاريخ إنشاء الشركة")]
 		[Required(ErrorMessage = Errors.isRequired)]
 		public DateTime EstablishDate { get; set; } = DateTime.Now;

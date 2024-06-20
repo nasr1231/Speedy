@@ -63,19 +63,8 @@
     <h1 class="mb-7">إبدأ تجربة توصيل سريعة معنا الآن</h1>
     <div class=" d-flex w-100 mb-4 justify-content-center">
         <div class=" d-flex flex-column flex-md-row justify-content-center align-items-center">
-            <form asp-controller="Orders" asp-action="Filter" method="get" class="d-flex  flex-column justify-content-center align-items-center">
+            <form asp-controller="Orders" asp-action="Create" method="post" class="d-flex  flex-column justify-content-center align-items-center">
                     <div class="fv-row row">
-                    <div class="input-group col-md-6 mb-7">
-                        <select asp-for="CityId" asp-items="@Model.Cities"  class="form-control form-control-lg form-control-solid border-gray-400" data-control="select2" data-placeholder="اختار مكان اقامتك" data-allow-clear="true">
-                            <option></option>
-                        </select>
-                            <span style="border-radius:8px; border-top-right-radius:0; border-bottom-right-radius: 0;" class="input-group-text border-gray-400" id="basic-addon1">
-                                <i class="fa-solid fa-location-dot fs-4"></i>
-                            </span>
-                        <span asp-validation-for="Cities"></span>
-
-                        </div>
-
                     <div class="input-group col-md-6 mb-7">
                         <select asp-for="CityId" asp-items="@Model.Cities" class="form-control form-control-lg form-control-solid border-gray-400" data-control="select2" data-placeholder=" اختر مكان اقامتك " data-allow-clear="true">
                             <option></option>
@@ -93,3 +82,8 @@
         </div>
     </div>
 </div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

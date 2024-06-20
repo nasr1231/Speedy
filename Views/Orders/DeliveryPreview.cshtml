@@ -1,31 +1,10 @@
-﻿@model OrderDeliveryViewModel
+﻿@model OrderFormViewModel
 @{
-    ViewData["Title"] = "اختار الدليفري";
+    ViewData["Title"] = "طلبك";
     Layout = "_StartLayout";
 }
 
-@* <div class="container d-flex align-items-center" style="min-height:400px;margin-top: 100px;">
-    <div class="row">
-        @foreach(var delivery in Model.Deliveries)
-        {
-            <div class="col-4">
-                <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">@delivery.AppUser!.FirstName @delivery.AppUser.LastName</h5>
-                        <p class="card-text">@delivery.AppUser.PhoneNumber</p>                        
-                        <a class="btn btn-primary js-render-modal" data-url="/Orders/InitiateCreate/@delivery.Id" href="javascript:;">Book</a>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-</div> *@
-
-
-
-
-<style>
+@* <style>
     .box div {
         border-radius: 10px;
         border-top-right-radius: 0;
@@ -75,9 +54,9 @@
             color: white;
         }
 
-</style>
+</style> *@
 
-<div class="container d-flex align-items-center" style="min-height:400px;margin-top: 100px;">
+@* <div class="container d-flex align-items-center" style="min-height:400px;margin-top: 100px;">
     <div class=" pb-5 pt-3 px-2 mx-auto">
         <!-- start row -->
         <div class=" d-flex justify-content-center  flex-md-row  align-items-center flex-wrap gap-sm-5">
@@ -101,24 +80,773 @@
         </div>
         <!-- end row -->
     </div>
+    </div> *@
+
+
+<style>
+    * {
+        direction: rtl !important;
+        font-family: "IBM Plex Sans Arabic", sans-serif;
+    }
+
+    .num {
+        background-color: #E25E3E;
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        margin-left: 6px;
+    }
+
+    .form-control.form-control-solid {
+        border-color: #92b0e6;
+    }
+
+    .btn {
+        background-color: #E25E3E;
+    }
+
+        .btn:hover {
+            background-color: #FF9B50;
+            color: white;
+        }
+
+    .select2-container .select2-selection--single {
+        height: 40px;
+    }
+</style>
+
+<div class="row text-center d-flex align-items-center justify-content-center w-100" style="height:800px;">
+    <div class="col-6">
+        <form asp-controller="Orders" asp-action="Create" enctype="multipart/form-data" class="form w-100" style="margin-top: 59px;" novalidate="novalidate"
+>
+
+            <input type="hidden" asp-for="UserId" value="@User.FindFirst(ClaimTypes.NameIdentifier)!.Value" />
+            <input type="hidden" asp-for="DeliveryId" />
+
+            <div class="slider-container">
+                <div class="slide" id="slide1">
+                    <!--begin::Separator-->
+                    <div class="d-flex justify-content-start align-items-center mb-7">
+                        <span class="fw-bold  fw-bolder text-white num">1</span><h3 class="align-self-end">بياناتك </h3>
+                    </div>
+                    <!--end::Separator-->
+                    <div class="row fv-row text-end">
+                        <!--begin::Col-->
+                        <div class="col-md-6 mb-7">
+                            <label class="form-label fw-bolder text-dark fs-6">الاسم</label>
+                            <input asp-for="SenderName" class="form-control form-control-lg form-control-solid" type="text" placeholder="" autocomplete="off" />
+                            <span asp-validation-for="SenderName" class="text-danger d-block h-10px"></span>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-md-6 mb-7">
+                            <label class="form-label fw-bolder text-dark fs-6">رقم هاتف للتواصل </label>
+                            <input asp-for="SenderPhoneNumber" class="form-control form-control-lg form-control-solid" type="text" placeholder="" autocomplete="off" />
+                            <span asp-validation-for="SenderPhoneNumber" class="text-danger d-block h-10px"></span>
+                        </div>
+                    </div>
+                    <!--begin::Input group-->
+                    <div class="row fv-row text-end">
+                        <div class="col-md-6 mb-7">
+                            <label class="form-label fw-bolder text-dark fs-6">المحافظة</label>
+                            <select id="GovernorateId" asp-for="@Model.SenderGovernorateId" asp-items="@Model.Governorates" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المحافظة" data-hide-search="true">
+                                <option></option>
+                            </select>
+                            <span asp-validation-for="@Model!.SenderGovernorateId" class="text-danger d-block h-10px"></span>
+                        </div>
+                        <div class="col-md-6 mb-7">
+                            <label class="form-label fw-bolder text-dark fs-6">المدينة</label>
+                            <select id="CityId" asp-for="@Model.SenderCityId" asp-items="@Model.Cities" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المدينة" data-hide-search="true">
+                                <option></option>
+                            </select>
+                            <span asp-validation-for="@Model!.SenderCityId" class="text-danger d-block h-10px"></span>
+                        </div>
+                        
+                    </div>
+
+                    <div class="modal-footer px-0 py-2 d-flex justify-content-center">
+                        <a onclick="nextSlide()" href="#" class="btn " id="nextBtn">التالي</a>
+                    </div>
+                </div>
+                <div class="slide" id="slide2">
+                    <!--begin::Separator-->
+                    <div class="d-flex justify-content-start align-items-center mb-7">
+                        <span class="fw-bold fw-bolder text-white num">2</span><h3 class="align-self-end">بيانات المستلم </h3>
+                    </div>
+                    <!--end::Separator-->
+                    <!--begin::Input group-->
+                    <div class="row fv-row text-end w-100">
+                        <!--begin::Col-->
+                        <div class="col-12 col-md-6 mb-7">
+                            <label class="form-label fw-bolder text-dark fs-6">الاسم </label>
+                            <input asp-for="RecieverName" class="form-control form-control-lg form-control-solid" type="text" placeholder="" autocomplete="off" />
+                            <span asp-validation-for="RecieverName" class="text-danger d-block h-10px"></span>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-12 col-md-6 mb-7">
+                            <label class="form-label fw-bolder text-dark fs-6">رقم هاتف للتواصل </label>
+                            <input asp-for="RecieverPhoneNumber" class="form-control form-control-lg form-control-solid" type="text" placeholder="" autocomplete="off" />
+                            <span asp-validation-for="RecieverPhoneNumber" class="text-danger d-block h-10px"></span>
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    
+                    <!--begin::Input group-->
+                    <div class="row fv-row text-end">
+                        <div class="col-md-6 mb-7">
+                            <label class="form-label fw-bolder text-dark fs-6">المحافظة</label>
+                            <select id="GovernorateId" asp-for="@Model.RecieverGovernorateId" asp-items="@Model.Governorates" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المحافظة" data-hide-search="true">
+                                <option></option>
+                            </select>
+                            <span asp-validation-for="@Model!.RecieverGovernorateId" class="text-danger d-block h-10px"></span>
+                        </div>
+                        <div class="col-md-6 mb-7">
+                            <label class="form-label fw-bolder text-dark fs-6">المدينة</label>
+                            <select id="CityId" asp-for="@Model.SenderCityId" asp-items="@Model.Cities" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المدينة" data-hide-search="true">
+                                <option></option>
+                            </select>
+                            <span asp-validation-for="@Model!.SenderCityId" class="text-danger d-block h-10px"></span>
+                        </div>
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-7 text-end">
+                        <label class="form-label fw-bolder text-dark fs-6">العنوان </label>
+                        <input asp-for="RecieverAddress" class="form-control form-control-lg form-control-solid" type="text" placeholder="" autocomplete="off" />
+                        <span asp-validation-for="RecieverAddress" class="text-danger d-block h-10px"></span>
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-7 text-end">
+                        <label class="form-label fw-bolder text-dark fs-6 ">تاريخ الاستلام</label>
+                        <div class="input-group">
+                            <input asp-for="ShippingDate" class="form-control form-control-solid" placeholder="Pick a date" id="js-Order-flatpicker" />
+                        </div>
+                        <span asp-validation-for="ShippingDate" class="text-danger d-block h-10px"></span>
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-7 text-end">
+                        <label class="form-label fw-bolder text-dark fs-6 ">تاريخ التسليم</label>
+                        <div class="input-group">
+                            <input asp-for="RecieveDate" class="form-control form-control-solid" placeholder="Pick a date" id="js-Order-flatpicker" />
+                        </div>
+                        <span asp-validation-for="RecieveDate" class="text-danger d-block h-10px"></span>
+                    </div>
+                    <!--end::Input group-->
+                    <div class="modal-footer px-0 py-2 d-flex justify-content-center">
+                        <a onclick="nextSlide()" href="#" class="btn m-5" id="nextBtn">التالي</a>
+                        <a onclick="prevSlide()" href="#" class="btn btn-secondary">السابق</a>
+                    </div>
+                </div>
+                <div class="slide" id="slide3">
+                    <!--begin::Separator-->
+                    <div class="d-flex justify-content-start align-items-center mb-7">
+                        <span class="fw-bold fw-bolder text-white num">3</span><h3 class="align-self-end">بيانات الشحنة </h3>
+                    </div>
+
+                    <!--end::Separator-->
+                    <div class=" w-100 text-end">
+                        <h5 class="fv-row mb-7 mt-3">برجاء إرفاق صورة الشحنة</h5>
+                        <div style="background-image: url(/assets/Website/images/addPhoto.png)" class="image-input image-input-empty" data-kt-image-input="true">
+                            <!--begin::Image preview wrapper-->
+                            <div class="image-input-wrapper w-250px h-200px"></div>
+                            <!--end::Image preview wrapper-->
+                            <!--begin::Edit button-->
+                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-20px bg-white shadow"
+                                   data-kt-image-input-action="change"
+                                   data-bs-toggle="tooltip"
+                                   data-bs-dismiss="click"
+                                   title="تغيير الصورة">
+                                <i class="bi bi-pencil-fill fs-7"></i>
+
+                                <!--begin::Inputs-->
+                                <input type="file" asp-for="OrderImage" accept=".png, .jpg, .jpeg" />
+                                <!--end::Inputs-->
+                            </label>
+                            <!--end::Edit button-->
+                            <!--begin::Cancel button-->
+                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                                  data-kt-image-input-action="cancel"
+                                  data-bs-toggle="tooltip"
+                                  data-bs-dismiss="click"
+                                  title="إلغاء الصورة">
+                                <i class="bi bi-x fs-2"></i>
+                            </span>
+                            <!--end::Cancel button-->
+                            <!--begin::Remove button-->
+                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                                  data-kt-image-input-action="remove"
+                                  data-bs-toggle="tooltip"
+                                  data-bs-dismiss="click"
+                                  title="Remove avatar">
+                                <i class="bi bi-x fs-2"></i>
+                            </span>
+                            <!--end::Remove button-->
+                        </div>
+                        <span asp-validation-for="@Model!.OrderImage" class="text-danger d-block h-10px"></span>
+                    </div>
+                    <div class="row my-10 text-end">
+                        <h5 class="fv-row mb-6 form-label fw-bolder text-dark fs-6 ">هل الشحنة قابلة للكسر؟</h5>
+                        <div class="d-flex justify-content-around text-end">
+                            <div class="input-group">
+                                <div class="form-check form-check-inline">
+                                    <input id="sensitive-yes" class="form-check-input" type="radio" name="gender" value="True">
+                                    <label for="sensitive-yes" class="form-check-label fw-bolder text-dark fs-6">نعم</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input id="sensitive-no" class="form-check-input" type="radio" name="gender" value="False">
+                                    <label for="sensitive-no" class="form-check-label fw-bolder text-dark fs-6">لا</label>
+                                </div>
+                            </div>
+                            <input asp-for="@Model.IsSensitive" type="hidden" id="IsSensitive">
+                            <span asp-validation-for="@Model!.IsSensitive" class="text-danger d-block h-10px"></span>
+                        </div>
+                    </div>
+
+                    <!--begin::Input group-->
+                    <div class="d-flex flex-column mb-8 text-end">
+                        <label class="fs-5 fw-bold mb-2">مواصفات الشحنة </label>
+                        <textarea asp-for="Description" class="form-control form-control-solid"></textarea>
+                        <span asp-validation-for="Description"></span>
+                    </div>
+                    <!--end::Input group-->
+                    <div class="modal-footer px-0 py-2 d-flex justify-content-center">
+                        <a onclick="nextSlide()" href="#" class="btn m-5" id="nextBtn">التالي</a>
+                        <a onclick="prevSlide()" href="#" class="btn btn-secondary">السابق</a>
+                    </div>
+                </div>
+                <div class="slide" id="slide4">
+                    <!--begin::Separator-->
+                    <div class="d-flex justify-content-start align-items-center mb-7">
+                        <span class="fw-bold  fw-bolder text-white num">4</span><h3 class="align-self-end">وسيلة الشحن</h3>
+                    </div>
+                    <!--end::Separator-->
+                    <!--begin::Input group-->
+                    <div class="d-flex flex-column mb-8  text-end">                        
+                        <div class="fv-row mb-7">
+                            <label class="form-label fw-bolder text-dark fs-6">وسيلة الشحن التي ترغب في الشحن من خلالها</label>
+                            <select asp-for="ShippingMethodId" asp-items="@Model!.ShippingMethods" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر الوسيلة" data-hide-search="true">
+                                <option></option>
+                            </select>
+                            <span asp-validation-for="ShippingMethodId" class="text-danger d-block h-10px"></span>
+                        </div>
+                    </div>
+                    <div class="text-center">                        
+                        <a onclick="nextSlide()" href="#" class="btn m-5" id="nextBtn">التالي</a>
+                        <a onclick="prevSlide()" href="#" class="btn btn-secondary">السابق</a>
+                    </div>
+                </div>
+                <div class="slide" id="slide5">
+                    <!--begin::Separator-->
+                    <div class="d-flex justify-content-start align-items-center mb-7">
+                        <span class="fw-bold  fw-bolder text-white num">4</span><h3 class="align-self-end">وسيلة الدفع</h3>
+                    </div>
+                    <!--end::Separator-->
+                    <div class="w-100" bis_skin_checked="1">
+                        <!--begin::Input group-->
+                        <div class="fv-row fv-plugins-icon-container fv-plugins-bootstrap5-row-valid text-end" bis_skin_checked="1">
+                            <!--begin:Option-->
+                            <label class="d-flex flex-stack cursor-pointer mb-5">
+                                <!--begin::Label-->
+                                <span class="d-flex align-items-center me-2">
+                                    <!--begin::Icon-->
+                                    <span class="symbol symbol-50px me-6">
+                                        <span class="symbol-label bg-light-success">
+                                            <i class="fa-solid fa-money-bill-wave text-success fs-2"></i>
+                                        </span>
+                                    </span>
+                                    <!--end::Icon-->
+                                    <!--begin::Info-->
+                                    <span class="d-flex flex-column me-3">
+                                        <span class="fw-bold fs-6">كاش</span>
+                                        <span class="fs-7 text-muted">الدفع عند الإستلام</span>
+                                    </span>
+                                    <!--end::Info-->
+                                </span>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <span class="form-check form-check-custom form-check-solid">
+                                    <input class="form-check-input" type="radio" id="cash" name="payment-method" value="cash">
+                                </span>
+                                <!--end::Input-->
+                            </label>
+                            <!--end::Option-->
+                            <!--begin:Option-->
+                            <label class="d-flex flex-stack cursor-pointer mb-5">
+                                <!--begin::Label-->
+                                <span class="d-flex align-items-center me-2">
+                                    <!--begin::Icon-->
+                                    <span class="symbol symbol-50px me-6">
+                                        <span class="symbol-label bg-light-danger">
+                                            <i class="fa-solid fa-building-columns fs-2 text-warning"></i>
+                                        </span>
+                                    </span>
+                                    <!--end::Icon-->
+                                    <!--begin::Info-->
+                                    <span class="d-flex flex-column me-3">
+                                        <span class="fw-bold fs-6">حساب بنكي</span>
+                                        <span class="fs-7 text-muted">نقبل الدفع بكروت Visa/Master Card/Meeza</span>
+                                    </span>
+                                    <!--end::Info-->
+                                </span>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <span class="form-check form-check-custom form-check-solid">
+                                    <input class="form-check-input" type="radio" id="bank-account" name="payment-method" value="bank-account">
+                                </span>
+                                <!--end::Input-->
+                            </label>
+                            <!--end::Option-->
+                            <div id="BankAccountDiv" style="display: none;">
+                                <!-- Bank account payment form fields here -->
+                                <div class="flex-row-fluid py-lg-5 px-lg-15" bis_skin_checked="1">
+                                    <div data-kt-stepper-element="content" bis_skin_checked="1" class="current">
+                                        <div class="w-100" bis_skin_checked="1">
+                                            <!--begin::Input group-->
+                                            <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container" bis_skin_checked="1">
+                                                <!--begin::Label-->
+                                                <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+                                                    <span class="required">أسم صاحب البطاقة</span>
+                                                    <span class="ms-1" data-bs-toggle="tooltip" aria-label="Specify a card holder's name" data-kt-initialized="1">
+                                                        <i class="ki-duotone ki-information-5 text-gray-500 fs-6"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+                                                    </span>
+                                                </label>
+                                                <!--end::Label-->
+                                                <input type="text" class="form-control form-control-solid" placeholder="">
+                                                <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback" bis_skin_checked="1"></div>
+                                            </div>
+                                            <!--end::Input group-->
+                                            <!--begin::Input group-->
+                                            <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container" bis_skin_checked="1">
+                                                <!--begin::Label-->
+                                                <label class="required fs-6 fw-semibold form-label mb-2">رقم البطاقة</label>
+                                                <!--end::Label-->
+                                                <!--begin::Input wrapper-->
+                                                <div class="position-relative" bis_skin_checked="1">
+                                                    <!--begin::Input-->
+                                                    <input type="text" class="form-control form-control-solid" placeholder="أدخل رقم الكارت">
+                                                    <!--end::Input-->
+                                                </div>
+                                                <!--end::Input wrapper-->
+                                                <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback" bis_skin_checked="1"></div>
+                                            </div>
+                                            <!--end::Input group-->
+                                            <!--begin::Input group-->
+                                            <div class="row mb-10" bis_skin_checked="1">
+                                                <!--begin::Col-->
+                                                <div class="col-md-8 fv-row" bis_skin_checked="1">
+                                                    <!--begin::Row-->
+                                                    <div class="row fv-row fv-plugins-icon-container" bis_skin_checked="1">
+                                                        <!--begin::Col-->
+                                                        <div class="col-6" bis_skin_checked="1">
+                                                            <!--begin::Label-->
+                                                            <label class="required fs-6 fw-semibold form-label mb-2">تاريخ الأنتهاء</label>
+                                                            <!--end::Label-->
+                                                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Year" tabindex="-1" aria-hidden="true" data-kt-initialized="1">
+                                                                <option data-select2-id="select2-data-75-01s6"></option>
+                                                                <option value="2024">1</option>
+                                                                <option value="2025">2</option>
+                                                                <option value="2026">3</option>
+                                                                <option value="2027">4</option>
+                                                                <option value="2028">5</option>
+                                                                <option value="2029">6</option>
+                                                                <option value="2030">7</option>
+                                                                <option value="2031">8</option>
+                                                                <option value="2032">9</option>
+                                                                <option value="2033">10</option>
+                                                                <option value="2034">11</option>
+                                                                <option value="2034">12</option>
+                                                            </select>
+                                                            <span class="select2 select2-container select2-container--bootstrap5" dir="ltr" data-select2-id="select2-data-74-xwra" style="width: 100%;">
+                                                            </span>
+                                                            <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback" bis_skin_checked="1"></div>
+                                                        </div>
+                                                        <!--end::Col-->
+                                                        <!--begin::Col-->
+                                                        <div class="col-6" bis_skin_checked="1">
+                                                            <!--begin::Label-->
+                                                            <label class="required fs-6 fw-semibold form-label mb-2">سنة الأنتهاء</label>
+                                                            <!--end::Label-->
+                                                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Year" tabindex="-1" aria-hidden="true" data-kt-initialized="1">
+                                                                <option data-select2-id="select2-data-75-01s6"></option>
+                                                                <option value="2024">2024</option>
+                                                                <option value="2025">2025</option>
+                                                                <option value="2026">2026</option>
+                                                                <option value="2027">2027</option>
+                                                                <option value="2028">2028</option>
+                                                                <option value="2029">2029</option>
+                                                                <option value="2030">2030</option>
+                                                                <option value="2031">2031</option>
+                                                                <option value="2032">2032</option>
+                                                                <option value="2033">2033</option>
+                                                                <option value="2034">2034</option>
+                                                            </select>
+                                                            <span class="select2 select2-container select2-container--bootstrap5" dir="ltr" data-select2-id="select2-data-74-xwra" style="width: 100%;">
+                                                            </span>
+                                                            <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback" bis_skin_checked="1"></div>
+                                                        </div>
+                                                        <!--end::Col-->
+                                                    </div>
+                                                    <!--end::Row-->
+                                                </div>
+                                                <!--end::Col-->
+                                                <!--begin::Col-->
+                                                <div class="col-md-4 fv-row fv-plugins-icon-container" bis_skin_checked="1">
+                                                    <!--begin::Label-->
+                                                    <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+                                                        <span class="required">CVV</span>
+                                                        <span class="ms-1" data-bs-toggle="tooltip" aria-label="أدخل رقم ال CVV" data-bs-original-title="Enter a card CVV code" data-kt-initialized="1">
+                                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+                                                        </span>
+                                                    </label>
+                                                    <!--end::Label-->
+                                                    <!--begin::Input wrapper-->
+                                                    <div class="position-relative" bis_skin_checked="1">
+                                                        <!--begin::Input-->
+                                                        <input type="text" class="form-control form-control-solid" minlength="3" maxlength="4" placeholder="CVV">
+                                                        <!--end::Input-->
+                                                        <!--begin::CVV icon-->
+                                                        <div class="position-absolute translate-middle-y top-50 end-0 me-3" bis_skin_checked="1">
+                                                            <i class="ki-duotone ki-credit-cart fs-2hx"><span class="path1"></span><span class="path2"></span></i>
+                                                        </div>
+                                                        <!--end::CVV icon-->
+                                                    </div>
+                                                    <!--end::Input wrapper-->
+                                                    <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback" bis_skin_checked="1"></div>
+                                                </div>
+                                                <!--end::Col-->
+                                            </div>
+                                            <!--end::Input group-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--begin:Option-->
+                            <label class="d-flex flex-stack cursor-pointer mb-5">
+                                <!--begin::Label-->
+                                <span class="d-flex align-items-center me-2">
+                                    <!--begin::Icon-->
+                                    <span class="symbol symbol-50px me-6">
+                                        <span class="symbol-label bg-light-light">
+                                            <i class="fa-solid fa-wallet text-gray fs-2"></i>
+                                        </span>
+                                    </span>
+                                    <!--end::Icon-->
+                                    <!--begin::Info-->
+                                    <span class="d-flex flex-column me-3">
+                                        <span class="fw-bold fs-6">محفظة الكترونية</span>
+                                        <span class="fs-7 text-muted">أدفع بمحفظتك الالكترونية</span>
+                                    </span>
+                                    <!--end::Info-->
+                                </span>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <span class="form-check form-check-custom form-check-solid">
+                                    <input class="form-check-input" type="radio" id="digital-wallets" name="payment-method" value="digital-wallets">
+                                </span>
+                                <!--end::Input-->
+                            </label>
+                            <div id="DigitalWalletsDiv" style="display: none;">
+                                <div class="flex-row-fluid py-lg-5 px-lg-15" bis_skin_checked="1">
+                                    <div data-kt-stepper-element="content" bis_skin_checked="1" class="current">
+                                        <div class="w-100" bis_skin_checked="1">
+                                            <!--begin::Input group-->
+                                            <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container" bis_skin_checked="1">
+                                                <!--begin::Label-->
+                                                <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+                                                    <span class="required">أسم صاحب المحفظة</span>
+                                                    <span class="ms-1" data-bs-toggle="tooltip" aria-label="Specify a card holder's name" data-kt-initialized="1">
+                                                        <i class="ki-duotone ki-information-5 text-gray-500 fs-6"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+                                                    </span>
+                                                </label>
+                                                <!--end::Label-->
+                                                <input type="text" class="form-control form-control-solid" placeholder="أدخل اسم صاحب المحفظة" id="Holder-Name">
+                                                <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback" bis_skin_checked="1"></div>
+                                            </div>
+                                            <!--end::Input group-->
+                                            <!--begin::Input group-->
+                                            <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container" bis_skin_checked="1">
+                                                <!--begin::Label-->
+                                                <label class="required fs-6 fw-semibold form-label mb-2">رقم المحفظة</label>
+                                                <!--end::Label-->
+                                                <!--begin::Input wrapper-->
+                                                <div class="position-relative" bis_skin_checked="1">
+                                                    <!--begin::Input-->
+                                                    <input type="text" class="form-control form-control-solid" placeholder="أدخل رقم المحفظة" id="walletNumber">
+                                                    <!--end::Input-->
+                                                </div>
+                                                <!--end::Input wrapper-->
+                                                <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback" bis_skin_checked="1"></div>
+                                            </div>
+                                            <!--end::Input group-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Option-->
+                            <!--begin:Option-->
+                            <label class="d-flex flex-stack cursor-pointer mb-10">
+                                <!--begin::Label-->
+                                <span class="d-flex align-items-center me-2">
+                                    <!--begin::Icon-->
+                                    <span class="symbol symbol-50px me-6">
+                                        <span class="symbol-label bg-light-warning">
+                                            <img src="~/assets/website/images/insta logo.png" style="width:80%;height:80%;" />
+                                        </span>
+                                    </span>
+                                    <!--end::Icon-->
+                                    <!--begin::Info-->
+                                    <span class="d-flex flex-column me-3">
+                                        <span class="fw-bold fs-6">إنستا باي</span>
+                                        <span class="fs-7 text-muted">أدفع من خلال إنستا باي</span>
+                                    </span>
+                                    <!--end::Info-->
+                                </span>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <span class="form-check form-check-custom form-check-solid">
+                                    <input class="form-check-input" type="radio" id="instapay" name="payment-method" value="InstaPay">
+                                </span>
+                                <!--end::Input-->
+                            </label>
+                            <div id="InstaPay" style="display: none;">
+                                <div class="flex-row-fluid py-lg-5 px-lg-15" bis_skin_checked="1">
+                                    <div data-kt-stepper-element="content" bis_skin_checked="1" class="current">
+                                        <div class="w-100" bis_skin_checked="1">
+                                            <!--begin::Input group-->
+                                            <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container" bis_skin_checked="1">
+                                                <!--begin::Label-->
+                                                <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+                                                    <span class="required">أدخل عنوان الأنستا باي</span>
+                                                    <span class="ms-1" data-bs-toggle="tooltip" aria-label="Specify a card holder's name" data-kt-initialized="1">
+                                                        <i class="ki-duotone ki-information-5 text-gray-500 fs-6"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+                                                    </span>
+                                                </label>
+                                                <!--end::Label-->
+                                                <input type="text" class="form-control form-control-solid" placeholder="أدخل عنوان انستا باي" id="InstaPayHandle">
+                                                <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback" bis_skin_checked="1"></div>
+                                            </div>
+                                            <!--end::Input group-->
+                                            @* <input asp-for="Title" type="hidden" id="Title" />
+                                            <input asp-for="handle" type="hidden" id="HandleName" />
+                                            <input asp-for="HolderName" type="hidden" id="HolderName" />
+                                            <input asp-for="WalletPhoneNumber" type="hidden" id="WPhoneNumber" /> *@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer px-0 py-2 d-flex justify-content-center">
+                                <a onclick="nextSlide()" href="#" class="btn m-5" id="nextBtn">التالي</a>
+                                <a onclick="prevSlide()" href="#" class="btn btn-secondary">السابق</a>
+                            </div>
+                            <!--end::Option-->
+                            <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback" bis_skin_checked="1"></div>
+                        </div>
+                        <!--end::Input group-->
+                    </div>
+                    <div id="CashDiv" style="display: none;">
+                    </div>
+                </div>
+                <div class="slide" id="slide6">
+                    <!--begin::Separator-->
+                    <div class="d-flex justify-content-start align-items-center mb-7">
+                        <span class="fw-bold  fw-bolder text-white num">6</span><h3 class="align-self-end">ملاحظات</h3>
+                    </div>
+                    <!--end::Separator-->
+                    <!--begin::Input group-->
+                    <div class="d-flex flex-column mb-8  text-end">
+                        <label class="fs-6 fw-bold mb-2">هل لديك أى ملاحظات إضافية بخصوص الشحنة أو الإستلام  </label>
+                        <textarea asp-for="Notes" class="form-control form-control-solid"></textarea>
+                    </div>
+                    <!--end::Input group-->
+                    <!--end::Input group-->
+                    <div class="text-danger"></div>
+                    <div class="text-center">
+                        <div asp-validation-summary="All" class="text-danger fs-4"></div>
+                        <button type="submit" class="btn btn-lg " id="Submit-Btn">
+                            <span class="indicator-label ">تسجيل الطلب</span>
+                            <span class="indicator-progress">
+                                برجاء الانتظار
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </span>
+                        </button>
+                        <a onclick="prevSlide()" href="#" class="btn btn-secondary">السابق</a>
+                    </div>
+                </div>
+            </div>
+           
+        </form>
     </div>
+</div>
+
 
 @Html.AntiForgeryToken()
-@section Scripts {    
+@section Scripts {
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
-    <script src="~/lib/expressive-annotations-validate/expressive.annotations.validate.min.js"></script>    
+    <script src="~/lib/expressive-annotations-validate/expressive.annotations.validate.min.js"></script>
     <script>
         $.validator.setDefaults({
             ignore: []
         });
     </script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const titleInput = document.getElementById('Title');
+
+            const radioButtons = document.querySelectorAll('input[name="payment-method"]');
+
+            radioButtons.forEach(radio => {
+                radio.addEventListener('change', function () {
+                    if (this.checked) {
+                        titleInput.value = this.value;
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#js-Order-flatpicker").flatpickr({
+                singleDatePicker: true,
+                autoApply: true,
+                showDropdowns: true,
+                drops: 'up',
+                minDate: new Date(),
+                enableTime: true,
+                dateFormat: "Y-m-d H:i",
+            });
+        });
+
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     var instapayInputs = $('#InstaPay input');
+        //     var digitalWalletsInputs = $('#DigitalWalletsDiv input');
+        //     var bankAccountInputs = $('#BankAccountDiv .flex-row-fluid input');
+
+        //     $('input[name="payment-method"]').change(function () {
+        //         var selectedRadio = $(this).attr('id');
+
+        //         instapayInputs.prop('required', false);
+        //         digitalWalletsInputs.prop('required', false);
+        //         bankAccountInputs.prop('required', false);
+
+        //         if (selectedRadio === 'instapay') {
+        //             instapayInputs.prop('required', true);
+        //         } else if (selectedRadio === 'digital-wallets') {
+        //             digitalWalletsInputs.prop('required', true);
+        //         } else if (selectedRadio === 'bank-account') {
+        //             bankAccountInputs.prop('required', true);
+        //         }
+        //     });
+        // });
+
+        const cashRadio = document.getElementById('cash');
+        const bankAccountRadio = document.getElementById('bank-account');
+        const digitalWalletsRadio = document.getElementById('digital-wallets');
+        const instapayRadio = document.getElementById('instapay');
+        const cashDiv = document.getElementById('CashDiv');
+        const bankAccountDiv = document.getElementById('BankAccountDiv');
+        const digitalWalletsDiv = document.getElementById('DigitalWalletsDiv');
+        const instapayDiv = document.getElementById('InstaPay');
+
+        cashRadio.addEventListener('change', function () {
+            if (this.checked) {
+                cashDiv.style.display = 'block';
+                bankAccountDiv.style.display = 'none';
+                digitalWalletsDiv.style.display = 'none';
+                instapayDiv.style.display = 'none';
+            }
+        });
+
+        bankAccountRadio.addEventListener('change', function () {
+            if (this.checked) {
+                cashDiv.style.display = 'none';
+                bankAccountDiv.style.display = 'block';
+                digitalWalletsDiv.style.display = 'none';
+                instapayDiv.style.display = 'none';
+            }
+        });
+
+        digitalWalletsRadio.addEventListener('change', function () {
+            if (this.checked) {
+                cashDiv.style.display = 'none';
+                bankAccountDiv.style.display = 'none';
+                digitalWalletsDiv.style.display = 'block';
+                instapayDiv.style.display = 'none';
+            }
+        });
+
+        instapayRadio.addEventListener('change', function () {
+            if (this.checked) {
+                cashDiv.style.display = 'none';
+                bankAccountDiv.style.display = 'none';
+                digitalWalletsDiv.style.display = 'none';
+                instapayDiv.style.display = 'block';
+            }
+        });
+
+        const Sensitive = document.getElementById('sensitive-yes');
+        const InSensitive = document.getElementById('sensitive-no');
+        const hiddenInput = document.getElementById('IsSensitive');
+
+        Sensitive.addEventListener('change', updateHiddenInput);
+        InSensitive.addEventListener('change', updateHiddenInput);
+
+        function updateHiddenInput() {
+            if (Sensitive.checked) {
+                hiddenInput.value = 'true';
+            } else if (InSensitive.checked) {
+                hiddenInput.value = 'false';
+            }
+        }
+    </script>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function showSlide(index) {
+            if (index < 0) {
+                index = slides.length - 1;
+            } else if (index >= slides.length) {
+                index = 0;
+            }
+            for (let i = 0; i < slides.length; i++) {
+                if (i === index) {
+                    slides[i].style.display = 'block';
+                } else {
+                    slides[i].style.display = 'none';
+                }
+            }
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Show the first slide initially
+        showSlide(0);
+
+    </script>
+
 }
 
-@section Plugins{
+@section Plugins {
+    <script src="~/js/IntitateCities.js" asp-append-version="true"></script>
     <script src="~/assets/website/deliveryassets/plugins.bundle.js"></script>
-    <script src="~/assets/website/deliveryassets/scripts.bundle.js"></script>        
+    <script src="~/assets/website/deliveryassets/scripts.bundle.js"></script>
 }

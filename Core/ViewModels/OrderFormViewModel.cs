@@ -1,9 +1,38 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace Speedy.Core.ViewModels
 {
     public class OrderFormViewModel
     {
+        public int? OrderTotal { get; set; }
+        public int? OrderFees { get; set; }
+
+        [Required(ErrorMessage = Errors.isRequired)]
+        [Display(Name = "محافظة العميل")]
+        public int RecieverGovernorateId { get; set; }
+        
+        [Required(ErrorMessage = Errors.isRequired)]
+        [Display(Name = "مدينة العميل")]
+        public int RecieverCityId { get; set; }
+
+        [Required(ErrorMessage = Errors.isRequired)]
+        [Display(Name = "محافظة المستلم")]
+        public int SenderGovernorateId { get; set; }
+
+        [Required(ErrorMessage = Errors.isRequired)]
+        [Display(Name = "مدينة العميل")]
+        public int SenderCityId { get; set; }        
+
+        [Required(ErrorMessage = Errors.isRequired)]
+        [Display(Name = "وسيلة الشحن")]
+        public int ShippingMethodId { get; set; }
+
+        public IEnumerable<SelectListItem> Cities { get; set; } = [];
+        public IEnumerable<SelectListItem> Governorates { get; set; } = [];
+        public IEnumerable<SelectListItem> ShippingMethods { get; set; } = [];
+
+        public int CityId { get; set; }
         public string UserId { get; set; } = null!;
         public int DeliveryId { get; set; }
         public DateTime RecieveDate { get; set; } = DateTime.Now;
@@ -16,7 +45,8 @@ namespace Speedy.Core.ViewModels
         public string Description { get; set; } = null!;
         public bool IsSensitive { get; set; }
 
-        [Required()]
+        [Required(ErrorMessage = Errors.isRequired)]
+        [Display(Name = "صورة الشحنة")]
         public IFormFile OrderImage { get; set; } = null!;        
 
         [Required(ErrorMessage = Errors.isRequired)]
@@ -48,7 +78,6 @@ namespace Speedy.Core.ViewModels
         //public string? HolderName { get; set; }        
         //public string CVV { get; set; }
 
-        //public double OrderTotal { get; set; }
         //public string? TrackingNumber { get; set; }
     }
 }

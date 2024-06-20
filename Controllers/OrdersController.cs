@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Speedy.Core.Enums;
 using Speedy.Core.Models;
 using Speedy.Services.User;
@@ -44,34 +46,33 @@ namespace Speedy.Controllers
             return View(viewModels);
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult Filter(CitiesHomeViewModel model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var deliveryCitiesFliter = _context.Deliveries.Include(au => au.AppUser)
-                .Where(n => n.CityId == model.CityId && !n.IsDeleted).ToList();
+            //var deliveryCitiesFliter = _context.Deliveries.Include(au => au.AppUser)
+            //    .Where(n => n.CityId == model.CityId && !n.IsDeleted).ToList();
 
-            if (deliveryCitiesFliter is null)
-                return NotFound();
+            //if (deliveryCitiesFliter is null)
+            //    return NotFound();
 
-            var orderViewModel = new OrderDeliveryViewModel { Deliveries = deliveryCitiesFliter };
+            var orderViewModel = new OrderFormViewModel { CityId = model.CityId };
 
-            return View("DeliveryPreview", orderViewModel);
+            return View("DeliveryPreview", InitialOrderForm(orderViewModel));
         }
 
-        [HttpGet]
-        public IActionResult InitiateCreate(int id)
-        {
-            //ModelState.AddModelError(string.Empty, "Sorry, There are no appointments available right now");
-            var appointmentsViewModel = new OrderFormViewModel { DeliveryId = id };
+        //[HttpGet]
+        //public IActionResult InitiateCreate(int id)
+        //{
+        //    //ModelState.AddModelError(string.Empty, "Sorry, There are no appointments available right now");
+        //    var appointmentsViewModel = new OrderFormViewModel { DeliveryId = id };
 
-            return PartialView("_ReservationForm", appointmentsViewModel);
-        }
+        //    return PartialView("_ReservationForm", appointmentsViewModel);
+        //}
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(OrderFormViewModel model)
         {
             if (!ModelState.IsValid)
@@ -85,7 +86,9 @@ namespace Speedy.Controllers
                userName: model.UserId);
 
             if (!imageAttachment.isUploaded)
-                return BadRequest(imageAttachment.errorMessage);            
+                return BadRequest(imageAttachment.errorMessage);
+
+            var priceList = TotalPriceCalculator(model.RecieverCityId, model.SenderCityId,model.ShippingMethodId);
 
             var order = new Order
             {
@@ -109,6 +112,8 @@ namespace Speedy.Controllers
                 SenderAddress = model.SenderAddress,
                 SenderPhoneNumber = model.SenderPhoneNumber,
                 OrderAttachment = imageAttachment.AttachmentUrl!,
+                OrderTotal = priceList.NetPrice,
+                Fees = priceList.Fees,
             };
 
             _context.Orders.Add(order);
@@ -135,7 +140,67 @@ namespace Speedy.Controllers
             //    IsDeleted = user.IsDeleted
             //};
 
-            return Ok();
+            return PartialView("_Receipt", model);
+        }
+
+        private OrderFormViewModel InitialOrderForm(OrderFormViewModel? model = null)
+        {
+            OrderFormViewModel startupFormView = model ?? new OrderFormViewModel();
+
+            var governoratesTask = _context.Governorates.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
+            var shippingMethodsTask = _context.ShippingMethods.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
+
+            startupFormView.Governorates = _mapper.Map<IEnumerable<SelectListItem>>(governoratesTask);
+            startupFormView.ShippingMethods = _mapper.Map<IEnumerable<SelectListItem>>(shippingMethodsTask);
+
+            return startupFormView;
+        }
+        private PriceCalculationResult TotalPriceCalculator(int receiverCityId, int senderCityId, int shippingMethodId)
+        {
+            int netPrice = 0;
+            int fees = 0;
+            switch (shippingMethodId)
+            {
+                case 1011:
+                    netPrice = (int)(120 * 0.20 * 0.5);
+                    fees = (int)(netPrice * 0.20);
+                    if ((receiverCityId == 11 && senderCityId == 12) || (receiverCityId == 12 && senderCityId == 11))
+                    {
+                        netPrice = (int)(120 * 0.666666667);
+                        fees = (int)(netPrice * 0.20);
+                    }
+                    else if ((receiverCityId == 7 && senderCityId == 10) || (receiverCityId == 10 && senderCityId == 7))
+                    {
+                        netPrice = (int)(120 * 0.333333333);
+                        fees = (int)(netPrice * 0.20);
+                    }
+                    else if ((receiverCityId == 9 && senderCityId == 10) || (receiverCityId == 10 && senderCityId == 9))
+                    {
+                        netPrice = (int)(120 * 0.516666667);
+                        fees = (int)(netPrice * 0.20);
+                    }
+                    break;
+                case 1012:
+                    netPrice = (int)(50 * 0.20 * 0.5);
+                    fees = (int)(netPrice * 0.20);
+                    if ((receiverCityId == 7 && senderCityId == 10) || (receiverCityId == 10 && senderCityId == 7))
+                    {
+                        netPrice = (int)(50 * 0.333333333);
+                        fees = (int)(netPrice * 0.20);
+                    }
+                    else if ((receiverCityId == 11 && senderCityId == 7) || (receiverCityId == 7 && senderCityId == 11))
+                    {
+                        netPrice = (int)(50 * 0.4);
+                        fees = (int)(netPrice * 0.20);
+                    }
+                    break;
+                default:
+                    netPrice = 30;
+                    fees = 30;
+                    break;
+            }
+
+            return new PriceCalculationResult { NetPrice = netPrice, Fees = fees };
         }
     }
 }
