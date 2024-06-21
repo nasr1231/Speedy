@@ -57,7 +57,11 @@ namespace Speedy.Core.ViewModels
 		[Required(ErrorMessage = Errors.isRequired)]
 		public DateTime EstablishDate { get; set; } = DateTime.Now;
 
-		public bool HasWhatsApp { get; set; }
+        [Display(Name = "الصورة الشخصية")]
+        [Required(ErrorMessage = Errors.isRequired)]
+        public IFormFile UserImage { get; set; } = null!;
+
+        public bool HasWhatsApp { get; set; }
 		public List<string>? Urls { get; set; }
 		public bool IsOnline { get; set; }				
 		#endregion

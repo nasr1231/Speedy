@@ -185,20 +185,48 @@
                                     <span class="fw-bold  fw-bolder text-white num">2</span><h3 class="align-self-end">بيانات شخصية</h3>
                                 </div>
                                 <!--end::Separator-->
-                                <!--begin::Input group-->
-                                <h5 class="fv-row mb-3 form-label fw-bolder text-dark fs-6 ">النوع</h5>
+                                <!--begin::Input group-->                                
                                 <div class="mb-5">
-                                    <div>
-                                        <img id="ImagePreview" src="~/assets/Portrait_Placeholder.png" class="img-thumbnail" alt="Book Image">
+                                    <h5 class="fv-row mb-3 form-label fw-bolder text-dark fs-6 ">الصورة الشخصية</h5>
+                                    <div style="background-image: url(/assets/Portrait_Placeholder.png)" class="image-input image-input-empty" data-kt-image-input="true">
+                                        <!--begin::Image preview wrapper-->
+                                        <div class="image-input-wrapper w-200px h-200px"></div>
+                                        <!--end::Image preview wrapper-->
+                                        <!--begin::Edit button-->
+                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-20px bg-white shadow"
+                                               data-kt-image-input-action="change"
+                                               data-bs-toggle="tooltip"
+                                               data-bs-dismiss="click"
+                                               title="تغيير الصورة">
+                                            <i class="bi bi-pencil-fill fs-7"></i>
 
-                                    </div>
-                                    <div class="form-floating mb-2">
-                                        <input type="file" class="form-control" placeholder="Image" asp-for="DeliveryImage" accept=".jpg,.jpeg,.png"
-                                               onchange="document.getElementById('ImagePreview').src = window.URL.createObjectURL(this.files[0])" />
-                                        <label asp-for="DeliveryImage"></label>
-                                    </div>
-                                    <span asp-validation-for="DeliveryImage" class="text-danger d-block"></span>
+                                            <!--begin::Inputs-->
+                                            <input type="file" asp-for="UserImage" accept=".png, .jpg, .jpeg" />
+                                            <!--end::Inputs-->
+                                        </label>
+                                        <!--end::Edit button-->
+                                        <!--begin::Cancel button-->
+                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                                              data-kt-image-input-action="cancel"
+                                              data-bs-toggle="tooltip"
+                                              data-bs-dismiss="click"
+                                              title="إلغاء الصورة">
+                                            <i class="bi bi-x fs-2"></i>
+                                        </span>
+                                        <!--end::Cancel button-->
+                                        <!--begin::Remove button-->
+                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                                              data-kt-image-input-action="remove"
+                                              data-bs-toggle="tooltip"
+                                              data-bs-dismiss="click"
+                                              title="Remove avatar">
+                                            <i class="bi bi-x fs-2"></i>
+                                        </span>
+                                        <!--end::Remove button-->
+                                    </div>                                    
+                                    <span asp-validation-for="UserImage" class="text-danger d-block"></span>
                                 </div>
+                                <h5 class="fv-row mb-3 form-label fw-bolder text-dark fs-6 ">النوع</h5>
                                 <div class="d-flex justify-content-around mb-5">
                                     <div class="input-group mb-2 justify-content-evenly">
                                         <div class="form-check form-check-inline">
@@ -390,6 +418,8 @@
 }
 
 @section Plugins {
+    <script src="~/assets/website/deliveryassets/plugins.bundle.js"></script>
+    <script src="~/assets/website/deliveryassets/scripts.bundle.js"></script>
     <script src="~/js/slider.js" asp-append-version="true"></script>
     <script src="~/js/IntitateCities.js" asp-append-version="true"></script>
     <script src="~/js/register.js" asp-append-version="true"></script>

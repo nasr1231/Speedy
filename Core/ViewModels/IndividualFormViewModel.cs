@@ -49,7 +49,13 @@ namespace Speedy.Core.ViewModels
         [Required(ErrorMessage = Errors.isRequired)]
         public DateTime BirthDate { get; set; } = DateTime.Now.AddYears(-16);
 
-        public bool HasWhatsApp { get; set; }        
+        public bool HasWhatsApp { get; set; }
+
+
+        [Display(Name = "الصورة الشخصية")]
+        [Required(ErrorMessage = Errors.isRequired)]
+        public IFormFile UserImage { get; set; } = null!;
+
 
         [Required(ErrorMessage = Errors.isRequired)]
         [StringLength(100, ErrorMessage = Errors.MaxLength, MinimumLength = 6)]

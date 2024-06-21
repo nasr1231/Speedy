@@ -66,7 +66,7 @@ namespace Speedy.Core.ViewModels
 
         [Display(Name = "الصورة الشخصية")]
         [Required(ErrorMessage = Errors.isRequired)]
-        public IFormFile DeliveryImage { get; set; } = null!;
+        public IFormFile UserImage { get; set; } = null!;
 
         #endregion
 

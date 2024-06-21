@@ -4,17 +4,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Speedy.Core.Consts;
+using Speedy.Core.Models;
 using Speedy.Services.StartUps;
 using Speedy.Services.User;
 
 namespace Speedy.Controllers
-{    
-    public class StartUpsController(ApplicationDbContext context, IMapper mapper, IStartUpService startService, IUserService userService, IDataService dataService) : Controller
+{
+    public class StartUpsController(ApplicationDbContext context, IMapper mapper, IStartUpService startService, IUserService userService, IDataService dataService, IAttachmentService attachmentService) : Controller
     {
         private readonly ApplicationDbContext _context = context;
         private readonly IMapper _mapper = mapper;
         private readonly IUserService _userService = userService;
         private readonly IDataService _dataService = dataService;
+        private readonly IAttachmentService _attachmentService = attachmentService;
         private readonly IStartUpService _startService = startService;
         public async Task<IActionResult> Index()
         {
@@ -42,7 +44,7 @@ namespace Speedy.Controllers
         }
         [HttpGet]
         public IActionResult Create()
-        {            
+        {
             return View("StartUpForm", InitialStartUpForm());
         }
 
@@ -85,10 +87,10 @@ namespace Speedy.Controllers
 
             var userForm = new UserFormViewModel
             {
-				Password = model.Password,
-				Email = model.Email,
-				ConfirmPassword = model.ConfirmPassword,	
-				SelectedRoles = AppRoles.StartUp,
+                Password = model.Password,
+                Email = model.Email,
+                ConfirmPassword = model.ConfirmPassword,
+                SelectedRoles = AppRoles.StartUp,
                 PhoneNumber = model.MobileNumber,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
@@ -99,20 +101,30 @@ namespace Speedy.Controllers
 
             if (!result.IsSuccess)
             {
-				ModelState.AddModelError(string.Empty, result.Error!);
-				return View("StartUpForm", InitialStartUpForm(model));
-			}
+                ModelState.AddModelError(string.Empty, result.Error!);
+                return View("StartUpForm", InitialStartUpForm(model));
+            }
 
-			var startUp = new StartUp
+            var startUp = new StartUp
             {
                 AppUserId = result.UserId!,
-                Address = model.Address,                
+                Address = model.Address,
                 FoundingDate = model.EstablishDate,
                 IsOnline = model.IsOnline,
-                StartUpName = model.StartUpName,                
+                StartUpName = model.StartUpName,
                 Url = model.Urls,
                 CityId = model.SelectedCityId,
             };
+
+            var imageAttachment = await _attachmentService.UploadImageAsync(
+              attachedFile: model.UserImage,
+              entityName: "StartUps",
+             userName: startUp.AppUserId);
+
+            if (!imageAttachment.isUploaded)
+                return BadRequest(imageAttachment.errorMessage);
+
+            startUp.AppUser.ProfilePictureIUrl = imageAttachment.AttachmentUrl;
 
             _context.Add(startUp);
             await _context.SaveChangesAsync();
@@ -126,7 +138,7 @@ namespace Speedy.Controllers
         public IActionResult Edit(string id)
         {
             var user = _context.Users.Find(id);
-            
+
             if (user is null)
                 return NotFound();
 
@@ -135,7 +147,7 @@ namespace Speedy.Controllers
                 Id = user.Id,
                 PhoneNumber = user.PhoneNumber,
                 FirstName = user.FirstName,
-                LastName = user.LastName            
+                LastName = user.LastName
             };
 
             return PartialView("_Form", userViewModel);
@@ -150,7 +162,7 @@ namespace Speedy.Controllers
 
             var user = _context.StartUps
                 .Include(ap => ap.AppUser)
-                .Include(c=>c.City)
+                .Include(c => c.City)
                 .SingleOrDefault(us => us.AppUser!.Id == model.Id);
 
             if (user is null)
@@ -172,22 +184,22 @@ namespace Speedy.Controllers
                 LastName = user.AppUser.LastName,
                 FirstName = user.AppUser.FirstName,
                 PhoneNumber = user.AppUser.PhoneNumber,
-                Id = user.Id, 
+                Id = user.Id,
                 Urls = user.Url,
-                IsDeleted = user.IsDeleted,                
+                IsDeleted = user.IsDeleted,
             };
 
             return View("Profile", userViewModel);
         }
         private StartUpFormViewModel InitialStartUpForm(StartUpFormViewModel? model = null)
-		{
-			StartUpFormViewModel startupFormView = model ?? new StartUpFormViewModel();
-			
-			var governoratesTask = _context.Governorates.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
-			
-			startupFormView.Governorates = _mapper.Map<IEnumerable<SelectListItem>>(governoratesTask);
+        {
+            StartUpFormViewModel startupFormView = model ?? new StartUpFormViewModel();
 
-			return startupFormView;
-		}
-	}
+            var governoratesTask = _context.Governorates.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
+
+            startupFormView.Governorates = _mapper.Map<IEnumerable<SelectListItem>>(governoratesTask);
+
+            return startupFormView;
+        }
+    }
 }

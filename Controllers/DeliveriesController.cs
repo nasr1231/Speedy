@@ -7,14 +7,14 @@ using System.Data;
 
 namespace Speedy.Controllers
 {
-    public class DeliveriesController(ApplicationDbContext context, IMapper mapper,UserManager<AppUser> userManager, IUserService userService, IAttachmentService attachmentService, IDeliveryService deliveryService) : Controller
+    public class DeliveriesController(ApplicationDbContext context, IMapper mapper, UserManager<AppUser> userManager, IUserService userService, IAttachmentService attachmentService, IDeliveryService deliveryService) : Controller
     {
         private readonly ApplicationDbContext _context = context;
         private readonly IMapper _mapper = mapper;
         private readonly UserManager<AppUser> _userManager = userManager;
         private readonly IUserService _userService = userService;
         private readonly IAttachmentService _attachmentService = attachmentService;
-        private readonly IDeliveryService _deliveryService = deliveryService;        
+        private readonly IDeliveryService _deliveryService = deliveryService;
 
         public async Task<IActionResult> Index()
         {
@@ -53,15 +53,15 @@ namespace Speedy.Controllers
             var delivery = _context.Deliveries.SingleOrDefault(d => d.AppUserId == id);
 
             var orders = _context.Orders
-                 .Include(ap => ap.AppUsers)                 
+                 .Include(ap => ap.AppUsers)
                  .Where(x => x.DeliveryId == delivery!.Id);
-           
+
             var orderViews = new List<DeliveryDashViewModel>();
 
             foreach (var order in orders)
             {
                 var orderView = new DeliveryDashViewModel
-                {                    
+                {
                     Description = order.Description,
                     IsSensitive = order.IsSensitive,
                     Notes = order.Notes,
@@ -89,8 +89,8 @@ namespace Speedy.Controllers
 
             if (delivery is null)
                 return NotFound();
-         
-            var deliveriesView = _mapper.Map<DeliveryViewModel>(delivery);            
+
+            var deliveriesView = _mapper.Map<DeliveryViewModel>(delivery);
 
             return View("Profile", deliveriesView);
         }
@@ -108,7 +108,7 @@ namespace Speedy.Controllers
                 return View("DeliveryForm", InitialDeliveryForm(model));
 
             using var transaction = _context.Database.BeginTransaction();
-          
+
             var userForm = new UserFormViewModel
             {
                 Password = model.Password,
@@ -140,15 +140,17 @@ namespace Speedy.Controllers
             };
 
             var imageAttachment = await _attachmentService.UploadImageAsync(
-              attachedFile: model.DeliveryImage,
+              attachedFile: model.UserImage,
               entityName: "Delivery Agents",
              userName: delivery.AppUserId);
 
             if (!imageAttachment.isUploaded)
                 return BadRequest(imageAttachment.errorMessage);
 
+            delivery.AppUser.ProfilePictureIUrl = imageAttachment.AttachmentUrl;
+
             var attachResult = await _attachmentService.UploadAttachmentAsync(
-                attachedFile: model.Attachments,                
+                attachedFile: model.Attachments,
                 entityName: "Delivery Agents",
                 userName: delivery.AppUserId);
 
@@ -176,8 +178,8 @@ namespace Speedy.Controllers
             var deliveryData = new DeliveryProfileFormViewModel
             {
                 Id = delivery.AppUser!.Id,
-                MobileNumber = delivery.AppUser!.PhoneNumber,                
-            };     
+                MobileNumber = delivery.AppUser!.PhoneNumber,
+            };
 
             return View("_SettingsForm", InitiateServiceArea(deliveryData));
         }
@@ -208,7 +210,7 @@ namespace Speedy.Controllers
 
             transaction.Commit();
 
-            return View("Profile", new { id = delivery.AppUser.Id});
+            return View("Profile", new { id = delivery.AppUser.Id });
         }
 
         [HttpGet]
@@ -218,11 +220,11 @@ namespace Speedy.Controllers
             var user = await _userManager.FindByIdAsync(id);
 
             if (user is null)
-                return BadRequest();                       
+                return BadRequest();
 
-            var resetPassForm = new ResetPasswordFormViewModel {Id = id};            
+            var resetPassForm = new ResetPasswordFormViewModel { Id = id };
             return PartialView("_ResetPasswordForm", resetPassForm);
-        }        
+        }
 
         [HttpPost]
         [AjaxOnly]
@@ -293,14 +295,15 @@ namespace Speedy.Controllers
             return Ok();
         }
 
-		public IActionResult IsUnique(DeliveryFormViewModel model){
+        public IActionResult IsUnique(DeliveryFormViewModel model)
+        {
 
             var isExists = _context.Users.Any(c => c.Email == model.Email);
 
             return Json(!isExists);
         }
 
-		public IActionResult GetCities(int GovernorateId)
+        public IActionResult GetCities(int GovernorateId)
         {
             var cities = _context.Cities.Where(c => !c.IsDeleted && c.GovernorateId == GovernorateId).OrderBy(c => c.Name).ToList();
 
@@ -329,7 +332,7 @@ namespace Speedy.Controllers
 
             var areas = _context.ServiceAreas.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
 
-            deliveryFormView.ServiceArea = _mapper.Map<IEnumerable<SelectListItem>>(areas);            
+            deliveryFormView.ServiceArea = _mapper.Map<IEnumerable<SelectListItem>>(areas);
 
             return deliveryFormView;
         }
