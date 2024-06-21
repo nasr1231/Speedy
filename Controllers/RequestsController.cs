@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Speedy.Core.Models;
 using Speedy.Core.Models.RelatedData;
 using Speedy.Services.User;
+using System.Security.Cryptography;
 
 namespace Speedy.Controllers
 {
@@ -21,7 +23,7 @@ namespace Speedy.Controllers
             var requests = _context.Deliveries
                 .Include(ap => ap.AppUser)
                 .Where(de => de.IsDeleted).ToList();
-            
+
             var servicesView = _mapper.Map<IEnumerable<RequestViewModel>>(requests);
 
 
@@ -38,6 +40,50 @@ namespace Speedy.Controllers
             var view = _mapper.Map<RequestDetailsViewModel>(delivery);
 
             return View("Index", view);
+        }
+
+        [HttpPost]
+        public IActionResult Accept(int id)
+        {
+            var delivery = _context.Deliveries.SingleOrDefault(x => x.Id == id);
+            if (delivery is null)
+                return NotFound();
+
+            delivery!.IsDeleted = false;
+
+            _context.Update(delivery);
+            _context.SaveChanges();
+
+            var requests = _context.Deliveries
+                .Include(ap => ap.AppUser)
+                .Where(de => de.IsDeleted && de.AppUser.IsActive == false).ToList();
+
+            var servicesView = _mapper.Map<IEnumerable<RequestViewModel>>(requests);
+
+            return View("DeliveryRequestPanel", servicesView);
+        }
+
+        [HttpPost]
+        public IActionResult Reject(int id)
+        {
+            var delivery = _context.Deliveries.SingleOrDefault(x => x.Id == id);
+            if (delivery is null)
+                return NotFound();
+
+            var user = _context.Users.SingleOrDefault(x => x.Id == delivery.AppUserId);
+
+            user!.IsActive = false;
+
+            _context.Update(user);
+            _context.SaveChanges();
+
+            var requests = _context.Deliveries
+                .Include(ap => ap.AppUser)
+                .Where(de => de.IsDeleted && de.AppUser.IsActive == false).ToList();
+
+            var servicesView = _mapper.Map<IEnumerable<RequestViewModel>>(requests);
+
+            return View("DeliveryRequestPanel", servicesView);
         }
     }
 }

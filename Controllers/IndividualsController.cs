@@ -90,7 +90,10 @@ namespace Speedy.Controllers
                 SelectedRoles = AppRoles.Individual,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                PhoneNumber = model.MobileNumber
+                PhoneNumber = model.MobileNumber,
+                Address = model.Address,
+                BirthDate = model.BirthDate,
+                Gender = model.Gender
             };
 
             var result = await _userService.SubmitUser(userForm);

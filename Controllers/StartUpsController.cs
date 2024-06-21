@@ -97,6 +97,7 @@ namespace Speedy.Controllers
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 NID = model.NID,
+                Address = model.Address,                
             };
 
             var result = await _userService.SubmitUser(userForm);

@@ -12,6 +12,9 @@ namespace Speedy.Core.ViewModels
 
         [MaxLength(60, ErrorMessage = Errors.MaxLength), Display(Name = "First Name")]
         public string FirstName { get; set; } = null!;
+        public string? Address { get; set; } 
+        public string? Gender { get; set; } 
+        public DateTime BirthDate{ get; set; } 
 
 		[MaxLength(60, ErrorMessage = Errors.MaxLength), Display(Name = "Last Name")]
 		public string LastName { get; set; } = null!;
