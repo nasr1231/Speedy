@@ -330,14 +330,16 @@
                                 <h5 class="fv-row  ">هل سبق لك و عملت فى مجال التوصيل؟</h5>
                                 <div class="d-flex justify-content-around mb-7">
                                     <div class="form-check form-check-inline ">
-                                        <input class="form-check-input" type="radio">
+                                        <input class="form-check-input" type="radio" id="radio-first">
                                         <label class="form-check-label fw-bolder text-dark fs-6">نعم</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio">
+                                        <input class="form-check-input" type="radio" id="radio-notfirst">
                                         <label class="form-check-label fw-bolder text-dark fs-6">لا</label>
                                     </div>
                                 </div>
+                                <input asp-for="IsFirst" type="hidden" id="FirstTime" />
+                                <span asp-validation-for="IsFirst" class="text-danger d-block h-10px"></span>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-7">
@@ -457,6 +459,25 @@
                     genderInput.value = '';
                 }
             }
+
+
+            const first = document.getElementById('radio-first');
+            const notfirst = document.getElementById('radio-notfirst');
+            const hiddenPass = document.getElementById('FirstTime');
+
+            first.addEventListener('change', updateFirstValue);
+            notfirst.addEventListener('change', updateFirstValue);
+
+            function updateFirstValue() {
+                if (first.checked) {
+                    hiddenPass.value = first.value;
+                } else if (notfirst.checked) {
+                    hiddenPass.value = notfirst.value;
+                } else {
+                    hiddenPass.value = '';
+                }
+            }
+
         });
     </script>
 }
