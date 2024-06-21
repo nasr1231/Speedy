@@ -30,7 +30,7 @@ namespace Speedy.Services.User
                 if (file.Length > _maxAllowedSize)
                     return (isUploaded: false, errorMessage: Errors.MaxSize, null);
 
-                var directoryPath = $"{_webHostEnvironment.WebRootPath}/attachments/entityName/{userName}";
+                var directoryPath = $"{_webHostEnvironment.WebRootPath}/attachments/{entityName}/{userName}";
 
                 if (!Directory.Exists(directoryPath))
                 {
@@ -39,7 +39,7 @@ namespace Speedy.Services.User
 
                 var filePath = Path.Combine(directoryPath, file.FileName);
 
-                using var stream = new FileStream(filePath, FileMode.Create);
+                using var stream = File.Create(filePath);
                 await file.CopyToAsync(stream);
                 stream.Dispose();
 
@@ -54,22 +54,28 @@ namespace Speedy.Services.User
         public async Task<(bool isUploaded, string? errorMessage, string? AttachmentUrl)> UploadImageAsync(IFormFile attachedFile, string entityName, string userName)
         {
             var extension = Path.GetExtension(attachedFile.FileName);
-
             if (!_allowedExtensions.Contains(extension))
-                return (isUploaded: false, errorMessage: Errors.NotAllowedExtension, null);
-
+                return (isUploaded: false, errorMessage: Errors.NotAllowedExtension, AttachmentUrl: null);
             if (attachedFile.Length > _maxAllowedSize)
-                return (isUploaded: false, errorMessage: Errors.MaxSize, null);
+                return (isUploaded: false, errorMessage: Errors.MaxSize, AttachmentUrl: null);
 
             var imageName = $"{Guid.NewGuid()}{extension}";
+            var directory = Path.Combine(_webHostEnvironment.WebRootPath, "images", "users");
+            var filePath = Path.Combine(directory, imageName);
 
-            var path = Path.Combine($"{_webHostEnvironment.WebRootPath}/attachments/Orders/", imageName);
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
 
-            using var stream = System.IO.File.Create(path);
-            attachedFile.CopyTo(stream);
+            using var stream = new FileStream(filePath, FileMode.Create);
+            {
+                await attachedFile.CopyToAsync(stream);
+            }
 
-            return (isUploaded: true, errorMessage: null, AttachmentUrl: path);
-        }        
+            var attachmentUrl = $"/images/users/{imageName}";
+            return (isUploaded: true, errorMessage: null, AttachmentUrl: attachmentUrl);
+        }
     }
    
 }

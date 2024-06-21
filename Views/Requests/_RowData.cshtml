@@ -1,0 +1,10 @@
+﻿@model RequestViewModel
+
+<tr>
+    <td class="text-center">@Model.FirstName @Model.LastName</td>
+    <td class="text-center">@Model.PhoneNumber</td>
+    <td class="text-center">@Model.CreatedOn</td>
+    <td class="text-center">
+        <a href="/Requests/Details/@Model.DeliverId" class="btn btn-primary fs-5">View Details</a>
+    </td>    
+</tr>

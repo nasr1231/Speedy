@@ -61,7 +61,7 @@ namespace Speedy.Controllers
                 return RedirectToAction("Create", "StartUps");
 
             return BadRequest("Invalid Role!");
-        }        
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -69,7 +69,21 @@ namespace Speedy.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        private CitiesHomeViewModel InitiateCities(CitiesHomeViewModel? model = null) 
+        public IActionResult Terms()
+        {
+            return View();
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+        public IActionResult Delivery()
+        {
+            return View();
+        }
+
+        private CitiesHomeViewModel InitiateCities(CitiesHomeViewModel? model = null)
         {
             CitiesHomeViewModel CitiesFormView = model ?? new CitiesHomeViewModel();
             var CitiesFormViewTask = _context.Cities.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();

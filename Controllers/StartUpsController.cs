@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -10,7 +11,7 @@ using Speedy.Services.User;
 
 namespace Speedy.Controllers
 {
-    public class StartUpsController(ApplicationDbContext context, IMapper mapper, IStartUpService startService, IUserService userService, IDataService dataService, IAttachmentService attachmentService) : Controller
+    public class StartUpsController(ApplicationDbContext context, IMapper mapper, IStartUpService startService, IUserService userService, IDataService dataService, UserManager<AppUser> userManager, IAttachmentService attachmentService) : Controller
     {
         private readonly ApplicationDbContext _context = context;
         private readonly IMapper _mapper = mapper;
@@ -18,6 +19,7 @@ namespace Speedy.Controllers
         private readonly IDataService _dataService = dataService;
         private readonly IAttachmentService _attachmentService = attachmentService;
         private readonly IStartUpService _startService = startService;
+        private readonly UserManager<AppUser> _userManager = userManager;
         public async Task<IActionResult> Index()
         {
             var startUps = await _dataService.GetAllStartUpsAsync();
@@ -107,7 +109,7 @@ namespace Speedy.Controllers
 
             var startUp = new StartUp
             {
-                AppUserId = result.UserId!,
+                AppUserId = result.AppUser!.Id,
                 Address = model.Address,
                 FoundingDate = model.EstablishDate,
                 IsOnline = model.IsOnline,
@@ -124,14 +126,16 @@ namespace Speedy.Controllers
             if (!imageAttachment.isUploaded)
                 return BadRequest(imageAttachment.errorMessage);
 
-            startUp.AppUser.ProfilePictureIUrl = imageAttachment.AttachmentUrl;
+            result.AppUser.ProfilePictureIUrl = imageAttachment.AttachmentUrl!;
+
+            await _userManager.UpdateAsync(result.AppUser);
 
             _context.Add(startUp);
             await _context.SaveChangesAsync();
 
             transaction.Commit();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToPage("/Account/Login", new { area = "Identity" });
         }
 
         [HttpGet]

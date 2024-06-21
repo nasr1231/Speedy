@@ -6,7 +6,7 @@ public class UserService(UserManager<AppUser> userManager) : IUserService
 {
     private readonly UserManager<AppUser> _userManager = userManager;
 
-    public async Task<(bool IsSuccess, string? UserId, string? Error)> SubmitUser(UserFormViewModel userForm)
+    public async Task<(bool IsSuccess, AppUser? AppUser, string? Error)> SubmitUser(UserFormViewModel userForm)
     {
         var user = new AppUser
         {
@@ -23,13 +23,13 @@ public class UserService(UserManager<AppUser> userManager) : IUserService
         var createUserResult = await _userManager.CreateAsync(user, userForm.Password);
 
         if (!createUserResult.Succeeded)
-            return (IsSuccess: false, UserId: null, Error: string.Join(',', createUserResult.Errors.Select(e => e.Description)));
+            return (IsSuccess: false, AppUser: null, Error: string.Join(',', createUserResult.Errors.Select(e => e.Description)));
 
         var addToRoleResult = await _userManager.AddToRoleAsync(user, userForm.SelectedRoles);
 
         if (!addToRoleResult.Succeeded)
-            return (IsSuccess: false, UserId: null, Error: string.Join(',', addToRoleResult.Errors.Select(e => e.Description)));
+            return (IsSuccess: false, AppUser: null, Error: string.Join(',', addToRoleResult.Errors.Select(e => e.Description)));
 
-        return (IsSuccess: true, UserId: user.Id, Error: null);
+        return (IsSuccess: true, AppUser: user, Error: null);
     }
 }

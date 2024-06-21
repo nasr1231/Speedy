@@ -1,127 +1,70 @@
-﻿@model RequestViewModel
+﻿@model IEnumerable<RequestViewModel>
 @{
     ViewData["Title"] = "Requests";
     Layout = "_Layout";
 }
 
+@section Styles
+{
+    <link href="~/assets/panel/plugins/datatables/datatables.bundle.css" rel="stylesheet" />
+}
+
+
 <div class="card shadow-sm mb-5 mb-lg-10">
     <div class="card-header">
         <div class="card-title">
             <div class="symbol symbol-70px me-4">
-                <div class="symbol-label fs-2 fw-semibold">                    
-                    <i class="fa-solid fa-file-contract text-warning"></i>
-                </div>                
+                <div class="symbol-label fs-2 fw-semibold text-success">
+                    <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
+                    <span class="svg-icon svg-icon-fluid svg-icon-primary">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path opacity="0.3" d="M21.25 18.525L13.05 21.825C12.35 22.125 11.65 22.125 10.95 21.825L2.75 18.525C1.75 18.125 1.75 16.725 2.75 16.325L4.04999 15.825L10.25 18.325C10.85 18.525 11.45 18.625 12.05 18.625C12.65 18.625 13.25 18.525 13.85 18.325L20.05 15.825L21.35 16.325C22.35 16.725 22.35 18.125 21.25 18.525ZM13.05 16.425L21.25 13.125C22.25 12.725 22.25 11.325 21.25 10.925L13.05 7.62502C12.35 7.32502 11.65 7.32502 10.95 7.62502L2.75 10.925C1.75 11.325 1.75 12.725 2.75 13.125L10.95 16.425C11.65 16.725 12.45 16.725 13.05 16.425Z" fill="currentColor" />
+                            <path d="M11.05 11.025L2.84998 7.725C1.84998 7.325 1.84998 5.925 2.84998 5.525L11.05 2.225C11.75 1.925 12.45 1.925 13.15 2.225L21.35 5.525C22.35 5.925 22.35 7.325 21.35 7.725L13.05 11.025C12.45 11.325 11.65 11.325 11.05 11.025Z" fill="currentColor" />
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                </div>
+                <span class="symbol-badge badge badge-circle bg-primary start-100 text-white">@Model.Count()</span>
             </div>
-            <h2 class="fw-bolder">Delivery Requests</h2>
+            <h2>Requests</h2>
         </div>
     </div>
 </div>
 
-<div class="card shadow-sm mb-5 mb-lg-10">
-    <div class="d-flex flex-column flex-column-fluid" bis_skin_checked="1">
-        <!--begin::Content-->
-        <div id="kt_app_content" class="app-content  flex-column-fluid " bis_skin_checked="1">
-            <!--begin::Content container-->
-            <div id="kt_app_content_container" class="app-container  container-xxl " bis_skin_checked="1">
-                <!--begin::Row-->
-                <div class="row g-6 g-xl-9 py-7" bis_skin_checked="1">
-                    @foreach(var delivery in Model.Deliveries)
+<div class="card shadow-sm mb-5 mb-lg-10 h-450px">
+    <div class="card-header">
+        <partial name="_TableHeader" />
+    </div>
+
+    <div class="card-body pt-0">
+        <div class="table-responsive">
+            <table class="table table-row-bordered table-row-gray-300 gy-3 align-middle js-datatable" data-export-title="قائمة المحافظات">
+                <thead>
+                    <tr class="fw-bold fs-6 text-gray-800 text-center">
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Phone Number</th>
+                        <th class="text-center">Regerstration Date</th>
+                        <th class="js-no-export text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var deliveries in Model)
                     {
-                        <!--begin::Col-->
-                        <div class="col-12 col-md-6 col-lg-3 border border-gray-200 rounded-50 h-50 pb-4" bis_skin_checked="1">
-                            <!--begin::Card-->
-                            <a href="/metronic8/demo1/apps/projects/project.html" class="card border-hover-primary ">
-                                <!--begin::Card header-->
-                                <div class="card-header border-0 pt-9" bis_skin_checked="1">
-                                    <!--begin::Card Title-->
-                                    <div class="card-title m-0" bis_skin_checked="1">
-                                        <!--begin::Avatar-->
-                                        <div class="symbol symbol-50px w-50px bg-light" bis_skin_checked="1">
-                                            <img src="/metronic8/demo1/assets/media/svg/brand-logos/plurk.svg" alt="image" class="p-3">
-                                        </div>
-                                        <!--end::Avatar-->
-                                    </div>
-                                    <!--end::Car Title-->
-                                    <!--begin::Card toolbar-->
-                                    <div class="card-toolbar" bis_skin_checked="1">
-                                        <span class="badge badge-light-primary fw-bold me-auto px-4 py-3">In Progress</span>
-                                    </div>
-                                    <!--end::Card toolbar-->
-                                </div>
-                                <!--end:: Card header-->
-                                <!--begin:: Card body-->
-                                <div class="card-body p-9 pb-0" bis_skin_checked="1">
-                                    <!--begin::Name-->
-                                    <div class="fs-3 fw-bold text-gray-900 mb-5" bis_skin_checked="1">
-                                        Mohamed Nasr
-                                    </div>
-                                    <!--end::Name-->
-                                    <!--begin::Info-->
-                                    <div class="d-flex flex-wrap mb-5" bis_skin_checked="1">
-                                        <!--begin::Due-->
-                                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3" bis_skin_checked="1">
-                                            <div class="fs-6 text-gray-800 fw-bold" bis_skin_checked="1">Apr 15, 2024</div>
-                                            <div class="fw-semibold text-gray-500" bis_skin_checked="1">Due Date</div>
-                                        </div>
-                                    </div>
-                                    <!--end::Info-->
-                                </div>
-                                <!--end:: Card body-->
-                            </a>
-                            <!--end::Card-->
-                        </div>
-                        <!--end::Col-->
+                        <partial name="_RowData" model="deliveries" />
                     }
-                </div>
-                <!--end::Row-->
-                <!--begin::Pagination-->
-                <div class="d-flex flex-stack flex-wrap py-10" bis_skin_checked="1">
-                    <div class="fs-6 fw-semibold text-gray-700" bis_skin_checked="1">
-                        Showing 1 to 10 of 50 entries
-                    </div>
-
-                    <!--begin::Pages-->
-                    <ul class="pagination">
-                        <li class="page-item previous">
-                            <a href="#" class="page-link"><i class="previous"></i></a>
-                        </li>
-
-                        <li class="page-item active">
-                            <a href="#" class="page-link">1</a>
-                        </li>
-
-                        <li class="page-item">
-                            <a href="#" class="page-link">2</a>
-                        </li>
-
-                        <li class="page-item">
-                            <a href="#" class="page-link">3</a>
-                        </li>
-
-                        <li class="page-item">
-                            <a href="#" class="page-link">4</a>
-                        </li>
-
-                        <li class="page-item">
-                            <a href="#" class="page-link">5</a>
-                        </li>
-
-                        <li class="page-item">
-                            <a href="#" class="page-link">6</a>
-                        </li>
-
-                        <li class="page-item next">
-                            <a href="#" class="page-link"><i class="next"></i></a>
-                        </li>
-                    </ul>
-                    <!--end::Pages-->
-                </div>
-                <!--end::Pagination-->
-            </div>
-            <!--end::Content container-->
+                </tbody>
+            </table>
         </div>
-        <!--end::Content-->
-
     </div>
 </div>
 
+@Html.AntiForgeryToken()
+
+@section Plugins {
+    <script src="~/assets/Panel/plugins/datatables/datatables.bundle.js"></script>
+    <script src="~/assets/Panel/plugins/datatables/vfs_fonts.js" asp-append-version="true"></script>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

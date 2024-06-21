@@ -2,5 +2,5 @@
 
 public interface IUserService
 {
-    public Task<(bool IsSuccess, string? UserId, string? Error)> SubmitUser(UserFormViewModel userForm);
+    public Task<(bool IsSuccess, AppUser? AppUser, string? Error)> SubmitUser(UserFormViewModel userForm);
 }

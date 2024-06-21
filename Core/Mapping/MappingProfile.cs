@@ -73,6 +73,15 @@ namespace Speedy.Core.Mapping
             CreateMap<Individual, IndividualProfileViewModel>();
 
             #region Related Data
+            CreateMap<Delivery, RequestDetailsViewModel>()
+                .ForMember(dest => dest.AppUser, opt => opt.MapFrom(src => src.AppUser));
+
+            CreateMap<Delivery, RequestViewModel>()
+                .ForMember(dest => dest.DeliverId, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.AppUser!.FirstName))
+                .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.AppUser!.LastName))
+                .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.AppUser!.PhoneNumber))
+                .ForMember(dest => dest.CreatedOn, opt => opt.MapFrom(src => src.AppUser!.CreatedOn));
 
             //Governorates
             CreateMap<Governorate, GovernorateFormViewModel>().ReverseMap();

@@ -131,7 +131,7 @@ namespace Speedy.Controllers
 
             var delivery = new Delivery
             {
-                AppUserId = result.UserId!,
+                AppUserId = result.AppUser!.Id,
                 HasWhatsApp = model.HasWhatsApp,
                 Address = model.Address,
                 CityId = model.SelectedCityId,
@@ -147,8 +147,10 @@ namespace Speedy.Controllers
 
             if (!imageAttachment.isUploaded)
                 return BadRequest(imageAttachment.errorMessage);
-            delivery.AppUser.ProfilePictureIUrl = imageAttachment.AttachmentUrl;
 
+           result.AppUser.ProfilePictureIUrl = imageAttachment.AttachmentUrl!;
+
+            await _userManager.UpdateAsync(result.AppUser);            
 
             var NationalId = await _attachmentService.UploadImageAsync(
               attachedFile: model.NationalId,
@@ -159,16 +161,6 @@ namespace Speedy.Controllers
                 return BadRequest(NationalId.errorMessage);
 
             delivery.NationalId= NationalId.AttachmentUrl!;
-
-            var DrivingLicesne = await _attachmentService.UploadImageAsync(
-              attachedFile: model.DrivingLicsense,
-              entityName: "Delivery Agents",
-             userName: delivery.AppUserId);
-
-            if (!DrivingLicesne.isUploaded)
-                return BadRequest(DrivingLicesne.errorMessage);
-
-            delivery.DrivingLicsense = DrivingLicesne.AttachmentUrl!;
 
             var Criminal = await _attachmentService.UploadImageAsync(
               attachedFile: model.UserImage,
@@ -186,7 +178,7 @@ namespace Speedy.Controllers
 
             transaction.Commit();
 
-            return View("~/Identity/Account/Login.cshtml");
+            return RedirectToPage("/Account/Login", new { area = "Identity" });
         }
 
 

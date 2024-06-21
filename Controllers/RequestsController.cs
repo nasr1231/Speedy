@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Speedy.Core.Models.RelatedData;
 using Speedy.Services.User;
 
 namespace Speedy.Controllers
@@ -17,11 +18,26 @@ namespace Speedy.Controllers
 
         public IActionResult GetRequests()
         {
-            var requests = _context.Deliveries.Where(de => de.IsDeleted).ToList();
+            var requests = _context.Deliveries
+                .Include(ap => ap.AppUser)
+                .Where(de => de.IsDeleted).ToList();
+            
+            var servicesView = _mapper.Map<IEnumerable<RequestViewModel>>(requests);
 
-            var requestsViewModel = new RequestViewModel { Deliveries = requests };
 
-            return View("DeliveryRequestPanel", requestsViewModel);
+            return View("DeliveryRequestPanel", servicesView);
+        }
+
+        public IActionResult Details(int id)
+        {
+            var delivery = _context.Deliveries.Include(ap => ap.AppUser).SingleOrDefault(x => x.Id == id);
+
+            if (delivery is null)
+                return NotFound();
+
+            var view = _mapper.Map<RequestDetailsViewModel>(delivery);
+
+            return View("Index", view);
         }
     }
 }

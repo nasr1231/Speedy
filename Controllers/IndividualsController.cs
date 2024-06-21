@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Speedy.Core.Consts;
@@ -9,7 +10,7 @@ using Speedy.Services.User;
 
 namespace Speedy.Controllers
 {
-    public class IndividualsController(ApplicationDbContext context, IMapper mapper, IUserService userService, IDataService dataService, IIndividualService individualService, IAttachmentService attachmentService) : Controller
+    public class IndividualsController(UserManager<AppUser> userManager,ApplicationDbContext context, IMapper mapper, IUserService userService, IDataService dataService, IIndividualService individualService, IAttachmentService attachmentService) : Controller
     {
         private readonly ApplicationDbContext _context = context;
         private readonly IMapper _mapper = mapper;
@@ -17,6 +18,7 @@ namespace Speedy.Controllers
         private readonly IIndividualService _individualService = individualService;
         private readonly IDataService _dataService = dataService;
         private readonly IAttachmentService _attachmentService = attachmentService;
+        private readonly UserManager<AppUser> _userManager = userManager;
 
         public async Task<IActionResult> Index()
         {
@@ -101,7 +103,7 @@ namespace Speedy.Controllers
 
             var individual = new Individual
             {
-                AppUserId = result.UserId!,
+                AppUserId = result.AppUser!.Id,
                 referralCode = model.ReferralCode,
                 CityId = model.SelectedCityId,
             };
@@ -111,15 +113,16 @@ namespace Speedy.Controllers
             entityName: "Individual",
              userName: individual.AppUserId);
 
-            if (!imageAttachment.isUploaded)
-                return BadRequest(imageAttachment.errorMessage);
+            result.AppUser.ProfilePictureIUrl = imageAttachment.AttachmentUrl!;
+
+            await _userManager.UpdateAsync(result.AppUser);
 
             _context.Add(individual);
             await _context.SaveChangesAsync();
 
             transaction.Commit();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToPage("/Account/Login", new { area = "Identity" });
         }
         private IndividualFormViewModel InitialIndividualForm(IndividualFormViewModel? model = null)
         {
