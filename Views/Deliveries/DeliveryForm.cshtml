@@ -228,7 +228,7 @@
                                 </div>
                                 <h5 class="fv-row mb-3 form-label fw-bolder text-dark fs-6 ">النوع</h5>
                                 <div class="d-flex justify-content-around mb-5">
-                                    <div class="input-group mb-2 justify-content-evenly">
+                                    <div class="input-group mb-2 justify-content-center">
                                         <div class="form-check form-check-inline">
                                             <input id="radio-male" class="form-check-input" type="radio" name="gender" value="Male">
                                             <label class="form-check-label fw-bolder text-dark fs-6">ذكر</label>
@@ -240,8 +240,7 @@
                                     </div>
                                     <input asp-for="@Model.Gender" type="hidden" id="GenderName">
                                     <span asp-validation-for="@Model!.Gender" class="text-danger d-block h-10px"></span>
-                                </div>
-                                <input type="hidden" id="hidden-gender" asp-for="@Model.Gender" name="hiddenGender">
+                                </div>                                
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-7">
@@ -352,19 +351,21 @@
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-7">
                                     <label class="form-label fw-bolder text-dark fs-6">فى حالة وجود سيارة او دراجه ناريه (موتوسيكل) أرفق صورة الرخصة الخاصة بها</label>
-                                    <input asp-for="Attachments" class="form-control form-control-lg form-control-solid" type="file" accept=".png, .jpg, .jpeg, .pdf" placeholder="" autocomplete="off" />
+                                    <input asp-for="DrivingLicsense" class="form-control form-control-lg form-control-solid" type="file" accept=".png, .jpg, .jpeg, .pdf" placeholder="" autocomplete="off" />                                    
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-7">
                                     <label class="form-label fw-bolder text-dark fs-6">أرفق صورة البطاقة الشخصية (يجب أن تكون ساريه)</label>
-                                    <input asp-for="Attachments" class="form-control form-control-lg form-control-solid" type="file" accept=".png, .jpg, .jpeg, .pdf" placeholder="" autocomplete="off" />
+                                    <input asp-for="NationalId" class="form-control form-control-lg form-control-solid" type="file" accept=".png, .jpg, .jpeg, .pdf" placeholder="" autocomplete="off" />
+                                    <span asp-validation-for="NationalId" class="text-danger d-block h-10px"></span>
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-7">
                                     <label class="form-label fw-bolder text-dark fs-6 lh-lg">أرفق صورة من الفيش الجنائي الخاص بك<br>(يجب أن يكون تاريخ صدوره من ثلاث أشهر كحد أقصى) </label>
-                                    <input asp-for="Attachments" class="form-control form-control-lg form-control-solid" type="file" accept=".png, .jpg, .jpeg, .pdf" autocomplete="off" />
+                                    <input asp-for="CriminalStatus" class="form-control form-control-lg form-control-solid" type="file" accept=".png, .jpg, .jpeg, .pdf" autocomplete="off" />
+                                    <span asp-validation-for="CriminalStatus" class="text-danger d-block h-10px"></span>
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->

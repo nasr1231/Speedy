@@ -30,7 +30,7 @@ namespace Speedy.Services.User
                 if (file.Length > _maxAllowedSize)
                     return (isUploaded: false, errorMessage: Errors.MaxSize, null);
 
-                var directoryPath = $"{_webHostEnvironment.WebRootPath}/attachments/Orders/{userName}";
+                var directoryPath = $"{_webHostEnvironment.WebRootPath}/attachments/entityName/{userName}";
 
                 if (!Directory.Exists(directoryPath))
                 {
@@ -69,7 +69,7 @@ namespace Speedy.Services.User
             attachedFile.CopyTo(stream);
 
             return (isUploaded: true, errorMessage: null, AttachmentUrl: path);
-        }
+        }        
     }
    
 }

@@ -40,9 +40,8 @@ namespace Speedy.Core.ViewModels
         [MaxLength(100, ErrorMessage = Errors.MaxLength)]
         public string Address { get; set; } = null!;
 
-        [Required(ErrorMessage = Errors.isRequired)]
-        [MaxLength(5, ErrorMessage = "يا اما ذكر يا اما أنثى")]
         [Display(Name = "النوع")]
+        [Required(ErrorMessage = Errors.isRequired)]        
         public string Gender { get; set; } = null!;
 
         [Display(Name = "تاريخ الميلاد")]

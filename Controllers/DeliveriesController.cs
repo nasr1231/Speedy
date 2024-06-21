@@ -139,6 +139,7 @@ namespace Speedy.Controllers
                 IsDeleted = true
             };
 
+            #region Services
             var imageAttachment = await _attachmentService.UploadImageAsync(
               attachedFile: model.UserImage,
               entityName: "Delivery Agents",
@@ -146,23 +147,46 @@ namespace Speedy.Controllers
 
             if (!imageAttachment.isUploaded)
                 return BadRequest(imageAttachment.errorMessage);
-
             delivery.AppUser.ProfilePictureIUrl = imageAttachment.AttachmentUrl;
 
-            var attachResult = await _attachmentService.UploadAttachmentAsync(
-                attachedFile: model.Attachments,
-                entityName: "Delivery Agents",
-                userName: delivery.AppUserId);
 
-            if (!attachResult.isUploaded)
-                return BadRequest(attachResult.errorMessage);
+            var NationalId = await _attachmentService.UploadImageAsync(
+              attachedFile: model.NationalId,
+              entityName: "Delivery Agents",
+             userName: delivery.AppUserId);
+
+            if (!NationalId.isUploaded)
+                return BadRequest(NationalId.errorMessage);
+
+            delivery.NationalId= NationalId.AttachmentUrl!;
+
+            var DrivingLicesne = await _attachmentService.UploadImageAsync(
+              attachedFile: model.DrivingLicsense,
+              entityName: "Delivery Agents",
+             userName: delivery.AppUserId);
+
+            if (!DrivingLicesne.isUploaded)
+                return BadRequest(DrivingLicesne.errorMessage);
+
+            delivery.DrivingLicsense = DrivingLicesne.AttachmentUrl!;
+
+            var Criminal = await _attachmentService.UploadImageAsync(
+              attachedFile: model.UserImage,
+              entityName: "Delivery Agents",
+             userName: delivery.AppUserId);
+
+            if (!Criminal.isUploaded)
+                return BadRequest(Criminal.errorMessage);
+
+            delivery.CriminalStatus = Criminal.AttachmentUrl!;
+            #endregion
 
             _context.Add(delivery);
             await _context.SaveChangesAsync();
 
             transaction.Commit();
 
-            return RedirectToAction("Index", "Home");
+            return View("~/Identity/Account/Login.cshtml");
         }
 
 

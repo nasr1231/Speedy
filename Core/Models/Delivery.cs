@@ -12,6 +12,9 @@ namespace Speedy.Core.Models
         public Byte? Rate { get; set; }
         public List<string>? ServiceArea { get; set; } = [];
         public string Address { get; set; } = null!;
+        public string NationalId { get; set; } = null!;
+        public string CriminalStatus { get; set; } = null!;
+        public string? DrivingLicsense { get; set; }
         public List<string>? AttachmentUrl { get; set; }
 
         [MaxLength(500)]

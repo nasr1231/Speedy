@@ -36,6 +36,7 @@ namespace Speedy.Core.ViewModels
 		[Required(ErrorMessage = Errors.isRequired)]
 		[MaxLength(100, ErrorMessage = Errors.MaxLength)]
 		public string Address { get; set; } = null!;        
+
 		public bool HasWhatsApp { get; set; }
 
         [Display(Name = "الرقم القومي")]
@@ -48,7 +49,9 @@ namespace Speedy.Core.ViewModels
         [DataType(DataType.Password), Display(Name = "كلمة المرور")]
         public string Password { get; set; } = null!;
 
-		[DataType(DataType.Password), Display(Name = "تأكيد كلمة المرور")]
+        [Display(Name = "تأكيد كلمة المرور")]
+        [Required(ErrorMessage = Errors.isRequired)]
+        [DataType(DataType.Password)]
 		[Compare("Password", ErrorMessage = Errors.ConfirmPasswordMatch)]
 		public string ConfirmPassword { get; set; } = null!;
 
@@ -57,8 +60,7 @@ namespace Speedy.Core.ViewModels
         public DateTime BirthDate { get; set; } = DateTime.Now.AddYears(-16);
 
 		[Required(ErrorMessage = Errors.isRequired)]
-        [Display(Name = "النوع")]
-        [MaxLength(5, ErrorMessage = "يا اما ذكر يا اما أنثى")]
+        [Display(Name = "النوع")]        
 		public string Gender { get; set; } = null!;
 
 		[Required(ErrorMessage = Errors.isRequired)]
@@ -90,6 +92,18 @@ namespace Speedy.Core.ViewModels
         [DisplayName("مناطق العمل")]
         [Required(ErrorMessage = Errors.isRequired)]
         public List<string>? ServiceArea { get; set; } = [];
+        #endregion
+
+        #region Documents
+        [Display(Name = "البطاقة الشخصية")]
+        [Required(ErrorMessage = Errors.isRequired)]
+        public IFormFile NationalId { get; set; } = null!;
+        [Display(Name = "الصحيفة الجنائية")]
+        [Required(ErrorMessage = Errors.isRequired)]
+        public IFormFile CriminalStatus { get; set; } = null!;
+        [Display(Name = "رخصة القيادة")]
+        [Required(ErrorMessage = Errors.isRequired)]
+        public IFormFile? DrivingLicsense { get; set; }
         #endregion
     }
 }
