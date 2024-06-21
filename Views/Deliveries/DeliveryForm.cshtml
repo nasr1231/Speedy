@@ -290,7 +290,7 @@
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="form-check form-check-custom form-check-solid me-10 mb-7">
-                                    <input asp-for="@Model.HasWhatsApp" type="checkbox" value="" class="form-check-input h-30px w-30px"/>
+                                    <input asp-for="@Model.HasWhatsApp" type="checkbox" class="form-check-input h-30px w-30px"/>
                                     <label class="form-check-label me-4" for="flexCheckbox30">
                                         هل هذا الرقم لديه واتساب؟
                                     </label>
@@ -329,17 +329,15 @@
                                 <!--begin::Input group-->
                                 <h5 class="fv-row  ">هل سبق لك و عملت فى مجال التوصيل؟</h5>
                                 <div class="d-flex justify-content-around mb-7">
-                                    <div class="form-check form-check-inline ">
-                                        <input class="form-check-input" type="radio" id="radio-first">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio">
                                         <label class="form-check-label fw-bolder text-dark fs-6">نعم</label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio">
                                         <label class="form-check-label fw-bolder text-dark fs-6">لا</label>
                                     </div>
-                                </div>
-                                <input asp-for="IsFirst" type="hidden" id="FirstTime" />
-                                <span asp-validation-for="IsFirst" class="text-danger d-block h-10px"></span>
+                                </div>                             
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-7">
@@ -458,25 +456,7 @@
                 } else {
                     genderInput.value = '';
                 }
-            }
-
-
-            const first = document.getElementById('radio-first');
-            const notfirst = document.getElementById('radio-notfirst');
-            const hiddenPass = document.getElementById('FirstTime');
-
-            first.addEventListener('change', updateFirstValue);
-            notfirst.addEventListener('change', updateFirstValue);
-
-            function updateFirstValue() {
-                if (first.checked) {
-                    hiddenPass.value = first.value;
-                } else if (notfirst.checked) {
-                    hiddenPass.value = notfirst.value;
-                } else {
-                    hiddenPass.value = '';
-                }
-            }
+            }           
 
         });
     </script>
