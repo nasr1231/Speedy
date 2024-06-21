@@ -34,8 +34,8 @@ namespace Speedy.Controllers
                 LastName = d.AppUser.LastName,
             });
 
-            if (User.IsInRole(AppRoles.Admin))
-                return View("Index", deliveriesView);
+
+                         
 
             if (User.IsInRole(AppRoles.Delivery))
                 return View("Dashboard", deliveriesView);
@@ -119,6 +119,9 @@ namespace Speedy.Controllers
                 PhoneNumber = model.MobileNumber,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
+                Address = model.Address,
+                BirthDate = model.BirthDate,
+                Gender = model.Gender
             };
 
             var result = await _userService.SubmitUser(userForm);

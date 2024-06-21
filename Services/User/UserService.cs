@@ -18,7 +18,10 @@ public class UserService(UserManager<AppUser> userManager) : IUserService
             FirstName = userForm.FirstName,
             LastName = userForm.LastName,
             PhoneNumber = userForm.PhoneNumber,
-		};
+            Address = userForm.Address,
+            BirthDate = userForm.BirthDate,
+            Gender = userForm.Gender
+        };
 
         var createUserResult = await _userManager.CreateAsync(user, userForm.Password);
 

@@ -5,6 +5,11 @@
     <td class="text-center">@Model.PhoneNumber</td>
     <td class="text-center">@Model.CreatedOn</td>
     <td class="text-center">
+        <span class="badge badge-light-@(Model.Status ? "danger" : "success")">
+            @(Model.Status ? "Not Active" : "Available")
+        </span>
+    </td>
+    <td class="text-center">
         <a href="/Requests/Details/@Model.DeliverId" class="btn btn-primary fs-5">View Details</a>
-    </td>    
+    </td>
 </tr>

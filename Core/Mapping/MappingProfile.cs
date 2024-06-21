@@ -78,6 +78,7 @@ namespace Speedy.Core.Mapping
 
             CreateMap<Delivery, RequestViewModel>()
                 .ForMember(dest => dest.DeliverId, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.IsDeleted))
                 .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.AppUser!.FirstName))
                 .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.AppUser!.LastName))
                 .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.AppUser!.PhoneNumber))
