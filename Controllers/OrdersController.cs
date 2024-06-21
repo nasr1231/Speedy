@@ -166,11 +166,11 @@ namespace Speedy.Controllers
             _context.Remove(order);
             _context.SaveChanges();
 
-            if (User.IsInRole(AppRoles.StartUp))
-                return View("~/Home/StartUpIndex.cshtml");
+            if (User.IsInRole(AppRoles.StartUp))                
+            return RedirectToPage("/Home/StartUpIndex.cshtml");
 
-            if (User.IsInRole(AppRoles.Individual))
-                return View("~/Home/UserIndex.cshtml");
+            if (User.IsInRole(AppRoles.Individual))                
+            return RedirectToPage("/Home/UserIndex.cshtml");
 
             return View();
         }

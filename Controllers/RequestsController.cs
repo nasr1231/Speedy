@@ -39,10 +39,11 @@ namespace Speedy.Controllers
 
             var view = _mapper.Map<RequestDetailsViewModel>(delivery);
 
+            view.DeliveryId = id;
+
             return View("Index", view);
         }
 
-        [HttpPost]
         public IActionResult Accept(int id)
         {
             var delivery = _context.Deliveries.SingleOrDefault(x => x.Id == id);
@@ -56,14 +57,13 @@ namespace Speedy.Controllers
 
             var requests = _context.Deliveries
                 .Include(ap => ap.AppUser)
-                .Where(de => de.IsDeleted && de.AppUser.IsActive == false).ToList();
+                .Where(de => de.IsDeleted).ToList();
 
             var servicesView = _mapper.Map<IEnumerable<RequestViewModel>>(requests);
 
-            return View("DeliveryRequestPanel", servicesView);
+            return RedirectToAction("GetRequests", "Requests", servicesView);
         }
 
-        [HttpPost]
         public IActionResult Reject(int id)
         {
             var delivery = _context.Deliveries.SingleOrDefault(x => x.Id == id);
@@ -79,11 +79,11 @@ namespace Speedy.Controllers
 
             var requests = _context.Deliveries
                 .Include(ap => ap.AppUser)
-                .Where(de => de.IsDeleted && de.AppUser.IsActive == false).ToList();
+                .Where(de => de.IsDeleted).ToList();
 
             var servicesView = _mapper.Map<IEnumerable<RequestViewModel>>(requests);
 
-            return View("DeliveryRequestPanel", servicesView);
+            return RedirectToAction("GetRequests", "Requests", servicesView);
         }
     }
 }

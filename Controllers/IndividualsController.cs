@@ -11,7 +11,7 @@ using Speedy.Services.User;
 namespace Speedy.Controllers
 {
     public class IndividualsController(UserManager<AppUser> userManager,ApplicationDbContext context, IMapper mapper, IUserService userService, IDataService dataService, IIndividualService individualService, IAttachmentService attachmentService) : Controller
-    {
+    {        
         private readonly ApplicationDbContext _context = context;
         private readonly IMapper _mapper = mapper;
         private readonly IUserService _userService = userService;
@@ -57,7 +57,7 @@ namespace Speedy.Controllers
                .SingleOrDefault(st => st.AppUserId == id);
 
             if (user is null)
-                return NotFound();
+                return NotFound(user);
 
             var userView = new IndividualProfileViewModel
             {

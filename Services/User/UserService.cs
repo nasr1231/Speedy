@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Speedy.Services.User;
 
-public class UserService(UserManager<AppUser> userManager) : IUserService
+public class UserService(ApplicationDbContext context,UserManager<AppUser> userManager) : IUserService
 {
+    private readonly ApplicationDbContext _context = context;
     private readonly UserManager<AppUser> _userManager = userManager;
 
     public async Task<(bool IsSuccess, AppUser? AppUser, string? Error)> SubmitUser(UserFormViewModel userForm)
@@ -35,4 +37,33 @@ public class UserService(UserManager<AppUser> userManager) : IUserService
 
         return (IsSuccess: true, AppUser: user, Error: null);
     }
+    public async Task<Individual?> GetIndividualAsync(string individualId)
+    {
+        IQueryable<Individual> individualQueryable = _context.Individuals!            
+            .Include(s => s.AppUser)
+            .Include(c => c.City)
+            .ThenInclude(g => g.Governorate);
+
+        individualQueryable = individualQueryable.AsNoTracking();
+
+        var delivery = await individualQueryable.SingleOrDefaultAsync(d => d.AppUserId == individualId);
+
+        return delivery;
+    }
+
+    public async Task<StartUp?> GetStartUpAsync(string startUpId)
+    {
+        IQueryable<StartUp> startUpQueryable = _context.StartUps
+                .Include(ap => ap.AppUser)                
+                .Include(c => c.City)
+                 .ThenInclude(g => g.Governorate);
+
+        startUpQueryable = startUpQueryable.AsNoTracking();
+
+        var startUp = await startUpQueryable.SingleOrDefaultAsync(d => d.AppUserId == startUpId);
+
+        return startUp;
+    }
+
+
 }

@@ -35,7 +35,8 @@ namespace Speedy.Controllers
             });
 
 
-                         
+            if (User.IsInRole(AppRoles.Admin))
+                return View("Index", deliveriesView);
 
             if (User.IsInRole(AppRoles.Delivery))
                 return View("Dashboard", deliveriesView);
@@ -183,7 +184,24 @@ namespace Speedy.Controllers
 
             return RedirectToPage("/Account/Login", new { area = "Identity" });
         }
+        
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Block(int id)
+        {
+            var delivery = _context.Deliveries.Find(id);
+
+            if (delivery is null)
+                return NotFound();
+
+            delivery.IsDeleted = !delivery.IsDeleted;
+            delivery.LastUpdatedOn = DateTime.Now;
+
+            _context.SaveChanges();
+
+            return Ok();
+        }
 
         [HttpGet]
         [AjaxOnly]

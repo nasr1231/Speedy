@@ -20,8 +20,7 @@ namespace Speedy.Core.Mapping
             .ForMember(dest => dest.NID, opt => opt.MapFrom(src => src.AppUser!.NID))
             .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.AppUser!.Email))
             .ForMember(dest => dest.MobileNumber, opt => opt.MapFrom(src => src.AppUser!.PhoneNumber))                     
-            .ForMember(dest => dest.Gender, opt => opt.MapFrom(src => src.AppUser!.Gender))                     
-            .ForMember(dest => dest.Gender, opt => opt.MapFrom(src => src.AppUser!.Gender))                     
+            .ForMember(dest => dest.Gender, opt => opt.MapFrom(src => src.AppUser!.Gender))                                 
             .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.AppUser!.IsActive))                     
             .ForMember(dest => dest.ProfilePictureIUrl, opt => opt.MapFrom(src => src.AppUser!.ProfilePictureIUrl))                     
             .ForMember(dest => dest.CreatedOn, opt => opt.MapFrom(src => src.AppUser!.CreatedOn));

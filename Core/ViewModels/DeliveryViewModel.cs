@@ -11,7 +11,7 @@ namespace Speedy.Core.ViewModels
         public string Gender { get; set; } = null!;
         public string Email { get; set; } = null!;
         public string? ProfilePictureIUrl { get; set; } = string.Empty;
-        public string NID { get; set; } = string.Empty;
+        public string NID { get; set; } = string.Empty;        
         public DateTime BirthDate { get; set; }
         #endregion
 

@@ -1,10 +1,6 @@
 ﻿@model RequestDetailsViewModel
 
-
-<input type="hidden" asp-for="DeliveryId" />
-
 <div id="kt_app_content_container" class="app-container  container-xxl " bis_skin_checked="1">
-
     <!--begin::Navbar-->
     <div class="card mb-5 mb-xxl-8" bis_skin_checked="1">
         <div class="card-body pt-9 pb-0" bis_skin_checked="1">
@@ -41,17 +37,10 @@
                         <!--end::User-->
                         <!--begin::Actions-->
                         <div class="d-flex my-4" bis_skin_checked="1">
-                            <form method="post" asp-action="Reject" asp-route-id="@Model.DeliveryId" asp-controller="Requests">
-                                <button type="submit" class="btn btn-md btn-danger me-2">
-                                    Reject
-                                </button>
-                            </form>
-
-                            <form method="post" asp-action="Accept" asp-route-id="@Model.DeliveryId" asp-controller="Requests">
-                                <button type="submit" class="btn btn-md btn-success me-2">
-                                    Accept
-                                </button>
-                            </form>
+                            <a href="/Requests/Reject/@Model.DeliveryId" class="btn btn-md btn-danger me-2">
+                                Reject
+                            </a>
+                            <a href="/Requests/Accept/@Model.DeliveryId" class="btn btn-md btn-success me-3">Accept</a>
                         </div>
                         <!--end::Actions-->
                     </div>
