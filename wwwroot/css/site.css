@@ -7,7 +7,7 @@ html {
 /**********************footer part css*******************/
 /* line 2, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */
 .footer_part {
-    padding: 115px 0px 25px;
+    padding: 80px 0px 25px;
 }
 
 @media (max-width: 576px) {
@@ -249,6 +249,7 @@ h4{
 /* line 203, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */
 .footer_part .copyright_text p a {
     color: #E25E3E;
+    font-weight:400;
     -webkit-transition: 0.5s;
     transition: 0.5s;
 }
