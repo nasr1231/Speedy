@@ -10,17 +10,7 @@ namespace Speedy.Data.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Deliveries_Cities_CityId1",
-                table: "Deliveries");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Deliveries_CityId1",
-                table: "Deliveries");
-
-            migrationBuilder.DropColumn(
-                name: "CityId1",
-                table: "Deliveries");
+            
         }
 
         /// <inheritdoc />
