@@ -97,7 +97,7 @@
             <span class="receipt__total__price">@(Model.Fees + Model.OrderTotal) جنيه</span>
         </p>
         <div class="text-center d-flex flex-row align-items-center justify-content-center">
-            <form asp-action="SubmitOrder" method="post">                
+            <form asp-action="AcceptOrder" method="post">
                 <button type="submit" class="btn btn-light-success m-5">قبول الطلب</button>
             </form>
             <form asp-action="RejectOrder" method="post">

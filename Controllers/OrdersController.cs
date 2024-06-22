@@ -136,7 +136,7 @@ namespace Speedy.Controllers
             var order = _context.Orders.Find(model.OrderId);
 
             if (order == null)
-                return NotFound(ModelState);
+                return NotFound();
 
             order.OrderTotal = model.OrderTotal;
             order.Fees = model.Fees;
@@ -144,13 +144,15 @@ namespace Speedy.Controllers
             _context.Update(order);
             _context.SaveChanges();
 
+            var cityView = new CitiesHomeViewModel();  
+            
             if (User.IsInRole(AppRoles.StartUp))
                 return View("OrderStartup");
 
             if (User.IsInRole(AppRoles.Individual))
                 return View("OrderIndividual");
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Filter", "Orders", cityView);
         }
 
         public IActionResult RejectOrder(ReceiptFormViewModel model) 
@@ -166,13 +168,15 @@ namespace Speedy.Controllers
             _context.Remove(order);
             _context.SaveChanges();
 
-            if (User.IsInRole(AppRoles.StartUp))                
-            return RedirectToPage("/Home/StartUpIndex.cshtml");
+            var cityView = new CitiesHomeViewModel();
 
-            if (User.IsInRole(AppRoles.Individual))                
-            return RedirectToPage("/Home/UserIndex.cshtml");
+            if (User.IsInRole(AppRoles.StartUp))
+                return View("OrderStartup");
 
-            return View();
+            if (User.IsInRole(AppRoles.Individual))
+                return View("OrderIndividual");
+
+            return RedirectToAction("Filter", "Orders", cityView);
         }
 
         private OrderFormViewModel InitialOrderForm(OrderFormViewModel? model = null)

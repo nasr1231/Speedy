@@ -25,10 +25,10 @@ namespace Speedy.Core.ViewModels
         [MaxLength(40, ErrorMessage = Errors.MaxLength)]
         public string Email { get; set; } = null!;
 
-        [Display(Name = "الرقم القومي")]
-        [MaxLength(14, ErrorMessage = Errors.MaxLength)]
-        [Required(ErrorMessage = Errors.isRequired)]
-        public string NID { get; set; } = string.Empty;
+        //[Display(Name = "الرقم القومي")]
+        //[MaxLength(14, ErrorMessage = Errors.MaxLength)]
+        //[Required(ErrorMessage = Errors.isRequired)]
+        //public string NID { get; set; } = string.Empty;
 
         [Display(Name = "رقم الهاتف المحمول")]
         [Required(ErrorMessage = Errors.isRequired)]
