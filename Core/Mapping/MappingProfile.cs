@@ -8,9 +8,13 @@ namespace Speedy.Core.Mapping
     {
         public MappingProfile()
         {
+            CreateMap<Delivery, AdminDashboardViewModel>();
+            CreateMap<Individual, AdminDashboardViewModel>();
+            CreateMap<StartUp, AdminDashboardViewModel>();
+            CreateMap<Order, AdminDashboardViewModel>();
 
             // Delivery Agent
-            CreateMap<Delivery, DeliveryViewModel>()
+                CreateMap<Delivery, DeliveryViewModel>()
             .ForMember(dest => dest.Reviews, opt => opt.Ignore())
             .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City!.Name))
             .ForMember(dest => dest.GovernorateName, opt => opt.MapFrom(src => src.City!.Governorate!.Name))                       

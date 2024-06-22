@@ -30,7 +30,7 @@
             </div>
 
             <div class="menu-item here show menu-accordion ">
-                <a asp-controller="Deliveries" asp-action="Profile" active-when="Deliveries" asp-route-id="@User.FindFirst(ClaimTypes.NameIdentifier)!.Value" class="menu-link">
+                <a asp-controller="DeliveryPanel" asp-action="Profile" active-when="DeliveryPanel" asp-route-id="@User.FindFirst(ClaimTypes.NameIdentifier)!.Value" class="menu-link">
                     <span class="menu-icon">
                         <i class="fa-solid fa-user fs-3 text-50-black"></i>
                     </span>

@@ -32,14 +32,17 @@
 <style>
     .main {
         padding-top: 200px;
-        margin-right:0;
+        margin-right: 0;
     }
-    .input-group{
-        flex-wrap:nowrap;
+
+    .input-group {
+        flex-wrap: nowrap;
     }
-    .selection{
-        display:flex;
+
+    .selection {
+        display: flex;
     }
+
     .select2-container .select2-selection--single {
         display: flex;
         height: 45px;
@@ -49,9 +52,9 @@
         flex: 1 1 auto;
         width: 1%;
         min-width: 0;
-       
     }
-    .input-group select{
+
+    .input-group select {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
         border-top-right-radius: 8px !important;
@@ -64,7 +67,7 @@
     <div class=" d-flex w-100 mb-4 justify-content-center">
         <div class=" d-flex flex-column flex-md-row justify-content-center align-items-center">
             <form asp-controller="Orders" asp-action="Filter" method="post" class="d-flex  flex-column justify-content-center align-items-center">
-                    <div class="fv-row row">
+                <div class="fv-row row">
                     <div class="input-group col-md-6 mb-7">
                         <select asp-for="CityId" asp-items="@Model.Cities" class="form-control form-control-lg form-control-solid border-gray-400" data-control="select2" data-placeholder=" اختر مكان اقامتك " data-allow-clear="true">
                             <option></option>
@@ -72,13 +75,11 @@
                         <span style="border-radius:8px; border-top-right-radius:0; border-bottom-right-radius: 0;" class="input-group-text border-gray-400" id="basic-addon1">
                             <i class="fa-solid fa-location-dot fs-4"></i>
                         </span>
-                        <span asp-validation-for="Cities"></span>
-
                     </div>
-                    </div>
+                </div>
                 <button type="submit" class="btn m-5" style="border-radius:8px; background-color:#E25E3E;">اختر وتابع</button>
-
-                </form>
+                <span asp-validation-for="CityId" class="text-danger fs-5 d-block"></span>
+            </form>
         </div>
     </div>
 </div>

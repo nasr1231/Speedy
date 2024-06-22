@@ -123,10 +123,10 @@ function showSuccessMessage() {
 
     Swal.fire({
         title: "Done Successfully.....",
-        text: message,
+        text: "تمت العملية بنجاح!",
         icon: 'success',
         buttonsStyling: false,
-        showConfirmButton: false,
+        showConfirmButton: true,
         timer: 2500
     }).then((result) => {
         if (result.isConfirmed) {
@@ -359,24 +359,22 @@ $(document).ready(function () {
                         data: {
                             '__RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
                         },
-                        success: function (lastUpdatedOn) {
+                        success: function () {
                             var row = btn.parents('tr');
                             var status = row.find('.js-status');
-                            var newStatus = status.text().trim() === 'Deleted' ? 'Available' : 'Deleted';
+                            var newStatus = status.text().trim() === 'Not Active' ? 'Active' : 'Not Active'  ;
                             status.text(newStatus).toggleClass('badge-light-success badge-light-danger');
-                            row.find('.js-updated-on').html(lastUpdatedOn);
-                            //ShowSuccessMessage();
-                            OnModalToaster();
+                            
+                            ShowSuccessMessage();                            
                         },
-                        error: function (message) {
-                            ShowErrorMessage(message);
+                        error: function () {
+                            ShowErrorMessage();
                         }
                     });
                 }
             }
         });
     });
-
     $(document).on('click', '.js-render-modal', function (e) {
         e.preventDefault(); // Prevent the default anchor behavior
         var btn = $(this);

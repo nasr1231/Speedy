@@ -24,14 +24,13 @@
 </div>
 
 <div class="card shadow-sm mb-5 mb-lg-10 min-h-md-425px">
-    <div class="card-body pt-0">
+    <div class="card-body pt-0 h-300px overflow-auto">
         <div class="table-responsive" style="min-height: 270px">
             <partial name="_TableHeader" />
             <table class="table table-row-bordered table-row-gray-300 gy-3 align-middle js-datatable" data-export-title="Delivery Agents">
                 <thead>
                     <tr class="fw-bold fs-6 text-gray-800">
                         <th>Name</th>
-                        <th>National Id</th>
                         <th>Email</th>
                         <th>Register Date</th>
                         <th>Status</th>
@@ -57,4 +56,6 @@
     <script src="~/assets/panel/plugins/datatables/vfs_fonts.js"></script>
 }
 
-@section Scripts {<partial name="_ValidationScriptsPartial" />}
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

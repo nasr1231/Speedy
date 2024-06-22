@@ -127,6 +127,25 @@ namespace Speedy.Controllers
 
             return RedirectToPage("/Account/Login", new { area = "Identity" });
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Block(int id)
+        {
+            var individual = _context.Individuals.Find(id);
+
+            if (individual is null)
+                return NotFound();
+
+            individual.IsDeleted = !individual.IsDeleted;
+            individual.LastUpdatedOn = DateTime.Now;
+            individual.LastUpdatedById = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
         private IndividualFormViewModel InitialIndividualForm(IndividualFormViewModel? model = null)
         {
             IndividualFormViewModel individualFormView = model ?? new IndividualFormViewModel();

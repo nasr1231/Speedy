@@ -25,7 +25,7 @@ namespace Speedy.Core.Models
         #region Conditions
         public bool IsActive { get; set; }        
         public string? CreatedById { get; set; }
-        public DateTime CreatedOn { get; set; } = DateTime.Now.ToUniversalTime();
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
         public string? LastUpdatedById { get; set; }
         public DateTime? LastUpdatedOn { get; set; }                
         #endregion

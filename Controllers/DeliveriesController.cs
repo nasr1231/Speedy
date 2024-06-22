@@ -83,18 +83,6 @@ namespace Speedy.Controllers
 
             return View("Dashboard", orderViews);
         }
-        public async Task<IActionResult> Profile(string id)
-        {
-            var delivery = await _deliveryService.GetDeliveryAsync(deliveryId: id);
-
-
-            if (delivery is null)
-                return NotFound();
-
-            var deliveriesView = _mapper.Map<DeliveryViewModel>(delivery);
-
-            return View("Profile", deliveriesView);
-        }
 
         [HttpGet]
         public IActionResult Create()
@@ -140,7 +128,7 @@ namespace Speedy.Controllers
                 Address = model.Address,
                 CityId = model.SelectedCityId,
                 ShippingMethodId = model.SelectedShippingMethod,
-                IsDeleted = true
+                IsDeleted = true                
             };
 
             #region Services
@@ -167,7 +155,7 @@ namespace Speedy.Controllers
             delivery.NationalId= NationalId.AttachmentUrl!;
 
             var Criminal = await _attachmentService.UploadImageAsync(
-              attachedFile: model.UserImage,
+              attachedFile: model.CriminalStatus,
               entityName: "Delivery Agents",
              userName: delivery.AppUserId);
 
@@ -197,6 +185,7 @@ namespace Speedy.Controllers
 
             delivery.IsDeleted = !delivery.IsDeleted;
             delivery.LastUpdatedOn = DateTime.Now;
+            delivery.LastUpdatedById = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
 
             _context.SaveChanges();
 

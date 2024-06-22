@@ -5,13 +5,13 @@
 <td>@Model.Email</td>
 <td>@Model.CreatedOn</td>
 <td>
-    <span class="badge badge-light-@(Model.IsDeleted ? "danger" : "success")">
-        @(Model.IsDeleted ? "Not Active" : "Available")
+    <span class="js-status badge badge-light-@(Model.IsDeleted ? "danger" : "success")">
+        @(Model.IsDeleted ? "Not Active" : "Active")
     </span>
 </td>
 <td class="text-center">
-    <a href="javascript:;" class="px-3 js-toggle-status menu-link"
-       data-id="@Model.Id" data-url="/Deliveries/Block/@Model.Id" data-title="Edit User">
-        Block
+    <a href="javascript:;" class="btn btn-info py-2 px-4 js-toggle-status"
+       data-id="@Model.Id" data-url="/Deliveries/Block/@Model.Id" data-title="Change Status" data-message="Do You Want To Change The Status?!">
+        Change Status
     </a>
 </td>  

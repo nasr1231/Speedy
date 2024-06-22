@@ -196,6 +196,26 @@ namespace Speedy.Controllers
 
             return View("Profile", userViewModel);
         }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Block(int id)
+        {
+            var startUp = _context.StartUps.Find(id);
+
+            if (startUp is null)
+                return NotFound();
+
+            startUp.IsDeleted = !startUp.IsDeleted;
+            startUp.LastUpdatedOn = DateTime.Now;
+            startUp.LastUpdatedById = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
         private StartUpFormViewModel InitialStartUpForm(StartUpFormViewModel? model = null)
         {
             StartUpFormViewModel startupFormView = model ?? new StartUpFormViewModel();
