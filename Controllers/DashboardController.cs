@@ -32,6 +32,6 @@ namespace Speedy.Controllers
 
             return View(viewModel);
         }
-
+        
     }
 }

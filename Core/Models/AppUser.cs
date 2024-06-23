@@ -13,12 +13,12 @@ namespace Speedy.Core.Models
         public string FirstName { get; set; } = null!;
         [MaxLength(40)]
         public string LastName { get; set; } = string.Empty;
-        public string Gender { get; set; } = string.Empty;
+        public string? Gender { get; set; }
         public DateTime BirthDate { get; set; }
         public string? ProfilePictureIUrl { get; set; } = string.Empty;
 
         [MaxLength(14)]
-        public string NID { get; set; } = string.Empty;
+        public string? NID { get; set; }
         public string? Address { get; set; }
         #endregion
 

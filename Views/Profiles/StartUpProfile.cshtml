@@ -1,10 +1,14 @@
-﻿@model IndividualProfileViewModel
+﻿@model StartUpProfileViewModel
 
 @{
     Layout = "_StartLayout";
     ViewData["Title"] = "حسابي";
 }
 
+@section Styles {
+
+    <link href="~/assets/Panel/plugins/datatables/datatables.bundle.css" rel="stylesheet" crossorigin="anonymous" />
+}
 
 <div class="container d-flex flex-column flex-column-fluid border border-gray-300 rounded-4" style="margin-top:100px;margin-bottom:100px;">
     <!--begin::Toolbar-->
@@ -46,7 +50,7 @@
                                 <div class="d-flex flex-column">
                                     <!--begin::Name-->
                                     <div class="d-flex align-items-center mb-7">
-                                        <a class="text-gray-900 text-primary fs-2 fw-bold me-1">@Model.FirstName @Model.LastName</a>
+                                        <a class="text-gray-900 text-primary fs-2 fw-bold me-1">@Model.CompanyName</a>
 
                                     </div>
                                     <!--end::Name-->
@@ -57,7 +61,7 @@
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
-                                            </i>        فرد
+                                            </i>        شركة
                                         </a>
                                         <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
                                             <i class="fa-solid fa-location-dot fs-4 me-1 ms-2"><span class="path1"></span><span class="path2"></span></i>
@@ -102,7 +106,7 @@
                                             </div>
                                             <!--end::Number-->
                                             <!--begin::Label-->
-                                            <div class="fw-semibold fs-6 text-gray-500">التقييم</div>
+                                            <div class="fw-semibold fs-6 text-gray-500">التقييم </div>
                                             <!--end::Label-->
                                         </div>
                                         <!--end::Stat-->
@@ -134,7 +138,7 @@
                                         <a class="nav-link text-active-primary ms-0 me-10 py-5 "
                                            data-bs-toggle="tab" role="tab"
                                            href="#demo1">
-                                            طرق الدفع
+                                            طلباتي
                                         </a>
                                     </li>
                                     <!--end::Nav item-->
@@ -157,7 +161,7 @@
                                 <h3 class="fw-bold m-0"> تفاصيل الحساب</h3>
                             </div>
                             <!--end::Card title-->
-                            <a data-url="/Individuals/Edit/@User.FindFirst(ClaimTypes.NameIdentifier)!.Value" href="javascript:;" data-title="تعديل بيانات الحساب" class="btn btn-sm btn-primary align-self-center js-render-modal"> تعديل الحساب</a>
+                            <a data-url="/StartUps/Edit/@User.FindFirst(ClaimTypes.NameIdentifier)!.Value" href="javascript:;" data-title="تعديل بيانات الحساب" class="btn btn-sm btn-primary align-self-center js-render-modal"> تعديل الحساب</a>
                         </div>
                         <!--begin::Card header-->
                         <!--begin::Card body-->
@@ -208,12 +212,26 @@
                             <!--begin::Input group-->
                             <div class="row mb-7">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 fw-bolder text-muted">البريد الالكتروني</label>
+                                <label class="col-lg-4 fw-bolder text-muted">   البريد الالكتروني الخاص بالشركة</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8">
                                     <a href="#" class="fw-semibold fs-6 text-gray-800 text-hover-primary">
-                                        @Model.Email
+                                        startup@gmail.com
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-7">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 fw-bolder text-muted">   رقم الهاتف الخاص بالشركة</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8">
+                                    <a href="#" class="fw-semibold fs-6 text-gray-800 text-hover-primary">
+                                        01537458926
                                     </a>
                                 </div>
                                 <!--end::Col-->
@@ -258,7 +276,7 @@
                             <!--begin::Card body-->
                             <div class="card-body border-top p-9">
                                 <!--begin::Email Address-->
-                                <div class="d-flex flex-wrap align-items-center">
+                                <div class="d-flex flex-wrap  align-items-center">
                                     <!--begin::Label-->
                                     <div id="kt_signin_email">
                                         <div class="fs-6 fw-bold mb-1">الإيميل</div>
@@ -269,7 +287,7 @@
                                     <!--end::Label-->
                                     <!--begin::Action-->
                                     <div id="kt_signin_email_button" class="ms-auto">
-                                        <button class="btn btn-light btn-active-light-primary me-12 ">تغيير الإيميل</button>
+                                        <button class="btn btn-light btn-active-light-primary me-12">تغيير الإيميل</button>
                                     </div>
                                     <!--end::Action-->
                                 </div>
@@ -300,106 +318,11 @@
                         </div>
                         <!--end::Content-->
                     </div>
-                    <!--begin::Deactivate Account-->
-                    <div class="card">
-                        <!--begin::Card header-->
-                        <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_deactivate" aria-expanded="true" aria-controls="kt_account_deactivate">
-                            <div class="card-title m-0">
-                                <h3 class="fw-bold m-0">تعطيل الحساب</h3>
-                            </div>
-                        </div>
-                        <!--end::Card header-->
-                        <!--begin::Content-->
-                        @*
-                        <div id="kt_account_settings_deactivate" class="collapse show">
-                        <!--begin::Form-->
-                        <!--begin::Card body-->
-                        <div class="card-body border-top p-9">
-                        <!--begin::Notice-->
-                        @if (Model.IsDeleted)
-                        {
-                        <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed mb-5 p-6">
-                        <i class="fa-solid fa-triangle-exclamation fs-2tx text-warning me-4"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
-                        <div class="d-flex flex-stack flex-grow-1 ">
-                        <div class="fw-semibold">
-                        <h4 class="text-gray-900 fw-bold">الحساب معطل</h4>
-
-                        </div>
-                        </div>
-                        </div>
-                        <div class="form-check form-check-solid fv-row mb-3">
-                        <input class="form-check-input border border-gray-400" id="isChecked" type="checkbox" />
-                        <label class="form-check-label fw-semibold ps-2 fs-6" for="deactivate">أنا متأكد من استعادة الحساب</label>
-
-                        </div>
-                        <span id="checkboxWarning" class="mt-2" style="display:none; color: red;">تأكد من موافقتك على استعادة حسابك</span>
-                        }
-                        else
-                        {
-                        <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed mb-5 p-6">
-                        <i class="fa-solid fa-triangle-exclamation fs-2tx text-warning me-4"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
-                        <div class="d-flex flex-stack flex-grow-1 ">
-                        <div class="fw-semibold">
-                        <h4 class="text-gray-900 fw-bold mb-5">أنت الآن تقوم بتعطيل حسابك</h4>
-                        <div class="fs-6 text-gray-700">هل أنت متأكد أنك تريد تعطيل الحساب <br /></div>
-                        </div>
-                        </div>
-                        </div>
-                        <div class="form-check form-check-solid fv-row mb-3">
-                        <input class="form-check-input border border-gray-400" id="isChecked" type="checkbox" />
-                        <label class="form-check-label fw-semibold ps-2 fs-6" for="deactivate">أنا متأكد من تعطيل الحساب</label>
-                        </div>
-                        <span id="checkboxWarning" style="display:none; color: red;">تأكد من موافقتك على تعطيل حسابك</span>
-                        }
-                        </div>
-                        @if (Model.IsDeleted)
-                        {
-                        <div class="card-footer d-flex justify-content-end py-6 px-9">
-                        <a href="javascript:;" data-url="/deliveries/ToggleStatus/@Model.Id" data-title="تغير حالة الحساب" data-message="هل انت متأكد من رغبتك في تغير حالة حسابك؟؟" class="btn btn-success fw-semibold delivery-toggle-status">إستعادة الحساب</a>
-                        </div>
-                        }
-                        else
-                        {
-                        <div class="card-footer d-flex justify-content-end py-6 px-9">
-                        <a href="javascript:;" data-url="/deliveries/ToggleStatus/@Model.Id" data-title="تغير حالة الحساب" data-message="هل انت متأكد من رغبتك في تغير حالة حسابك؟؟" class="btn btn-danger fw-semibold delivery-toggle-status">تعطيل الحساب</a>
-                        </div>
-                        }
-                        </div>
-
-                        *@
-                        <!--end::Content-->
-                    </div>
                 </div>
             </div>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade" id="demo1" role="tabpanel">
-                    <div class="card  mb-5 mb-xl-10">
-                        <!--begin::Col-->
-                        <div class="col-xl-6 my-15 mx-10">
-                            <!--begin::Notice-->
-                            <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed h-lg-100 p-6">
-                                <!--begin::Wrapper-->
-                                <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
-                                    <!--begin::Content-->
-                                    <div class="mb-3 mb-md-0 fw-semibold">
-                                        <h4 class="text-gray-900 fw-bold">ملحوظة هامه!</h4>
-                                        <div class="fs-6 text-gray-700 pe-7">فى حاله إضافة أو تعديل أى بطاقه برجاء العلم أنها يجب أن تكون سارية </div>
-                                    </div>
-                                    <!--end::Content-->
-                                    <!--begin::Action-->
-                                    @*
-                                    <a href="javascript:;" data-url="/Payments/Create?userId=@Model.Id" data-title="إضافة وسيلة سحب" class="btn btn-primary px-6 align-self-center text-nowrap js-render-modal">
-                                    إضافة حساب
-                                    </a>
-                                    *@
-
-                                    <!--end::Action-->
-                                </div>
-                                <!--end::Wrapper-->
-                            </div>
-                            <!--end::Notice-->
-                        </div>
-                        <!--end::Col-->
+                    <div class="card mb-5 mb-xl-10">
                     </div>
                 </div>
             </div>
@@ -409,6 +332,14 @@
 </div>
 
 @Html.AntiForgeryToken()
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script src="~/assets/panel/plugins/datatables/datatables.bundle.js"></script>
+    <script src="~/assets/panel/plugins/datatables/vfs_fonts.js"></script>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
 }

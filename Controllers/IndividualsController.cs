@@ -10,7 +10,7 @@ using Speedy.Services.User;
 
 namespace Speedy.Controllers
 {
-    public class IndividualsController(UserManager<AppUser> userManager,ApplicationDbContext context, IMapper mapper, IUserService userService, IDataService dataService, IIndividualService individualService, IAttachmentService attachmentService) : Controller
+    public class IndividualsController(ApplicationDbContext context, UserManager<AppUser> userManager, IMapper mapper, IUserService userService, IDataService dataService, IIndividualService individualService, IAttachmentService attachmentService) : Controller
     {        
         private readonly ApplicationDbContext _context = context;
         private readonly IMapper _mapper = mapper;
@@ -46,33 +46,7 @@ namespace Speedy.Controllers
         public IActionResult Create()
         {
             return View("IndividualForm", InitialIndividualForm());
-        }
-
-        [HttpGet]
-        public IActionResult Profile(string id)
-        {
-            var user = _context.Individuals
-               .Include(c => c.City)
-               .Include(ap => ap.AppUser)
-               .SingleOrDefault(st => st.AppUserId == id);
-
-            if (user is null)
-                return NotFound(user);
-
-            var userView = new IndividualProfileViewModel
-            {
-                Address = user.AppUser!.Address,
-                City = user.City.Name,
-                Email = user.AppUser.Email,
-                FirstName = user.AppUser!.FirstName,
-                LastName = user.AppUser!.LastName,
-                PhoneNumber = user.AppUser.PhoneNumber,
-                Id = user.AppUserId,
-                IsDeleted = user.IsDeleted
-            };
-
-            return View("Profile", userView);
-        }
+        }        
 
         [HttpPost]
         public async Task<IActionResult> Create(IndividualFormViewModel model)

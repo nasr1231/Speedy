@@ -124,7 +124,7 @@
         <form asp-controller="Orders" asp-action="Create" method="post" enctype="multipart/form-data" class="form w-100" style="margin-top: 59px;" novalidate="novalidate">
 
             <input type="hidden" asp-for="UserId" value="@User.FindFirst(ClaimTypes.NameIdentifier)!.Value" />            
-
+            <input type="hidden" asp-for="CityId" />
             <div class="slider-container">
                 <div class="slide" id="slide1">
                     <!--begin::Separator-->

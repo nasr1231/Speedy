@@ -407,8 +407,11 @@
                     "disable": [
                         function (date) {
                             let currentDate = new Date();
+                            let fifteenDaysAgo = new Date(currentDate);
+                            fifteenDaysAgo.setDate(currentDate.getDate() - 15);
+
                             // return true to disable
-                            return (date >= currentDate)
+                            return (date >= fifteenDaysAgo);
                         }
                     ],
                 }

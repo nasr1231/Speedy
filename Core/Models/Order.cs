@@ -43,6 +43,8 @@ namespace Speedy.Core.Models
         public Delivery? Delivery { get; set; } = null!;
 
         public int? PaymentMethodId { get; set; }
+        public int ShippingMethodId { get; set; }
+        public int RecieveAreaId { get; set; }
 
         public PaymentMethod PaymentMethod { get; set; } = null!;
 

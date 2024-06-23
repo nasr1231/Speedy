@@ -16,7 +16,7 @@ public class UserService(ApplicationDbContext context,UserManager<AppUser> userM
             UserName = userForm.Email,
             IsActive = true,            
             EmailConfirmed = true,
-            NID =  userForm.NID,   
+            NID =  userForm?.NID,   
             FirstName = userForm.FirstName,
             LastName = userForm.LastName,
             PhoneNumber = userForm.PhoneNumber,

@@ -11,8 +11,7 @@ $(document).ready(function () {
            
             return;
         }
-        
-        checkbox.css('border', '2px solid red');
+                
         warningMessage.hide();
 
         bootbox.confirm({

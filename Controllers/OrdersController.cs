@@ -39,12 +39,6 @@ namespace Speedy.Controllers
                 viewModels.Add(viewModel);
             }
 
-            if (User.IsInRole(AppRoles.StartUp))
-                return View("OrderStartup");
-
-            if (User.IsInRole(AppRoles.Individual))
-                return View("OrderIndividual");
-
             return View();
         }
 
@@ -112,6 +106,8 @@ namespace Speedy.Controllers
                 SenderAddress = model.SenderAddress,
                 SenderPhoneNumber = model.SenderPhoneNumber,
                 OrderAttachment = imageAttachment.AttachmentUrl!,
+                RecieveAreaId = model.CityId,
+                ShippingMethodId = model.ShippingMethodId
             };
 
             _context.Orders.Add(order);
@@ -144,18 +140,17 @@ namespace Speedy.Controllers
             _context.Update(order);
             _context.SaveChanges();
 
-            var cityView = new CitiesHomeViewModel();  
-            
-            if (User.IsInRole(AppRoles.StartUp))
-                return View("OrderStartup");
+            var cityView = new CitiesHomeViewModel();
 
-            if (User.IsInRole(AppRoles.Individual))
-                return View("OrderIndividual");
+            //if (User.IsInRole(AppRoles.StartUp))
 
-            return RedirectToAction("Filter", "Orders", cityView);
+            //if (User.IsInRole(AppRoles.Individual))
+            //    return View("ّ~/Views/Home/UserIndex.cshtml");
+            return RedirectToAction("Index", "Home");
+
         }
 
-        public IActionResult RejectOrder(ReceiptFormViewModel model) 
+        public IActionResult RejectOrder(ReceiptFormViewModel model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -170,13 +165,7 @@ namespace Speedy.Controllers
 
             var cityView = new CitiesHomeViewModel();
 
-            if (User.IsInRole(AppRoles.StartUp))
-                return View("OrderStartup");
-
-            if (User.IsInRole(AppRoles.Individual))
-                return View("OrderIndividual");
-
-            return RedirectToAction("Filter", "Orders", cityView);
+            return View("OrderIndividual");
         }
 
         private OrderFormViewModel InitialOrderForm(OrderFormViewModel? model = null)
@@ -229,7 +218,7 @@ namespace Speedy.Controllers
                     else if ((receiverCityId == 11 && senderCityId == 7) || (receiverCityId == 7 && senderCityId == 11))
                     {
                         netPrice = (int)(50 * 0.4);
-                        fees = (int)(netPrice * 0.20);                        
+                        fees = (int)(netPrice * 0.20);
                     }
                     break;
                 default:

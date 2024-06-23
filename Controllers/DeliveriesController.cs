@@ -51,11 +51,14 @@ namespace Speedy.Controllers
         }
         public IActionResult Dashboard(string id)
         {
-            var delivery = _context.Deliveries.SingleOrDefault(d => d.AppUserId == id);
-
+            var delivery = _context.Deliveries
+                .Include(c => c.City)
+                .Include(d => d.AppUser)
+                .SingleOrDefault(d => d.AppUserId == id);
+           
             var orders = _context.Orders
-                 .Include(ap => ap.AppUsers)
-                 .Where(x => x.DeliveryId == delivery!.Id);
+                 .Include(ap => ap.AppUsers)                 
+                 .Where(x => x.ShippingMethodId == delivery!.ShippingMethodId).ToList();
 
             var orderViews = new List<DeliveryDashViewModel>();
 

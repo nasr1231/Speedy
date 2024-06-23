@@ -48,36 +48,7 @@ namespace Speedy.Controllers
         public IActionResult Create()
         {
             return View("StartUpForm", InitialStartUpForm());
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Profile(string id)
-        {
-            var user = _context.StartUps
-                .Include(c => c.City)
-                .Include(ap => ap.AppUser)
-                .SingleOrDefault(st => st.AppUserId == id);
-
-            if (user is null)
-                return NotFound();
-
-            var userView = new StartUpProfileViewModel
-            {
-                CompanyName = user.StartUpName,
-                IsDeleted = user.IsDeleted,
-                City = user.City.Name,
-                Address = user.Address!,
-                Email = user.AppUser.Email!,
-                EstablishDate = user.FoundingDate,
-                FirstName = user.AppUser.FirstName,
-                LastName = user.AppUser.LastName,
-                Id = user.Id,
-                Urls = user.Url,
-                PhoneNumber = user.AppUser.PhoneNumber!
-            };
-
-            return View("Profile", userView);
-        }
+        }        
 
         [HttpPost]
         public async Task<IActionResult> Create(StartUpFormViewModel model)

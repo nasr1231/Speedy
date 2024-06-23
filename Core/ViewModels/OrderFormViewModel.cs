@@ -18,7 +18,7 @@ namespace Speedy.Core.ViewModels
         [Display(Name = "وسيلة الشحن")]
         public int ShippingMethodId { get; set; }
 
-        public int? shippingFees { get; set; }
+        public int? shippingFees { get; set; }        
 
 
         public IEnumerable<SelectListItem> Cities { get; set; } = [];
