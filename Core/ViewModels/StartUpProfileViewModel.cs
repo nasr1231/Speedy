@@ -17,7 +17,8 @@
         public List<string> Urls { get; set; }
         public string? CompanyName { get; set; }
 
-        public IEnumerable<Order>? Orders { get; set; }
+        public List<Order>? Orders { get; set; }
+        public AppUser DeliveryUser { get; set; }
 
     }
 }

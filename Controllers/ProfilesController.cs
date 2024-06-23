@@ -16,7 +16,7 @@ namespace Speedy.Controllers
             var orders = _context.Orders.Where(x=>x.AppUserId == User.FindFirst(ClaimTypes.NameIdentifier)!.Value).ToList();
 
             if (user is null)
-                return NotFound("الحساب مش موجود والله ياريس");
+                return NotFound("Try Again The server is not working");
 
             var userView = new IndividualProfileViewModel
             {
@@ -41,8 +41,10 @@ namespace Speedy.Controllers
                 .Include(i => i.City)
                 .SingleOrDefaultAsync(st => st.AppUserId == User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
 
+            var orders = _context.Orders.Where(x => x.AppUserId == User.FindFirst(ClaimTypes.NameIdentifier)!.Value).ToList();
+
             if (user is null)
-                return NotFound("لماذا نصر بيه سمت مطرية");
+                return NotFound("Try Again The server is not working");
 
             var userView = new StartUpProfileViewModel
             {
@@ -56,7 +58,9 @@ namespace Speedy.Controllers
                 LastName = user.AppUser.LastName,
                 Id = user.Id,
                 Urls = user.Url,
-                PhoneNumber = user.AppUser.PhoneNumber!
+                PhoneNumber = user.AppUser.PhoneNumber!,
+                Orders = orders,
+                DeliveryUser = user.AppUser
             };
 
             return View(userView);
