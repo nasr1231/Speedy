@@ -225,9 +225,11 @@ namespace Speedy.Controllers
             OrderFormViewModel startupFormView = model ?? new OrderFormViewModel();
 
             var governoratesTask = _context.Governorates.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
+            var citiesTask = _context.Cities.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
             var shippingMethodsTask = _context.ShippingMethods.Where(c => !c.IsDeleted).OrderBy(c => c.Name).ToList();
 
             startupFormView.Governorates = _mapper.Map<IEnumerable<SelectListItem>>(governoratesTask);
+            startupFormView.Cities = _mapper.Map<IEnumerable<SelectListItem>>(citiesTask);
             startupFormView.ShippingMethods = _mapper.Map<IEnumerable<SelectListItem>>(shippingMethodsTask);
 
             return startupFormView;

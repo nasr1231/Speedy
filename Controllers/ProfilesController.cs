@@ -28,7 +28,8 @@ namespace Speedy.Controllers
                 PhoneNumber = user.AppUser.PhoneNumber,
                 Id = user.AppUserId,
                 IsDeleted = user.IsDeleted,
-                Orders = orders
+                Orders = orders,
+                DeliveryUser = user.AppUser
             };
 
             return View(userView);

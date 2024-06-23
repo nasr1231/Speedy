@@ -1,4 +1,4 @@
-﻿$(document).ready(function() {
+﻿$(document).ready(function () {
     $('#GovernorateId').on('change', function () {
         var GovernorateId = $(this).val();
         var cityList = $('#CityId');

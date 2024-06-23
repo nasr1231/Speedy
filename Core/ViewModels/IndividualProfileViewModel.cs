@@ -15,5 +15,6 @@
         public string? City { get; set; }
 
         public List<Order>? Orders { get; set; }
+        public AppUser DeliveryUser { get; set; }
     }
 }

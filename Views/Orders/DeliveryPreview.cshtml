@@ -184,14 +184,14 @@
                     <div class="row fv-row text-end">
                         <div class="col-md-6 mb-7">
                             <label class="form-label fw-bolder text-dark fs-6">المحافظة</label>
-                            <select id="GovernorateId" asp-for="@Model.RecieverGovernorateId" asp-items="@Model.Governorates" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المحافظة" data-hide-search="true">
+                            <select asp-for="@Model.RecieverGovernorateId" asp-items="@Model.Governorates" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المحافظة" data-hide-search="true">
                                 <option></option>
                             </select>
                             <span asp-validation-for="@Model!.RecieverGovernorateId" class="text-danger d-block h-10px"></span>
                         </div>
                         <div class="col-md-6 mb-7">
                             <label class="form-label fw-bolder text-dark fs-6">المدينة</label>
-                            <select id="CityId" asp-for="@Model.RecieverCityId" asp-items="@Model.Cities" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المدينة" data-hide-search="true">
+                            <select asp-for="@Model.RecieverCityId" asp-items="@Model.Cities" class="form-select form-select-solid js-select2" data-control="select2" data-placeholder="اختر المدينة" data-hide-search="true">
                                 <option></option>
                             </select>
                             <span asp-validation-for="@Model!.RecieverCityId" class="text-danger d-block h-10px"></span>
@@ -674,15 +674,7 @@
 
 @Html.AntiForgeryToken()
 @section Scripts {
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-    <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
-    <script src="~/lib/expressive-annotations-validate/expressive.annotations.validate.min.js"></script>
-    <script>
-        $.validator.setDefaults({
-            ignore: []
-        });
-    </script>
+    <partial name="_ValidationScriptsPartial" />
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {

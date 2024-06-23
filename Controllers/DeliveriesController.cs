@@ -54,11 +54,11 @@ namespace Speedy.Controllers
             var delivery = _context.Deliveries
                 .Include(c => c.City)
                 .Include(d => d.AppUser)
-                .SingleOrDefault(d => d.AppUserId == User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+                .SingleOrDefault(ye => ye.AppUserId == User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
 
             var orders = _context.Orders
      .Include(o => o.AppUsers)
-     .Where(x => x.ShippingMethodId == delivery.ShippingMethodId && x.DeliveryId == null)
+    .Where(x => x.ShippingMethodId == delivery.ShippingMethodId && x.DeliveryId == null)
      .ToList();
 
             var orderViews = new List<DeliveryDashViewModel>();
@@ -132,7 +132,7 @@ namespace Speedy.Controllers
                 Address = model.Address,
                 CityId = model.SelectedCityId,
                 ShippingMethodId = model.SelectedShippingMethod,
-                IsDeleted = true                
+                IsDeleted = true
             };
 
             #region Services
@@ -144,9 +144,9 @@ namespace Speedy.Controllers
             if (!imageAttachment.isUploaded)
                 return BadRequest(imageAttachment.errorMessage);
 
-           result.AppUser.ProfilePictureIUrl = imageAttachment.AttachmentUrl!;
+            result.AppUser.ProfilePictureIUrl = imageAttachment.AttachmentUrl!;
 
-            await _userManager.UpdateAsync(result.AppUser);            
+            await _userManager.UpdateAsync(result.AppUser);
 
             var NationalId = await _attachmentService.UploadImageAsync(
               attachedFile: model.NationalId,
@@ -156,7 +156,7 @@ namespace Speedy.Controllers
             if (!NationalId.isUploaded)
                 return BadRequest(NationalId.errorMessage);
 
-            delivery.NationalId= NationalId.AttachmentUrl!;
+            delivery.NationalId = NationalId.AttachmentUrl!;
 
             var Criminal = await _attachmentService.UploadImageAsync(
               attachedFile: model.CriminalStatus,
@@ -176,7 +176,7 @@ namespace Speedy.Controllers
 
             return RedirectToPage("/Account/Login", new { area = "Identity" });
         }
-        
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

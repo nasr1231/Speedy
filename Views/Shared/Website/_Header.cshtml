@@ -62,8 +62,8 @@
                     @{
                         if (SignInManager.IsSignedIn(User))
                         {
-                            var role = User.FindFirst(ClaimTypes.Role)!.Value;
-                            var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+                            var role = User.FindFirst(ClaimTypes.Role).Value;
+                            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                             @if ( role == AppRoles.Individual)
                             {
                                 <ul class="nav text-white">
