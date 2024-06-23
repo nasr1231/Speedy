@@ -6,12 +6,14 @@ namespace Speedy.Controllers
     public class ProfilesController(ApplicationDbContext context) : Controller
     {
         private readonly ApplicationDbContext _context = context;
-        public async Task<IActionResult> IndividualProfile()
+        public IActionResult IndividualProfile()
         {
-            var user = await _context.Individuals!
+            var user = _context.Individuals!
                 .Include(i => i.AppUser)
                 .Include(i => i.City)
-                .SingleOrDefaultAsync(st => st.AppUserId == User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+                .SingleOrDefault(st => st.AppUserId == User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+
+            var orders = _context.Orders.Where(x=>x.AppUserId == User.FindFirst(ClaimTypes.NameIdentifier)!.Value).ToList();
 
             if (user is null)
                 return NotFound("الحساب مش موجود والله ياريس");
@@ -25,7 +27,8 @@ namespace Speedy.Controllers
                 LastName = user.AppUser.LastName,
                 PhoneNumber = user.AppUser.PhoneNumber,
                 Id = user.AppUserId,
-                IsDeleted = user.IsDeleted
+                IsDeleted = user.IsDeleted,
+                Orders = orders
             };
 
             return View(userView);

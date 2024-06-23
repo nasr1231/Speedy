@@ -68,6 +68,53 @@ namespace Speedy.Controllers
         //    return PartialView("_ReservationForm", appointmentsViewModel);
         //}
 
+        [HttpGet]
+        [AjaxOnly]
+        public IActionResult OrderDetails(int id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var order = _context.Orders.SingleOrDefault(x => x.OrderId == id);
+
+            var orderView = new OrderReviewViewModel { 
+                OrderId = order.OrderId,
+                order = order
+            };
+
+            return PartialView("_acceptForm", orderView);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AcceptDeliveryOrder(OrderReviewViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+
+            if (userId == null)
+                return BadRequest("User not found");
+
+            var delivery = await _context.Deliveries
+                .SingleOrDefaultAsync(x => x.AppUserId == userId);
+
+            if (delivery == null)
+                return NotFound("Delivery not found");
+
+            var order = await _context.Orders.SingleOrDefaultAsync(x=>x.OrderId == model.OrderId);
+
+            if (order == null)
+                return NotFound("Order not found");
+
+            order.DeliveryId = delivery.Id;
+            _context.Update(order);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(OrderFormViewModel model)
         {
@@ -122,6 +169,11 @@ namespace Speedy.Controllers
             };
 
             return View("_Receipt", receiptViewModel);
+        }
+
+        public IActionResult AcceptDelivery()
+        {
+            return View();
         }
 
         public IActionResult AcceptOrder(ReceiptFormViewModel model)

@@ -139,7 +139,7 @@
                     <!--begin::Name-->
                     <div class="d-none d-md-flex flex-column align-items-end justify-content-center me-2 me-md-4">
                         @* <span class="text-muted fs-8 fw-semibold lh-1 mb-1">@User.FindFirst(ClaimTypes.Role)!.Value</span> *@
-                        <span class="text-white fs-6 fw-bold lh-1">Hello, @User.FindFirst(ClaimTypes.Name)!.Value</span>
+                        <span class="text-white fs-6 fw-bold lh-1">Hello
                     </div>
                     <!--end::Name-->
                     <!--begin::Symbol-->
@@ -161,11 +161,10 @@
                             <!--end::Avatar-->
                             <!--begin::Username-->
                             <div class="d-flex flex-column">
-                                <div class="fw-bold d-flex align-items-center fs-5">
-                                    @User.FindFirst(ClaimTypes.Name)!.Value
-                                    <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">@User.FindFirst(ClaimTypes.Role)!.Value</span>
+                                <div class="fw-bold d-flex align-items-center fs-5">                                    
+                                    
                                 </div>
-                                <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">@User.FindFirst(ClaimTypes.Email)!.Value</a>
+                                
                             </div>
                             <!--end::Username-->
                         </div>

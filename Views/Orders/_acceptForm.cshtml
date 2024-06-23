@@ -1,0 +1,91 @@
+﻿@model OrderReviewViewModel
+
+<form asp-action="AcceptDeliveryOrder" asp-controller="Orders"
+      data-ajax-method="post"
+      data-ajax="true"
+      data-ajax-begin="onModalBegin"
+      data-ajax-success="modalSubmitClose"
+      data-ajax-failure="showErrorMessage"
+      data-ajax-complete="onModalComplete">
+
+    <input asp-for="@Model.OrderId" type="hidden" />
+    <img src="@Model.order.OrderAttachment" class="h-100px w-100px"/>
+    <div class="card-body p-9">
+        <h1 class="mb-10">بيانات المستلم</h1>
+        <div class="row mb-7">
+            <!--begin::Label-->
+            <label class="col-lg-4 fw-bolder text-muted">اسم المستلم </label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8">
+                <span class="fw-bold fs-6 text-gray-800">
+                    @Model.order.RecieverName
+                </span>
+            </div>
+            <!--end::Col-->
+        </div>
+        <!--end::Row-->
+        <!--begin::Input group-->
+        <div class="row mb-7">
+            <!--begin::Label-->
+            <label class="col-lg-4 fw-bolder text-muted">رقم الهاتف </label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8 fv-row">
+                <span class="fw-semibold text-gray-800 fs-6">@Model.order.RecieverPhoneNumber</span>
+            </div>
+            <!--end::Col-->
+        </div>
+        <!--end::Input group-->
+        <!--begin::Input group-->
+        <div class="row mb-7">
+            <!--begin::Label-->
+            <label class="col-lg-4 fw-bolder text-muted">العنوان</label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8">
+                @Model.order.RecieverAddress
+            </div>
+            <!--end::Col-->
+        </div>
+        <!--end::Input group-->
+        <h1 class="mb-10">بيانات العميل</h1>
+        <!--begin::Input group-->
+        <div class="row mb-7">
+            <!--begin::Label-->
+            <label class="col-lg-4 fw-bolder text-muted">اسم العميل</label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8">
+                @Model.order.SenderName
+            </div>
+            <!--end::Col-->
+        </div>
+        <!--end::Input group-->
+        <!--begin::Input group-->
+        <div class="row mb-7">
+            <!--begin::Label-->
+            <label class="col-lg-4 fw-bolder text-muted">عنوان العميل</label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8">
+                @Model.order.SenderAddress
+            </div>
+            <!--end::Col-->
+        </div>
+        <!--end::Input group-->
+        <!--begin::Input group-->
+        <div class="row mb-7">
+            <!--begin::Label-->
+            <label class="col-lg-4 fw-bolder text-muted">رقم العميل</label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8">
+                @Model.order.SenderPhoneNumber
+            </div>
+            <!--end::Col-->
+        </div>
+        <!--end::Input group-->
+        <button type="submit" class="btn btn-success fs-5 mt-3">قبول الطلب</button>
+    </div>    
+</form>

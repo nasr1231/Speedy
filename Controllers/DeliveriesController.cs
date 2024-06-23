@@ -54,11 +54,12 @@ namespace Speedy.Controllers
             var delivery = _context.Deliveries
                 .Include(c => c.City)
                 .Include(d => d.AppUser)
-                .SingleOrDefault(d => d.AppUserId == id);
-           
+                .SingleOrDefault(d => d.AppUserId == User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+
             var orders = _context.Orders
-                 .Include(ap => ap.AppUsers)                 
-                 .Where(x => x.ShippingMethodId == delivery!.ShippingMethodId).ToList();
+     .Include(o => o.AppUsers)
+     .Where(x => x.ShippingMethodId == delivery.ShippingMethodId && x.DeliveryId == null)
+     .ToList();
 
             var orderViews = new List<DeliveryDashViewModel>();
 
