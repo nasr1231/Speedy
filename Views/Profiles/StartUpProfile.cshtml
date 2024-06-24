@@ -40,8 +40,15 @@
             <!--begin::Navbar-->
             <div class="card mb-5 mb-xl-10 mt-5">
                 <div class="card-body pt-3 pb-0">
+
                     <!--begin::Details-->
                     <div class="d-flex flex-wrap flex-sm-nowrap mb-0">
+                        <div class="me-7 mb-4" bis_skin_checked="1">
+                            <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative" bis_skin_checked="1">
+                                <img src="@Model.ProfilePicture" alt="image" class="h-100">
+                                <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-body h-20px w-20px" bis_skin_checked="1"></div>
+                            </div>
+                        </div>
                         <!--begin::Info-->
                         <div class="flex-grow-1">
                             <!--begin::Title-->
@@ -50,8 +57,7 @@
                                 <div class="d-flex flex-column">
                                     <!--begin::Name-->
                                     <div class="d-flex align-items-center mb-7">
-                                        <a class="text-gray-900 text-primary fs-2 fw-bold me-1">@Model.CompanyName</a>
-
+                                        <a class="text-gray-900 text-primary fs-2 fw-bold me-5">@Model.CompanyName</a>
                                     </div>
                                     <!--end::Name-->
                                     <!--begin::Info-->

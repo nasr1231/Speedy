@@ -11,13 +11,14 @@ namespace Speedy.Core.ViewModels
         public string? SenderPhoneNumber { get; set; }
         public DateTime RecieveDate { get; set; }
         public DateTime ShippingDate { get; set; }
-        public double OrderTotal { get; set; }
+        public int? Total { get; set; }
         public Status? OrderStatus { get; set; } = Status.Pending;
         public string? Notes { get; set; }
         public Status? PaymentStatus { get; set; } = Status.Pending;
         public string? Description { get; set; }
         public bool IsSensitive { get; set; }
         public int TrackingNumber { get; set; }
+        public int? Fees { get; set; }
         public DateTime PaymentDate { get; set; }
         public DateOnly PaymentDueDate { get; set; }        
         public string RecieverName { get; set; }

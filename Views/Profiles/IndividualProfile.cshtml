@@ -38,9 +38,14 @@
         <div id="kt_app_content_container" class="app-container container-fluid ">
             <!--begin::Navbar-->
             <div class="card mb-5 mb-xl-10 mt-5">
-                <div class="card-body pt-3 pb-0">
-                    <!--begin::Details-->
+                <div class="card-body pt-3 pb-0">                                        
                     <div class="d-flex flex-wrap flex-sm-nowrap mb-0">
+                        <div class="me-7 mb-4" bis_skin_checked="1">
+                            <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative" bis_skin_checked="1">
+                                <img src="@Model.ProfilePicture" alt="image" class="h-100">
+                                <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-body h-20px w-20px" bis_skin_checked="1"></div>
+                            </div>
+                        </div>
                         <!--begin::Info-->
                         <div class="flex-grow-1">
                             <!--begin::Title-->
@@ -49,7 +54,7 @@
                                 <div class="d-flex flex-column">
                                     <!--begin::Name-->
                                     <div class="d-flex align-items-center mb-7">
-                                        <a class="text-gray-900 text-primary fs-2 fw-bold me-1">@Model.FirstName @Model.LastName</a>
+                                        <a class="text-gray-900 text-primary fs-2 fw-bold me-5">@Model.FirstName @Model.LastName</a>
 
                                     </div>
                                     <!--end::Name-->
@@ -160,7 +165,7 @@
                                 <h3 class="fw-bold m-0"> تفاصيل الحساب</h3>
                             </div>
                             <!--end::Card title-->
-                            <a data-url="/Individuals/Edit/@User.FindFirst(ClaimTypes.NameIdentifier)!.Value" href="javascript:;" data-title="تعديل بيانات الحساب" class="btn btn-sm btn-primary align-self-center js-render-modal"> تعديل الحساب</a>
+                            @* <a data-url="/Individuals/Edit/@User.FindFirst(ClaimTypes.NameIdentifier)!.Value" href="javascript:;" data-title="تعديل بيانات الحساب" class="btn btn-sm btn-primary align-self-center js-render-modal"> تعديل الحساب</a> *@
                         </div>
                         <!--begin::Card header-->
                         <!--begin::Card body-->

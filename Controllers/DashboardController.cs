@@ -23,12 +23,15 @@ namespace Speedy.Controllers
             {
                 Deliveries = _context.Deliveries.Include(d => d.AppUser).ToList(),
                 StartUps = _context.StartUps.Include(s => s.AppUser).ToList(),
-                Individuals = _context.Individuals.Include(i => i.AppUser).ToList()
+                Individuals = _context.Individuals.Include(i => i.AppUser).ToList(),
+                Orders= _context.Orders.Include(i => i.Delivery).ToList(),
+
             };
 
             viewModel.TotalDeliveries = viewModel.Deliveries.Count;
             viewModel.TotalStartUps = viewModel.StartUps.Count;
             viewModel.TotalIndividuals = viewModel.Individuals.Count;
+            viewModel.TotalOrders = viewModel.Orders.Count;
 
             return View(viewModel);
         }

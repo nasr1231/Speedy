@@ -433,9 +433,10 @@
                     "drops": 'up',
                     "disable": [
                         function (date) {
-                            let currentDate = new Date(new Date().getFullYear() - 16, 11, 31);
+                            let eighteenYearsAgo = new Date();
+                            eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18);
                             // return true to disable
-                            return (date >= currentDate)
+                            return date > eighteenYearsAgo;
                         }
                     ],
 

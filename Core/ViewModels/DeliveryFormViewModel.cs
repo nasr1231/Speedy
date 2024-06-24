@@ -57,7 +57,7 @@ namespace Speedy.Core.ViewModels
 
 		[Display(Name = "تاريخ الميلاد")]
 		[Required(ErrorMessage = Errors.isRequired)]        
-        public DateTime BirthDate { get; set; } = DateTime.Now.AddYears(-16);
+        public DateTime BirthDate { get; set; } = DateTime.Now.AddYears(-18);
 
 		[Required(ErrorMessage = Errors.isRequired)]
         [Display(Name = "النوع")]        
@@ -101,8 +101,7 @@ namespace Speedy.Core.ViewModels
         [Display(Name = "الصحيفة الجنائية")]
         [Required(ErrorMessage = Errors.isRequired)]
         public IFormFile CriminalStatus { get; set; } = null!;
-        [Display(Name = "رخصة القيادة")]
-        [Required(ErrorMessage = Errors.isRequired)]
+        [Display(Name = "رخصة القيادة")]        
         public IFormFile? DrivingLicsense { get; set; }
         #endregion
     }

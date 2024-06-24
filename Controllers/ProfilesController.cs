@@ -29,7 +29,8 @@ namespace Speedy.Controllers
                 Id = user.AppUserId,
                 IsDeleted = user.IsDeleted,
                 Orders = orders,
-                DeliveryUser = user.AppUser
+                DeliveryUser = user.AppUser,
+                ProfilePicture = user.AppUser.ProfilePictureIUrl,
             };
 
             return View(userView);
@@ -58,9 +59,10 @@ namespace Speedy.Controllers
                 LastName = user.AppUser.LastName,
                 Id = user.Id,
                 Urls = user.Url,
+                ProfilePicture = user.AppUser.ProfilePictureIUrl,
                 PhoneNumber = user.AppUser.PhoneNumber!,
                 Orders = orders,
-                DeliveryUser = user.AppUser
+                DeliveryUser = user.AppUser,
             };
 
             return View(userView);

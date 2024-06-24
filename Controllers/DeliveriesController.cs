@@ -61,29 +61,24 @@ namespace Speedy.Controllers
     .Where(x => x.ShippingMethodId == delivery.ShippingMethodId && x.DeliveryId == null)
      .ToList();
 
-            var orderViews = new List<DeliveryDashViewModel>();
-
-            foreach (var order in orders)
+            var orderViews = orders.Select(order => new DeliveryDashViewModel
             {
-                var orderView = new DeliveryDashViewModel
-                {
-                    Description = order.Description,
-                    IsSensitive = order.IsSensitive,
-                    Notes = order.Notes,
-                    ShippingDate = order.ShippingDate,
-                    RecieverName = order.RecieverName,
-                    SenderName = order.SenderName,
-                    RecieverPhoneNumber = order.RecieverPhoneNumber,
-                    TrackingNumber = order.TrackingNumber,
-                    SenderPhoneNumber = order.SenderPhoneNumber,
-                    SenderAddress = order.SenderAddress,
-                    OrderAttachment = order.OrderAttachment,
-                    RecieveDate = order.RecieveDate,
-                    RecieverAddress = order.RecieverAddress,
-                    OrderId = order.OrderId,
-                };
-                orderViews.Add(orderView);
-            };
+                OrderId = order.OrderId,
+                Description = order.Description,
+                IsSensitive = order.IsSensitive,
+                Notes = order.Notes,
+                ShippingDate = order.ShippingDate,
+                RecieverName = order.RecieverName,
+                SenderName = order.SenderName,
+                RecieverPhoneNumber = order.RecieverPhoneNumber,
+                TrackingNumber = order.TrackingNumber,
+                SenderPhoneNumber = order.SenderPhoneNumber,
+                SenderAddress = order.SenderAddress,
+                OrderAttachment = order.OrderAttachment,
+                RecieveDate = order.RecieveDate,
+                RecieverAddress = order.RecieverAddress,
+                Total = order.Fees + order.OrderTotal
+            }).ToList();
 
             return View("Dashboard", orderViews);
         }
@@ -132,7 +127,7 @@ namespace Speedy.Controllers
                 Address = model.Address,
                 CityId = model.SelectedCityId,
                 ShippingMethodId = model.SelectedShippingMethod,
-                IsDeleted = true
+                IsDeleted = true,                
             };
 
             #region Services
@@ -146,7 +141,17 @@ namespace Speedy.Controllers
 
             result.AppUser.ProfilePictureIUrl = imageAttachment.AttachmentUrl!;
 
-            await _userManager.UpdateAsync(result.AppUser);
+            var drivingAttachment = await _attachmentService.UploadImageAsync(
+              attachedFile: model.DrivingLicsense,
+              entityName: "Delivery Agents",
+             userName: delivery.AppUserId);
+
+
+            if (!drivingAttachment.isUploaded)
+                return BadRequest(drivingAttachment.errorMessage);
+
+            delivery.DrivingLicsense = drivingAttachment.AttachmentUrl!;
+
 
             var NationalId = await _attachmentService.UploadImageAsync(
               attachedFile: model.NationalId,
